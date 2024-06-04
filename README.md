@@ -31,3 +31,19 @@ In the competitive world of retail, particularly in supermarkets, efficient bill
 
 [Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Inventory%20Management%20and%20Invoice%20Generating) 
 
+### Hotel booking application using Syncfusion React DataGrid
+While looking for a secure and comfortable hotel stay that fits your budget, preferred amenities, desired location, and high user reviews, this article explores how Syncfusion React Grid can display a comprehensive list of hotels and their rooms, along with facilities, user reviews, and costs. Additionally, Syncfusion React Grid offers filtering options based on budget, amenities, location, and user reviews, making the booking process more efficient and user-friendly.
+
+This demo will show you how to utilize the Syncfusion Data Grid to display the lists of hotels and it facility and cost and locations and user reviews. Also, how to provide the option to select the hostel based on available hotel rooms on the selected check and checkout date with budget-wise and facilities and user review. With our step-by-step guide, you'll be able to easily set up and configure the data grid to meet your specific needs.
+
+[Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Hotel-booking-App)
+
+
+### Employee management application using Syncfusion React DataGrid
+![Employee_Organization](images/EmployeeManagement_organization.gif)
+
+![Employee_profile](images/EmployeeManagement_myprofile.gif)
+
+[Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Employee_Managment_App)
+
+
