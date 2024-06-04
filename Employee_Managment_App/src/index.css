@@ -1,0 +1,335 @@
+.xyz-management-header {
+  padding: 15px 20px 15px 20px;
+  position: fixed;
+  top: 0;
+  background-color: #ccccff;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.08);
+  height: 75px;
+  width: 100%;
+  z-index: 10001;
+}
+
+.xyz-management-header .header-content {
+  padding: 11px 0 11px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(0, 0, 0, 0.7);
+  display: inline-block;
+}
+
+.xyz-management-content {
+  position: absolute;
+  top: 75px;
+  height: 650px;
+}
+
+.xyz-management-content .col-md-2.sidebar {
+  height: 650px;
+  border-right: 1px solid rgb(0, 0, 0, 0.2);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.04);
+  background-color: #ecf2f9;
+  padding-right: 0px;
+  position: fixed;
+}
+
+.xyz-management-content .col-md-10.main-content {
+  padding-right: 0px;
+  padding-left: 0px;
+  position: absolute;
+  left: 170px;
+}
+
+@media (min-width: 400px) {
+  .xyz-management-content .col-md-2.sidebar {
+    width: 185px;
+    float: left;
+  }
+  .xyz-management-content .col-md-10.main-content {
+    width: calc(100% - 170px);
+    float: left;
+  }
+}
+.nav > li > a:focus,
+.nav > li > a.active,
+.nav > li > a:hover {
+  text-decoration: none;
+  background-color: #eaddff;
+}
+.policiespage a:focus,
+.policiespage a.active,
+.policiespage a:hover {
+  text-decoration: none;
+}
+.xyz-management-content .col-md-2.sidebar a {
+  color: rgb(0, 0, 0, 0.7);
+}
+
+/* Employees Page */
+
+.employeespage .employees-header,
+.policiespage .policies-header,
+.announcementpage .announcement-header,
+.achievementspage .achievements-header,
+.employeeinfopage .employeeinfo-header {
+  padding: 20px;
+  height: 70px;
+  font-size: 17px;
+  font-family: 'Roboto', 'Segoe UI', 'GeezaPro', 'DejaVu Serif', 'sans-serif',
+    '-apple-system', 'BlinkMacSystemFont';
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
+}
+
+.employeespage .employees-content,
+.employeeinfopage .employeeinfo-content,
+.policiespage .policies-content,
+.announcementpage .announcement-content,
+.achievementspage .achievements-content,
+.employeeinfopage .overview-content {
+  padding: 20px;
+}
+
+.employeeinfopage .overview-header {
+  padding: 20px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
+}
+
+a.employee-popover:hover {
+  text-decoration: none !important;
+}
+.tab-content {
+  padding: 20px 10px 20px 10px;
+}
+
+/* Tooltip */
+
+.e-tooltip-template-css.e-tooltip-wrap.e-popup {
+  background-color: #eaddff;
+  border: 1px solid #e0e0e0;
+}
+.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-outer.e-tip-bottom {
+  border-top: 8px solid #e0e0e0;
+}
+.e-tooltip-template-css.e-tooltip-wrap .e-tip-content {
+  color: rgba(0, 0, 0, 0.87);
+}
+.e-tooltip-template-css.e-tooltip-wrap {
+  opacity: 1;
+}
+.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-inner.e-tip-bottom,
+.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-inner.e-tip-top {
+  color: #eaddff;
+}
+
+/* Employee Pay Stub and PayRoll */
+
+.paystub-header,
+.payroll-header {
+  font-size: 13px;
+  font-family: 'Roboto', 'Segoe UI', 'GeezaPro', 'DejaVu Serif', 'sans-serif',
+    '-apple-system', 'BlinkMacSystemFont';
+  line-height: 20px;
+  padding: 0 0 20px 0;
+}
+
+.paystubinfo,
+.payrollinfo {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+@media (min-width: 600px) {
+  .paystubdd-container,
+  .payrolldd-container {
+    float: right;
+  }
+
+  .paystubinfo,
+  .payrollinfo {
+    padding-top: 8px;
+    display: inline-block;
+  }
+}
+/* Employee Info */
+
+.employeeinfo-header {
+  padding: 0 0 20px 0;
+}
+.profile-image {
+  width: 120px;
+  float: left;
+}
+.profile-data {
+  padding: 2px 0;
+}
+
+.employeeLeave-header {
+  font-size: 13px;
+  font-family: 'Roboto', 'Segoe UI', 'GeezaPro', 'DejaVu Serif', 'sans-serif',
+    '-apple-system', 'BlinkMacSystemFont';
+  line-height: 20px;
+  padding: 0 0 20px 0;
+}
+
+.leaveinfo {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+@media (min-width: 600px) {
+  .daterange {
+    float: right;
+  }
+
+  .leaveinfo {
+    padding-top: 8px;
+    display: inline-block;
+  }
+}
+
+.daterange .e-input-group .e-clear-icon,
+.daterange .e-input-group.e-control-wrapper .e-clear-icon {
+  display: none;
+}
+
+.badge-casual {
+  background-color: #65cea7;
+  color: #fff;
+}
+
+.badge-sick {
+  background-color: #23c6c8;
+  color: #fff;
+}
+
+.badge-others {
+  background-color: #5c8a8a;
+  color: #fff;
+}
+
+.badge-request {
+  background-color: #f3ce85;
+  color: #fff;
+}
+
+td.cardcell {
+  padding: 4px 0;
+}
+
+td.cardcell.separateline {
+  padding-bottom: 20px;
+}
+
+.detail {
+  padding-bottom: 15px;
+}
+
+.sub-heading {
+  font-weight: 400;
+  padding-right: 58px;
+  width: 205px;
+  display: inline-block;
+  color: #757575;
+}
+
+.information {
+  padding-left: 15px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.statustemp .statustxt.closed,
+.statustemp .statustxt.approved,
+.statustemp .statustxt.needtoapprove {
+  position: relative;
+  top: 1.5px;
+}
+.statustemp.approved {
+  background-color: #ffff99;
+  width: 75px;
+}
+.statustxt.approved {
+  color: #006400;
+}
+.statustemp.needtoapprove {
+  background-color: #ffd7cc;
+  width: 120px;
+}
+
+.statustemp.closed {
+  background-color: #ccffcc;
+  width: 54px;
+}
+
+.statustxt.closed {
+  color: #00cc00;
+}
+
+.statustxt.needtoapprove {
+  color: #e60000;
+}
+
+.statustemp {
+  position: relative;
+  height: 25px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#listSidebar .e-listview:not(.e-list-template) .e-list-item {
+  height: 60px;
+  padding: 12px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Weather Card Layout Customization */
+
+.card-control-section.basic_card_layout .card-layout {
+  margin: auto;
+  max-width: 400px;
+}
+
+.policiespage .row,
+.achievementspage .row,
+.announcementpage .row {
+  padding: 0 0 10px 0;
+}
+
+.announcementpage .e-card-content {
+  height: 150px;
+}
+.policiespage .e-card-content {
+  height: 170px;
+}
+@media (min-width: 870px) {
+  .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
+    width: 50%;
+  }
+
+  .achievements-content
+    .card-control-section.basic_card_layout
+    .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
+    width: 100%;
+  }
+
+  .card-control-section.basic_card_layout .card-layout {
+    max-width: 870px;
+  }
+}
+
+/* Horizontal Card Layout Customization */
+
+.card-control-section.horizontal_card_layout
+  .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
+  width: 100%;
+  margin: auto;
+}
+
+.card-control-section.horizontal_card_layout .card-layout {
+  margin: auto;
+  max-width: 870px;
+}
