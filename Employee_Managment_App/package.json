@@ -1,0 +1,71 @@
+{
+  "name": "management-sample",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@syncfusion/ej2-base": "25.1.35",
+    "@syncfusion/ej2-buttons": "25.1.35",
+    "@syncfusion/ej2-calendars": "25.1.35",
+    "@syncfusion/ej2-data": "25.1.35",
+    "@syncfusion/ej2-documenteditor": "25.1.35",
+    "@syncfusion/ej2-dropdowns": "25.1.35",
+    "@syncfusion/ej2-grids": "25.1.35",
+    "@syncfusion/ej2-lists": "25.1.35",
+    "@syncfusion/ej2-navigations": "25.1.35",
+    "@syncfusion/ej2-pivotview": "25.1.35",
+    "@syncfusion/ej2-react-base": "25.1.35",
+    "@syncfusion/ej2-react-buttons": "25.1.35",
+    "@syncfusion/ej2-react-calendars": "25.1.35",
+    "@syncfusion/ej2-react-dropdowns": "25.1.35",
+    "@syncfusion/ej2-react-grids": "25.1.35",
+    "@syncfusion/ej2-react-inputs": "25.1.35",
+    "@syncfusion/ej2-react-lists": "25.1.35",
+    "@syncfusion/ej2-react-navigations": "25.1.35",
+    "@syncfusion/ej2-react-popups": "25.1.35",
+    "@syncfusion/ej2-schedule": "25.1.35",
+    "@syncfusion/ej2-splitbuttons": "25.1.35",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.20.55",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-intl": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.0.5",
+    "react-router-dom": "^6.23.0",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "extract": "formatjs extract",
+    "i18n:extract": "npm run extract -- 'src/**/*.ts*' --ignore='**/*.d.ts' --out-file lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
+    "i18n:upload": "simplelocalize upload",
+    "i18n:download": "simplelocalize download"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@formatjs/cli": "^5.0.6",
+    "@formatjs/ts-transformer": "^3.9.9"
+  }
+}
