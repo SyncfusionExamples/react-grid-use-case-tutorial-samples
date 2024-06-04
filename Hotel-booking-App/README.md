@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hotel booking application using Syncfusion React Grid 
+While looking for a secure and comfortable hotel stay that fits your budget, preferred amenities, desired location, and high user reviews, this article explores how Syncfusion React Grid can display a comprehensive list of hotels and their rooms, along with facilities, user reviews, and costs. Additionally, Syncfusion React Grid offers filtering options based on budget, amenities, location, and user reviews, making the booking process more efficient and user-friendly.
 
-## Available Scripts
+This demo will show you how to utilize the Syncfusion Data Grid to display the lists of hotels and it facility and cost and locations and user reviews. Also, how to provide the option to select the hostel based on available hotel rooms on the selected check and checkout date with budget-wise and facilities and user review. With our step-by-step guide, you'll be able to easily set up and configure the data grid to meet your specific needs.
 
-In the project directory, you can run:
 
-### `yarn start`
+![Inventory App](demo-img/inventory-app.gif)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Target Audience
+-	Accountants and Bookkeepers 
+-	Construction Companies 
+-	Property Management Companies
+-	Medical Practice
+-	Educational Institutions
+-	Event Management Companies
+-	Software Development Firms
+-	Transportation and Logistics Companies
+-	Manufacturing Companies
+-	Travel Agencies
+-	Insurance Agencies
+-	Real Estate Agencies
+-	Hospitality Businesses
+-	Fitness Centers and Gyms
+-	Consulting Firms
+-	Photography Studios
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Prerequisites 
+-	We have developed this app by using the [node.js 16.0](https://legacy.reactjs.org/blog/2017/09/26/react-v16.0.html).
+-	If you have not previously installed the React packages or if you have installed a version of node.js older than Node 16 on your machine, you can run the following command to install them.
+ ```sh
+  npm install -g create-react-app
 
-### `yarn test`
+  ```
+## Run the sample
+To execute the following command in your command prompt.
+ ```sh
+npm start
+  ```
+## Common errors
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Error  | Try to solution |
+|----------|----------|
+| Module not found: Can't resolve 'module'    | This indicates that the required module is either not installed properly or is missing. Therefore, we recommend ensuring that all dependency modules are installed correctly by executing either the npm install or yarn install command after deleting the package.lock.json file.   |
+| npm ERR! ENOENT: no such file or directory   | This error suggests that the specified directory or file is not available on your machine, or permission for execution was denied. To resolve this, ensure that the file exists and that proper permissions are enabled for accessing the file or directory.   |
+|npm ERR! Failed at the project-name@0.1.0 start script| This error occurred due to a problem with  the start script defined in your package.json file. It's important to validate the start script and execute it correctly set up to run your application. Additionally, ensure that all dependencies are installed properly or not. |
+|npm ERR! EADDRINUSE: Address already in use | This error indicates the port number already used. So, you can choose another port or stop the existing running application. |
+|npm ERR! Invalid package.json| This error indicates any syntax issue occurred in your package.json. to ensure all the syntax properly. |
 
-### `yarn build`
+## Reference of Syncfusion Grid
+[Demo](https://ej2.syncfusion.com/react/demos/#/material3/grid/overview), <br/>
+[Documentation](https://ej2.syncfusion.com/react/documentation/grid/getting-started).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
