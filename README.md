@@ -26,6 +26,7 @@ Additionally, it supports real-time applications with autofill capabilities and 
 ## Realtime samples using Syncfusion React DataGrid
 ### Inventory and Billing Insights
 In the competitive world of retail, particularly in supermarkets, efficient billing, and invoicing are essential for enhancing customer satisfaction and streamlining operations. This article explores how Syncfusion React Grid can transform supermarket billing and invoicing processes, making them more efficient and user-friendly. This demo will show you how to utilize the Syncfusion Data Grid to generate an invoice with automatic calculations based on your inventory details. With our step-by-step guide, you'll be able to easily set up and configure the data grid to meet your specific needs.
+
 ![Inventory App](images/inventory-app.gif)
 
 [Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Inventory%20Management%20and%20Invoice%20Generating) 
