@@ -1,0 +1,81 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.23.4",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+    "@syncfusion/ej2-react-grids": "*",
+    "@syncfusion/ej2-react-calendars": "*",
+    "@syncfusion/ej2-react-buttons": "*",
+    "@syncfusion/ej2-react-popups": "*",
+    "@syncfusion/ej2-react-inputs": "*",
+    "@syncfusion/ej2-react-dropdowns": "*",
+    "@syncfusion/ej2-react-navigations": "*",
+    "@syncfusion/ej2-react-notifications": "*",
+    "@syncfusion/ej2-react-maps": "*",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.23",
+    "@types/numeral": "^2.0.2",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "axios": "^1.4.0",
+    "babel-plugin-inline-react-svg": "^2.0.2",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "buffer": "^6.0.3",
+    "formik": "^2.4.2",
+    "moment": "^2.29.4",
+    "numeral": "^2.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-inject-env": "^2.1.0",
+    "react-number-format": "^5.3.1",
+    "react-router-dom": "^6.11.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "prepare": "husky install"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "autoprefixer": "^10.4.14",
+    "husky": "^8.0.3",
+    "postcss": "^8.4.22",
+    "prettier": "2.8.8",
+    "tailwindcss": "^3.3.1"
+  }
+}

@@ -1,0 +1,490 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", "GeezaPro", "DejaVu Serif", sans-serif, "-apple-system", "BlinkMacSystemFont";
+    font-size: 13px;
+    font-weight: 400;
+    color: black;
+}
+
+.e-title-bar {
+    background-color: #ffffff;
+    padding: 20px 32px;
+    box-shadow: none;
+    border-bottom: 3px solid #aedbf9 !important;
+    display: flex;
+    align-items: center;
+}
+
+.e-title-bar-spacer {
+    flex-grow: 1;
+}
+
+.e-title-text-container {
+    text-align: center;
+    width: 100%;
+}
+
+.e-menu-button-container {
+    display: none;
+}
+
+.e-menu-button::before {
+    content: "\e94c";
+    color: #333;
+    font-size: 17px;
+    font-family: "e-icons";
+    cursor: pointer;
+}
+
+.e-main-container {
+    display: flex;
+}
+
+.e-side-bar-title {
+    display: none;
+    align-items: center;
+}
+
+.e-side-bar-close-button::before {
+    content: "\e7a7";
+    color: #333;
+    font-size: 17px;
+    font-family: "e-icons";
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.e-side-bar-operation-container {
+    background-color: #ffffff;
+}
+
+.e-check-in-out-text {
+    padding-bottom: 10px;
+}
+
+.e-side-bar-separator {
+    padding: 15px 15px;
+}
+
+.e-side-bar-treeview-separator {
+    padding: 10px 3px;
+}
+
+.e-line-separator {
+    width: 90%;
+    background-color: gray;
+    padding: 1px 0px;
+    margin: 10px auto;
+}
+
+.e-data-line-separator {
+    width: 95%;
+    background-color: gray;
+    padding: 0.2px 0px;
+    margin: 10px auto;
+}
+
+.e-app-container {
+    background-color: #e6eaed;
+    width: 100%;
+}
+
+.e-operation-container {
+    padding: 20px 10px;
+}
+
+.e-grid-container {
+    padding: 10px;
+}
+
+.e-mobile-layout {
+    position: relative;
+    width: 340px;
+    height: 480px;
+    margin: auto;
+    border: 16px #f4f4f4 solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+    box-shadow: 0 0px 2px rgb(144 144 144), 0 0px 10px rgb(0 0 0 / 16%);
+}
+
+.e-mobile-layout .e-mobile-content {
+    overflow-x: hidden;
+    height: 100%;
+    background: white;
+    border: 0px solid #dddddd;
+}
+
+.e-title-text {
+    font-size: 15px;
+    font-weight: 900;
+    color: black;
+}
+
+.e-header-text {
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    padding: 10px;
+    color: black;
+}
+
+.e-semi-header-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: black;
+}
+
+.e-semi-bold-header-text {
+    font-size: 14px;
+    font-weight: 800;
+    color: black;
+}
+
+.e-light-blue-border-bottom {
+    border-bottom: 3px solid #e0f2fe !important;
+}
+
+.templateRow {
+    padding: 10px;
+}
+
+.templateRow td {
+    position: relative;
+}
+
+.e-rowtemplate-border-applier {
+    box-shadow: none;
+    border: 5px solid #e0f2fe !important;
+}
+
+.e-room-not-available-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    opacity: 0.5;
+    z-index: 1000;
+}
+
+.e-flex-layout {
+    display: flex;
+}
+
+.e-img-container {
+    padding: 5px;
+}
+
+.e-img {
+    margin: 15px;
+    width: 210px;
+    height: 210px;
+}
+
+.e-info-container {
+    padding: 5px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.e-row-template-separator {
+    padding: 5px 10px 15px 10px;
+}
+
+.e-info-flex-items-center-applier {
+    display: flex;
+    align-items: center;
+}
+
+.e-info-flex-spacer {
+    flex-grow: 1;
+}
+
+.e-info-flex-width-applier {
+    width: 50%;
+    padding-right: 15px;
+}
+
+.e-map-text-spacer {
+    margin-left: 10px;
+}
+
+.e-map-text-styler {
+    color: #008ae6;
+    cursor: pointer;
+}
+
+.e-address-text-styler {
+    color: #008ae6;
+    text-decoration: underline;
+}
+
+.e-below-text-styler {
+    margin-top: 5px;
+}
+
+.e-quote-styler {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.e-rating-container.e-custom-rating .e-rating-item-container {
+    margin: -5px 0px 0px 0px;
+    padding: 0px 5px;
+    font-size: 18px;
+}
+
+.e-book-layout {
+    display: flex;
+    align-items: center;
+    margin: 22px 15px;
+}
+
+.e-extralist-price-info-container {
+    display: flex;
+    align-items: center;
+    width: 85%;
+}
+
+.e-book-spacer {
+    flex-grow: 1;
+}
+
+.e-cost-line-through-styler {
+    text-decoration: line-through;
+    padding-right: 3px;
+}
+
+.e-price-info {
+    text-align: right;
+}
+
+.e-cost-styler {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.e-book-button {
+    padding: 0px 8px 0px 25px;
+}
+
+.e-book-details-button {
+    padding-right: 13px;
+}
+
+.emptyRecordTemplate {
+    text-align: center;
+}
+
+.e-emptyRecord {
+    display: block;
+    margin: 10px auto;
+}
+
+.e-details-container {
+    background-color: #e6eaed;
+}
+
+.e-back-button-carousel-container {
+    display: block !important;
+}
+
+.e-back-button-container {
+    padding: 10px;
+}
+
+.e-back-button::before {
+    content: "\e610";
+    color: #333;
+    background-color: #ffffff;
+    padding: 5px;
+    font-size: 17px;
+    font-family: "e-icons";
+    margin: 10px;
+    cursor: pointer;
+}
+
+.e-carouselcomponent-container {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.e-carouselcomponent-container,
+.e-carousel-img-container img {
+    height: 240px;
+    width: 520px;
+}
+
+.e-carousel-img-container {
+    height: 100%;
+    margin: 0;
+}
+
+.e-details-info-container {
+    display: flex;
+    background-color: #ffffff;
+}
+
+.e-booking-details-container {
+    width: 100%;
+    border-left: 5px solid #e6eaed !important;
+    border-right: 5px solid #e6eaed !important;
+}
+
+.e-booking-details-separator {
+    padding: 10px 15px;
+}
+
+.e-hotel-details-container {
+    border-right: 5px solid #e6eaed !important;
+}
+
+.e-hotel-details-side-bar-separator {
+    padding: 10px 15px;
+}
+
+.e-toast-container .e-toast,
+.e-toast-container .e-toast:hover {
+    background-color: #5b5b57;
+}
+
+.e-toast-container .e-toast .e-toast-message .e-toast-content,
+.e-toast-container .e-toast .e-toast-message .e-toast-content:hover {
+    color: white;
+}
+
+@import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
+@import "../node_modules/@syncfusion/ej2-react-grids/styles/fabric.css";
+@import "../node_modules/@syncfusion/ej2-icons/styles/fabric.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/fabric.css";
+@import '../node_modules/@syncfusion/ej2-notifications/styles/fabric.css';
+
+
+@media only screen and (max-width: 1050px) {
+
+    .e-rating-reviews-container {
+        display: block;
+    }
+
+    .e-reviews-container {
+        padding-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+
+    .e-img-info-container {
+        display: block;
+    }
+
+    .e-img-container {
+        text-align: center;
+    }
+
+    .e-img {
+        width: 420px;
+        height: 210px;
+    }
+
+    .e-main-container .e-book-layout {
+        display: block;
+    }
+
+    .e-extralist-price-info-container {
+        width: 100%;
+    }
+
+    .e-main-container .e-book-button {
+        text-align: right;
+        margin-top: 20px;
+        padding: 0px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .e-details-info-container {
+        display: block;
+    }
+
+    .e-booking-details-container {
+        width: 100%;
+        border-left: 0px solid #e6eaed !important;
+        border-right: 0px solid #e6eaed !important;
+        border-bottom: 5px solid #e6eaed !important;
+    }
+
+    .e-hotel-details-container {
+        border-right: 0px solid #e6eaed !important;
+    }
+}
+
+@media only screen and (min-width: 801px) {
+    .e-side-bar {
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .e-menu-button-container {
+        display: block;
+    }
+
+    .e-main-container {
+        display: block;
+    }
+
+    .e-side-bar {
+        display: none;
+        position: fixed;
+        z-index: 1000000001;
+        height: 100%;
+        top: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .e-side-bar-title {
+        display: flex;
+    }
+
+    .e-side-bar-operation-container {
+        position: absolute;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .e-carouselcomponent-container,
+    .e-carousel-img-container img {
+        height: 240px;
+        width: 420px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .e-img {
+        width: 320px;
+        height: 180px;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+
+    .e-carouselcomponent-container,
+    .e-carousel-img-container img {
+        height: 180px;
+        width: 320px;
+    }
+}
