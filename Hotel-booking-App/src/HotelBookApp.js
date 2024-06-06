@@ -4,7 +4,7 @@ import {
     ColumnsDirective,
     ColumnDirective,
     Inject,
-    Page
+    Page, Print
 } from '@syncfusion/ej2-react-grids';
 import { closest } from '@syncfusion/ej2-base';
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
@@ -14,63 +14,56 @@ import { NumericTextBoxComponent, TextBoxComponent, RatingComponent, SliderCompo
 import { FormValidator } from '@syncfusion/ej2-react-inputs';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { TreeViewComponent, CarouselComponent } from '@syncfusion/ej2-react-navigations';
-import { ToastComponent } from '@syncfusion/ej2-react-notifications';
 
 import { MapsComponent, LayersDirective, LayerDirective, MarkersDirective, MarkerDirective, Marker, MapsTooltip } from '@syncfusion/ej2-react-maps';
 import * as USA from './usa.json';
 
 import { DataManager, Query, Predicate } from '@syncfusion/ej2-data';
-import { hotelData } from './DataCreation';
+import { data } from './DataCreation';
 import './HotelBookApp.css';
 
 function HotelBookApp() {
-
-    const localHotelData = React.useRef(hotelData);
-
-    let toastRef = React.useRef(null);
-
-    let sidebarRef = React.useRef(null);
-    let carouselContainerRef = React.useRef(null);
-
-    const [showHotels, setShowHotels] = React.useState(true);
-
-    let gridRef;
-    const gridPageSettings = { pageSize: 10, pageSizes: true };
+    // Hotel grid which render the hotel list using grid component
+    let hotelGrid;
     let filterDataPredicate;
-    const [hotelBookAppData, setHotelBookAppData] = React.useState([]);
+    const hotelData = React.useRef(data);
+    const [showHotels, setShowHotels] = React.useState(true);
+    const [hotelGridData, setHotelGridData] = React.useState([]);
 
-    let drRef = React.useRef(null);
-    const startDate = new Date();
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 2);
-    const [rangeStartDate, setRangeStartDate] = React.useState(startDate);
-    const [rangeEndDate, setRangeEndDate] = React.useState(endDate);
+    // Menu ref property for opening and closing the menu when clicking menu button
+    let menu = React.useRef(null);
 
-    let minPriceRef = React.useRef(null);
-    let maxPriceRef = React.useRef(null);
-    const minPrice = 50;
-    const maxPrice = 1000;
-    const sliderTooltip = { placement: 'After', isVisible: true, showOn: 'Focus' };
+    // Check in and check out information for rendering the hotel list according to user specified date
+    let checkInOutDate = React.useRef(null);
+    const defaultCheckInDate = new Date();
+    const defaultCheckOutDate = new Date(defaultCheckInDate);
+    defaultCheckOutDate.setDate(defaultCheckInDate.getDate() + 2);
+    const [checkInDate, setCheckInDate] = React.useState(defaultCheckInDate);
+    const [checkOutDate, setCheckOutDate] = React.useState(defaultCheckOutDate);
 
+    // Price range information for rendering the hotel list according to user expecting price
+    let priceRange = React.useRef(null);
+    let minPriceText = React.useRef(null);
+    let maxPriceText = React.useRef(null);
+    const defaultMinPrice = 50;
+    const defaultMaxPrice = 1000;
+
+    // Map information for hotel location
+    let map = React.useRef(null);
     const [showMapDialog, setShowMapDialog] = React.useState(false);
-
-    let mapRef = React.useRef(null);
     const [mapDataSource, setMapDataSource] = React.useState([]);
 
-    let sortDDRef = React.useRef(null);
-    const ddData = [
+    // Sorting the hotels according to user specific choice
+    let sortOptionContainer = React.useRef(null);
+    const sortOption = [
         { key: 1, value: 'Top rating' },
         { key: 2, value: 'Price (low to high)' },
         { key: 3, value: 'Price (high to low)' },
     ];
-    const ddFields = { text: 'value', value: 'key' };
 
-    let priceRangeRef = React.useRef(null);
-
-    let amenitiesRef = React.useRef(null);
-
-    let roomAmenitiesRef = React.useRef(null);
-    let amenitiesData = [
+    // Hotel amenities infromation for rendering the hotel list according to user requirement that present in the hotel
+    let hotelAmenities = React.useRef(null);
+    let hotelAmenitiesData = [
         { id: 1001, name: 'Amenities', hasChild: true, expanded: true, fieldValue: 'HotelFacility' },
         { id: 1002, pid: 1001, name: 'Parking' },
         { id: 1003, pid: 1001, name: 'Pet allowed' },
@@ -78,6 +71,10 @@ function HotelBookApp() {
         { id: 1005, pid: 1001, name: 'Restaurant' },
         { id: 1006, pid: 1001, name: 'Spa' },
     ];
+    const hotelAmenitiesField = { dataSource: hotelAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+
+    // Room amenities infromation for rendering the hotel list according to user requirement that present in the room
+    let roomAmenities = React.useRef(null);
     let roomAmenitiesData = [
         { id: 2001, name: 'Room Amenities', hasChild: true, expanded: true, fieldValue: 'RoomFacility' },
         { id: 2002, pid: 2001, name: 'Television' },
@@ -89,26 +86,38 @@ function HotelBookApp() {
         { id: 2008, pid: 2001, name: 'Shower' },
 
     ];
-    const amenitiesField = { dataSource: amenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
     const roomAmenitiesField = { dataSource: roomAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 
-    let carouselRef = React.useRef(null);
-    const [carouselDataSource, setCarouselDataSource] = React.useState([]);
+    // Hotel images for user booking room
+    const [hotelImages, setHotelImages] = React.useState([]);
 
+    // Obtaining user information via input field with validator while booking room in hotel
     const [selectedRoom, setSelectedRoom] = React.useState({});
+    let formValidator = React.useRef(null);
+    let firstName = React.useRef(null);
+    let lastName = React.useRef(null);
+    let email = React.useRef(null);
+    let phno = React.useRef(null);
+    let address = React.useRef(null);
+    let city = React.useRef(null);
+    let code = React.useRef(null);
+    let country = React.useRef(null);
+    let person = React.useRef(null);
+    let extraBed = React.useRef(null);
+    let lineThroughPriceText = React.useRef(null);
+    let taxedPriceText = React.useRef(null);
+    let priceStatementText = React.useRef(null);
+    let priceCollectionData = React.useRef({});
 
-    let firstNameRef = React.useRef(null);
+    // Printing the booked room infromation
+    let printInfo = React.useRef({});
+    let personalInfoGrid = React.useRef(null);
+    let hotelInfoGrid = React.useRef(null);
+    const [showPrintInfo, setShowPrintInfo] = React.useState(false);
 
-    let formObject = React.useRef(null);
-
-    let extraBedRef = React.useRef(null);
-
-    let lineThroughPriceRef = React.useRef(null);
-    let taxedPriceRef = React.useRef(null);
-    let priceStatementRef = React.useRef(null);
-
-    const checkSortDD = (query) => {
-        const value = sortDDRef.current.value;
+    // This method calls for checking the selected sorting option for generating hotel list
+    const checkSortOptions = (query) => {
+        const value = sortOptionContainer.current.value;
         switch (value) {
             case 1:
                 query.sortBy('Rating', 'descending');
@@ -122,6 +131,7 @@ function HotelBookApp() {
         }
     }
 
+    // This method calls for checking the selected hotel and room amenities options for generating hotel list
     const checkAmenities = (ref) => {
         const checkedNodes = ref.checkedNodes;
         for (let i = 0; i < checkedNodes.length; i++) {
@@ -135,92 +145,106 @@ function HotelBookApp() {
         }
     }
 
+    // This method calls for checking both user expecting price and amenities for generating hotel list
     const checkPriceRangeAndAmenities = (query) => {
-        const value = priceRangeRef.current.value;
+        const value = priceRange.current.value;
         filterDataPredicate = new Predicate('Price', 'greaterthanorequal', value[0]);
         filterDataPredicate = filterDataPredicate.and('Price', 'lessthanorequal', value[1]);
-
-        checkAmenities(amenitiesRef.current);
-        checkAmenities(roomAmenitiesRef.current);
-
+        checkAmenities(hotelAmenities.current);
+        checkAmenities(roomAmenities.current);
         query.where(filterDataPredicate);
     }
 
+    // This method will generate and assign data for hotel grid
     const generateHotelData = () => {
+        // Generating query here
         let query = new Query();
         checkPriceRangeAndAmenities(query);
-        checkSortDD(query);
-        new DataManager(localHotelData.current).executeQuery(query).then((e) => {
-            setHotelBookAppData(e.result);
+        checkSortOptions(query);
+
+        // Generating data according to query
+        new DataManager(hotelData.current).executeQuery(query).then((e) => {
+            // Assigning data to hotel grid
+            setHotelGridData(e.result);
         });
     }
 
-    const gridCreated = () => {
+    // This method calls for generating hotel list when hotel grid is created
+    const hotelGridCreated = () => {
         generateHotelData();
     }
 
-    const sortDDChange = (args) => {
+    // This method calls for generating hotel list when sort options is changed
+    const sortOptionsChange = (args) => {
         generateHotelData();
     }
 
-    const dateRangeChange = (args) => {
+    // This method calls for generating hotel list when check in and check out date is changed
+    const checkInOutDateChange = (args) => {
         if (args.startDate && args.endDate) {
-            setRangeStartDate(args.startDate);
-            setRangeEndDate(args.endDate);
+            setCheckInDate(args.startDate);
+            setCheckOutDate(args.endDate);
             generateHotelData();
         }
     }
 
-    const priceSliderChanged = (args) => {
-        minPriceRef.current.innerText = args.value[0];
-        maxPriceRef.current.innerText = args.value[1];
+    // This method calls for generating hotel list when price range is changed
+    const priceRangeChanged = (args) => {
+        minPriceText.current.innerText = args.value[0];
+        maxPriceText.current.innerText = args.value[1];
         generateHotelData();
     }
 
+    // This method calls for generating hotel list when amenities is changed 
     const amenitiesNodeChecked = (args) => {
         generateHotelData();
     }
 
+    // This method calls for showing hotel location in map
     const showMap = (args) => {
         const rowIndex = closest(args.target, 'tr').rowIndex;
-        const rowObject = gridRef.currentViewData[rowIndex];
+        const rowObject = hotelGrid.currentViewData[rowIndex];
         setMapDataSource([rowObject.Location]);
-        const mapInstRef = mapRef.current;
+        const mapInst = map.current;
         setTimeout(() => {
-            mapInstRef.refresh();
+            mapInst.refresh();
         }, 10);
         setShowMapDialog(true);
     }
 
-    const closeShowMapDialog = () => {
+    // This method calls for closing the map
+    const closeMap = () => {
         setShowMapDialog(false);
     }
 
-    const customFn = (args) => {
+    // This method calls for validating the input field in a custom way
+    const customValidation = (args) => {
         const argsLength = args.element.ej2_instances[0].value.length;
         return argsLength >= 10;
     };
 
-    const setBookDetailsPrice = (selectedRoom) => {
-        const price = selectedRoom.Price + (extraBedRef.current.value * selectedRoom.ExtraBedCost);
-        const priceCollection = calculatedPrice(price, selectedRoom.DiscountPercentage, selectedRoom.TaxPercentage);
-        lineThroughPriceRef.current.innerText = '$' + price.toFixed(2);
-        taxedPriceRef.current.innerText = '$' + priceCollection.TaxedPrice;
-        priceStatementRef.current.innerText = 'includes ' + selectedRoom.DiscountPercentage + '% discount (-$' + priceCollection.DiscountAmount + ') and ' + selectedRoom.TaxPercentage + '% tax (+$' + priceCollection.TaxAmount + ')';
+    // This method calls for rendering the room price with discount and tax
+    const renderRoomPrice = (selectedRoom) => {
+        const price = selectedRoom.Price + (extraBed.current.value * selectedRoom.ExtraBedCost);
+        const priceCollection = calculatePrice(price, selectedRoom.DiscountPercentage, selectedRoom.TaxPercentage);
+        priceCollectionData.current = priceCollection;
+        lineThroughPriceText.current.innerText = '$' + price.toFixed(2);
+        taxedPriceText.current.innerText = '$' + priceCollection.TaxedPrice;
+        priceStatementText.current.innerText = 'includes ' + selectedRoom.DiscountPercentage + '% discount (-$' + priceCollection.DiscountAmount + ') and ' + selectedRoom.TaxPercentage + '% tax (+$' + priceCollection.TaxAmount + ')';
     }
 
-    const bookDetails = (args) => {
+    // This method calls for navigate the user to booking page and rendering the input field with form validator
+    const goToRoomBookingPage = (args) => {
         const rowIndex = closest(args.target, 'tr').rowIndex;
-        const rowObject = gridRef.currentViewData[rowIndex];
+        const rowObject = hotelGrid.currentViewData[rowIndex];
         setSelectedRoom(rowObject);
-        setCarouselDataSource([
+        setHotelImages([
             { ID: 1, Name: rowObject.HotelImgID, imageName: rowObject.HotelImgID },
             { ID: 2, Name: rowObject.RoomImgID, imageName: rowObject.RoomImgID }
         ]);
         setShowHotels(false);
-
         setTimeout(() => {
-            firstNameRef.current.element.focus();
+            firstName.current.element.focus();
             const options = {
                 rules: {
                     firstname: {
@@ -235,7 +259,7 @@ function HotelBookApp() {
                         required: [true, '* Please enter your email'],
                     },
                     phno: {
-                        numberValue: [customFn, '* Please enter your phone number'],
+                        numberValue: [customValidation, '* Please enter your phone number'],
                     },
 
                     address: {
@@ -255,12 +279,12 @@ function HotelBookApp() {
                     },
                 },
             };
-            formObject.current = new FormValidator('#form1', options);
-            setBookDetailsPrice(rowObject);
+            formValidator.current = new FormValidator('#form1', options);
+            renderRoomPrice(rowObject);
         }, 10);
-
     }
 
+    // This method calls for revisting the hotel list page
     const backToHotels = () => {
         setShowHotels(true);
     }
@@ -269,10 +293,11 @@ function HotelBookApp() {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
+    // This method calls for checking the room whether it is available or not for the user choosed check in and check out date
     const checkRoomAvailable = (checkInOut) => {
         let isRoomAvailable = true;
-        const startDate = getDate(drRef.current.startDate);
-        const endDate = getDate(drRef.current.endDate);
+        const startDate = getDate(checkInOutDate.current.startDate);
+        const endDate = getDate(checkInOutDate.current.endDate);
         for (let i = 0; i < checkInOut.length; i++) {
             const checkIn = getDate(checkInOut[i].CheckIn);
             const checkOut = getDate(checkInOut[i].CheckOut);
@@ -284,21 +309,23 @@ function HotelBookApp() {
         return isRoomAvailable;
     }
 
-    const calculatedPrice = (price, discount, tax) => {
+    // This method calculate and return the price with discount and tax
+    const calculatePrice = (price, discount, tax) => {
         const discountAmount = price * (discount * 0.01);
         const discountedPrice = price - discountAmount;
         const taxAmount = discountedPrice * (tax * 0.01);
         const taxedPrice = discountedPrice + taxAmount;
-        return { DiscountAmount: discountAmount.toFixed(2), DiscountedPrice: discountedPrice.toFixed(2), TaxAmount: taxAmount.toFixed(2), TaxedPrice: taxedPrice.toFixed(2) };
+        return { OriginalCost: price.toFixed(2), DiscountAmount: discountAmount.toFixed(2), DiscountedPrice: discountedPrice.toFixed(2), TaxAmount: taxAmount.toFixed(2), TaxedPrice: taxedPrice.toFixed(2) };
     }
 
-    const gridRowTemplate = (props) => {
+    // This method calls for rendering hotel grid row in a custom way using rowTemplate feature
+    const renderHotelGridRow = (props) => {
         const src = '/images/' + props.RoomImgID + '.jpg';
         const hotelFacilityList = props.HotelFacility.split(', ');
         const roomFacilityList = props.RoomFacility.split(', ');
         const extrasList = props.Extras.split(', ');
         const isRoomAvailable = checkRoomAvailable(props.CheckInOut);
-        const priceCollection = calculatedPrice(props.Price, props.DiscountPercentage, props.TaxPercentage);
+        const priceCollection = calculatePrice(props.Price, props.DiscountPercentage, props.TaxPercentage);
         return (
             <tr className='templateRow'>
                 <td className='e-rowtemplate-border-applier'>
@@ -395,7 +422,7 @@ function HotelBookApp() {
                         </div>
                         <div className='e-book-spacer'></div>
                         <div className='e-book-button'>
-                            <ButtonComponent cssClass='e-primary' onClick={bookDetails} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
+                            <ButtonComponent cssClass='e-primary' onClick={goToRoomBookingPage} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
                         </div>
                     </div>
                 </td>
@@ -403,7 +430,8 @@ function HotelBookApp() {
         );
     };
 
-    const gridEmptyRecordTemplate = () => {
+    // This method calls for rendering the empty record template in the hotel grid when there is no hotel is available according to user specification
+    const renderHotelGridEmptyRecordRow = () => {
         return (
             <div className='emptyRecordTemplate'>
                 <img src="/images/emptyRecordTemplate.svg" className="e-emptyRecord" alt="No record" />
@@ -414,119 +442,331 @@ function HotelBookApp() {
         );
     }
 
-    const gridHeaderTemplate = (args) => {
+    // This method calls for rendering the hotel grid header in custom way using headerTemplate feature
+    const renderHotelGridHeader = (args) => {
         return (
             <div className='e-header-text'>{args.headerText}</div>
         );
     }
 
-    const memoizedGridComponent = React.useMemo(() => {
+    // Memoized the hotel grid to prevent unnecessary rerenders
+    const memoizedHotelGrid = React.useMemo(() => {
         return (
             <GridComponent
-                ref={g => gridRef = g}
-                dataSource={hotelBookAppData}
+                ref={g => hotelGrid = g}
+                dataSource={hotelGridData}
                 height={620}
                 allowPaging={true}
-                pageSettings={gridPageSettings}
-                created={gridCreated}
-                rowTemplate={gridRowTemplate}
-                emptyRecordTemplate={gridEmptyRecordTemplate}
+                pageSettings={{ pageSize: 10, pageSizes: true }}
+                created={hotelGridCreated}
+                rowTemplate={renderHotelGridRow}
+                emptyRecordTemplate={renderHotelGridEmptyRecordRow}
             >
                 <ColumnsDirective>
-                    <ColumnDirective headerText='Hotel Information' headerTextAlign='center' headerTemplate={gridHeaderTemplate} />
+                    <ColumnDirective headerText='Hotel Information' headerTextAlign='center' headerTemplate={renderHotelGridHeader} />
                 </ColumnsDirective>
                 <Inject services={[Page]} />
             </GridComponent>
         );
-    }, [hotelBookAppData]);
+    }, [hotelGridData]);
 
-    const memoizedDateRangePickerComponent = React.useMemo(() => {
+    // Memoized the check in, check out data picker to prevent unnecessary rerenders
+    const memoizedCheckInOutDate = React.useMemo(() => {
         return (
-            <DateRangePickerComponent ref={dr => drRef.current = dr} placeholder='Check-in date - Check-out date' min={startDate} startDate={startDate} endDate={endDate} change={dateRangeChange} />
+            <DateRangePickerComponent ref={dr => checkInOutDate.current = dr} placeholder='Check-in date - Check-out date' min={defaultCheckInDate} startDate={defaultCheckInDate} endDate={defaultCheckOutDate} change={checkInOutDateChange} />
         );
     }, []);
 
-    const carouselItemTemplate = (props) => {
+    // This method calls for rendering the hotel images in a custom way in carousel using itemTemplate feature
+    const hotelImagesItemTemplate = (props) => {
         return (<figure className="e-carousel-img-container"><img src={"/images/" + props.imageName + ".jpg"} alt={props.imageName} /></figure>);
     }
+
+    // This method calls for rendering the room price when extra bed value change
     const extraBedChange = (args) => {
-        setBookDetailsPrice(selectedRoom);
+        renderRoomPrice(selectedRoom);
     }
 
+    const getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // The method calls for storing the user entered infromation for booking the room and display the receipt dialog to user
     const bookRoom = (args) => {
-        if (formObject.current.validate()) {
-            const dataIndex = localHotelData.current.findIndex(data => data.HotelID === selectedRoom.HotelID && data.RoomID === selectedRoom.RoomID);
-            localHotelData.current[dataIndex].CheckInOut.push({ CheckIn: rangeStartDate, CheckOut: rangeEndDate });
+        if (formValidator.current.validate()) {
+            const dataIndex = hotelData.current.findIndex(data => data.HotelID === selectedRoom.HotelID && data.RoomID === selectedRoom.RoomID);
+            hotelData.current[dataIndex].CheckInOut.push({ CheckIn: checkInDate, CheckOut: checkOutDate });
             setShowHotels(true);
-            toastRef.current.show();
+            printInfo.current = {
+                FirstName: firstName.current.value,
+                LastName: lastName.current.value,
+                Email: email.current.value,
+                Phno: phno.current.value,
+                Address: address.current.value,
+                City: city.current.value,
+                Code: code.current.value,
+                Country: country.current.value,
+                Person: person.current.value,
+                ExtraBed: extraBed.current.value,
+                HotelData: hotelData.current[dataIndex],
+                PriceCollection: priceCollectionData.current,
+                FinalPrice: parseFloat(priceCollectionData.current.TaxedPrice),
+                ReceiptID: getRandomNumber(1111111, 100000000),
+                BookedDate: new Date(),
+                CheckIn: checkInDate,
+                CheckOut: checkOutDate,
+            };
+            setShowPrintInfo(true);
         }
     }
 
-    const menuButtonClick = (args) => {
-        sidebarRef.current.style.display = 'block';
+    // This method calls for opening the menu
+    const menuClick = (args) => {
+        menu.current.style.display = 'block';
     }
 
-    const sideBarCloseButtonClick = (args) => {
-        sidebarRef.current.style.display = 'none';
+    // This method calls for closing the menu
+    const menuCloseClick = (args) => {
+        menu.current.style.display = 'none';
+    }
+
+    // This method calls for closing the print information dialog
+    const closePrintInfo = (args) => {
+        setShowPrintInfo(false);
+    }
+
+    // This method calls for printing the receipt using print method of grid 
+    const printInformation = (args) => {
+        personalInfoGrid.current.print();
+    }
+
+    // This method calls for printing the receipt in a custom way
+    const beforePrint = (args) => {
+
+        args.cancel = true;
+
+        // formating the booked date
+        const bookedDate = printInfo.current.BookedDate;
+        const formattedDate = bookedDate.toLocaleDateString();
+        const formattedTime = bookedDate.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        const formattedDateTime = formattedDate + " " + formattedTime;
+
+        // Creating the print window
+        let printWindow = window.open(
+            "",
+            "_blank",
+            "width=" + window.outerWidth + ",height=" + window.outerHeight
+        );
+
+        if (printWindow) {
+            // Customizing the receipt
+            printWindow.document.write("<body>");
+
+            printWindow.document.write("<div style='text-align: center; margin-top: 20px;'>");
+            printWindow.document.write("<h1>Hotel Receipt</h1>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='text-align: center; margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 24px;font-weight: 800;'>" + printInfo.current.HotelData.HotelName + "</div>");
+            printWindow.document.write("<div style='font-size: 20px;'>" + printInfo.current.HotelData.Address + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write('<div style="width: 100%; padding-top: 20px; text-align: center;">' + '******************************' + '</div>');
+
+            printWindow.document.write("<div style='display: flex; text-align: center;'>");
+
+            printWindow.document.write("<div style='width: 50%'>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Check In</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + printInfo.current.CheckIn.toLocaleDateString() + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Recipient name</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + printInfo.current.FirstName + " " + printInfo.current.LastName + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Room name</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + printInfo.current.HotelData.RoomName + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='width: 50%'>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Check Out</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + printInfo.current.CheckOut.toLocaleDateString() + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Booking ID</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + printInfo.current.ReceiptID.toString() + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 20px;'>");
+            printWindow.document.write("<div style='font-size: 20px; font-weight: 600;'>Booked date</div>");
+            printWindow.document.write("<div style='font-size: 24px;'>" + formattedDateTime + "</div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<table style='width: 100%; margin-top: 30px;'>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 24px; font-weight: 800; padding: 10px;'>");
+            printWindow.document.write("Description");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 24px; font-weight: 800; padding: 10px;'>");
+            printWindow.document.write("Price");
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("Room cost");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("+$" + printInfo.current.HotelData.Price);
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("Extra bed cost ( " + printInfo.current.HotelData.ExtraBedCost + " * " + printInfo.current.ExtraBed + " )");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("+$" + (printInfo.current.HotelData.ExtraBedCost * printInfo.current.ExtraBed));
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("Discount " + printInfo.current.HotelData.DiscountPercentage + "%");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("-$" + printInfo.current.PriceCollection.DiscountAmount);
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("Tax " + printInfo.current.HotelData.TaxPercentage + "%");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 24px; padding: 10px;'>");
+            printWindow.document.write("+$" + printInfo.current.PriceCollection.TaxAmount);
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("<tr>");
+            printWindow.document.write("<td style='font-size: 22px; font-weight: 800; padding: 10px;'>");
+            printWindow.document.write("Final price");
+            printWindow.document.write("</td>");
+            printWindow.document.write("<td style='font-size: 22px; font-weight: 800; padding: 10px;'>");
+            printWindow.document.write("$" + printInfo.current.PriceCollection.TaxedPrice);
+            printWindow.document.write("</td>");
+            printWindow.document.write("</tr>");
+
+            printWindow.document.write("</table>");
+
+            printWindow.document.write('<div style="width: 100%; padding-top: 20px; text-align: center;">' + '******************************' + '</div>');
+
+            printWindow.document.write("<div style='font-size: 24px; font-weight: 800; padding: 10px; text-align: center;'>Thank you for booking the hotel from HoRoomtel!</div>");
+
+            printWindow.document.write("<div style='margin-top: 30px;'>");
+            printWindow.document.write("<div><span style='font-size: 20px; font-weight: 600;'>Room amenities: </span><span style='font-size: 20px;'>" + printInfo.current.HotelData.RoomFacility + ".</span></div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 30px;'>");
+            printWindow.document.write("<div><span style='font-size: 20px; font-weight: 600;'>Hotel amenities: </span><span style='font-size: 20px;'>" + printInfo.current.HotelData.HotelFacility + ".</span></div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("<div style='margin-top: 30px;'>");
+            printWindow.document.write("<div><span style='font-size: 20px; font-weight: 600;'>Hotel policy: </span><span style='font-size: 20px;'>" + printInfo.current.HotelData.Extras + ".</span></div>");
+            printWindow.document.write("</div>");
+
+            printWindow.document.write("</body>");
+
+            printWindow.document.close();
+
+            // Printing the receipt
+            printWindow.print();
+
+            if ("onafterprint" in printWindow) {
+                printWindow.onafterprint = function () {
+                    printWindow.close();
+                };
+            }
+
+        } else {
+            console.error("Print window could not be opened.");
+        }
     }
 
     return (
         <div>
             <div className='e-title-bar'>
-                {showHotels && <div className='e-menu-button-container'><span className='e-menu-button' onClick={menuButtonClick}></span></div>}
+                {showHotels && <div className='e-menu-button-container'><span className='e-menu-button' onClick={menuClick}></span></div>}
                 <div className='e-title-text-container'>
                     <span className='e-title-text'>Book My HoRoomtel</span>
                 </div>
             </div>
             {showHotels ?
                 <div className='e-main-container'>
-                    <div ref={e => sidebarRef.current = e} className='e-side-bar'>
+                    <div ref={e => menu.current = e} className='e-side-bar'>
                         <div className='e-side-bar-operation-container'>
                             <div className='e-side-bar-separator e-side-bar-title'>
                                 <div className='e-title-bar'>
                                     <span className='e-title-text'>Book My HoRoomtel</span>
                                 </div>
                                 <div>
-                                    <span className='e-side-bar-close-button' onClick={sideBarCloseButtonClick}></span>
+                                    <span className='e-side-bar-close-button' onClick={menuCloseClick}></span>
                                 </div>
                             </div>
                             <div className='e-side-bar-separator'>
                                 <div className='e-daterangepicker-container'>
                                     <div className='e-semi-header-text e-check-in-out-text'>Check-in date - Check-out date</div>
                                     <div>
-                                        {memoizedDateRangePickerComponent}
+                                        {memoizedCheckInOutDate}
                                     </div>
                                 </div>
                             </div>
                             <div className='e-side-bar-separator'>
                                 <div className='e-semi-header-text'>
-                                    Price Range: $<span ref={e => minPriceRef.current = e}>{minPrice}</span> to $<span ref={e => maxPriceRef.current = e}>{maxPrice}</span>
+                                    Price Range: $<span ref={e => minPriceText.current = e}>{defaultMinPrice}</span> to $<span ref={e => maxPriceText.current = e}>{defaultMaxPrice}</span>
                                 </div>
                                 <div className='e-slidercomponent-container'>
-                                    <SliderComponent width={200} ref={p => priceRangeRef.current = p} type='Range' value={[minPrice, maxPrice]} min={minPrice} max={maxPrice} tooltip={sliderTooltip} changed={priceSliderChanged} />
+                                    <SliderComponent width={200} ref={p => priceRange.current = p} type='Range' value={[defaultMinPrice, defaultMaxPrice]} min={defaultMinPrice} max={defaultMaxPrice} tooltip={{ placement: 'After', isVisible: true, showOn: 'Focus' }} changed={priceRangeChanged} />
                                 </div>
                             </div>
                             <div className='e-line-separator'></div>
                             <div className='e-side-bar-treeview-separator'>
-                                <TreeViewComponent ref={a => amenitiesRef.current = a} fields={amenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
+                                <TreeViewComponent ref={a => hotelAmenities.current = a} fields={hotelAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
                             </div>
                             <div className='e-line-separator'></div>
                             <div className='e-side-bar-treeview-separator'>
-                                <TreeViewComponent ref={r => roomAmenitiesRef.current = r} fields={roomAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
+                                <TreeViewComponent ref={r => roomAmenities.current = r} fields={roomAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
                             </div>
                         </div>
                     </div>
                     <div className='e-app-container'>
                         <div className='e-operation-container'>
                             <div className='e-dd-container'>
-                                <DropDownListComponent ref={dd => sortDDRef.current = dd} width="auto" dataSource={ddData} fields={ddFields} value={1} change={sortDDChange} />
+                                <DropDownListComponent ref={dd => sortOptionContainer.current = dd} width="auto" dataSource={sortOption} fields={{ text: 'value', value: 'key' }} value={1} change={sortOptionsChange} />
                             </div>
                         </div>
                         <div className='e-grid-container'>
-                            {memoizedGridComponent}
-                            <DialogComponent width='95%' height='95%' visible={showMapDialog} close={closeShowMapDialog} isModal={true} target='.e-grid' header="Location" showCloseIcon={true}>
+                            {memoizedHotelGrid}
+                            <DialogComponent width='95%' height='95%' visible={showMapDialog} close={closeMap} isModal={true} target='.e-grid' header="Location" showCloseIcon={true}>
                                 <div className="dialogContent">
-                                    <MapsComponent ref={m => mapRef.current = m}>
+                                    <MapsComponent ref={m => map.current = m}>
                                         <Inject services={[Marker, MapsTooltip]} />
                                         <LayersDirective>
                                             <LayerDirective shapeData={USA} shapeSettings={{ fill: '#5cd65c' }}>
@@ -552,12 +792,12 @@ function HotelBookApp() {
                 </div>
                 :
                 <div className='e-details-container'>
-                    <div ref={e => carouselContainerRef.current = e} className='e-flex-layout e-back-button-carousel-container'>
+                    <div className='e-flex-layout e-back-button-carousel-container'>
                         <div className='e-back-button-container'>
                             <span className='e-back-button' onClick={backToHotels}></span>
                         </div>
                         <div className='e-carouselcomponent-container'>
-                            <CarouselComponent ref={c => carouselRef.current = c} selectedIndex={0} dataSource={carouselDataSource} itemTemplate={carouselItemTemplate}></CarouselComponent>
+                            <CarouselComponent selectedIndex={0} dataSource={hotelImages} itemTemplate={hotelImagesItemTemplate}></CarouselComponent>
                         </div>
                     </div>
                     <div className='e-details-info-container'>
@@ -568,21 +808,21 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Personal information</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={f => firstNameRef.current = f} width='75%' placeholder="First name *" name='firstname' floatLabelType="Always" type="text" data-msg-containerid="errorForFirstName" />
+                                            <TextBoxComponent ref={f => firstName.current = f} width='75%' placeholder="First name *" name='firstname' floatLabelType="Always" type="text" data-msg-containerid="errorForFirstName" />
                                             <div id="errorForFirstName" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent width='75%' placeholder="Last name *" name='lastname' floatLabelType="Always" type="text" data-msg-containerid="errorForLastName" />
+                                            <TextBoxComponent ref={l => lastName.current = l} width='75%' placeholder="Last name *" name='lastname' floatLabelType="Always" type="text" data-msg-containerid="errorForLastName" />
                                             <div id="errorForLastName" />
                                         </div>
                                     </div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent width='75%' placeholder="Email *" name='email' floatLabelType="Always" type='email' data-msg-containerid="errorForEmail" />
+                                            <TextBoxComponent ref={e => email.current = e} width='75%' placeholder="Email *" name='email' floatLabelType="Always" type='email' data-msg-containerid="errorForEmail" />
                                             <div id="errorForEmail" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <MaskedTextBoxComponent width='75%' mask="(999) 999-9999" placeholder="Phone number *" name='phno' floatLabelType='Always' />
+                                            <MaskedTextBoxComponent ref={p => phno.current = p} width='75%' mask="(999) 999-9999" placeholder="Phone number *" name='phno' floatLabelType='Always' />
                                             <label className='e-error' htmlFor='phno' />
                                         </div>
                                     </div>
@@ -592,21 +832,21 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Current address</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent width='75%' placeholder="Address *" name='address' floatLabelType="Always" type="text" data-msg-containerid="errorForAddress" />
+                                            <TextBoxComponent ref={a => address.current = a} width='75%' placeholder="Address *" name='address' floatLabelType="Always" type="text" data-msg-containerid="errorForAddress" />
                                             <div id="errorForAddress" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent width='75%' placeholder="City *" name='city' floatLabelType="Always" type="text" data-msg-containerid="errorForCity" />
+                                            <TextBoxComponent ref={c => city.current = c} width='75%' placeholder="City *" name='city' floatLabelType="Always" type="text" data-msg-containerid="errorForCity" />
                                             <div id="errorForCity" />
                                         </div>
                                     </div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent width='75%' placeholder="Zip/Post code *" name='code' floatLabelType="Always" type="number" data-msg-containerid="errorForCode" />
+                                            <TextBoxComponent ref={c => code.current = c} width='75%' placeholder="Zip/Post code *" name='code' floatLabelType="Always" type="number" data-msg-containerid="errorForCode" />
                                             <div id="errorForCode" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <DropDownListComponent width='75%' placeholder='Country/Region *' name='country' floatLabelType="Always" dataSource={['USA']} value="USA" data-msg-containerid="errorForCountry" />
+                                            <DropDownListComponent ref={c => country.current = c} width='75%' placeholder='Country/Region *' name='country' floatLabelType="Always" dataSource={['USA']} value="USA" data-msg-containerid="errorForCountry" />
                                             <div id="errorForCountry" />
                                         </div>
                                     </div>
@@ -623,10 +863,10 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Room details</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <NumericTextBoxComponent width='75%' placeholder={'No of person (capacity: ' + selectedRoom.Capacity + ')'} floatLabelType='Always' value={1} min={1} max={selectedRoom.Capacity} />
+                                            <NumericTextBoxComponent ref={c => person.current = c} width='75%' placeholder={'No of person (capacity: ' + selectedRoom.Capacity + ')'} floatLabelType='Always' value={1} min={1} max={selectedRoom.Capacity} />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <NumericTextBoxComponent ref={e => extraBedRef.current = e} width='75%' placeholder={'No of extra bed (capacity: ' + selectedRoom.ExtraBed + ' and per bed cost: $' + selectedRoom.ExtraBedCost + ')'} floatLabelType='Always' value={0} min={0} max={selectedRoom.ExtraBed} change={extraBedChange} />
+                                            <NumericTextBoxComponent ref={e => extraBed.current = e} width='75%' placeholder={'No of extra bed (capacity: ' + selectedRoom.ExtraBed + ' and per bed cost: $' + selectedRoom.ExtraBedCost + ')'} floatLabelType='Always' value={0} min={0} max={selectedRoom.ExtraBed} change={extraBedChange} />
                                         </div>
                                     </div>
                                 </div>
@@ -636,10 +876,10 @@ function HotelBookApp() {
                                 <div className='e-book-spacer'></div>
                                 <div className='e-price-info'>
                                     <div>
-                                        <span className='e-cost-line-through-styler' ref={e => lineThroughPriceRef.current = e}></span>
-                                        <span className='e-cost-styler' ref={e => taxedPriceRef.current = e}></span>
+                                        <span className='e-cost-line-through-styler' ref={e => lineThroughPriceText.current = e}></span>
+                                        <span className='e-cost-styler' ref={e => taxedPriceText.current = e}></span>
                                     </div>
-                                    <div ref={e => priceStatementRef.current = e}></div>
+                                    <div ref={e => priceStatementText.current = e}></div>
                                 </div>
                                 <div className='e-book-button e-book-details-button'>
                                     <ButtonComponent cssClass='e-primary' onClick={bookRoom}>Book Room</ButtonComponent>
@@ -677,7 +917,45 @@ function HotelBookApp() {
                     </div>
                 </div>
             }
-            <ToastComponent ref={t => toastRef.current = t} content="Hotel room booked successfully!" position={{ X: 'Center', Y: "Top" }} />
+            <div className='e-print-info' style={{ display: showPrintInfo ? 'block' : 'none' }}>
+                <DialogComponent width='90%' height='75%' visible={showPrintInfo} close={closePrintInfo} isModal={true} target='.e-print-info' header='Hotel room booked successfully!' showCloseIcon={true}>
+                    <div className="dialogContent">
+                        {showPrintInfo && <div className='e-print-info-container'>
+                            <div className='e-flex-layout'>
+                                <div className='e-flex-spacer'></div>
+                                <ButtonComponent className='e-custom-print-button' iconCss='e-custom-print-icon' onClick={printInformation}>Print</ButtonComponent>
+                            </div>
+                            <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Personal Information</div>
+                            <GridComponent ref={g => personalInfoGrid.current = g}
+                                width={'100%'}
+                                dataSource={[printInfo.current]}
+                                allowTextWrap={true}
+                                beforePrint={beforePrint}>
+                                <ColumnsDirective>
+                                    <ColumnDirective field='FirstName' headerText='First name' width={120} />
+                                    <ColumnDirective field='LastName' headerText='Last name' width={120} />
+                                    <ColumnDirective field='Email' headerText='Email' width={120} />
+                                    <ColumnDirective field='Address' headerText='Address' width={120} />
+                                    <ColumnDirective field='Country' headerText='Country' width={120} />
+                                </ColumnsDirective>
+                                <Inject services={[Print]} />
+                            </GridComponent>
+                            <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Room Information</div>
+                            <GridComponent ref={g => hotelInfoGrid.current = g} width={'100%'} dataSource={[printInfo.current]} allowTextWrap={true}>
+                                <ColumnsDirective>
+                                    <ColumnDirective field='HotelData.HotelName' headerText='Hotel name' width={120} />
+                                    <ColumnDirective field='HotelData.RoomName' headerText='Room name' width={120} />
+                                    <ColumnDirective field='CheckIn' headerText='Check In date' format={{ type: 'date', format: 'dd/MM/yyyy' }} width={120} />
+                                    <ColumnDirective field='CheckOut' headerText='Check Out date' format={{ type: 'date', format: 'dd/MM/yyyy' }} width={120} />
+                                    <ColumnDirective field='Person' headerText='No of person' width={120} />
+                                    <ColumnDirective field='ExtraBed' headerText='No of extra bed' width={120} />
+                                    <ColumnDirective field='FinalPrice' headerText='Price' type='number' format='C2' width={120} />
+                                </ColumnsDirective>
+                            </GridComponent>
+                        </div>}
+                    </div>
+                </DialogComponent>
+            </div>
         </div>
     );
 }

@@ -201,6 +201,10 @@ body {
     flex-grow: 1;
 }
 
+.e-flex-spacer {
+    flex-grow: 1;
+}
+
 .e-info-flex-width-applier {
     width: 50%;
     padding-right: 15px;
@@ -354,6 +358,35 @@ body {
 .e-toast-container .e-toast .e-toast-message .e-toast-content,
 .e-toast-container .e-toast .e-toast-message .e-toast-content:hover {
     color: white;
+}
+
+.e-print-info {
+    display: none;
+    position: fixed;
+    z-index: 1000000001;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.e-print-info-container {
+    padding: 10px;
+}
+
+.e-custom-print-button {
+text-align: left;
+}
+
+.e-custom-print-icon::before {
+    content: "\ebf9";
+    color: #333;
+    font-size: 16px;
+    font-family: "e-icons";
+}
+
+.e-print-info-separator {
+    margin-top: 10px;
 }
 
 @import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';

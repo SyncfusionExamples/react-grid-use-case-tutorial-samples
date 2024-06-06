@@ -9,7 +9,7 @@ startDate2.setDate(endDate1.getDate() + 1);
 const endDate2 = new Date(startDate2);
 endDate2.setDate(startDate2.getDate() + 2);
 
-var hotelInfo = [
+var hotelData = [
     {
         HotelID: 102278,
         HotelName: 'Benor Cotel',
@@ -79,7 +79,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 117823,
         HotelName: 'Zabator Cotel',
@@ -149,7 +148,6 @@ var hotelInfo = [
         Price: 100,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 322211,
         HotelName: 'Ben Swikator',
@@ -219,8 +217,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    //////////////////////////////////////////
-
     {
         HotelID: 112278,
         HotelName: 'Zentor Motel',
@@ -290,7 +286,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 127823,
         HotelName: 'Bakator Cotel',
@@ -360,7 +355,6 @@ var hotelInfo = [
         Price: 100,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 332211,
         HotelName: 'Zen Swikator',
@@ -430,8 +424,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    /////////////////////////
-
     {
         HotelID: 342211,
         HotelName: 'Cen Zwikator',
@@ -501,8 +493,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    //////////////////
-
     {
         HotelID: 132278,
         HotelName: 'Bekaor Cotel',
@@ -572,7 +562,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 137823,
         HotelName: 'Zanator Cotel',
@@ -642,7 +631,6 @@ var hotelInfo = [
         Price: 300,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 343211,
         HotelName: 'Bentoo Swikator',
@@ -712,8 +700,6 @@ var hotelInfo = [
         Price: 250,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    //////////////////////////////////////////
-
     {
         HotelID: 142278,
         HotelName: 'ZZntor Cotel',
@@ -783,7 +769,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 129823,
         HotelName: 'Oakator Cotel',
@@ -853,7 +838,6 @@ var hotelInfo = [
         Price: 100,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 332221,
         HotelName: 'ZenZen Swikator',
@@ -923,8 +907,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    /////////////////////////
-
     {
         HotelID: 342311,
         HotelName: 'CenCake Owikator',
@@ -994,9 +976,6 @@ var hotelInfo = [
         Price: 550,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-
-    ///////////////////
-
     {
         HotelID: 192278,
         HotelName: 'Zekaorza Cotel',
@@ -1066,7 +1045,6 @@ var hotelInfo = [
         Price: 250,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 197823,
         HotelName: 'Zabatorza Cotel',
@@ -1136,7 +1114,6 @@ var hotelInfo = [
         Price: 300,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 393211,
         HotelName: 'Saentoo Swikator',
@@ -1206,8 +1183,6 @@ var hotelInfo = [
         Price: 250,
         CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
     },
-    //////////////////////////////////////////
-
     {
         HotelID: 199278,
         HotelName: 'Zoontor Cotel',
@@ -1277,7 +1252,6 @@ var hotelInfo = [
         Price: 150,
         CheckInOut: []
     },
-    ////////////////////////////////
     {
         HotelID: 199923,
         HotelName: 'Sasktor Cotel',
@@ -1304,4 +1278,4 @@ var hotelInfo = [
 
 ];
 
-exports.hotelData = hotelInfo;
+exports.data = hotelData;
