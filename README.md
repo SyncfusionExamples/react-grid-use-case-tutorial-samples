@@ -36,6 +36,8 @@ While looking for a secure and comfortable hotel stay that fits your budget, pre
 
 This demo will show you how to utilize the Syncfusion Data Grid to display the lists of hotels and it facility and cost and locations and user reviews. Also, how to provide the option to select the hostel based on available hotel rooms on the selected check and checkout date with budget-wise and facilities and user review. With our step-by-step guide, you'll be able to easily set up and configure the data grid to meet your specific needs.
 
+![Hotelbooking App](images/hotel-app.gif)
+
 [Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Hotel-booking-App)
 
 
