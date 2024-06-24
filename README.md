@@ -48,4 +48,11 @@ This demo will show you how to utilize the Syncfusion Data Grid to display the l
 
 [Sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Employee_Managment_App)
 
+### Building a FIFA stats report application with Syncfusion React DataGrid
+The Syncfusion React DataGrid is a powerful and versatile data visualization component, adept at efficiently managing large datasets. It provides an extensive range of features, including sorting, filtering, grouping, and pagination, which are crucial for developing an effective and user-friendly statistics reporting tool. In this application, the Syncfusion DataGrid is used to display comprehensive FIFA World Cup records and statistics, covering the entire history of the tournament from 1930 to 2022.
+The FIFA World Cup statistics and data utilized in this application are sourced from [Wikipedia](https://en.wikipedia.org/wiki/FIFA_World_Cup_records_and_statistics). We extend our sincere thanks to Wikipedia for their invaluable resource, which has been instrumental in preparing this demonstration.
+
+![FIFA-STATS App](images/fifa.gif)
+[sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/FIFA-STATS)
+
 
