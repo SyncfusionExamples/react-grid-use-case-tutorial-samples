@@ -42,6 +42,8 @@ This demo will show you how to utilize the Syncfusion Data Grid to display the l
 
 
 ### Employee management application using Syncfusion React DataGrid
+The Syncfusion React DataGrid is a robust and versatile data visualization component designed to efficiently manage large datasets. It offers a comprehensive range of features, including  [sorting](https://ej2.syncfusion.com/react/documentation/grid/sorting), [filtering](https://ej2.syncfusion.com/react/documentation/grid/filtering/filtering), [grouping](https://ej2.syncfusion.com/react/documentation/grid/grouping/grouping), and [pagination](https://ej2.syncfusion.com/react/documentation/grid/paging), as well as data [exporting](https://ej2.syncfusion.com/react/documentation/grid/excel-export/excel-exporting) and [printing](https://ej2.syncfusion.com/react/documentation/grid/print), all of which are essential for developing an effective and user-friendly statistics reporting tool. In this guide, we will demonstrate how to create an Employee Portal management application using the Syncfusion Data Grid.
+
 ![Employee_Organization](images/EmployeeManagement_organization.gif)
 
 ![Employee_profile](images/EmployeeManagement_myprofile.gif)
