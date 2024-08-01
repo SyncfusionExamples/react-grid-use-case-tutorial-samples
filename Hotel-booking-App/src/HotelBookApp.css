@@ -1,9 +1,18 @@
 body {
     margin: 0;
-    font-family: "Segoe UI", "GeezaPro", "DejaVu Serif", sans-serif, "-apple-system", "BlinkMacSystemFont";
-    font-size: 13px;
+    font-family: "Segoe UI";
     font-weight: 400;
-    color: black;
+    font-size: 16px;
+    line-height: 24px;
+    color: #767676;
+}
+
+.primary-text-style {
+    font-family: "Segoe UI";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #767676;
 }
 
 .e-title-bar {
@@ -56,6 +65,7 @@ body {
 
 .e-side-bar-operation-container {
     background-color: #ffffff;
+    width: 260px;
 }
 
 .e-check-in-out-text {
@@ -70,31 +80,29 @@ body {
     padding: 10px 3px;
 }
 
-.e-line-separator {
-    width: 90%;
-    background-color: gray;
+.e-line-separator,
+.e-data-line-separator {
+    width: 95%;
+    background-color: #EAEAEA;
     padding: 1px 0px;
     margin: 10px auto;
 }
 
-.e-data-line-separator {
-    width: 95%;
-    background-color: gray;
-    padding: 0.2px 0px;
-    margin: 10px auto;
-}
-
 .e-app-container {
-    background-color: #e6eaed;
+    background-color: #F0F4F6;
     width: 100%;
 }
 
 .e-operation-container {
-    padding: 20px 10px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 10;
+    right: 0px;
+    top: 0px;
 }
 
 .e-grid-container {
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
 }
 
 .e-mobile-layout {
@@ -117,37 +125,33 @@ body {
 }
 
 .e-title-text {
-    font-size: 15px;
-    font-weight: 900;
-    color: black;
+    font-weight: 600;
+    color: #333333;
 }
 
 .e-header-text {
-    font-size: 15px;
-    font-weight: 900;
     text-align: center;
     padding: 10px;
-    color: black;
+    font-weight: 600;
+    color: #333333;
+}
+
+.e-headercell .e-header-text {
+    padding: 14px;
 }
 
 .e-semi-header-text {
-    font-size: 13px;
-    font-weight: 700;
-    color: black;
+    font-weight: 600;
+    color: #333333;
 }
 
 .e-semi-bold-header-text {
-    font-size: 14px;
-    font-weight: 800;
-    color: black;
+    font-weight: 600;
+    color: #333333;
 }
 
 .e-light-blue-border-bottom {
     border-bottom: 3px solid #e0f2fe !important;
-}
-
-.templateRow {
-    padding: 10px;
 }
 
 .templateRow td {
@@ -156,12 +160,12 @@ body {
 
 .e-rowtemplate-border-applier {
     box-shadow: none;
-    border: 5px solid #e0f2fe !important;
+    border: 1px solid #EAEAEA !important;
 }
 
 .e-room-not-available-cover {
     position: absolute;
-    width: 100%;
+    width: calc(100% - 2px);
     height: 100%;
     background-color: #f2f2f2;
     opacity: 0.5;
@@ -224,20 +228,21 @@ body {
     text-decoration: underline;
 }
 
-.e-below-text-styler {
-    margin-top: 5px;
-}
-
-.e-quote-styler {
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.e-rating-container.e-custom-rating .e-rating-item-list {
+    margin: 0px;
 }
 
 .e-rating-container.e-custom-rating .e-rating-item-container {
-    margin: -5px 0px 0px 0px;
-    padding: 0px 5px;
-    font-size: 18px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+}
+
+.e-rating-container .e-rating-item-container {
+    font-size: 16px;
+}
+
+.e-rating-reviews-container {
+    align-items: center;
 }
 
 .e-book-layout {
@@ -266,9 +271,8 @@ body {
 }
 
 .e-cost-styler {
-    font-size: 20px;
     font-weight: 600;
-    color: black;
+    color: #333333;
 }
 
 .e-book-button {
@@ -289,21 +293,40 @@ body {
 }
 
 .e-details-container {
-    background-color: #e6eaed;
+    background-color: #F0F4F6;
+    padding-top: 30px;
+}
+
+.e-carousel-image-holder-height {
+    height: 280px;
 }
 
 .e-back-button-carousel-container {
     display: block !important;
 }
 
+.e-background-blur-image-container {
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.e-background-blur-image {
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    filter: blur(1px);
+}
+
 .e-back-button-container {
     padding: 10px;
+    position: absolute;
+    z-index: 1;
 }
 
 .e-back-button::before {
     content: "\e610";
-    color: #333;
-    background-color: #ffffff;
+    color: black;
     padding: 5px;
     font-size: 17px;
     font-family: "e-icons";
@@ -330,12 +353,13 @@ body {
 .e-details-info-container {
     display: flex;
     background-color: #ffffff;
+    margin-top: 30px;
 }
 
 .e-booking-details-container {
     width: 100%;
-    border-left: 5px solid #e6eaed !important;
-    border-right: 5px solid #e6eaed !important;
+    border-left: 5px solid #F0F4F6 !important;
+    border-right: 5px solid #F0F4F6 !important;
 }
 
 .e-booking-details-separator {
@@ -343,21 +367,11 @@ body {
 }
 
 .e-hotel-details-container {
-    border-right: 5px solid #e6eaed !important;
+    border-right: 5px solid #F0F4F6 !important;
 }
 
 .e-hotel-details-side-bar-separator {
     padding: 10px 15px;
-}
-
-.e-toast-container .e-toast,
-.e-toast-container .e-toast:hover {
-    background-color: #5b5b57;
-}
-
-.e-toast-container .e-toast .e-toast-message .e-toast-content,
-.e-toast-container .e-toast .e-toast-message .e-toast-content:hover {
-    color: white;
 }
 
 .e-print-info {
@@ -374,19 +388,16 @@ body {
     padding: 10px;
 }
 
-.e-custom-print-button {
-text-align: left;
-}
-
-.e-custom-print-icon::before {
-    content: "\ebf9";
-    color: #333;
-    font-size: 16px;
-    font-family: "e-icons";
-}
-
 .e-print-info-separator {
     margin-top: 10px;
+}
+
+.e-chip-list {
+    padding-left: 0px;
+}
+
+.e-chip.e-outline {
+    margin-left: 0px;
 }
 
 @import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
@@ -452,13 +463,13 @@ text-align: left;
 
     .e-booking-details-container {
         width: 100%;
-        border-left: 0px solid #e6eaed !important;
-        border-right: 0px solid #e6eaed !important;
-        border-bottom: 5px solid #e6eaed !important;
+        border-left: 0px solid #F0F4F6 !important;
+        border-right: 0px solid #F0F4F6 !important;
+        border-bottom: 5px solid #F0F4F6 !important;
     }
 
     .e-hotel-details-container {
-        border-right: 0px solid #e6eaed !important;
+        border-right: 0px solid #F0F4F6 !important;
     }
 }
 
@@ -496,6 +507,7 @@ text-align: left;
         position: absolute;
         height: 100%;
         overflow-y: auto;
+        width: auto;
     }
 
     .e-carouselcomponent-container,
@@ -511,13 +523,18 @@ text-align: left;
         width: 320px;
         height: 180px;
     }
+
+    .e-operation-container {
+        position: static;
+        padding-top: 0px;
+    }
 }
 
 @media only screen and (max-width: 560px) {
 
     .e-carouselcomponent-container,
     .e-carousel-img-container img {
-        height: 180px;
+        height: 240px;
         width: 320px;
     }
 }

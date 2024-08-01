@@ -35,11 +35,16 @@ function HotelBookApp() {
 
     // Check in and check out information for rendering the hotel list according to user specified date
     let checkInOutDate = React.useRef(null);
-    const defaultCheckInDate = new Date();
+    let defaultCheckInDate = new Date();
+    defaultCheckInDate = new Date(
+        defaultCheckInDate.getFullYear(),
+        defaultCheckInDate.getMonth(),
+        defaultCheckInDate.getDate()
+    );
     const defaultCheckOutDate = new Date(defaultCheckInDate);
     defaultCheckOutDate.setDate(defaultCheckInDate.getDate() + 2);
-    const [checkInDate, setCheckInDate] = React.useState(defaultCheckInDate);
-    const [checkOutDate, setCheckOutDate] = React.useState(defaultCheckOutDate);
+    const checkInDate = React.useRef(defaultCheckInDate);
+    const checkOutDate = React.useRef(defaultCheckOutDate);
 
     // Price range information for rendering the hotel list according to user expecting price
     let priceRange = React.useRef(null);
@@ -60,6 +65,7 @@ function HotelBookApp() {
         { key: 2, value: 'Price (low to high)' },
         { key: 3, value: 'Price (high to low)' },
     ];
+    let sortOptionValue = React.useRef(1);
 
     // Hotel amenities infromation for rendering the hotel list according to user requirement that present in the hotel
     let hotelAmenities = React.useRef(null);
@@ -89,6 +95,7 @@ function HotelBookApp() {
     const roomAmenitiesField = { dataSource: roomAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 
     // Hotel images for user booking room
+    let backgroundBlurImage = React.useRef(null);
     const [hotelImages, setHotelImages] = React.useState([]);
 
     // Obtaining user information via input field with validator while booking room in hotel
@@ -176,14 +183,15 @@ function HotelBookApp() {
 
     // This method calls for generating hotel list when sort options is changed
     const sortOptionsChange = (args) => {
+        sortOptionValue.current = args.value;
         generateHotelData();
     }
 
     // This method calls for generating hotel list when check in and check out date is changed
     const checkInOutDateChange = (args) => {
         if (args.startDate && args.endDate) {
-            setCheckInDate(args.startDate);
-            setCheckOutDate(args.endDate);
+            checkInDate.current = args.startDate;
+            checkOutDate.current = args.endDate;
             generateHotelData();
         }
     }
@@ -244,7 +252,6 @@ function HotelBookApp() {
         ]);
         setShowHotels(false);
         setTimeout(() => {
-            firstName.current.element.focus();
             const options = {
                 rules: {
                     firstname: {
@@ -286,6 +293,8 @@ function HotelBookApp() {
 
     // This method calls for revisting the hotel list page
     const backToHotels = () => {
+        checkInDate.current = defaultCheckInDate;
+        checkOutDate.current = defaultCheckOutDate;
         setShowHotels(true);
     }
 
@@ -296,8 +305,8 @@ function HotelBookApp() {
     // This method calls for checking the room whether it is available or not for the user choosed check in and check out date
     const checkRoomAvailable = (checkInOut) => {
         let isRoomAvailable = true;
-        const startDate = getDate(checkInOutDate.current.startDate);
-        const endDate = getDate(checkInOutDate.current.endDate);
+        const startDate = getDate(checkInDate.current);
+        const endDate = getDate(checkOutDate.current);
         for (let i = 0; i < checkInOut.length; i++) {
             const checkIn = getDate(checkInOut[i].CheckIn);
             const checkOut = getDate(checkInOut[i].CheckOut);
@@ -327,7 +336,7 @@ function HotelBookApp() {
         const isRoomAvailable = checkRoomAvailable(props.CheckInOut);
         const priceCollection = calculatePrice(props.Price, props.DiscountPercentage, props.TaxPercentage);
         return (
-            <tr className='templateRow'>
+            <tr className='templateRow primary-text-style'>
                 <td className='e-rowtemplate-border-applier'>
                     {!isRoomAvailable && <div className='e-room-not-available-cover'></div>}
                     <div className='e-flex-layout e-img-info-container'>
@@ -347,13 +356,19 @@ function HotelBookApp() {
                                             <span className='e-map-text-spacer'>(<span className='e-map-text-styler' onClick={showMap}>Show on map</span>)</span>
                                         </div>
                                     </div>
-                                    <div className='e-flex-layout e-info-flex-width-applier e-rating-reviews-container'>
+                                    <div className='e-info-flex-width-applier'>
                                         <div>
-                                            <RatingComponent value={props.Rating} readOnly={true} cssClass='e-custom-rating'></RatingComponent>
+                                            <span className='e-semi-header-text'>Rating:</span>
                                         </div>
-                                        <div className='e-reviews-container'>
-                                            ({props.ReviewCount} reviews)
+                                        <div className='e-flex-layout e-rating-reviews-container'>
+                                            <div>
+                                                <RatingComponent value={props.Rating} readOnly={true} cssClass='e-custom-rating'></RatingComponent>
+                                            </div>
+                                            <div className='e-reviews-container'>
+                                                ({props.ReviewCount} reviews)
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -375,7 +390,7 @@ function HotelBookApp() {
                                 <div className='e-flex-layout'>
                                     <div className='e-info-flex-width-applier'>
                                         <span className='e-semi-header-text'>Amenities:</span>
-                                        <ChipListComponent>
+                                        <ChipListComponent cssClass='e-outline'>
                                             <ChipsDirective>
                                                 {hotelFacilityList.map((item, index) => (
                                                     <ChipDirective key={index} text={item}></ChipDirective>
@@ -385,7 +400,7 @@ function HotelBookApp() {
                                     </div>
                                     <div className='e-info-flex-width-applier'>
                                         <span className='e-semi-header-text'>Room Amenities:</span>
-                                        <ChipListComponent>
+                                        <ChipListComponent cssClass='e-outline'>
                                             <ChipsDirective>
                                                 {roomFacilityList.map((item, index) => (
                                                     <ChipDirective key={index} text={item}></ChipDirective>
@@ -401,7 +416,7 @@ function HotelBookApp() {
                     <div className='e-book-layout'>
                         <div className='e-extralist-price-info-container'>
                             <div className='e-extralist-container'>
-                                <ChipListComponent>
+                                <ChipListComponent cssClass='e-outline'>
                                     <ChipsDirective>
                                         {extrasList.map((item, index) => (
                                             <ChipDirective key={index} text={item}></ChipDirective>
@@ -422,7 +437,7 @@ function HotelBookApp() {
                         </div>
                         <div className='e-book-spacer'></div>
                         <div className='e-book-button'>
-                            <ButtonComponent cssClass='e-primary' onClick={goToRoomBookingPage} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
+                            <ButtonComponent cssClass='e-primary e-outline' onClick={goToRoomBookingPage} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
                         </div>
                     </div>
                 </td>
@@ -445,7 +460,12 @@ function HotelBookApp() {
     // This method calls for rendering the hotel grid header in custom way using headerTemplate feature
     const renderHotelGridHeader = (args) => {
         return (
-            <div className='e-header-text'>{args.headerText}</div>
+            <div className='primary-text-style'>
+                <div className='e-header-text'>{args.headerText}</div>
+                <div className='e-operation-container'>
+                    <DropDownListComponent ref={dd => sortOptionContainer.current = dd} width={160} dataSource={sortOption} fields={{ text: 'value', value: 'key' }} value={sortOptionValue.current} change={sortOptionsChange} />
+                </div>
+            </div>
         );
     }
 
@@ -457,7 +477,9 @@ function HotelBookApp() {
                 dataSource={hotelGridData}
                 height={620}
                 allowPaging={true}
-                pageSettings={{ pageSize: 10, pageSizes: true }}
+                pageSettings={{
+                    pageSize: 10, pageSizes: true
+                }}
                 created={hotelGridCreated}
                 rowTemplate={renderHotelGridRow}
                 emptyRecordTemplate={renderHotelGridEmptyRecordRow}
@@ -473,7 +495,7 @@ function HotelBookApp() {
     // Memoized the check in, check out data picker to prevent unnecessary rerenders
     const memoizedCheckInOutDate = React.useMemo(() => {
         return (
-            <DateRangePickerComponent ref={dr => checkInOutDate.current = dr} placeholder='Check-in date - Check-out date' min={defaultCheckInDate} startDate={defaultCheckInDate} endDate={defaultCheckOutDate} change={checkInOutDateChange} />
+            <DateRangePickerComponent ref={dr => checkInOutDate.current = dr} min={defaultCheckInDate} startDate={defaultCheckInDate} endDate={defaultCheckOutDate} change={checkInOutDateChange} />
         );
     }, []);
 
@@ -495,7 +517,7 @@ function HotelBookApp() {
     const bookRoom = (args) => {
         if (formValidator.current.validate()) {
             const dataIndex = hotelData.current.findIndex(data => data.HotelID === selectedRoom.HotelID && data.RoomID === selectedRoom.RoomID);
-            hotelData.current[dataIndex].CheckInOut.push({ CheckIn: checkInDate, CheckOut: checkOutDate });
+            hotelData.current[dataIndex].CheckInOut.push({ CheckIn: checkInDate.current, CheckOut: checkOutDate.current });
             setShowHotels(true);
             printInfo.current = {
                 FirstName: firstName.current.value,
@@ -513,8 +535,8 @@ function HotelBookApp() {
                 FinalPrice: parseFloat(priceCollectionData.current.TaxedPrice),
                 ReceiptID: getRandomNumber(1111111, 100000000),
                 BookedDate: new Date(),
-                CheckIn: checkInDate,
-                CheckOut: checkOutDate,
+                CheckIn: checkInDate.current,
+                CheckOut: checkOutDate.current,
             };
             setShowPrintInfo(true);
         }
@@ -710,6 +732,11 @@ function HotelBookApp() {
         }
     }
 
+    const onSlideChanging = (args) => {
+        backgroundBlurImage.current.src = "/images/" + hotelImages[args.nextIndex].imageName + ".jpg";
+        backgroundBlurImage.current.alt = hotelImages[args.nextIndex].imageName;
+    }
+
     return (
         <div>
             <div className='e-title-bar'>
@@ -743,7 +770,7 @@ function HotelBookApp() {
                                     Price Range: $<span ref={e => minPriceText.current = e}>{defaultMinPrice}</span> to $<span ref={e => maxPriceText.current = e}>{defaultMaxPrice}</span>
                                 </div>
                                 <div className='e-slidercomponent-container'>
-                                    <SliderComponent width={200} ref={p => priceRange.current = p} type='Range' value={[defaultMinPrice, defaultMaxPrice]} min={defaultMinPrice} max={defaultMaxPrice} tooltip={{ placement: 'After', isVisible: true, showOn: 'Focus' }} changed={priceRangeChanged} />
+                                    <SliderComponent ref={p => priceRange.current = p} type='Range' value={[defaultMinPrice, defaultMaxPrice]} min={defaultMinPrice} max={defaultMaxPrice} tooltip={{ placement: 'After', isVisible: true, showOn: 'Focus' }} changed={priceRangeChanged} />
                                 </div>
                             </div>
                             <div className='e-line-separator'></div>
@@ -757,11 +784,6 @@ function HotelBookApp() {
                         </div>
                     </div>
                     <div className='e-app-container'>
-                        <div className='e-operation-container'>
-                            <div className='e-dd-container'>
-                                <DropDownListComponent ref={dd => sortOptionContainer.current = dd} width="auto" dataSource={sortOption} fields={{ text: 'value', value: 'key' }} value={1} change={sortOptionsChange} />
-                            </div>
-                        </div>
                         <div className='e-grid-container'>
                             {memoizedHotelGrid}
                             <DialogComponent width='95%' height='95%' visible={showMapDialog} close={closeMap} isModal={true} target='.e-grid' header="Location" showCloseIcon={true}>
@@ -792,12 +814,15 @@ function HotelBookApp() {
                 </div>
                 :
                 <div className='e-details-container'>
-                    <div className='e-flex-layout e-back-button-carousel-container'>
+                    <div className='e-back-button-carousel-container e-carousel-image-holder-height'>
+                        <div className='e-background-blur-image-container e-carousel-image-holder-height'>
+                            <img ref={e => backgroundBlurImage.current = e} className='e-background-blur-image' src={"/images/" + hotelImages[0].imageName + ".jpg"} alt={hotelImages[0].imageName} />
+                        </div>
                         <div className='e-back-button-container'>
                             <span className='e-back-button' onClick={backToHotels}></span>
                         </div>
                         <div className='e-carouselcomponent-container'>
-                            <CarouselComponent selectedIndex={0} dataSource={hotelImages} itemTemplate={hotelImagesItemTemplate}></CarouselComponent>
+                            <CarouselComponent selectedIndex={0} dataSource={hotelImages} itemTemplate={hotelImagesItemTemplate} slideChanging={onSlideChanging}></CarouselComponent>
                         </div>
                     </div>
                     <div className='e-details-info-container'>
@@ -882,7 +907,7 @@ function HotelBookApp() {
                                     <div ref={e => priceStatementText.current = e}></div>
                                 </div>
                                 <div className='e-book-button e-book-details-button'>
-                                    <ButtonComponent cssClass='e-primary' onClick={bookRoom}>Book Room</ButtonComponent>
+                                    <ButtonComponent cssClass='e-primary e-outline' onClick={bookRoom}>Book Room</ButtonComponent>
                                 </div>
                             </div>
 
@@ -895,7 +920,7 @@ function HotelBookApp() {
                             <div className='e-hotel-details-side-bar-separator'><span className='e-semi-header-text'>Capacity: </span>{selectedRoom.Capacity} person</div>
                             <div className='e-hotel-details-side-bar-separator'>
                                 <span className='e-semi-header-text'>Amenities:</span>
-                                <ChipListComponent>
+                                <ChipListComponent cssClass='e-outline'>
                                     <ChipsDirective>
                                         {selectedRoom.HotelFacility.split(', ').map((item, index) => (
                                             <ChipDirective key={index} text={item}></ChipDirective>
@@ -905,7 +930,7 @@ function HotelBookApp() {
                             </div>
                             <div className='e-hotel-details-side-bar-separator'>
                                 <span className='e-semi-header-text'>Room Amenities:</span>
-                                <ChipListComponent>
+                                <ChipListComponent cssClass='e-outline'>
                                     <ChipsDirective>
                                         {selectedRoom.RoomFacility.split(', ').map((item, index) => (
                                             <ChipDirective key={index} text={item}></ChipDirective>
@@ -923,7 +948,7 @@ function HotelBookApp() {
                         {showPrintInfo && <div className='e-print-info-container'>
                             <div className='e-flex-layout'>
                                 <div className='e-flex-spacer'></div>
-                                <ButtonComponent className='e-custom-print-button' iconCss='e-custom-print-icon' onClick={printInformation}>Print</ButtonComponent>
+                                <ButtonComponent cssClass='e-primary e-outline' onClick={printInformation}>Print</ButtonComponent>
                             </div>
                             <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Personal Information</div>
                             <GridComponent ref={g => personalInfoGrid.current = g}
