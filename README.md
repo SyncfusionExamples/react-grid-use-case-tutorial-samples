@@ -73,5 +73,10 @@ In this demo, you can add stocks to your wishlist portfolio and filter stocks by
 - MACD Indicator
 - Stochastic Indicator
 - Moreover, you have the option to select stocks using query filtering. The demonstration also displays charts of the top gainers and losers.
+![Stock-overview App](images/Stock_Market_allpage.gif)
+![Stock-protfolio App](images/Stock_Market_myportfolio.gif)
+![Stock-tech App](images/Stock_Market_stock_analysis.gif)
+![Stock-overview1 App](images/Stock_Market_overview.gif)
+  
   
 [sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Stock-Market-Application)
