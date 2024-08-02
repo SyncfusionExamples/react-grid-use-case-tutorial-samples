@@ -57,4 +57,21 @@ The FIFA World Cup statistics and data utilized in this application are sourced 
 ![FIFA-STATS App](images/fifa.gif)
 [sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/FIFA-STATS)
 
+### Stock Market application with Syncfusion React DataGrid
+The Syncfusion DataGrid is a powerful tool for manipulating data, offering features such as sorting, filtering, searching, CRUD operations, grouping, exporting, and printing options. It can update cells every second without any performance lag. In this example, we created a stock market application using the Syncfusion DataGrid to perform technical analysis with the Chart component.
 
+In this demo, you can add stocks to your wishlist portfolio and filter stocks by business category. You can analyze stock performance using the Chart component for intraday trends. The application allows analysis with a candlestick chart across different time frames: 1M, 3M, 6M, YTD, and All. Additionally, you can apply technical analysis using popular formulas, including:
+
+- EMA Indicator
+- RSI Indicator
+- Bollinger Bands
+- TMA Indicator
+- Momentum Indicator
+- SMA Indicator
+- ATR Indicator
+- Accumulation Distribution Indicator
+- MACD Indicator
+- Stochastic Indicator
+- Moreover, you have the option to select stocks using query filtering. The demonstration also displays charts of the top gainers and losers.
+  
+[sample](https://github.com/SyncfusionExamples/react-grid-use-case-tutorial-samples/tree/master/Stock-Market-Application)
