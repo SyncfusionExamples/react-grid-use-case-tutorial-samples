@@ -1,0 +1,417 @@
+/* Router link */
+.addmywishlist.e-icons::before {
+  content: '\e7f9';
+}
+.removemywishlist.e-icons::before {
+  content: '\e934';
+}
+.analysis.e-icons::before {
+  content: '\e831';
+}
+
+.nav {
+  display: flex;
+  /* justify-content: space-around; Distribute items evenly */
+  background-color: #082338;
+  padding: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #f3f3f3;
+  padding: 10px 15px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #0080ff;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #0080dd;
+  text-decoration: none;
+}
+
+.menu-container {
+  position: relative;
+}
+
+.menu-button {
+  background-color: #082338;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.menu-button:hover {
+  background-color: #555;
+}
+
+.menu-popup {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #082338;
+  border: 1px solid #082338;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 150px;
+}
+
+.menu-popup.open {
+  display: block;
+}
+
+.menu-item {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  /* color: #f3f3f3; */
+}
+
+.menu-item:hover {
+  /* background-color: #f0f0f0; */
+}
+
+.e-icons.e-menu:before {
+  content: "\e99a";
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+  background-color: #082338;
+}
+/* marquee */
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  /* background: #333; */
+  background: #00264d;
+  font-size: 24px;
+  padding: 10px 0;
+}
+
+.marquee {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 35s linear infinite;
+  font-size: 15px;
+}
+.marquee .company {
+  padding: 0 25px;
+}
+.marquee .value {
+  padding: 0 3px 0 7px;
+}
+.company.posvalue {
+  color: #00ff55;
+  font-weight: bold;
+}
+.company.negvalue {
+  color: #ff3740;
+  font-weight: bold;
+}
+.company .pos {
+  vertical-align: text-top;
+}
+.company .neg {
+  vertical-align: text-bottom;
+}
+.company.posvalue .pos.e-icons::before {
+  content: '\e82a';
+}
+.company.negvalue .neg.e-icons::before {
+  content: '\e83d';
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.e-ddb-icons.e-profile::before {
+  content: "\e703";
+}
+
+/* main content */
+
+.main-content {
+  min-height: 600px;
+  background-color: #003366;
+  color: #ffffff;
+  padding: 10px;
+}
+
+/* Overview */
+
+.stock-content-area {
+  padding-left: 10px;
+  min-height: 450px;
+}
+.dd-container {
+  padding-bottom: 10px;
+}
+.e-sidebar {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: #303030;
+}
+.e-grid td.e-rowcell.e-pos:not(.e-editedbatchcell):not(.e-updatedtd),
+.e-grid.e-gridhover
+  .e-row:not(.e-disable-gridhover):not(.e-editedrow):not(.e-detailrow):hover
+  .e-rowcell.e-pos:not(.e-cellselectionbackground):not(.e-active):not(
+    .e-updatedtd
+  ):not(.e-indentcell),
+.e-grid td.e-rowcell.e-pos .e-icons {
+  color: #00a653;
+}
+
+.e-grid td.e-rowcell.e-neg:not(.e-editedbatchcell):not(.e-updatedtd),
+.e-grid.e-gridhover
+  .e-row:not(.e-disable-gridhover):not(.e-editedrow):not(.e-detailrow):hover
+  .e-rowcell.e-neg:not(.e-cellselectionbackground):not(.e-active):not(
+    .e-updatedtd
+  ):not(.e-indentcell),
+.e-grid td.e-rowcell.e-neg .e-icons {
+  color: #ff3740;
+}
+
+
+/* Gainers Losers */
+
+.sections,
+.section1,
+.section2 {
+  display: inline-block;
+}
+
+.section1,
+.section2 {
+  width: 50%;
+  padding: 20px 20px 0;
+}
+
+.section1 {
+  float: left;
+}
+
+.section2 {
+  /* padding-left: 10px; */
+}
+
+.sections .header {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+/* stock analysis */
+
+.companydd-container {
+  padding-top: 5px;
+}
+.chartHeader {
+  padding: 10px 0 10px 0;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+.chart-container {
+  padding-top: 10px;
+}
+
+text#stockchartdefault_ChartTitle {
+  fill: rgba(256, 256, 256, 1);
+}
+
+#stockchartdefault_stockChart_chartAxisLabels0 text {
+  fill: rgba(255, 255, 255, 0.87);
+}
+
+#stockchartdefault_stockChart_chartAxisLabels1 text {
+  fill: rgba(255, 255, 255, 0.87);
+}
+
+/* News */
+
+.col-xs-4.col-sm-4.col-lg-4.col-md-4 {
+  padding: 15px;
+}
+
+.e-card .e-card-header .e-card-header-caption .e-card-header-title {
+  font-weight: bold;
+  color: rgba(0, 0, 0, .7);
+}
+.e-card {
+  border-radius: 10px;
+}
+.e-card .e-card-content {
+  color: #000;
+  padding: 0 16px 16px 16px;
+}
+.e-card .e-card-actions {
+  padding: 8px 16px 16px;
+}
+.e-card-content {
+  min-height: 120px;
+}
+
+.e-card.card1 {
+  background-color: #E6E6FA;
+}
+
+.e-card.card2 {
+  background-color: #AFEEEE;
+  /* background-color: #66B2FF; */
+}
+
+.e-card.card3 {
+  background-color: #FFFF99;
+}
+
+.e-card.card4 {
+  background-color: #99FF99;
+}
+.e-card.card5 {
+  background-color: #FFB6B6;
+}
+.e-card.card6 {
+  background-color: #F5FFFA;
+}
+
+.e-card .e-card-actions a, .e-card .e-card-actions a:hover {
+  background-color: rgb(103, 80, 164);
+  color: #fff;
+  border-radius: 5px;
+}
+
+/* Know More */
+
+.db-carousel-section .carousel-sample {
+  /* border: 1px solid #e5e5e5; */
+  border-radius: 0.5em;
+  margin: 0 auto 2em;
+  max-width: 1000px;
+  height: 550px;
+  padding-top: 10px;
+}
+
+.db-carousel {
+  background-color: inherit;
+  border-radius: 0.5em;
+}
+
+.db-carousel .e-carousel-items .e-carousel-item .card-title,
+.db-carousel .e-carousel-items .e-carousel-item .card-text {
+  opacity: 0;
+  text-align: justify;
+  transform: translateY(20px);
+}
+
+.db-carousel .e-carousel-items .e-carousel-item.e-active .card-title,
+.db-carousel .e-carousel-items .e-carousel-item.e-active .card-text {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.db-carousel .e-carousel-items .e-carousel-item .card-title {
+  font-size: 20px;
+  transition: transform 0.4s ease 0.2s;
+}
+
+.db-carousel .e-carousel-items .e-carousel-item .card-text {
+  font-size: 14px;
+  transition: transform 0.4s ease 0.2s;
+}
+
+.db-carousel .e-carousel-indicators {
+  height: 3em;
+}
+
+.db-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator div {
+  background-color: #e7e7e7;
+}
+
+@media screen and (max-width: 480px) {
+  .db-carousel-section .carousel-sample {
+      width: 100%;
+      height: 440px;
+  }
+}
+
+
+@media screen and (min-width: 700px) {
+  .e-card-content {
+    min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .e-card-content {
+    min-height: 150px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .e-card-content {
+    min-height: 130px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .sector-container, .menu-container{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  /* Overview */
+  #listSidebar, .nav .nav-link {
+    display: none;
+  }
+  .nav .menu-container .nav-link {
+    display: inherit;
+  }
+  .stock-content-area.e-content-animation {
+    transform: unset !important;
+    margin-left: unset !important;
+  }
+  .sector-container {
+    padding-right: 10px;
+  }
+  .sector-container .e-input-group input#sectors.e-input, 
+  .sector-container .e-input-group.e-control-wrapper input#sectors.e-input {
+    min-height: 28px;
+}
+
+  /* Climbers Fallers */
+  .sections,
+.section1,
+.section2 {
+  display: block;
+}
+
+.section1,
+.section2 {
+  width: auto;
+}
+
+.section1 {
+  float: unset;
+}
+
+/* News */
+.col-xs-4 {
+  width: 100%;
+}
+.e-card-content {
+  min-height: unset;
+}
+}

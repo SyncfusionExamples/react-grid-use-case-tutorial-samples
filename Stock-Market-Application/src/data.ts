@@ -1,0 +1,148 @@
+export interface StockDetails {
+    ID: number;
+    CompanyName: string;
+    Sector: string;
+    Net: number;
+    Last: number;
+    ChangeInValue: number;
+    ChangeInPercent: number;
+    High: number;
+    Low: number;
+    Rating: string;
+    Volume: number;
+}
+
+export let ListData: { id: string, text: string, isChecked?: boolean }[] = [
+    { id: '1', text: 'All Sectors' },
+    { id: '2', text: 'Technology' },
+    { id: '3', text: 'Healthcare' },
+    { id: '4', text: 'Finance' },
+    { id: '5', text: 'Retail' },
+    { id: '6', text: 'Manufacturing' },
+    { id: '7', text: 'Energy' },
+    { id: '8', text: 'Consumer Goods' },
+    { id: '9', text: 'Telecommunications' },
+    { id: '10', text: 'Transportation' },
+    { id: '11', text: 'Utilities' },
+    { id: '12', text: 'Banks' },
+];
+
+export let marqueeData: StockDetails[] = [
+    {
+        ID: 1,
+        CompanyName: 'Tech Innovators Inc',
+        Sector: 'Technology',
+        Net: 41.300000000000004,
+        Last: 33.5,
+        ChangeInValue: -7.8,
+        ChangeInPercent: -0.1888,
+        High: 49.2,
+        Low: 33.5,
+        Rating: 'Strongly Sell',
+        Volume: 20273,
+    },
+    {
+        ID: 11,
+        CompanyName: 'Health Solutions LLC',
+        Sector: 'Healthcare',
+        Net: 46.45,
+        Last: 48.65,
+        ChangeInValue: 2.2,
+        ChangeInPercent: 0.0473,
+        High: 55.19,
+        Low: 39.16,
+        Rating: 'Buy',
+        Volume: 8379,
+    },
+    {
+        ID: 21,
+        CompanyName: 'Finance Corp',
+        Sector: 'Finance',
+        Net: 26.34,
+        Last: 29.74,
+        ChangeInValue: 3.4,
+        ChangeInPercent: 0.129,
+        High: 34.24,
+        Low: 18.54,
+        Rating: 'Buy',
+        Volume: 15122,
+    },
+    {
+        ID: 31,
+        CompanyName: 'Retail Enterprises',
+        Sector: 'Retail',
+        Net: 45.77,
+        Last: 46.47,
+        ChangeInValue: 0.7,
+        ChangeInPercent: 0.0152,
+        High: 53.67,
+        Low: 37.01,
+        Rating: 'Buy',
+        Volume: 17028,
+    },
+    {
+        ID: 41,
+        CompanyName: 'Manufacturing Co',
+        Sector: 'Manufacturing',
+        Net: 56.63,
+        Last: 64.23,
+        ChangeInValue: 7.6,
+        ChangeInPercent: 0.1342,
+        High: 64.53,
+        Low: 47.88,
+        Rating: 'Strongly Buy',
+        Volume: 20723,
+    },
+    {
+        ID: 51,
+        CompanyName: 'Energy Holdings',
+        Sector: 'Energy',
+        Net: 25.34,
+        Last: 30.84,
+        ChangeInValue: 5.5,
+        ChangeInPercent: 0.217,
+        High: 33.08,
+        Low: 18.55,
+        Rating: 'Strongly Buy',
+        Volume: 22522,
+    },
+    {
+        ID: 61,
+        CompanyName: 'Consumer Goods Group',
+        Sector: 'Consumer Goods',
+        Net: 55.42,
+        Last: 56.12,
+        ChangeInValue: 0.7,
+        ChangeInPercent: 0.0126,
+        High: 64.15,
+        Low: 47.620,
+        Rating: 'Buy',
+        Volume: 13952,
+    },
+    {
+        ID: 71,
+        CompanyName: 'Telecom Networks',
+        Sector: 'Telecommunications',
+        Net: 47.43,
+        Last: 54.73,
+        ChangeInValue: 7.3,
+        ChangeInPercent: 0.1539,
+        High: 55.03,
+        Low: 41.1299,
+        Rating: 'Strongly Buy',
+        Volume: 14701,
+    },
+    {
+        ID: 81,
+        CompanyName: 'Transport Ltd',
+        Sector: 'Transportation',
+        Net: 44.99,
+        Last: 41.39,
+        ChangeInValue: -3.6,
+        ChangeInPercent: -0.0800,
+        High: 53.7300,
+        Low: 35.38,
+        Rating: 'Sell',
+        Volume: 10988,
+    },
+];
