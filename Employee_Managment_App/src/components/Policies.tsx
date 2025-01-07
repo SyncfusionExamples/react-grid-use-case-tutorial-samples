@@ -3,9 +3,6 @@ import * as React from 'react';
 const Policies = () => {
   return (
     <div className="policiespage">
-      <div className="policies-header">
-        <div>Policies</div>
-      </div>
       <div className="policies-content">
         <div className="col-lg-12 card-control-section basic_card_layout">
           <div className="e-card-resize-container">

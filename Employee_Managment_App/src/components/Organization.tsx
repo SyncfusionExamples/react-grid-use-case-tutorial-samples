@@ -31,9 +31,6 @@ const Organization = () => {
   };
   return (
     <div className="employeespage">
-      <div className="employees-header">
-        <div>Organization</div>
-      </div>
       <div className="employees-content">
         <TabComponent heightAdjustMode="Auto">
           <TabItemsDirective>

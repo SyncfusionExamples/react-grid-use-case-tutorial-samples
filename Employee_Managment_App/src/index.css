@@ -19,17 +19,18 @@
 
 .xyz-management-content {
   position: absolute;
-  top: 75px;
   height: 650px;
 }
 
 .xyz-management-content .col-md-2.sidebar {
-  height: 650px;
-  border-right: 1px solid rgb(0, 0, 0, 0.2);
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.04);
-  background-color: #ecf2f9;
-  padding-right: 0px;
+  width: 240px;
+  background-color: #ffffff;
+  color: #3a3b3c;
   position: fixed;
+  height: 100%;
+  padding-top: 20px;
+  border-right: 1px solid #e0e0e0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .xyz-management-content .col-md-10.main-content {
@@ -39,7 +40,20 @@
   left: 170px;
 }
 
-@media (min-width: 400px) {
+@media (max-width: 426px) {
+  .xyz-management-content .col-md-2.sidebar {
+    width: 155px;
+    float: left;
+  }
+  .xyz-management-content .col-md-10.main-content {
+    width: calc(100% - 170px);
+    float: left;
+    position: sticky;
+    left: 200px;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
   .xyz-management-content .col-md-2.sidebar {
     width: 185px;
     float: left;
@@ -49,11 +63,44 @@
     float: left;
   }
 }
+@media (min-width:1024px) {
+  .xyz-management-content .col-md-2.sidebar {
+    width: 185px;
+    float: left;
+  }
+  .xyz-management-content .col-md-10.main-content {
+    width: calc(100% - 170px);
+    float: left;
+  }
+}
+
+@media (max-width:600px) {
+  .detail .information {
+      display: block;
+      padding-left: 0px;
+  }
+  .detail .sub-heading {
+    width: 130px;
+    padding-right: 10px;
+  }
+}
+
+.nav > li {
+  align-items: center;
+/* padding: 15px 20px; */
+color: #3a3b3c;
+text-decoration: none;
+transition: background-color 0.3s ease, color 0.3s ease;
+font-weight: 500;
+margin-left: 10px;
+}
+
 .nav > li > a:focus,
 .nav > li > a.active,
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #eaddff;
+  background-color: #f0f2f5;
+  color: #007bff;
 }
 .policiespage a:focus,
 .policiespage a.active,
@@ -106,21 +153,21 @@ a.employee-popover:hover {
 
 /* Tooltip */
 
-.e-tooltip-template-css.e-tooltip-wrap.e-popup {
+.e-tooltip-wrap.e-popup {
   background-color: #eaddff;
   border: 1px solid #e0e0e0;
 }
-.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-outer.e-tip-bottom {
+.e-tooltip-wrap .e-arrow-tip-outer.e-tip-bottom {
   border-top: 8px solid #e0e0e0;
 }
-.e-tooltip-template-css.e-tooltip-wrap .e-tip-content {
+.e-tooltip-wrap .e-tip-content {
   color: rgba(0, 0, 0, 0.87);
 }
-.e-tooltip-template-css.e-tooltip-wrap {
+.e-tooltip-wrap {
   opacity: 1;
 }
-.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-inner.e-tip-bottom,
-.e-tooltip-template-css.e-tooltip-wrap .e-arrow-tip-inner.e-tip-top {
+.e-tooltip-wrap .e-arrow-tip-inner.e-tip-bottom,
+.e-tooltip-wrap .e-arrow-tip-inner.e-tip-top {
   color: #eaddff;
 }
 
@@ -318,6 +365,22 @@ td.cardcell.separateline {
 
   .card-control-section.basic_card_layout .card-layout {
     max-width: 870px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
+    width: 100%;
+  }
+
+  .achievements-content
+    .card-control-section.basic_card_layout
+    .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
+    width: 100%;
+  }
+
+  .card-control-section.basic_card_layout .card-layout {
+    max-width: 600px;
   }
 }
 
