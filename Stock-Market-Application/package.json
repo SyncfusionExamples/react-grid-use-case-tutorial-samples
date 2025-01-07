@@ -5,6 +5,7 @@
   "dependencies": {
     "@syncfusion/ej2-base": "^26.1.35",
     "@syncfusion/ej2-react-base": "^26.1.35",
+    "@syncfusion/ej2-react-notifications": "^26.1.35",
     "@syncfusion/ej2-querybuilder": "^26.1.35",
     "@syncfusion/ej2-react-querybuilder": "^26.1.35",
     "@syncfusion/ej2-data": "^26.1.35",

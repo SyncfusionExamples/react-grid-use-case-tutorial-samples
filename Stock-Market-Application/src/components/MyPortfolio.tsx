@@ -19,6 +19,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import { StockDetails } from '../data';
 import { useNavigate } from 'react-router-dom';
+import { MessageComponent } from '@syncfusion/ej2-react-notifications';
 
 export default function MyPortfolio(props: { changeMarquee: Function, myStockDm: DataManager }) {
   const navigate = useNavigate();
@@ -155,6 +156,11 @@ export default function MyPortfolio(props: { changeMarquee: Function, myStockDm:
               enableHover={false}
               commandClick={commandClick}
               destroyed={destroyed}
+              allowSelection={false}
+              allowKeyboard={false}
+              emptyRecordTemplate={()=>{
+                return (<MessageComponent id="msg_info" content="Your portfolio has no stocks." severity="Info" variant="Filled"></MessageComponent>);
+              }}
             >
               <ColumnsDirective>
                 <ColumnDirective
