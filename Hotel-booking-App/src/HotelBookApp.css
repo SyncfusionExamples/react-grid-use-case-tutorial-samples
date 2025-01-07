@@ -1,4 +1,4 @@
-body {
+.e-hotel-book {
     margin: 0;
     font-family: "Segoe UI";
     font-weight: 400;
@@ -16,10 +16,10 @@ body {
 }
 
 .e-title-bar {
-    background-color: #ffffff;
+    background-color: #111827;
     padding: 20px 32px;
     box-shadow: none;
-    border-bottom: 3px solid #aedbf9 !important;
+    border-bottom: 3px solid #6366f1 !important;
     display: flex;
     align-items: center;
 }
@@ -38,9 +38,9 @@ body {
 }
 
 .e-menu-button::before {
-    content: "\e94c";
-    color: #333;
-    font-size: 17px;
+    content: "\e721";
+    color: #ffffff;
+    font-size: 20px;
     font-family: "e-icons";
     cursor: pointer;
 }
@@ -55,16 +55,16 @@ body {
 }
 
 .e-side-bar-close-button::before {
-    content: "\e7a7";
-    color: #333;
-    font-size: 17px;
+    content: "\e7e7";
+    color: #ffffff;
+    font-size: 20px;
     font-family: "e-icons";
     margin-left: 15px;
     cursor: pointer;
 }
 
 .e-side-bar-operation-container {
-    background-color: #ffffff;
+    background-color: #111827;
     width: 260px;
 }
 
@@ -83,13 +83,13 @@ body {
 .e-line-separator,
 .e-data-line-separator {
     width: 95%;
-    background-color: #EAEAEA;
+    background-color: #ffffff;
     padding: 1px 0px;
     margin: 10px auto;
 }
 
 .e-app-container {
-    background-color: #F0F4F6;
+    background-color: #31353e;
     width: 100%;
 }
 
@@ -126,14 +126,14 @@ body {
 
 .e-title-text {
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
 }
 
 .e-header-text {
     text-align: center;
     padding: 10px;
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
 }
 
 .e-headercell .e-header-text {
@@ -142,16 +142,41 @@ body {
 
 .e-semi-header-text {
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
+}
+
+.e-semi-title-header-text {
+    font-weight: 200;
+    color: #ffffff;
 }
 
 .e-semi-bold-header-text {
+    font-weight: 700;
+    color: #22d3ee;
+    font-size: 24px;
+}
+
+.e-semi-bold-title-header-text {
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
+}
+
+.e-rowcell.e-grid-hotel-name {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.e-rowcell.e-grid-room-name {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.e-rowcell.e-grid-date {
+    font-weight: 500;
 }
 
 .e-light-blue-border-bottom {
-    border-bottom: 3px solid #e0f2fe !important;
+    border-bottom: 3px solid #6366f1 !important;
 }
 
 .templateRow td {
@@ -160,14 +185,14 @@ body {
 
 .e-rowtemplate-border-applier {
     box-shadow: none;
-    border: 1px solid #EAEAEA !important;
+    border: 1px solid #ffffff !important;
 }
 
 .e-room-not-available-cover {
     position: absolute;
     width: calc(100% - 2px);
     height: 100%;
-    background-color: #f2f2f2;
+    background-color: #4b5563;
     opacity: 0.5;
     z-index: 1000;
 }
@@ -214,17 +239,23 @@ body {
     padding-right: 15px;
 }
 
+.normal-text-color {
+    color: #e5e7eb;
+}
+
+.normal-hint-text-color {
+    color: #9ca3af;
+}
+
 .e-map-text-spacer {
     margin-left: 10px;
 }
 
 .e-map-text-styler {
-    color: #008ae6;
     cursor: pointer;
 }
 
 .e-address-text-styler {
-    color: #008ae6;
     text-decoration: underline;
 }
 
@@ -235,6 +266,13 @@ body {
 .e-rating-container.e-custom-rating .e-rating-item-container {
     padding-left: 0px;
     padding-bottom: 0px;
+}
+
+.e-custom-rating-color.e-rating-container .e-rating-item-container.e-rating-selected .e-rating-icon {
+    background: linear-gradient(to right, #ffa600 var(--rating-value), #ffa600 var(--rating-value));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #ffa600;
 }
 
 .e-rating-container .e-rating-item-container {
@@ -272,7 +310,8 @@ body {
 
 .e-cost-styler {
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
+    font-size: 24px;
 }
 
 .e-book-button {
@@ -293,7 +332,7 @@ body {
 }
 
 .e-details-container {
-    background-color: #F0F4F6;
+    background-color: #31353e;
     padding-top: 30px;
 }
 
@@ -325,10 +364,10 @@ body {
 }
 
 .e-back-button::before {
-    content: "\e610";
+    content: "\e773";
     color: black;
     padding: 5px;
-    font-size: 17px;
+    font-size: 20px;
     font-family: "e-icons";
     margin: 10px;
     cursor: pointer;
@@ -352,14 +391,14 @@ body {
 
 .e-details-info-container {
     display: flex;
-    background-color: #ffffff;
+    background-color: #111827;
     margin-top: 30px;
 }
 
 .e-booking-details-container {
-    width: 100%;
-    border-left: 5px solid #F0F4F6 !important;
-    border-right: 5px solid #F0F4F6 !important;
+    flex: 3;
+    border-left: 5px solid #31353e !important;
+    border-right: 5px solid #31353e !important;
 }
 
 .e-booking-details-separator {
@@ -367,7 +406,8 @@ body {
 }
 
 .e-hotel-details-container {
-    border-right: 5px solid #F0F4F6 !important;
+    flex: 1;
+    border-right: 5px solid #31353e !important;
 }
 
 .e-hotel-details-side-bar-separator {
@@ -396,23 +436,21 @@ body {
     padding-left: 0px;
 }
 
-.e-chip.e-outline {
-    margin-left: 0px;
+.e-chip.e-info {
+    margin: 6px 6px 0px 0px;
 }
 
-@import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/fabric.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
-@import "../node_modules/@syncfusion/ej2-react-grids/styles/fabric.css";
-@import "../node_modules/@syncfusion/ej2-icons/styles/fabric.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/fabric.css";
-@import '../node_modules/@syncfusion/ej2-notifications/styles/fabric.css';
+@media only screen and (max-width: 1120px) {
 
+    .e-booking-details-container {
+        flex: 2;
+    }
+
+    .e-hotel-details-container {
+        flex: 1;
+    }
+
+}
 
 @media only screen and (max-width: 1050px) {
 
@@ -463,13 +501,13 @@ body {
 
     .e-booking-details-container {
         width: 100%;
-        border-left: 0px solid #F0F4F6 !important;
-        border-right: 0px solid #F0F4F6 !important;
-        border-bottom: 5px solid #F0F4F6 !important;
+        border-left: 0px solid #31353e !important;
+        border-right: 0px solid #31353e !important;
+        border-bottom: 5px solid #31353e !important;
     }
 
     .e-hotel-details-container {
-        border-right: 0px solid #F0F4F6 !important;
+        border-right: 0px solid #31353e !important;
     }
 }
 
