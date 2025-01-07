@@ -237,10 +237,6 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
     };
     return (
         <div className="employeeinfopage">
-            <div className="employeeinfo-header">
-                {employeeData.Name === userInfo.Name ? 'My' : employeeData.Name + "'s"}{' '}
-                Profile
-            </div>
             <div className="employeeinfo-content">
                 <TabComponent heightAdjustMode="Auto">
                     <TabItemsDirective>

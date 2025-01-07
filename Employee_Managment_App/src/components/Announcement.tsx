@@ -3,9 +3,6 @@ import * as React from 'react';
 const Announcement = () => {
   return (
     <div className="announcementpage">
-      <div className="announcement-header">
-        <div>Announcement</div>
-      </div>
       <div className="announcement-content">
         <div className="col-lg-12 card-control-section basic_card_layout">
           <div className="e-card-resize-container">

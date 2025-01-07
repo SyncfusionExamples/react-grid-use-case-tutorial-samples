@@ -3,9 +3,6 @@ import * as React from 'react';
 const Achievements = () => {
   return (
     <div className="achievementspage">
-      <div className="achievements-header">
-        <div>Achievements</div>
-      </div>
       <div className="achievements-content">
         <div className="col-lg-12 control-section card-control-section horizontal_card_layout">
           <div className="e-card-resize-container">
