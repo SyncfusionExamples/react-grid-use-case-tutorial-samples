@@ -159,6 +159,17 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
       let query: Query = new Query().where(Predicate.or(predicates));
       (props.myStockDm as any).persistQuery = query;
       props.myStockDm.setPersistData({} as any, 'myStocks', query);
+      if (myWishList.length) {
+        const myWishlistIcon = args.target.querySelector('.addmywishlist');
+        if (myWishlistIcon) {
+          myWishlistIcon.classList.remove('addmywishlist');
+          myWishlistIcon.classList.add('addedmywishlist');
+        }
+        if (args.target.classList.contains('e-primary')) {
+          args.target.classList.remove('e-primary');
+          args.target.classList.add('e-success');
+        }
+      }
     }
     if (args.target!.querySelector('.analysis')) {
       navigate('/stock_analysis', {
@@ -190,7 +201,8 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
                 created={onGridCreated}
                 queryCellInfo={queryCellInfo}
                 commandClick={commandClick}
-                pageSettings={{pageSize: 10}}
+                pageSettings={{ pageCount: 4, pageSize: 10 }}
+                height={341}
               >
                 <ColumnsDirective>
                   <ColumnDirective
@@ -265,14 +277,14 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
                         title: 'Add to Wishlist',
                         buttonOption: {
                           iconCss: 'addmywishlist e-icons',
-                          cssClass: 'e-flat',
+                          cssClass: 'e-primary',
                         },
                       },
                       {
                         title: 'Analysis',
                         buttonOption: {
                           iconCss: 'analysis e-icons',
-                          cssClass: 'e-flat',
+                          cssClass: 'e-primary',
                         },
                       },
                     ]}

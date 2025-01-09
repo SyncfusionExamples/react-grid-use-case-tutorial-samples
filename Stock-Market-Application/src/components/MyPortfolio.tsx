@@ -236,14 +236,14 @@ export default function MyPortfolio(props: { changeMarquee: Function, myStockDm:
                       title: 'Remove from Wishlist',
                       buttonOption: {
                         iconCss: 'removemywishlist e-icons',
-                        cssClass: 'e-flat',
+                        cssClass: 'e-warning',
                       },
                     },
                     {
                       title: 'Analysis',
                       buttonOption: {
                         iconCss: 'analysis e-icons',
-                        cssClass: 'e-flat',
+                        cssClass: 'e-primary',
                       },
                     },
                   ]}
