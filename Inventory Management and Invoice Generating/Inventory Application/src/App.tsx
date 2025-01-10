@@ -96,13 +96,13 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
 
     //Search grid - instance ref property.
     let productSearchGridInstance = useRef<GridComponent>(null);
-    const searchGridToolbarOptions: any = ["Search"];
+    const searchGridToolbarOptions = ["Search"];
     const animationSettings: AnimationSettingsModel = { effect: "None" };
-    const selectionSettings: any = { mode: "Row", type: "Multiple", checkboxOnly: true };
-    const searchGridSelectionSettings: any = { mode: "Row", type: "Multiple" };
-    const toolbarOptions: any = ["Delete"];
-    const wrapSettings: any = { text: "Header", value: "Header" };
-    const editSettings: any = {
+    const selectionSettings = { mode: "Row", type: "Multiple", checkboxOnly: true };
+    const searchGridSelectionSettings = { mode: "Row", type: "Multiple" };
+    const toolbarOptions = ["Delete"];
+    const wrapSettings = { text: "Header", value: "Header" };
+    const editSettings = {
       allowEditing: true,
       allowAdding: true,
       allowDeleting: true,
@@ -121,7 +121,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
     let balanceAmount = "";
     let cashPaidAmount = "";
-    const commands: any = [
+    const commands = [
       {
         type: "Cancel",
         buttonOption: {
@@ -224,7 +224,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       };
 
       useEffect(() => {
-        const generatedBillNo: any = generateBillNo();
+        const generatedBillNo = generateBillNo();
         // Set Bill No to the input field
         const billNoInput = document.getElementById("billNoInput");
         if (billNoInput) {
@@ -247,9 +247,9 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       }, [refresh]);
 
       //function to handle customer id input element changes - change event.
-      const handleCustomerIDChange = (event: ChangeEventArgs): void  => {
-        const enteredID: number = parseInt(event.value as string);
-        const foundCustomer: any = customerDatabase.find(
+      const handleCustomerIDChange = (event): void  => {
+        const enteredID: number = parseInt(event.value);
+        const foundCustomer = customerDatabase.find(
           (customer) => (customer as any).id === enteredID
         );
         if (foundCustomer) {
@@ -286,7 +286,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
     
     // Grid component's Events and Functions
       //Grid action complete event.
-      const actionComplete = (args: any): void => {
+      const actionComplete = (args): void => {
         if (args.action === "add" && args.requestType === "save") {
           const lastRowIndex = gridInstance.current.getRows().length - 1; // Get the index of the last row
           productSearchGridInstance.current.clearSelection();
@@ -329,14 +329,14 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       };
 
       //Grid created event.
-      const createdGrid = (args?: any): void => {
+      const createdGrid = (args?): void => {
         gridInstance.current.getContent().querySelector(".e-addedrow .e-rowcell .e-checkbox-wrapper").classList.add('e-checkbox-disabled');
       }
 
       //Function to Calculate total savings of the bill amount
-      function computeSavings(dataSource: any): number {
+      function computeSavings(dataSource): number {
         let savings = 0;
-        dataSource.forEach((item: any) => {
+        dataSource.forEach((item) => {
           const MRP = item.MRP;
           const Price = item.Price;
           const Qty = parseFloat(item.Quantity) || 0;
@@ -346,9 +346,9 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
         return savings;
       }
 
-      function totalNetAmount(dataSource: any): void {
+      function totalNetAmount(dataSource): void {
         let totalAmount = 0;
-        dataSource.forEach((item: any) => {
+        dataSource.forEach((item) => {
           if (item.Qty !== 0) {
             totalAmount += item.Total;
           }
@@ -357,14 +357,14 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       }
     
       //Function to Update savings card element with proper savings amount.
-      function updateSavingsDisplay(dataSource: any): void {
+      function updateSavingsDisplay(dataSource): void {
         const computedSavings = computeSavings(dataSource);
         (document.querySelector("#yourSavings") as HTMLElement).innerHTML =
           "$" + computedSavings.toFixed(2);
       }
 
       //Grid action begin event
-      const actionBegin = (args: any): void => {
+      const actionBegin = (args): void => {
         if (args.requestType === 'save') {
           args.index = (gridInstance.current.pageSettings.currentPage * gridInstance.current.pageSettings.pageSize) - 1;
           productSearchGridInstance.current.clearSelection();
@@ -373,7 +373,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       };
 
       //Grid before print event.
-      const beforePrint = (args: any): void => {
+      const beforePrint = (args): void => {
         // Cancel default Grid print action
         args.cancel = true;
     
@@ -390,16 +390,16 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
             ? true
             : false;
         function printTable(
-          gridInstance: any,
-          shopName: any,
-          billNo: any,
-          customerName: any,
-          phoneNumber: any,
-          address: any,
-          formattedDateTime: any,
-          totalAmount: any,
-          savings: any,
-          isDoorDelivery: any,
+          gridInstance,
+          shopName,
+          billNo,
+          customerName,
+          phoneNumber,
+          address,
+          formattedDateTime,
+          totalAmount,
+          savings,
+          isDoorDelivery,
         ) {
           let data = gridInstance.dataSource;
           let columnConfig = gridInstance.columns;
@@ -474,7 +474,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
     
             // Header row
             let headerRow = "<thead><tr>";
-            columnConfig.forEach((column: any) => {
+            columnConfig.forEach((column) => {
               if (
                 column.headerText !== "" &&
                 column.headerText !== "Product ID" &&
@@ -513,9 +513,9 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
     
             // Data rows
             printWindow.document.write("<tbody>");
-            data.forEach((item: any) => {
+            data.forEach((item) => {
               let row = "<tr>";
-              columnConfig.forEach((column: any) => {
+              columnConfig.forEach((column) => {
                 if (
                   column.headerText !== "" &&
                   column.headerText !== "Product ID" &&
@@ -662,7 +662,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
       };
       
       //Grid command column delete button - Click event.
-      const commandClick = (args: any): void  => {
+      const commandClick = (args): void  => {
         const rowIndex = parseInt(
           args.target.closest("tr").getAttribute("data-rowindex"),
           10
@@ -694,7 +694,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                 );
                 if (product) {
                     const isProductExists = (gridInstance.current.dataSource as any).some(
-                        (item: any) => (item as any).ProductID === (product as any).ProductID
+                        (item) => (item as any).ProductID === (product as any).ProductID
                     );
                     if (isProductExists) {
                         alert("Product has already been added.");
@@ -704,7 +704,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                         (gridInstance.current.dataSource as any).length === 0
                             ? 0
                             : (gridInstance.current.dataSource as any).length - 1;
-                    let editedRowIndex: any = (gridInstance as any).current.editModule.editModule.editRowIndex; 
+                    let editedRowIndex = (gridInstance as any).current.editModule.editModule.editRowIndex; 
                     if(!isNullOrUndefined(editedRowIndex)) {
                       updateRecord(product, editedRowIndex);
                     } else {
@@ -719,7 +719,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           }
         };
 
-        const updateRecord = (product: any, editedRowIndex: any) =>{
+        const updateRecord = (product, editedRowIndex) =>{
           (document.getElementById(gridInstance.current.element.id + 'ProductID') as any).value = product.ProductID;
           (document.getElementById(gridInstance.current.element.id + 'ProductName') as any).value = product.ProductName;
           (document.getElementById(gridInstance.current.element.id + 'Price') as any).value = product.Price;
@@ -755,11 +755,11 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           }
         };
       
-        const readProductIDFn = (args: any) => {
+        const readProductIDFn = (args) => {
             return args.value;
         };
 
-        const writeProductIDFn = (args: any) => {
+        const writeProductIDFn = (args) => {
           autocompleteIns = new AutoComplete({
             dataSource: productData.map(product => ({ ProductID: (product as any).ProductID, ProductName: (product as any).ProductName })), // Provide your data source
             fields: { value: 'ProductID' },
@@ -818,7 +818,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
             return args.value;
         };
       
-        const writeProductNameFn = (args: any) => {
+        const writeProductNameFn = (args) => {
           productNameTextBoxIns = new TextBox({
             value: args.rowData[args.column.field],
             placeholder: "Enter product name",
@@ -888,7 +888,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           return "";
         };
       
-        const writeQuantityFn = (args: any) => {
+        const writeQuantityFn = (args) => {
           quantityTextBoxIns = new TextBox({
             value: args.rowData[args.column.field],
             placeholder: "Enter quantity",
@@ -1014,11 +1014,11 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
     }
     
     //Primary Grid component - Declaration to prevent re-rener on unwanted state changes.
-    const MemorizedGridComponent: any = React.useMemo(
+    const MemorizedGridComponent = React.useMemo(
       () => (
         <GridComponent
           ref={gridInstance}
-          emptyRecordTemplate={(): any => null}
+          emptyRecordTemplate={() => null}
           gridLines="Both"
           height="435px"
           width='100%'
