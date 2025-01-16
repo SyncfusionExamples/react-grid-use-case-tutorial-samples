@@ -166,12 +166,12 @@
   height: 30px;
 }
 
-.header .input-container.billno {
-  width: 10%;
+.header .input-container.custaddress {
+  width: 22%;
 }
 
 .header .input-container.phone {
-  width: 15%;
+  width: 24%;
 }
 
 .header .input-container.datepicker {
@@ -179,7 +179,7 @@
 }
 
 .header .input-container {
-  padding-right: 30px;
+  padding-right: 5px;
   /* Adjust the padding value as needed */
 }
 
@@ -236,7 +236,7 @@
 }
 
 .control-pane.amount .control-section .card-layout #poscards {
-  height: 114px;
+  height: 130px;
 }
 
 .control-pane.amount .control-section .card-layout #poscards .e-card-actions {
@@ -587,17 +587,8 @@ body {
 
 @media screen and (max-width: 1300px) {
 
-  .e-dialog {
-    width: 95% !important;
-    max-width: none !important;
-  }
-
   .input-container-title {
     font-size: 20px;
-  }
-
-  .control-pane.amount .control-section .e-card-resize-container {
-    height: 200px;
   }
 
   .header {
@@ -607,34 +598,17 @@ body {
 
   .header .input-container {
     margin-bottom: 20px;
-    margin-right: 10px;
-  }
-
-  .header .input-container.billno,
-  .header .input-container.phone,
-  .header .input-container.datepicker {
-    width: auto;
-  }
-
-  .primary-container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .control-pane.amount {
-    width: 100%;
-    height: 100%;
+    margin-top: 10px;
   }
 
   .control-pane.amount .col-xs-6 {
-    width: 30%;
     min-width: 20%;
     margin-bottom: 10px;
     margin-left: 2%;
   }
 
   .control-pane.payment .col-xs-3 {
-    width: 48%;
+    width: 25%;
     margin-bottom: 10px;
   }
 }
