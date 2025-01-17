@@ -598,7 +598,7 @@ body {
 
   .header .input-container {
     margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 23px;
   }
 
   .control-pane.amount .col-xs-6 {
@@ -612,11 +612,27 @@ body {
     margin-bottom: 10px;
   }
 
+  .header .input-container.billno {
+    width: 120px;
+  }
+
+  .header .input-container.phone {
+    width: 190px;
+  }
+
+  .header .input-container.custaddress{
+    width: 200px;
+  }
+
+  .header .input-container.custname {
+    width: 220px;
+  }
+
   .header .input-container.custid {
-    width: 250px;
+    width: 235px;
   }
 
   .header .input-container.datepicker {
-    width: 270px;
+    width: 255px;
   }
 }

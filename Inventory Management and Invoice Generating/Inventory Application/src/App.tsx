@@ -1176,7 +1176,6 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
             <TextBoxComponent
               type="text"
               id="customerName"
-              width={180}
               ref={customerNameRef}
               placeholder="Customer name"
               readOnly
@@ -1196,7 +1195,6 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
             <label>Address:</label>
             <TextAreaComponent
               id="customerAddress"
-              width='100%'
               value={""}
               ref={customerAddressRef}
               placeholder="Customer address"
