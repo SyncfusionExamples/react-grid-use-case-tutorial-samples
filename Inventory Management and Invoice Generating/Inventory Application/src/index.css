@@ -611,4 +611,12 @@ body {
     width: 25%;
     margin-bottom: 10px;
   }
+
+  .header .input-container.custid {
+    width: 250px;
+  }
+
+  .header .input-container.datepicker {
+    width: 270px;
+  }
 }
