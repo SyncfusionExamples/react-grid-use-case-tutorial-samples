@@ -16,13 +16,18 @@
   font-size: larger;
 }
 
+body {
+  height: 100vh;
+  margin: 0;
+}
+
 .nav {
   display: flex;
   align-items: center;
   background-color: #151e28;
   padding: 10px 20px;
   border-bottom: 1px solid #2C2C2C;
-  height: 65px;
+  height: 60px;
 }
 
 .nav-link {
@@ -309,10 +314,6 @@
   font-weight: bold;
 }
 
-.chart-container {
-  padding-top: 10px;
-}
-
 text#stockchartdefault_ChartTitle {
   fill: rgba(256, 256, 256, 1);
 }
@@ -358,10 +359,6 @@ text#stockchartdefault_ChartTitle {
   padding: 8px 16px 16px;
 }
 
-.e-card-content {
-  min-height: 120px;
-}
-
 .e-card.card1 {
   background-color: #E0F2FE;
 }
@@ -386,6 +383,16 @@ text#stockchartdefault_ChartTitle {
   background-color: #F0FDFA;
 }
 
+.e-card.card7 {
+  background-color: #FFEDD5;
+}
+.e-card.card8 {
+  background-color: #E7E5E4;
+}
+.e-card.card9 {
+  background-color: #E8EAF6;
+}
+
 .e-card .e-card-actions a,
 .e-card .e-card-actions a:hover {
   background-color: rgb(103, 80, 164);
@@ -396,7 +403,7 @@ text#stockchartdefault_ChartTitle {
 /* Know More */
 
 .control-pane .control-section.db-carousel-section {
-  height: 530px;
+  height: 400px;
   overflow-y: scroll;
 }
 

@@ -128,6 +128,67 @@ const News = () => {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="row card-layout">
+                <div className="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                  <div className="e-card card7" id="basic_card">
+                    <div className="e-card-header">
+                      <div className="e-card-header-caption">
+                        <div className="e-card-header-title">
+                          Healthcare Innovation Surge
+                        </div>
+                      </div>
+                    </div>
+                    <div className="e-card-content">
+                      Healthcare companies are driving breakthroughs in biotechnology and medical devices, improving patient outcomes. This wave of innovation has translated into strong financial performance and heightened investor interest.
+                    </div>
+                    <div className="e-card-actions">
+                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                  <div className="e-card card8" id="weather_card">
+                    <div className="e-card-header">
+                      <div className="e-card-header-caption">
+                        <div className="e-card-header-title">
+                          Green Energy Expansion
+                        </div>
+                      </div>
+                    </div>
+                    <div className="e-card-content">
+                      Renewable energy companies are rapidly scaling operations to meet global sustainability goals. These efforts have led to impressive stock growth, making the sector a key focus for forward-thinking investors.
+                    </div>
+                    <div className="e-card-actions">
+                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                  <div className="e-card card9" id="weather_card">
+                    <div className="e-card-header">
+                      <div className="e-card-header-caption">
+                        <div className="e-card-header-title">
+                          Tech Giants Lead the Charge
+                        </div>
+                      </div>
+                    </div>
+                    <div className="e-card-content">
+                      The tech industry is at the forefront of innovation, with giants leveraging cutting-edge technologies to redefine possibilities. Investing in these companies presents promising growth opportunities as they expand into emerging markets.
+                    </div>
+                    <div className="e-card-actions">
+                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
