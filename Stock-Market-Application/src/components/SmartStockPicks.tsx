@@ -202,7 +202,7 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
                 queryCellInfo={queryCellInfo}
                 commandClick={commandClick}
                 pageSettings={{ pageCount: 4, pageSize: 10 }}
-                height={341}
+                height={330}
               >
                 <ColumnsDirective>
                   <ColumnDirective
