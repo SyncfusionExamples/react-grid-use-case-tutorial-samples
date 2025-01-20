@@ -257,7 +257,7 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
                 <ColumnDirective
                   field="CompanyName"
                   headerText="Company"
-                  width="170"
+                  width="160"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="Sector"
@@ -275,21 +275,21 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
                   field="Last"
                   format="N2"
                   textAlign="Center"
-                  width="90"
+                  width="80"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="ChangeInValue"
                   headerText="CHNG 1D"
                   format="N2"
                   textAlign="Center"
-                  width="100"
+                  width="90"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="ChangeInPercent"
                   headerText="CHNG (%)"
                   format="P2"
                   textAlign="Center"
-                  width="100"
+                  width="80"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="Rating"
@@ -300,13 +300,13 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
                   field="High"
                   format="N2"
                   textAlign="Center"
-                  width="90"
+                  width="80"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="Low"
                   format="N2"
                   textAlign="Center"
-                  width="90"
+                  width="80"
                 ></ColumnDirective>
                 <ColumnDirective
                   field="Volume"
@@ -331,7 +331,7 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
                       },
                     },
                   ]}
-                  width="110"
+                  width="100"
                 ></ColumnDirective>
               </ColumnsDirective>
               <Inject services={[Page, Sort, CommandColumn]} />
@@ -343,7 +343,7 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
         id="listSidebar"
         ref={sidebarobj}
         className="sidebar-list"
-        width="250px"
+        width="220px"
         target=".listmaincontent"
         type="Auto"
         isOpen={true}
