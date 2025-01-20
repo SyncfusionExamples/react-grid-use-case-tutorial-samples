@@ -9,16 +9,31 @@ startDate2.setDate(endDate1.getDate() + 1);
 const endDate2 = new Date(startDate2);
 endDate2.setDate(startDate2.getDate() + 2);
 
+const startDate3 = new Date(endDate2);
+startDate3.setDate(endDate2.getDate() + 5);
+const endDate3 = new Date(startDate3);
+endDate3.setDate(startDate3.getDate() + 5);
+
+const startDate4 = new Date(endDate3);
+startDate4.setDate(endDate3.getDate() + 5);
+const endDate4 = new Date(startDate4);
+endDate4.setDate(startDate4.getDate() + 5);
+
+const startDate5 = new Date(endDate4);
+startDate5.setDate(endDate4.getDate() + 2);
+const endDate5 = new Date(startDate5);
+endDate5.setDate(startDate5.getDate() + 2);
+
 var hotelData = [
     {
         HotelID: 102278,
-        HotelName: 'Benor Cotel',
+        HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
         Description: 'We are the king of the hotel in the vast beautiful world.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_1',
@@ -31,17 +46,17 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Projector, Balcony, Whiteboard, Kitchen, Internet, Shower',
         Price: 500,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 102278,
-        HotelName: 'Benor Cotel',
+        HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
         Description: 'We are the king of the hotel in the vast beautiful world.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_2',
@@ -54,17 +69,17 @@ var hotelData = [
         Extras: 'Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Whiteboard, Kitchen, Internet',
         Price: 300,
-        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }]
+        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 102278,
-        HotelName: 'Benor Cotel',
+        HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
         Description: 'We are the king of the hotel in the vast beautiful world.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Benor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_3',
@@ -77,17 +92,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 150,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 117823,
-        HotelName: 'Zabator Cotel',
+        HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
         Description: 'Pleasent hotel for pleasent people.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Hotel, New York' },
         HotelFacility: 'Parking, Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_4',
@@ -104,13 +119,13 @@ var hotelData = [
     },
     {
         HotelID: 117823,
-        HotelName: 'Zabator Cotel',
+        HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
         Description: 'Pleasent hotel for pleasent people.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Hotel, New York' },
         HotelFacility: 'Parking, Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_5',
@@ -123,17 +138,17 @@ var hotelData = [
         Extras: 'Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet',
         Price: 300,
-        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
+        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 117823,
-        HotelName: 'Zabator Cotel',
+        HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
         Description: 'Pleasent hotel for pleasent people.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabator Hotel, New York' },
         HotelFacility: 'Parking, Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_6',
@@ -146,7 +161,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Internet',
         Price: 100,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate5, CheckOut: endDate5 }]
     },
     {
         HotelID: 322211,
@@ -169,7 +184,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 600,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate5, CheckOut: endDate5 }]
     },
     {
         HotelID: 322211,
@@ -215,17 +230,17 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Internet, Shower',
         Price: 150,
-        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
+        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 112278,
-        HotelName: 'Zentor Motel',
+        HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
         Description: 'We are the queen of the hotel.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Motel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool',
         RoomID: 1,
         RoomImgID: 'room_10',
@@ -238,17 +253,17 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Projector, Balcony, Whiteboard, Kitchen, Internet, Shower',
         Price: 500,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 112278,
-        HotelName: 'Zentor Motel',
+        HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
         Description: 'We are the queen of the hotel.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Motel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool',
         RoomID: 2,
         RoomImgID: 'room_11',
@@ -265,13 +280,13 @@ var hotelData = [
     },
     {
         HotelID: 112278,
-        HotelName: 'Zentor Motel',
+        HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
         Description: 'We are the queen of the hotel.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Motel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zentor Hotel, Montana' },
         HotelFacility: 'Parking, Pet allowed, Swiming pool',
         RoomID: 3,
         RoomImgID: 'room_12',
@@ -284,17 +299,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 150,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 127823,
-        HotelName: 'Bakator Cotel',
+        HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_13',
@@ -307,17 +322,17 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Projector, Balcony, Kitchen, Internet',
         Price: 600,
-        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate2, CheckOut: endDate2 }]
+        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate2, CheckOut: endDate2 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 127823,
-        HotelName: 'Bakator Cotel',
+        HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_14',
@@ -334,13 +349,13 @@ var hotelData = [
     },
     {
         HotelID: 127823,
-        HotelName: 'Bakator Cotel',
+        HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Bakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_15',
@@ -353,7 +368,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Internet',
         Price: 100,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate5, CheckOut: endDate5 }]
     },
     {
         HotelID: 332211,
@@ -376,7 +391,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 600,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 332211,
@@ -445,7 +460,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 600,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 342211,
@@ -468,7 +483,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Internet, Shower',
         Price: 300,
-        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }]
+        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 342211,
@@ -495,13 +510,13 @@ var hotelData = [
     },
     {
         HotelID: 132278,
-        HotelName: 'Bekaor Cotel',
+        HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_6',
@@ -514,17 +529,17 @@ var hotelData = [
         Extras: 'Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 600,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 132278,
-        HotelName: 'Bekaor Cotel',
+        HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_7',
@@ -541,13 +556,13 @@ var hotelData = [
     },
     {
         HotelID: 132278,
-        HotelName: 'Bekaor Cotel',
+        HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Bekaor Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_8',
@@ -560,17 +575,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 150,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 137823,
-        HotelName: 'Zanator Cotel',
+        HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 1,
         RoomImgID: 'room_9',
@@ -587,13 +602,13 @@ var hotelData = [
     },
     {
         HotelID: 137823,
-        HotelName: 'Zanator Cotel',
+        HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 2,
         RoomImgID: 'room_10',
@@ -610,13 +625,13 @@ var hotelData = [
     },
     {
         HotelID: 137823,
-        HotelName: 'Zanator Cotel',
+        HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zanator Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 3,
         RoomImgID: 'room_11',
@@ -629,7 +644,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Internet',
         Price: 300,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate5, CheckOut: endDate5 }]
     },
     {
         HotelID: 343211,
@@ -652,7 +667,7 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Kitchen',
         Price: 400,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 343211,
@@ -675,7 +690,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Internet, Shower',
         Price: 500,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 343211,
@@ -702,13 +717,13 @@ var hotelData = [
     },
     {
         HotelID: 142278,
-        HotelName: 'ZZntor Cotel',
+        HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 1,
         RoomImgID: 'room_15',
@@ -725,13 +740,13 @@ var hotelData = [
     },
     {
         HotelID: 142278,
-        HotelName: 'ZZntor Cotel',
+        HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 2,
         RoomImgID: 'room_16',
@@ -748,13 +763,13 @@ var hotelData = [
     },
     {
         HotelID: 142278,
-        HotelName: 'ZZntor Cotel',
+        HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'ZZntor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 3,
         RoomImgID: 'room_1',
@@ -767,17 +782,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 150,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 129823,
-        HotelName: 'Oakator Cotel',
+        HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_2',
@@ -790,17 +805,17 @@ var hotelData = [
         Extras: 'Credit card accepted',
         RoomFacility: 'Projector, Balcony, Kitchen, Internet',
         Price: 300,
-        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
+        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 129823,
-        HotelName: 'Oakator Cotel',
+        HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_3',
@@ -817,13 +832,13 @@ var hotelData = [
     },
     {
         HotelID: 129823,
-        HotelName: 'Oakator Cotel',
+        HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Oakator Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_4',
@@ -836,7 +851,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Internet',
         Price: 100,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate5, CheckOut: endDate5 }]
     },
     {
         HotelID: 332221,
@@ -882,7 +897,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Internet, Shower',
         Price: 600,
-        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }]
+        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 332221,
@@ -928,7 +943,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 600,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 342311,
@@ -951,7 +966,7 @@ var hotelData = [
         Extras: 'Free cancellation, Credit card accepted, Pay at visit',
         RoomFacility: 'Television, Internet, Shower',
         Price: 300,
-        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }]
+        CheckInOut: [{ CheckIn: startDate1, CheckOut: endDate1 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 342311,
@@ -978,13 +993,13 @@ var hotelData = [
     },
     {
         HotelID: 192278,
-        HotelName: 'Zekaorza Cotel',
+        HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_11',
@@ -997,17 +1012,17 @@ var hotelData = [
         Extras: 'Pay at visit',
         RoomFacility: 'Television, Kitchen, Internet, Shower',
         Price: 100,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 192278,
-        HotelName: 'Zekaorza Cotel',
+        HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 2,
         RoomImgID: 'room_12',
@@ -1024,13 +1039,13 @@ var hotelData = [
     },
     {
         HotelID: 192278,
-        HotelName: 'Zekaorza Cotel',
+        HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
         Description: 'We have different theme hotel.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zekaorza Hotel, Montana' },
         HotelFacility: 'Pet allowed, Swiming pool, Restaurant',
         RoomID: 3,
         RoomImgID: 'room_13',
@@ -1043,17 +1058,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 250,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 197823,
-        HotelName: 'Zabatorza Cotel',
+        HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 1,
         RoomImgID: 'room_14',
@@ -1070,13 +1085,13 @@ var hotelData = [
     },
     {
         HotelID: 197823,
-        HotelName: 'Zabatorza Cotel',
+        HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 2,
         RoomImgID: 'room_15',
@@ -1093,13 +1108,13 @@ var hotelData = [
     },
     {
         HotelID: 197823,
-        HotelName: 'Zabatorza Cotel',
+        HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
         Description: 'Pleasent hotel for polite people.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Zabatorza Hotel, New York' },
         HotelFacility: 'Parking, Pet allowed',
         RoomID: 3,
         RoomImgID: 'room_16',
@@ -1112,7 +1127,7 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television',
         Price: 300,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate4, CheckOut: endDate4 }]
     },
     {
         HotelID: 393211,
@@ -1181,17 +1196,17 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Internet, Shower',
         Price: 250,
-        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }]
+        CheckInOut: [{ CheckIn: startDate2, CheckOut: endDate2 }, { CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 199278,
-        HotelName: 'Zoontor Cotel',
+        HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 1,
         RoomImgID: 'room_4',
@@ -1204,17 +1219,17 @@ var hotelData = [
         Extras: 'Free cancellation',
         RoomFacility: 'Television, Whiteboard, Kitchen, Internet, Shower',
         Price: 290,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 199278,
-        HotelName: 'Zoontor Cotel',
+        HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 2,
         RoomImgID: 'room_5',
@@ -1231,13 +1246,13 @@ var hotelData = [
     },
     {
         HotelID: 199278,
-        HotelName: 'Zoontor Cotel',
+        HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
         Description: 'We are the winner hotel.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
-        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Cotel, Montana' },
+        Location: { latitude: 45.322690, longitude: -106.781689, TooltipContent: 'Zoontor Hotel, Montana' },
         HotelFacility: 'Parking, Swiming pool',
         RoomID: 3,
         RoomImgID: 'room_6',
@@ -1250,17 +1265,17 @@ var hotelData = [
         Extras: 'Free cancellation, Pay at visit',
         RoomFacility: 'Television, Internet',
         Price: 150,
-        CheckInOut: []
+        CheckInOut: [{ CheckIn: startDate3, CheckOut: endDate3 }]
     },
     {
         HotelID: 199923,
-        HotelName: 'Sasktor Cotel',
+        HotelName: 'Sasktor Hotel',
         Address: "255, RU Boulevard Tirou GG",
         Description: 'Pleasent hotel for sweet people.',
         HotelImgID: 'hotel_8',
         Rating: 2,
         ReviewCount: 50,
-        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Sasktor Cotel, New York' },
+        Location: { latitude: 40.633829, longitude: -73.967230, TooltipContent: 'Sasktor Hotel, New York' },
         HotelFacility: 'Swiming pool, Restaurant',
         RoomID: 1,
         RoomImgID: 'room_7',
