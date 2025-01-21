@@ -352,6 +352,11 @@
     padding-right: 3px;
 }
 
+.e-arrow-styler {
+    font-size: 20px;
+    padding-right: 3px;
+}
+
 .e-price-info {
     text-align: right;
 }
@@ -494,8 +499,17 @@
     padding-left: 0px;
 }
 
-.e-chip.e-info {
+.e-chip.e-disabled.e-info {
     margin: 6px 6px 0px 0px;
+    background: #ecfeff !important;
+    border-color: #cffafe !important;
+    color: #0e7490 !important;
+}
+
+.e-chip.e-disabled.e-success {
+    background: #f0fdf4 !important;
+    border-color: #bbf7d0 !important;
+    color: #15803d !important;
 }
 
 @import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
