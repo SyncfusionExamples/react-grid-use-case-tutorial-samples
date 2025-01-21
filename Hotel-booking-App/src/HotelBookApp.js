@@ -1023,7 +1023,7 @@ function HotelBookApp() {
                                 width={'100%'}
                                 dataSource={[printInfo.current]}
                                 allowTextWrap={true}
-                                beforePrint={beforePrint}>
+                                beforePrint={beforePrint} enableHover={false} allowSelection={false}>
                                 <ColumnsDirective>
                                     <ColumnDirective field='FirstName' headerText='First name' width={120} />
                                     <ColumnDirective field='LastName' headerText='Last name' width={120} />
@@ -1034,7 +1034,7 @@ function HotelBookApp() {
                                 <Inject services={[Print]} />
                             </GridComponent>
                             <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Room Information</div>
-                            <GridComponent ref={g => hotelInfoGrid.current = g} width={'100%'} dataSource={[printInfo.current]} allowTextWrap={true}>
+                            <GridComponent ref={g => hotelInfoGrid.current = g} width={'100%'} dataSource={[printInfo.current]} allowTextWrap={true} enableHover={false} allowSelection={false}>
                                 <ColumnsDirective>
                                     <ColumnDirective field='HotelData.HotelName' headerText='Hotel name' width={120} customAttributes={{ class: 'e-grid-hotel-name' }} />
                                     <ColumnDirective field='HotelData.RoomName' headerText='Room name' width={120} customAttributes={{ class: 'e-grid-room-name' }} />
