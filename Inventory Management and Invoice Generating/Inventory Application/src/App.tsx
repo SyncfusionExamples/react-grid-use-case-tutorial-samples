@@ -1,36 +1,32 @@
 import {
-    ColumnDirective,
-    ColumnsDirective,
-    GridComponent,
-    Inject,
-    Toolbar,
-    Edit,
-    Selection,
-    Sort,
-    CommandColumn,
-    Aggregate,
-    AggregateColumnsDirective,
-    AggregateColumnDirective,
-    AggregateDirective,
-    AggregatesDirective,
-  } from "@syncfusion/ej2-react-grids";
-  import {
-    DialogComponent,
-    ButtonPropsModel,
-    AnimationSettingsModel,
-  } from "@syncfusion/ej2-react-popups";
-  import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
-  import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
-  import {
-    MaskedTextBoxComponent,
-    TextAreaComponent,
-    TextBox,
-    TextBoxComponent,
-  } from "@syncfusion/ej2-react-inputs";
-  import React, { useRef, useEffect, useState } from "react";
-  import { productData } from "./datasource";
-import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropdowns";
-  
+  ColumnDirective,
+  ColumnsDirective,
+  GridComponent,
+  Inject,
+  Toolbar,
+  Edit,
+  Selection,
+  Sort,
+  CommandColumn,
+} from "@syncfusion/ej2-react-grids";
+import {
+  DialogComponent,
+  ButtonPropsModel,
+  AnimationSettingsModel,
+} from "@syncfusion/ej2-react-popups";
+import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
+import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
+import {
+  MaskedTextBoxComponent,
+  TextAreaComponent,
+  TextBox,
+  TextBoxComponent,
+} from "@syncfusion/ej2-react-inputs";
+import React, { useRef, useEffect, useState } from "react";
+import { productData } from "./datasource";
+import { AutoComplete, AutoCompleteComponent, ChangeEventArgs } from "@syncfusion/ej2-react-dropdowns";
+import { isNullOrUndefined } from '@syncfusion/ej2-base';
+
   let customerDatabase: object[] = [
     {
       id: 2401,
@@ -63,7 +59,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       phone: "(555) 567-8901",
     },
   ];
-  
+
   function App() {
     //Primary grid component ref property
     let gridInstance = useRef<GridComponent>(null);
@@ -142,7 +138,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       number: true,
       min: 1
     };
-    const productRule: Object = { required: true, minLength: 2 };
+    const productRule: Object = { required: true };
     let prevProductID: String = "";
     let prevProductName: String = "";
 
@@ -219,14 +215,14 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
 
     /// Functions
     // Header - Customer details panel functions
-  
+
       // Function to generate Bill No
       const generateBillNo = (): string => {
         // Logic to generate Bill No
         const randomNo: number = Math.floor(100000 + Math.random() * 900000);
         return randomNo.toString();
       };
-  
+
       useEffect(() => {
         const generatedBillNo: any = generateBillNo();
         // Set Bill No to the input field
@@ -251,8 +247,8 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       }, [refresh]);
 
       //function to handle customer id input element changes - change event.
-      const handleCustomerIDChange = (event): void  => {
-        const enteredID: number = parseInt(event.value);
+      const handleCustomerIDChange = (event: ChangeEventArgs): void  => {
+        const enteredID: number = parseInt(event.value as string);
         const foundCustomer: any = customerDatabase.find(
           (customer) => (customer as any).id === enteredID
         );
@@ -293,7 +289,6 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       const actionComplete = (args: any): void => {
         if (args.action === "add" && args.requestType === "save") {
           const lastRowIndex = gridInstance.current.getRows().length - 1; // Get the index of the last row
-          // gridInstance.current.selectRow(lastRowIndex);
           productSearchGridInstance.current.clearSelection();
           dialogInstance.current.hide();
           gridInstance.current.editModule.startEdit(gridInstance.current.getRowByIndex(lastRowIndex) as HTMLTableRowElement);
@@ -326,6 +321,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
           }
         }
         updateSavingsDisplay(gridInstance.current.dataSource);
+        totalNetAmount(gridInstance.current.dataSource);
         (document.querySelector("#totalItems") as HTMLElement).innerHTML = (
           gridInstance.current as any
         ).dataSource.length;
@@ -337,17 +333,10 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
         gridInstance.current.getContent().querySelector(".e-addedrow .e-rowcell .e-checkbox-wrapper").classList.add('e-checkbox-disabled');
       }
 
-      //Grid - Aggregate function to calculate Total amount - aggregate from total amount column
-      function totalNetAmount(props: any): void {
-        (document.querySelector("#totalNetAmount") as HTMLElement).innerHTML =
-          props.Sum;
-        return props.Sum;
-      }
-
       //Function to Calculate total savings of the bill amount
       function computeSavings(dataSource: any): number {
         let savings = 0;
-        dataSource.forEach((item) => {
+        dataSource.forEach((item: any) => {
           const MRP = item.MRP;
           const Price = item.Price;
           const Qty = parseFloat(item.Quantity) || 0;
@@ -355,6 +344,16 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
           if (Qty !== 0) savings += (MRP - Price) * Qty + Discount;
         });
         return savings;
+      }
+
+      function totalNetAmount(dataSource: any): void {
+        let totalAmount = 0;
+        dataSource.forEach((item: any) => {
+          if (item.Qty !== 0) {
+            totalAmount += item.Total;
+          }
+        });
+        (document.querySelector("#totalNetAmount") as HTMLElement).innerHTML = "$" + totalAmount.toFixed(2);
       }
     
       //Function to Update savings card element with proper savings amount.
@@ -365,7 +364,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       }
 
       //Grid action begin event
-      const actionBegin = (args): void => {
+      const actionBegin = (args: any): void => {
         if (args.requestType === 'save') {
           args.index = (gridInstance.current.pageSettings.currentPage * gridInstance.current.pageSettings.pageSize) - 1;
           productSearchGridInstance.current.clearSelection();
@@ -391,16 +390,16 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             ? true
             : false;
         function printTable(
-          gridInstance,
-          shopName,
-          billNo,
-          customerName,
-          phoneNumber,
-          address,
-          formattedDateTime,
-          totalAmount,
-          savings,
-          isDoorDelivery,
+          gridInstance: any,
+          shopName: any,
+          billNo: any,
+          customerName: any,
+          phoneNumber: any,
+          address: any,
+          formattedDateTime: any,
+          totalAmount: any,
+          savings: any,
+          isDoorDelivery: any,
         ) {
           let data = gridInstance.dataSource;
           let columnConfig = gridInstance.columns;
@@ -475,7 +474,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
     
             // Header row
             let headerRow = "<thead><tr>";
-            columnConfig.forEach((column) => {
+            columnConfig.forEach((column: any) => {
               if (
                 column.headerText !== "" &&
                 column.headerText !== "Product ID" &&
@@ -514,9 +513,9 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
     
             // Data rows
             printWindow.document.write("<tbody>");
-            data.forEach((item) => {
+            data.forEach((item: any) => {
               let row = "<tr>";
-              columnConfig.forEach((column) => {
+              columnConfig.forEach((column: any) => {
                 if (
                   column.headerText !== "" &&
                   column.headerText !== "Product ID" &&
@@ -569,12 +568,12 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             printWindow.document.write(
               '<table style="width: 100%; margin-top: 15px; border-collapse: collapse;">' +
                 "<tr>" +
-                '<td style="border: none; text-align: right; padding-bottom: 10px;">TOTAL SAVINGS: ' +
+                '<td style="border: none; text-align: right; padding-bottom: 10px; font-weight: bold">TOTAL SAVINGS: ' +
                 savings +
                 "</td>" +
                 "</tr>" +
                 "<tr>" +
-                '<td style="border: none; text-align: right;">TOTAL AMOUNT: ' +
+                '<td style="border: none; text-align: right; font-weight: bold">TOTAL AMOUNT: ' +
                 totalAmount +
                 "</td>" +
                 "</tr>" +
@@ -586,12 +585,12 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
               printWindow.document.write(
                 '<table style="width: 100%; margin-top: 10px; border-collapse: collapse;">' +
                   "<tr>" +
-                  '<td style="border: none; text-align: right; padding-bottom: 10px;">CASH RECEIVED: ' +
+                  '<td style="border: none; text-align: right; padding-bottom: 10px; font-weight: bold">CASH RECEIVED: ' +
                   `$${parseFloat(cashPaidRef.current.value).toFixed(2)}` +
                   "</td>" +
                   "</tr>" +
                   "<tr>" +
-                  '<td style="border: none; text-align: right;">CHANGE: ' +
+                  '<td style="border: none; text-align: right; font-weight: bold">CHANGE: ' +
                   balanceRef.current.innerHTML +
                   "</td>" +
                   "</tr>" +
@@ -663,7 +662,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       };
       
       //Grid command column delete button - Click event.
-      const commandClick = (args): void  => {
+      const commandClick = (args: any): void  => {
         const rowIndex = parseInt(
           args.target.closest("tr").getAttribute("data-rowindex"),
           10
@@ -695,7 +694,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                 );
                 if (product) {
                     const isProductExists = (gridInstance.current.dataSource as any).some(
-                        (item) => (item as any).ProductID === (product as any).ProductID
+                        (item: any) => (item as any).ProductID === (product as any).ProductID
                     );
                     if (isProductExists) {
                         alert("Product has already been added.");
@@ -705,7 +704,12 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                         (gridInstance.current.dataSource as any).length === 0
                             ? 0
                             : (gridInstance.current.dataSource as any).length - 1;
-                    gridInstance.current.addRecord(product, index);
+                    let editedRowIndex: any = (gridInstance as any).current.editModule.editModule.editRowIndex; 
+                    if(!isNullOrUndefined(editedRowIndex)) {
+                      updateRecord(product, editedRowIndex);
+                    } else {
+                      gridInstance.current.addRecord(product, index);
+                    }
                     return;
                 } else {
                     alert("No product found with the provided Product ID");
@@ -714,7 +718,31 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             }, 300); // Delay of 500ms to wait for the user to type 5 digits
           }
         };
-      
+
+        const updateRecord = (product: any, editedRowIndex: any) =>{
+          (document.getElementById(gridInstance.current.element.id + 'ProductID') as any).value = product.ProductID;
+          (document.getElementById(gridInstance.current.element.id + 'ProductName') as any).value = product.ProductName;
+          (document.getElementById(gridInstance.current.element.id + 'Price') as any).value = product.Price;
+          (document.getElementById(gridInstance.current.element.id + 'MRP') as any).value = product.MRP;
+          (document.getElementById(gridInstance.current.element.id + 'Discount') as any).value = product.Discount;
+          (document.getElementById(gridInstance.current.element.id + 'Tax') as any).value = product.Tax;
+          (document.getElementById(gridInstance.current.element.id + 'Total') as any).value = product.Total;
+          (gridInstance as any).current.dataSource[editedRowIndex] = product;
+          setTimeout(() => {
+            gridInstance.current.editModule.startEdit(gridInstance.current.getRowByIndex(editedRowIndex) as HTMLTableRowElement);
+            const ele = (gridInstance.current
+              .getContent()
+              .querySelectorAll(".e-editedrow .e-rowcell")[4]
+              .querySelector(".e-textbox") as HTMLInputElement);
+            ele.value = "";
+            ele.focus();
+            (gridInstance.current
+              .getContent()
+              .querySelectorAll(".e-editedrow .e-rowcell")[1]
+              .querySelector(".e-textbox") as any).value = editedRowIndex + 1;
+          }, 0)
+        }
+
         const createProductIDFn = () => {
           productIDInput = document.createElement("input");
           return productIDInput;
@@ -722,26 +750,22 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       
         const destroyProductIDFn = () => {
           if (autocompleteIns && productIDInput) {
-            // textBoxIns.destroy();
+            autocompleteIns.destroy();
             productIDInput.removeEventListener("keyup", handleKeyUp); // Remove event listener
           }
         };
       
-        const readProductIDFn = () => {
-          if (autocompleteIns) {
-            return autocompleteIns.value;
-          }
-          return "";
+        const readProductIDFn = (args: any) => {
+            return args.value;
         };
 
-        const writeProductIDFn = (args) => {
+        const writeProductIDFn = (args: any) => {
           autocompleteIns = new AutoComplete({
             dataSource: productData.map(product => ({ ProductID: (product as any).ProductID, ProductName: (product as any).ProductName })), // Provide your data source
             fields: { value: 'ProductID' },
             value: args.rowData[args.column.field],
-            itemTemplate: "<table style='border-collapse: collapse; border: 1px solid rgba(var(--color-sf-outline-variant)); width: 300px;'><tr><td style='width: 45.5%; border: 1px solid rgba(var(--color-sf-outline-variant)); padding: 2px; text-align: center;'>${ProductID}</td><td style='width: 75%; border: 1px solid rgba(var(--color-sf-outline-variant)); padding: 2px; text-align: center;'>${ProductName}</td></tr></table>",
+            itemTemplate: "<table style='border-collapse: collapse; border: 1px solid rgba(var(--color-sf-outline-variant));'><tr><td style='width: 30px; border: 1px solid rgba(var(--color-sf-outline-variant)); padding: 2px;'>${ProductID}</td><td style='width: 70px; border: 1px solid rgba(var(--color-sf-outline-variant)); padding: 2px;'>${ProductName}</td></tr></table>",
             suggestionCount: productData.length,
-            width: "300px",
             placeholder: "Enter product id",
             floatLabelType: "Never",
             select: (e) => {
@@ -790,14 +814,11 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
           }
         };
       
-        const readProductNameFn = () => {
-          if (productNameTextBoxIns) {
-            return productNameTextBoxIns.value;
-          }
-          return "";
+        const readProductNameFn = (args:any) => {
+            return args.value;
         };
       
-        const writeProductNameFn = (args) => {
+        const writeProductNameFn = (args: any) => {
           productNameTextBoxIns = new TextBox({
             value: args.rowData[args.column.field],
             placeholder: "Enter product name",
@@ -813,36 +834,39 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
 
         //Function to calculate total amount and update the same in total amount card component.
         const calculateTotal = (value: number): number => {
-          const price = parseFloat(
-            (gridInstance.current
-              .getContent()
-              .querySelectorAll(".e-editedrow .e-rowcell")[6]
-              .querySelector(".e-input") as HTMLInputElement).value
-          );
-          const discount = parseFloat(
-            (gridInstance.current
-              .getContent()
-              .querySelectorAll(".e-editedrow .e-rowcell")[7]
-              .querySelector(".e-input") as HTMLInputElement).value
-          );
-          const tax = parseFloat(
-            (gridInstance.current
-              .getContent()
-              .querySelectorAll(".e-editedrow .e-rowcell")[8]
-              .querySelector(".e-input") as HTMLInputElement).value
-          );
-          return (value * price) - (value * discount) + (value * price * tax);
+          if(gridInstance.current.getContent().querySelectorAll(".e-editedrow .e-rowcell").length) {
+            const price = parseFloat(
+              (gridInstance.current
+                .getContent()
+                .querySelectorAll(".e-editedrow .e-rowcell")[6]
+                .querySelector(".e-input") as HTMLInputElement).value
+            );
+            const discount = parseFloat(
+              (gridInstance.current
+                .getContent()
+                .querySelectorAll(".e-editedrow .e-rowcell")[7]
+                .querySelector(".e-input") as HTMLInputElement).value
+            );
+            const tax = parseFloat(
+              (gridInstance.current
+                .getContent()
+                .querySelectorAll(".e-editedrow .e-rowcell")[8]
+                .querySelector(".e-input") as HTMLInputElement).value
+            );
+            return (value * price) - (value * discount) + (value * price * tax);
+          }
         };
 
         //function to handle key up event of product quantity column - show add new row - input element of grid.
         const handleproductQuantityKeyup = (event: Event) => {
-          if ((event.target as HTMLInputElement).value && !isNaN(parseFloat((event.target as HTMLInputElement).value))) {
+          if ((event.target as HTMLInputElement).value && !isNaN(parseFloat((event.target as HTMLInputElement).value)) &&
+            gridInstance.current.getContent().querySelectorAll(".e-editedrow .e-rowcell").length) {
             const total = calculateTotal(
               parseFloat((event.target as HTMLInputElement).value)
             );
             (gridInstance.current
             .getContent().querySelectorAll(".e-editedrow .e-rowcell")[9]
-            .querySelector(".e-input") as HTMLInputElement).value = total.toString();
+            .querySelector(".e-input") as HTMLInputElement).value = total.toFixed(2);
           }
         };
       
@@ -864,7 +888,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
           return "";
         };
       
-        const writeQuantityFn = (args) => {
+        const writeQuantityFn = (args: any) => {
           quantityTextBoxIns = new TextBox({
             value: args.rowData[args.column.field],
             placeholder: "Enter quantity",
@@ -897,7 +921,14 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                 (gridInstance.current.dataSource as any).length === 0
                   ? 0
                   : (gridInstance.current.dataSource as any).length - 1;
-              gridInstance.current.addRecord(...newItems, index);
+              const editedRowIndex = (gridInstance as any).current.editModule.editModule.editRowIndex;
+              if(!isNullOrUndefined(editedRowIndex)) {
+                updateRecord(newItems[0], editedRowIndex);
+                productSearchGridInstance.current.clearSelection();
+                dialogInstance.current.hide();
+              } else {
+                gridInstance.current.addRecord(...newItems, index);
+              }
             }
           }
       };
@@ -962,7 +993,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       };
 
     //on click funtion to change and set the delivery type in delivery type button
-    const onClickToggle = (args): void => {
+    const onClickToggle = (): void => {
       setDeliveryType(prevType =>
           prevType === "Take Away" ? "Door Delivery" : "Take Away"
       );
@@ -987,10 +1018,11 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
       () => (
         <GridComponent
           ref={gridInstance}
-          emptyRecordTemplate={() => null}
+          emptyRecordTemplate={(): any => null}
           gridLines="Both"
-          height="335px"
+          height="250px"
           width='100%'
+          rowHeight={15}
           textWrapSettings={wrapSettings}
           dataSource={[]}
           actionComplete={actionComplete}
@@ -1009,7 +1041,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
               width="5%"
               textAlign="Center"
             ></ColumnDirective>
-            <ColumnDirective field="SNO" headerText="SNO" width="10%" />
+            <ColumnDirective field="SNO" headerText="SNO" width="10%" allowEditing={false} />
             <ColumnDirective
               field="ProductID"
               isPrimaryKey={true}
@@ -1098,50 +1130,33 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
               commands={commands}
             ></ColumnDirective>
           </ColumnsDirective>
-  
-          <AggregatesDirective>
-            <AggregateDirective>
-              <AggregateColumnsDirective>
-                <AggregateColumnDirective
-                  field="Total"
-                  type="Sum"
-                  format="C2"
-                  footerTemplate={totalNetAmount}
-                >
-                  {" "}
-                </AggregateColumnDirective>
-              </AggregateColumnsDirective>
-            </AggregateDirective>
-          </AggregatesDirective>
           <Inject
-            services={[Selection, Aggregate, Toolbar, Edit, Sort, CommandColumn]}
+            services={[Selection, Toolbar, Edit, Sort, CommandColumn]}
           />
         </GridComponent>
       ),
       [refresh]
     );
-  
+
     return (
       <div>
-        <div className="input-container-title">
-          ABC Supermarket Point of Sale (POS)
-        </div>
-
+      <div className="input-container-title">ABC SUPERMARKET POINT OF SALE (POS)</div>
         {/* Customer details Header element */}
-        <div className="header">
-          <div className="input-container billno">
-            <label>Bill No:</label>
+        <div className="header" style={{marginTop: "15px", height: '20%'}}>
+          <table className="header-table" style={{marginLeft: '40px'}}>
+          <tr className="input-container billno"><td>
+            <label>Bill Number:</label></td><td>
             <TextBoxComponent
               id="billNoInput"
               type="text"
               readOnly
             />
-          </div>
-          <div className="input-container custid">
-            <label>Customer ID:</label>
+          </td></tr>
+          <tr className="input-container custid"><td>
+            <label>Customer ID:</label></td><td>
             <AutoCompleteComponent
                 id="customerID"
-                placeholder="Enter id"
+                placeholder="Enter customer id"
                 dataSource={customerDatabase.map(customer => (customer as any).id)}
                 ref={customerIDRef}
             />
@@ -1153,19 +1168,20 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             >
               +
             </ButtonComponent>
-          </div>
-          <div className="input-container custname">
-            <label>Customer Name:</label>
+          </td></tr></table>
+          <table className="header-table">
+          <tr className="input-container custname"><td>
+            <label>Customer Name:</label></td><td>
             <TextBoxComponent
               type="text"
               id="customerName"
               ref={customerNameRef}
-              placeholder="Customer name"
+              placeholder="Customer Name"
               readOnly
             />
-          </div>
-          <div className="input-container phone">
-            <label>PhoneNo:</label>
+          </td></tr>
+          <tr className="input-container phone"><td>
+            <label>Phone Number:</label></td><td>
             <MaskedTextBoxComponent
               id="phone-input"
               ref={customerPhoneRef}
@@ -1173,33 +1189,31 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
               placeholder="(999) 999-9999"
               readOnly
             />
-          </div>
-          <div className="input-container custaddress">
-            <label>Address:</label>
+          </td></tr></table>
+          <table className="header-table">
+          <tr className="input-container custaddress"><td>
+            <label>Customer Address:</label></td><td>
             <TextAreaComponent
               id="customerAddress"
               value={""}
               ref={customerAddressRef}
-              placeholder="Customer address"
-              style={{height: "22px" }}
+              placeholder="Customer Address"
               readOnly
             />
-          </div>
-          <div className="input-container datepicker">
-            <label>Date:</label>
+          </td></tr>
+          <tr className="input-container datepicker"><td>
+            <label>Date:</label></td><td>
             <DateTimePickerComponent
               id="date-picker"
               ref={datePicker}
-              // style={{ width: "100%" }}
               value={currentDateTime}
               format="MM/dd/yyyy hh:mm:ss a"
               readOnly
             />
-          </div>
+          </td></tr></table>
         </div>
-
         {/* Main Content of the Body - Primary Grid and Vertical Amount details Card components */}
-        <div className="primary-container">
+        <div className="primary-container" style={{marginTop: "15px", height: '50%'}}>
           {MemorizedGridComponent}
 
           {/* Product search by its name - Dialog popup */}
@@ -1228,7 +1242,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                 <ColumnDirective
                   field="ProductID"
                   headerText="Product ID"
-                  width="150"
+                  width="180"
                 />
                 <ColumnDirective
                   field="ProductName"
@@ -1254,7 +1268,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             <div className="control-section card-control-section vertical_card_layout">
               <div className="e-card-resize-container">
                 <div className="row">
-                  <div className="row card-layout">
+                  <div className="row card-layout" style={{height: '330px'}}>
                     <div className="col-xs-6 col-sm-6 col-sm-4 ">
                       <div className="e-card" id="poscards">
                         <div className="e-card-header">
@@ -1309,7 +1323,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
         </div>
 
         {/* Horizontal Card components - Delivery type, Payment type Buttons*/}
-        <div className="control-pane payment">
+        <div className="control-pane payment" style={{marginTop: "15px", height: '20%'}}>
           <div className="control-section card-control-section vertical_card_layout">
             <div className="e-card-resize-container">
               <div className="row">
@@ -1318,15 +1332,15 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="deliverOptionDiv">
+                        <div className="e-card-btn-txt" id="deliverOptionDiv" style={{ background: 'linear-gradient(to right, rgb(251, 146, 60), rgb(224 212 55) 50%, rgb(251, 146, 60))'}}>
                           <ButtonComponent
                             ref={buttonRef}
                             onClick={onClickToggle}
                             isToggle={true}
                             title="Toggle Delivery type"
                           >
-                            Delivery type : &nbsp;
-                            <span ref={deliverytypeRef} style={{ color: deliveryType === "Take Away" ? "green" : "#ff0077", fontWeight: "bold" }}>
+                            <span>Delivery Type:</span> &nbsp;
+                            <span ref={deliverytypeRef} style={{ color: deliveryType === "Take Away" ? "rgb(8 168 67)" : "red" }}>
                             {deliveryType}
                             </span>
                           </ButtonComponent>
@@ -1338,18 +1352,18 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="cardPayButtonDiv">
+                        <div className="e-card-btn-txt" id="cardPayButtonDiv" style={{ background: 'linear-gradient(to right, rgb(16, 18, 240), rgb(141 149 232) 50%, rgb(16, 18, 240))'}}>
                           <ButtonComponent
                             id="cardPayButton"
                             title="Click to enter card payment"
                             onClick={renderPaymentConfimation}
                           >
                             <img
-                              src="Images/Card.svg"
+                              src="./Images/Card.svg"
                               alt="Card"
                               className="payment-icon"
                             />{" "}
-                            Card Payment
+                            <span>Card Payment</span>
                           </ButtonComponent>
                         </div>
                       </div>
@@ -1359,18 +1373,18 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="UPIPayButtondiv">
+                        <div className="e-card-btn-txt" id="UPIPayButtondiv" style={{ background: 'linear-gradient(to right, #15803d, #55e189 50%, #15803d)'}}>
                           <ButtonComponent
                             id="UPIPayButton"
                             title="Click to enter UPI payment"
                             onClick={renderPaymentConfimation}
                           >
                             <img
-                              src="Images/UPI.svg"
+                              src="./Images/UPI.svg"
                               alt="UPI"
                               className="payment-icon"
                             />{" "}
-                            UPI Payment
+                            <span>UPI Payment</span>
                           </ButtonComponent>
                         </div>
                       </div>
@@ -1380,7 +1394,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="totalNetAmount">
+                        <div className="e-card-btn-txt" id="totalNetAmount" style={{ background: 'linear-gradient(to right, rgb(251 60 60), rgb(239 179 87) 50%, rgb(251 60 60))'}}>
                           <ButtonComponent
                             id="cashPayButton"
                             title="Click to enter cash payment"
@@ -1388,11 +1402,11 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                           >
                             {" "}
                             <img
-                              src="Images/Cash.svg"
+                              src="./Images/Cash.svg"
                               alt="Cash"
                               className="payment-icon"
                             />{" "}
-                            Cash
+                            <span>Cash</span>
                           </ButtonComponent>
                         </div>
                       </div>
@@ -1411,6 +1425,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             buttons={buttons}
             header="Payment Confirmation"
             width="500px"
+            style={{fontSize: '16px'}}
             ref={confirmationDialog}
             target="#targetElement2"
             visible={false}
@@ -1425,7 +1440,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
             >
               <form>
                     <div className="input-container" style={{ marginBottom: "5px" }}>
-                    <label htmlFor="customerName">Customer Name:</label>
+                    <label htmlFor="customerName">Customer Name</label>
                     <TextBoxComponent
                         id="customerName"
                         ref={newCustomerNameRef}
@@ -1433,7 +1448,7 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                     />
                     </div>
                     <div className="input-container" style={{ marginBottom: "5px" }}>
-                    <label htmlFor="phone-input">Phone No:</label>
+                    <label htmlFor="phone-input">Phone No</label>
                     <MaskedTextBoxComponent
                         id="phone-input"
                         ref={newCustomerPhoneRef}
@@ -1442,9 +1457,10 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
                     />
                     </div>
                     <div className="input-container" style={{ marginBottom: "5px" }}>
-                    <label htmlFor="customerAddress">Address:</label>
+                    <label htmlFor="customerAddress">Address</label>
                     <TextAreaComponent
                         id="customerAddress"
+                        width='100%'
                         value={""}
                         ref={newCustomerAddressRef}
                         placeholder="Enter customer address"
@@ -1492,4 +1508,3 @@ import { AutoComplete, AutoCompleteComponent } from "@syncfusion/ej2-react-dropd
     );
   }
   export default App;
-  
