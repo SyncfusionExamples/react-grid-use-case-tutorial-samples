@@ -1,128 +1,113 @@
 .e-grid .e-gridfooter,
 .e-btn.e-hide {
-  display: none;
+    display: none;
 }
 
 .e-grid {
-  flex: 9;
+    flex: 9;
 }
 
 .e-grid td.e-active {
-  background: #d8d8d8a6;
+    background: #d8d8d8a6;
 }
 
 .e-grid .e-emptyrow td {
-  padding: 0;
-  line-height: 0;
+    padding: 0;
+    line-height: 0;
 }
 
 .e-grid .e-headercell {
-  background-color: #e0f2fe;
-  /* Formal header background color */
+    background-color: #5fdace;
+    /* Formal header background color */
 }
 
 .e-unboundcelldiv {
-  display: flex !important;
-  justify-content: center;
-  /* Horizontally center-aligns the button */
-  align-items: center;
-  /* Vertically center-aligns the button */
-  height: 100%;
+    display: flex !important;
+    justify-content: center;
+    /* Horizontally center-aligns the button */
+    align-items: center;
+    /* Vertically center-aligns the button */
+    height: 100%;
 
-  .e-cancelbutton.e-hide {
-    display: block;
-  }
-}
-
-/* Style for buttons */
-.input-container button {
-  padding: 6px 10px;
-  /* Add padding to buttons */
-  /* font-size: 20px; */
-  background-color: white;
-  /* Set button background color */
-  color: black;
-  /* Set button text color */
-  border-radius: 4px;
-  /* Add border radius to buttons */
-  cursor: pointer;
-  /* Change cursor to pointer on hover */
+    .e-cancelbutton.e-hide {
+        display: block;
+    }
 }
 
 .header .input-container .e-input-group.e-control-wrapper.e-ddl {
-  width: 50% !important;
+    width: 86% !important;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #075985;
-  /* Header background color */
-  /* Header text color */
-  padding: 12px;
-  /* Add padding for spacing */
-  width: 100%;
-  min-height: 100px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    /* Header background color */
+    /* Header text color */
+    padding: 10px;
+    /* Add padding for spacing */
+    width: 100%;
+    min-height: 55px;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 /* Font size for 150% scale and greater (1280px width and below) */
 @media screen and (max-width: 1540px) {
 
-  .e-input-group input.e-input,
-  .e-input-group.e-control-wrapper input.e-input,
-  .e-input-group textarea.e-input,
-  .e-input-group.e-control-wrapper textarea.e-input,
-  .e-grid .e-headercelldiv,
-  .e-grid .e-row .e-input-group .e-input.e-field,
-  .e-grid .e-row .e-input-focus .e-input.e-field,
-  .e-grid .e-rowcell,
-  .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
-  .header .input-container label,
-  .control-pane.payment button,
-  .control-pane.amount .e-card-header-title,
-  .control-pane,
-  .e-control,
-  .e-dialog .e-dlg-content {
-    font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
-    font-size: 14px;
-  }
+    .e-input-group input.e-input,
+    .e-input-group.e-control-wrapper input.e-input,
+    .e-input-group textarea.e-input,
+    .e-input-group.e-control-wrapper textarea.e-input,
+    .e-grid .e-headercelldiv,
+    .e-grid .e-row .e-input-group .e-input.e-field,
+    .e-grid .e-row .e-input-focus .e-input.e-field,
+    .e-grid .e-rowcell,
+    .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
+    .header .input-container label,
+    .control-pane.payment button,
+    .control-pane.amount .e-card-header-title,
+    .control-pane,
+    .e-control,
+    .e-dialog .e-dlg-content {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 13px;
+    }
 
-  .input-container-title {
-    font-size: 18px;
-  }
+    .input-container-title {
+        font-size: 19px;
+    }
 }
 
 @media screen and (min-width: 1536px) {
 
-  .e-input-group input.e-input,
-  .e-input-group.e-control-wrapper input.e-input,
-  .e-input-group textarea.e-input,
-  .e-input-group.e-control-wrapper textarea.e-input,
-  .e-grid .e-headercelldiv,
-  .e-grid .e-row .e-input-group .e-input.e-field,
-  .e-grid .e-row .e-input-focus .e-input.e-field,
-  .e-grid .e-rowcell,
-  .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
-  .header .input-container label,
-  .control-pane.payment button,
-  .control-pane.amount .e-card-header-title,
-  .control-pane,
-  .e-control,
-  .e-dialog .e-dlg-content {
-    font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
-    font-size: 18px;
-  }
+    .e-input-group input.e-input,
+    .e-input-group.e-control-wrapper input.e-input,
+    .e-input-group textarea.e-input,
+    .e-input-group.e-control-wrapper textarea.e-input,
+    .e-grid .e-headercelldiv,
+    .e-grid .e-row .e-input-group .e-input.e-field,
+    .e-grid .e-row .e-input-focus .e-input.e-field,
+    .e-grid .e-rowcell,
+    .e-toolbar .e-toolbar-item .e-tbar-btn .e-tbar-btn-text,
+    .header .input-container label,
+    .control-pane.payment button,
+    .control-pane.amount .e-card-header-title,
+    .control-pane,
+    .e-control,
+    .e-dialog .e-dlg-content {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 15px;
+    }
 
-  .input-container-title {
-    font-size: 18px;
-  }
+    .input-container-title {
+        font-size: 19px;
+    }
 
-  .card-control-section.vertical_card_layout .col-xs-3.col-sm-3 #poscards.e-card {
-    height: 90px;
-  }
+    .card-control-section.vertical_card_layout .col-xs-3.col-sm-3 #poscards.e-card {
+        height: 90px;
+    }
 }
 
 .e-calendar .e-content td.e-today.e-selected:hover span.e-day,
@@ -131,508 +116,494 @@
 .e-bigger.e-small .e-calendar .e-content td.e-today.e-selected:hover span.e-day,
 .e-bigger.e-small .e-calendar .e-content td.e-selected:hover span.e-day,
 .e-bigger.e-small .e-calendar .e-content td.e-selected.e-focused-date span.e-day {
-  background-color: #6b7280;
+    background-color: #6b7280;
 }
 
 .e-calendar .e-content td.e-today span.e-day,
 .e-calendar .e-content td.e-focused-date.e-today span.e-day,
 .e-bigger.e-small .e-calendar .e-content td.e-today span.e-day,
 .e-bigger.e-small .e-calendar .e-content td.e-focused-date.e-today span.e-day {
-  border: 2px solid #6b7280;
-  color: white
+    border: 2px solid #6b7280;
+    color: white
 }
 
 .input-container-title {
-  background: #075985;
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
-  color: #ffffff;
-  margin: 0;
-  padding: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 34px;
-  font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
-  font-weight: bold;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
+    background: linear-gradient(to right, #fb923c , #facc15  50%, #f97316 );
+    color: black;
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 19px;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: bold;
 }
 
 .e-btn,
 .e-css.e-btn {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 .header .input-container {
-  display: flex;
-  align-items: center;
-  height: 30px;
+    align-items: center;
+    height: 30px;
 }
 
 .header .input-container.custaddress {
-  width: 22%;
+    width: 22%;
 }
 
 .header .input-container.phone {
-  width: 24%;
+    width: 24%;
 }
 
 .header .input-container.datepicker {
-  width: 22%;
+    width: 22%;
 }
 
 .header .input-container {
-  padding-right: 5px;
-  /* Adjust the padding value as needed */
+    padding-right: 5px;
+    /* Adjust the padding value as needed */
 }
 
 .input-container label {
-  margin-right: 4px;
-  margin-bottom: 0;
-  font-weight: bold;
-  font-size: 18px;
-  color: white;
-  white-space: nowrap;
-  /* Prevents wrapping to a new line */
+    margin-right: 4px;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 13px;
+    color: black;
+    white-space: nowrap;
+    /* Prevents wrapping to a new line */
+}
+
+.e-dialog .input-container label {
+    color: black;
+    margin-bottom: "10px";
+    font-weight: "bold";
+    font-size: 14px;
 }
 
 .header input,
 .header .e-input {
-  width: 200px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  color: #333;
-  padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 8px;
 }
 
 .header .e-datepicker-wrapper {
-  width: 200px;
+    width: 200px;
 }
 
 .header .e-input-group-icon {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 .header .e-input-group-icon .e-input-group-icon.e-date-icon::before {
-  content: '\e836';
-  /* Icon code for calendar */
-  font-family: 'ej-icon';
+    content: '\e836';
+    /* Icon code for calendar */
+    font-family: 'ej-icon';
 }
 
 .primary-container {
-  display: flex;
-  height: 520px;
-  border-radius: 8px;
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
 }
 
 .primary-container .e-control.e-grid {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .primary-container .control-pane.amount {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 140px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 140px;
 }
 
 .control-pane.amount .control-section .card-layout #poscards {
-  height: 130px;
+    height: 90px;
+    background-color: #e2e0f2;
 }
 
 .control-pane.amount .control-section .card-layout #poscards .e-card-actions {
-  padding-top: 22px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.control-pane.amount .control-section .col-xs-6.col-sm-6.col-sm-4:nth-child(3) {
-  margin-bottom: -18px;
-}
-
-.control-pane.amount .control-section .e-card-resize-container {
-  margin-top: 40px;
+    padding-top: 9px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .primary-container .card-layout .col-xs-6 {
-  width: 100%;
-  /* Each card should occupy full width */
+    width: 100%;
+    /* Each card should occupy full width */
 }
 
 .row .card-layout {
-  margin-right: 1px;
-  margin-left: 1px;
+    margin-right: 1px;
+    margin-left: 1px;
 }
 
 .primary-container .e-card {
-  height: 140px;
+    height: 140px;
 }
 
 /* Vertical card customization */
 
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-header {
-  text-align: left;
+    text-align: left;
 }
 
 .card-control-section.vertical_card_layout #poscards_profile.e-card>* {
-  height: 50%;
+    height: 50%;
 }
 
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-content {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-header-caption .e-card-sub-title,
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-header-caption .e-card-header-title,
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-content table td {
-  color: #fff;
+    color: #fff;
 }
 
 .card-control-section.vertical_card_layout #poscards.e-card,
 .card-control-section.vertical_card_layout #poscards_profile.e-card {
-  text-align: center;
-  background-size: cover;
-  height: 70px;
+    text-align: center;
+    background-size: cover;
+    height: 55px;
 }
 
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-header-caption .e-card-header-title,
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-header-caption .e-card-sub-title,
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-actions button {
-  color: #000;
+    color: white;
 }
 
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-actions,
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-actions {
-  justify-content: center;
-  height: 100%;
+    justify-content: center;
+    height: 100%;
 }
 
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-actions button,
 .card-control-section.vertical_card_layout #poscards_profile.e-card .e-card-actions button {
-  background-color: transparent;
-  text-transform: none;
-  border: none;
+    background-color: transparent;
+    text-transform: none;
+    border: none;
 }
 
 .control-pane,
 .e-control,
 .e-dialog .e-dlg-content {
-  font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .control-pane .e-card-header-title {
-  font-size: 12px;
-  font-weight: bold;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 /* Button text */
 .control-pane.payment .e-card .e-card-btn-txt {
-  color: #333;
-  /* Text color */
-  font-size: 18px;
-  /* Font size */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 100%;
-  /* Occupy the full height of the parent */
+    color: #333;
+    /* Text color */
+    font-size: 18px;
+    /* Font size */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100%;
+    /* Occupy the full height of the parent */
 }
 
 /* Adjust this if you want the image to appear before the text */
 .control-pane.payment #cardPayButtonDiv .e-card-btn-txt {
-  background-position-x: 20px;
-  /* Adjust based on the space you want before the text */
+    background-position-x: 20px;
+    /* Adjust based on the space you want before the text */
 }
 
 .control-pane.payment #UPIPayButtondiv .e-card-btn-txt {
-  background-position-x: 20px;
+    background-position-x: 20px;
 }
 
 .control-pane.payment #cashPayButton .e-card-btn-txt {
-  background-position-x: 20px;
+    background-position-x: 20px;
 }
 
 
 /* Payment Options Card Component CSS */
 
 .control-pane.payment .card-control-section {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 .control-pane.payment .e-card {
-  margin: 10px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
 }
 
 .control-pane.payment .e-card:hover {
-  transform: translateY(-5px);
-}
-
-.control-pane.payment .e-card .e-card-actions {
-  padding: 5px;
-  background-color: #f4f4f4;
+    transform: scale(1.05) ;
 }
 
 /* Button Text */
 .control-pane.payment .e-card .e-card-btn-txt {
-  color: white;
-  /* Text color */
-  font-size: 18px;
-  /* Font size */
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  /* Occupy the full height of the parent */
-  width: 100%;
-  /* Occupy the full width of the parent */
-  background-color: #075985;
-  /* Button background color */
-  border-radius: 5px;
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
-  transition: background-color 0.3s ease-in-out;
-  padding: 0;
-  /* Remove default padding */
-  margin: 0;
-  /* Remove default margin */
+    color: white;
+    /* Text color */
+    font-size: 18px;
+    /* Font size */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* Occupy the full height of the parent */
+    width: 100%;
+    /* Occupy the full width of the parent */
+    background-color: #fb923c;
+    /* Button background color */
+    border-radius: 5px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
+    transition: background-color 0.3s ease-in-out;
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
 }
 
 .control-pane.payment .e-card .e-card-btn-txt button {
-  width: 100%;
-  /* Occupy the full width of its container */
-  height: 100%;
-  /* Occupy the full height of its container */
-  background: transparent;
-  /* Remove default button background */
-  border: none;
-  /* Remove default button border */
-  cursor: pointer;
-  padding: 0;
-  /* Remove default button padding */
-  margin: 0;
-  /* Remove default button margin */
+    width: 100%;
+    /* Occupy the full width of its container */
+    height: 100%;
+    /* Occupy the full height of its container */
+    background: transparent;
+    /* Remove default button background */
+    border: none;
+    /* Remove default button border */
+    cursor: pointer;
+    padding: 0;
+    /* Remove default button padding */
+    margin: 0;
+    /* Remove default button margin */
 }
 
 /* Adjust this if you want the image to appear before the text */
 .control-pane.payment #cardPayButtonDiv .e-card-btn-txt,
 .control-pane.payment #UPIPayButtondiv .e-card-btn-txt,
 .control-pane.payment #cashPayButton .e-card-btn-txt {
-  background-repeat: no-repeat;
-  background-position: 20px center;
-  /* Adjust based on the space you want before the text */
-  background-size: 30px 30px;
-  /* Size of the image */
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    /* Adjust based on the space you want before the text */
+    background-size: 30px 30px;
+    /* Size of the image */
 }
 
 .payment-icon {
-  height: 65%;
-  opacity: 0.9;
-  margin-right: 10px;
-  fill: var(--light-text);
+    height: 65%;
+    opacity: 0.9;
+    margin-right: 10px;
+    fill: var(--light-text);
 }
 
 /* Cards */
 .e-card {
-  margin: 10px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 10px 0 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Dialogs */
 .e-dialog .e-header,
 #targetElement2 .e-footer-content .e-control.e-btn {
-  background-color: #075985;
-  color: white;
+    background-color: #fb923c;
+    color: white;
+    font-weight: bold;
 }
 
 .e-dialog .e-footer {
-  background-color: #f8f9fa;
+    background-color: #f8f9fa;
 }
 
 /* Cards inside Dialog */
 .e-card .e-card-header,
 .e-card .e-card-header-caption {
-  background-color: #e0f2fe;
-  /*necessary*/
-  color: #333;
-  line-height: 32px;
+    background-color: #543cfb;
+    /*necessary*/
+    color: #333;
+    line-height: 32px;
 }
 
 /* Card Buttons */
 .e-card .e-card-actions .e-card-btn-txt {
-  color: #007bff;
-  cursor: pointer;
+    color: black;
+    cursor: pointer;
 }
 
 /* Payment Confirmation Dialog */
 #paymentConfirmationDialog .e-content {
-  text-align: center;
+    text-align: center;
 }
 
 /* General Styling */
 body {
-  font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 5px;
-  position: absolute;
-  min-width: 50%;
-  height: auto;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #f4f4f4;
+    margin: 5px;
+    position: absolute;
+    min-width: 50%;
+    height: auto;
 }
 
 .control-section {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .e-card-resize-container {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 /* Additional Styling */
 #poscards {
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #cashCalculator {
-  margin-top: 20px;
-  font-family: 'graphik-medium', Helvetica, Arial, sans-serif;
+    margin-top: 20px;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 #cashCalculator table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #ffffff;
-  /* Table background color */
-  border: 1px solid #dddddd;
-  /* Table border */
-  border-radius: 5px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    /* Table background color */
+    border: 1px solid #dddddd;
+    /* Table border */
+    border-radius: 5px;
 }
 
 #cashCalculator th,
 #cashCalculator td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #dddddd;
-  /* Border bottom for rows */
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    /* Border bottom for rows */
 }
 
 #cashCalculator th {
-  background-color: #f2f2f2;
-  /* Header row background color */
-  font-weight: bold;
-  color: #333333;
-  /* Header row text color */
+    background-color: #f2f2f2;
+    /* Header row background color */
+    font-weight: bold;
+    color: #333333;
+    /* Header row text color */
 }
 
 #cashCalculator tbody tr:hover {
-  background-color: #f8f8f8;
-  /* Lighter background color on hover */
+    background-color: #f8f8f8;
+    /* Lighter background color on hover */
 }
 
 #cashCalculator input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #dddddd;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #cashCalculator td:first-child {
-  font-weight: bold;
-  color: #333333;
-  font-size: 20px;
-  /* Text color for first column */
+    font-weight: bold;
+    color: #333333;
+    font-size: 17px;
+    /* Text color for first column */
 }
 
 #cashCalculator td:last-child {
-  text-align: right;
-  font-weight: bold;
-  color: #1b8ef2;
-  font-size: 20px;
-  /* Text color for balance amount */
+    text-align: right;
+    font-weight: bold;
+    color: #1b8ef2;
+    font-size: 17px;
+    /* Text color for balance amount */
 }
 
 .e-card-btn-txt span {
-  font-size: 20px;
-  font-weight: bold;
-  color: white
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
 }
 
 .e-grid .e-input-group .e-input.e-field.e-ralign {
-  padding-right: 10px;
+    padding-right: 10px;
 }
 
 .input-container .e-input-group.e-multi-line-input.e-auto-width {
-  width: 100%;
+    width: 100%;
+    height: 35px;
 }
 
 .e-dialog .e-dlg-header {
-  font-size: 23px;
+    font-size: 20px;
 }
 
 .e-grid.e-bothlines .e-rowcell {
-  border-width: 0 0 1px 1px;
+    border-width: 0 0 1px 1px;
 }
 
-#content-area {
-  background-color: #e0f2fe;
+.header .header-table {
+    width: 35%;
+    margin-right:5%;
+}
+
+.e-grid .e-row.e-altrow {
+    background-color: #e8ebea;
+}
+td {
+    padding: 3px;
+}
+
+.input-container.custid button,
+.input-container.custid button:hover {
+    background-color: rgb(234 88 12);
+    color: white;
+    width: 28px;
 }
 
 @media screen and (max-width: 1300px) {
 
-  .input-container-title {
-    font-size: 20px;
-  }
+    .input-container-title {
+        font-size: 19px;
+    }
 
-  .header {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
+    .control-pane.amount .col-xs-6 {
+        min-width: 20%;
+        margin-bottom: 10px;
+        margin-left: 2%;
+    }
 
-  .header .input-container {
-    margin-bottom: 20px;
-    margin-top: 23px;
-  }
+    .control-pane.payment .col-xs-3 {
+        width: 25%;
+    }
 
-  .control-pane.amount .col-xs-6 {
-    min-width: 20%;
-    margin-bottom: 10px;
-    margin-left: 2%;
-  }
+    .header .header-table {
+        width: 28%;
+        margin-right:50px;
+    }
+}
 
-  .control-pane.payment .col-xs-3 {
-    width: 25%;
-    margin-bottom: 10px;
-  }
-
-  .header .input-container.billno {
-    width: 120px;
-  }
-
-  .header .input-container.phone {
-    width: 190px;
-  }
-
-  .header .input-container.custaddress{
-    width: 200px;
-  }
-
-  .header .input-container.custname {
-    width: 220px;
-  }
-
-  .header .input-container.custid {
-    width: 235px;
-  }
-
-  .header .input-container.datepicker {
-    width: 255px;
-  }
+@media screen and (max-width: 1200px) {
+    .header .input-container .e-input-group.e-control-wrapper.e-ddl {
+        width: 83% !important;
+    }
 }
