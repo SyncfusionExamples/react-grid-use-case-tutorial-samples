@@ -101,6 +101,15 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
         args.cell!.classList.add('e-neg');
       }
     }
+    if (args.cell.classList.contains('e-unboundcell')) {
+      var myWishList = getWishList();
+      if (myWishList.indexOf((args.data as StockDetails).CompanyName) > -1) {
+        var btn = args.cell.querySelector('.addmywishlist');
+        if (btn) {
+          btn.classList.add('added');
+        }
+      }
+    }
   };
 
   const OnSelect = (args: SelectEventArgs) => {
@@ -146,26 +155,32 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
     }
   };
 
-  function commandClick(args: CommandClickEventArgs) {
-    if (args.target!.querySelector('.addmywishlist')) {
-      let myWishList = [];
-      let predicates: Predicate[] = [];
-      if (window.localStorage.myStocks) {
-        let persistQuery = JSON.parse(window.localStorage.myStocks);
-        if (persistQuery.queries) {
-          for (let i = 0; i < persistQuery.queries.length; i++) {
-            if (persistQuery.queries[i].fn === 'onWhere') {
-              for (
-                let j = 0;
-                j < persistQuery.queries[i].e.predicates.length;
-                j++
-              ) {
-                myWishList.push(persistQuery.queries[i].e.predicates[j].value);
-              }
+  function getWishList() {
+    let myWishList = [];
+    if (window.localStorage.myStocks) {
+      let persistQuery = JSON.parse(window.localStorage.myStocks);
+      if (persistQuery.queries) {
+        for (let i = 0; i < persistQuery.queries.length; i++) {
+          if (persistQuery.queries[i].fn === 'onWhere') {
+            for (
+              let j = 0;
+              j < persistQuery.queries[i].e.predicates.length;
+              j++
+            ) {
+              myWishList.push(persistQuery.queries[i].e.predicates[j].value);
             }
           }
         }
       }
+    }
+    return myWishList;
+  }
+
+  function commandClick(args: CommandClickEventArgs) {
+    if (args.target!.querySelector('.addmywishlist')) {
+      args.target.classList.add('added');
+      let myWishList = getWishList();
+      let predicates: Predicate[] = [];
       if (myWishList.indexOf((args.rowData as StockDetails).CompanyName) === -1) {
         myWishList.push((args.rowData as StockDetails).CompanyName);
       }
@@ -175,17 +190,6 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
       let query: Query = new Query().where(Predicate.or(predicates));
       (props.myStockDm as any).persistQuery = query;
       props.myStockDm.setPersistData({} as any, 'myStocks', query);
-      if (myWishList.length) {
-        const myWishlistIcon = args.target.querySelector('.addmywishlist');
-        if (myWishlistIcon) {
-          myWishlistIcon.classList.remove('addmywishlist');
-          myWishlistIcon.classList.add('addedmywishlist');
-        }
-        if (args.target.classList.contains('e-primary')) {
-          args.target.classList.remove('e-primary');
-          args.target.classList.add('e-success');
-        }
-      }
     }
     if (args.target!.querySelector('.analysis')) {
       navigate('/stock_analysis', {
