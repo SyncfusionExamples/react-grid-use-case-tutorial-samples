@@ -295,7 +295,7 @@ body {
 .section1,
 .section2 {
   width: 50%;
-  padding: 20px 20px 0;
+  padding: 15px 15px 0;
 }
 
 .section1 {
@@ -403,6 +403,10 @@ text#stockchartdefault_ChartTitle {
 }
 
 /* Know More */
+
+.kb-carousel.e-carousel .e-carousel-items .e-carousel-item {
+  height: 360px;
+}
 
 .kb-carousel .e-carousel-items .e-carousel-item .product-container {
   display: flex;
