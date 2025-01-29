@@ -162,7 +162,7 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
 
   function commandClick(args: CommandClickEventArgs) {
     if (args.target!.querySelector('.addmywishlist')) {
-      args.target.classList.add('added');
+      args.target.querySelector('.addmywishlist').classList.add('added');
       let myWishList = getWishList();
       let predicates: Predicate[] = [];
       if (myWishList.indexOf((args.rowData as StockDetails).CompanyName) === -1) {
