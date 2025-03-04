@@ -300,7 +300,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
             field="Item"
             headerText="Item"
             template={itemTemplate}
-            width="170"
+            width="190"
           ></ColumnDirective>
           <ColumnDirective
             field="Total"

@@ -22,6 +22,15 @@
   height: 650px;
 }
 
+.xyz-management-content .col-md-2.sidebar .title {
+  font-size: 1.2em;
+  text-align: center;
+  color: #2a2a72;
+  font-weight: bolder;
+  margin-bottom: 30px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+} 
+
 .xyz-management-content .col-md-2.sidebar {
   width: 240px;
   background-color: #ffffff;
@@ -92,15 +101,14 @@ color: #3a3b3c;
 text-decoration: none;
 transition: background-color 0.3s ease, color 0.3s ease;
 font-weight: 500;
-margin-left: 10px;
+text-align: left;
 }
 
 .nav > li > a:focus,
 .nav > li > a.active,
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #f0f2f5;
-  color: #007bff;
+  background-color: #D9E9FF;
 }
 .policiespage a:focus,
 .policiespage a.active,
@@ -141,7 +149,6 @@ margin-left: 10px;
 .employeeinfopage .overview-header {
   padding: 20px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.2);
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
 }
 
 a.employee-popover:hover {
@@ -149,6 +156,9 @@ a.employee-popover:hover {
 }
 .tab-content {
   padding: 20px 10px 20px 10px;
+}
+.xyz-management-content .e-tab-header {
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
 }
 
 /* Tooltip */
@@ -220,6 +230,10 @@ a.employee-popover:hover {
   padding: 0 0 20px 0;
 }
 
+.employeeLeave-header span {
+  margin: 0px 5px
+}
+
 .leaveinfo {
   color: rgba(0, 0, 0, 0.87);
 }
@@ -261,7 +275,7 @@ a.employee-popover:hover {
 }
 
 td.cardcell {
-  padding: 4px 0;
+  padding: 4px 0 10px 0;
 }
 
 td.cardcell.separateline {
@@ -299,21 +313,21 @@ td.cardcell.separateline {
   color: #006400;
 }
 .statustemp.needtoapprove {
-  background-color: #ffd7cc;
+  background-color: #df2222;
   width: 120px;
 }
 
 .statustemp.closed {
-  background-color: #ccffcc;
+  background-color: #00b300;
   width: 54px;
 }
 
 .statustxt.closed {
-  color: #00cc00;
+  color: white;
 }
 
 .statustxt.needtoapprove {
-  color: #e60000;
+  color: white;
 }
 
 .statustemp {
