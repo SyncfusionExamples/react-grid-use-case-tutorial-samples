@@ -271,12 +271,14 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
                   <ColumnDirective
                     field="High"
                     format="N2"
+                    template="<span class='high'> ${High} </span ><span class='e-icons'></span>"
                     textAlign="Right"
                     width="70"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="Low"
                     format="N2"
+                    template="</span><span class='low'> ${Low} </span ><span class='e-icons'>"
                     textAlign="Right"
                     width="70"
                   ></ColumnDirective>
@@ -298,8 +300,7 @@ export default function SmartStockPicks(props: { myStockDm: DataManager }) {
                       {
                         title: 'Analysis',
                         buttonOption: {
-                          iconCss: 'analysis e-icons',
-                          cssClass: 'e-primary',
+                          iconCss: 'analysis e-icons'
                         },
                       },
                     ]}

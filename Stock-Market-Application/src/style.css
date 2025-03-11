@@ -254,14 +254,21 @@ body {
 
 .e-grid td.e-rowcell.e-pos:not(.e-editedbatchcell):not(.e-updatedtd),
 .e-grid.e-gridhover .e-row:not(.e-disable-gridhover):not(.e-editedrow):not(.e-detailrow):hover .e-rowcell.e-pos:not(.e-cellselectionbackground):not(.e-active):not(.e-updatedtd):not(.e-indentcell),
-.e-grid td.e-rowcell.e-pos .e-icons {
+.e-grid td.e-rowcell.e-pos .e-icons,
+.e-grid td.e-rowcell .e-icons.e-arrow-up {
   color: #00a653;
 }
 
 .e-grid td.e-rowcell.e-neg:not(.e-editedbatchcell):not(.e-updatedtd),
 .e-grid.e-gridhover .e-row:not(.e-disable-gridhover):not(.e-editedrow):not(.e-detailrow):hover .e-rowcell.e-neg:not(.e-cellselectionbackground):not(.e-active):not(.e-updatedtd):not(.e-indentcell),
-.e-grid td.e-rowcell.e-neg .e-icons {
+.e-grid td.e-rowcell.e-neg .e-icons,
+.e-grid td.e-rowcell .e-icons.e-arrow-down {
   color: #ff3740;
+}
+
+.e-grid td.e-rowcell .e-icons.e-arrow-up,
+.e-grid td.e-rowcell .e-icons.e-arrow-down {
+  vertical-align: middle;
 }
 
 .e-grid .e-gridheader .e-sortfilter .e-headercelldiv {
@@ -353,8 +360,15 @@ text#stockchartdefault_ChartTitle {
 
 .e-card .e-card-content {
   color: #333;
-  padding: 0 16px 16px 16px;
   max-height: 60px;
+}
+
+.row .e-card .e-card-header {
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.row .e-card .e-card-actions {
+  border-top-color: rgba(0, 0, 0, 0.15);
 }
 
 .e-card .e-card-actions {
@@ -414,6 +428,7 @@ text#stockchartdefault_ChartTitle {
   justify-content: center;
   padding: 1rem;
   margin-top: 15px;
+  gap: 20px;
 }
 
 .kb-carousel .e-carousel-items .e-carousel-item .product-container .heading {
@@ -499,7 +514,7 @@ text#stockchartdefault_ChartTitle {
 
 @media screen and (min-width: 900px) {
   .e-card-content {
-    min-height: 110px;
+    min-height: 130px;
     max-height: 120px;
   }
 }
