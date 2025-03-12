@@ -644,7 +644,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
         if ((gridInstance.current.dataSource as any).length) {
           printTable(
             (gridInstance.current),
-            "ABC SUPERMARKET",
+            "ShopNezt Supermarket",
             (document.getElementById("billNoInput") as HTMLInputElement).value,
             (document.getElementById("customerName") as HTMLInputElement).value,
             (document.getElementById("phone-input") as HTMLInputElement).value,
@@ -1140,7 +1140,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
 
     return (
       <div>
-      <div className="input-container-title">ABC SUPERMARKET POINT OF SALE (POS)</div>
+  <div className="input-container-title">ShopNezt Supermarket Point Of Sale (POS)</div>
         {/* Customer details Header element */}
         <div className="header" style={{marginTop: "15px", height: '20%'}}>
           <table className="header-table" style={{marginLeft: '40px'}}>
@@ -1332,7 +1332,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="deliverOptionDiv" style={{ background: 'linear-gradient(to right, rgb(251, 146, 60), rgb(224 212 55) 50%, rgb(251, 146, 60))'}}>
+                        <div className="e-card-btn-txt" id="deliverOptionDiv" style={{ background: 'rgba(251, 140, 0, 0.7)'}}>
                           <ButtonComponent
                             ref={buttonRef}
                             onClick={onClickToggle}
@@ -1340,7 +1340,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                             title="Toggle Delivery type"
                           >
                             <span>Delivery Type:</span> &nbsp;
-                            <span ref={deliverytypeRef} style={{ color: deliveryType === "Take Away" ? "rgb(8 168 67)" : "red" }}>
+                            <span ref={deliverytypeRef} style={{ color: deliveryType === "Take Away" ? "green" : "red" }}>
                             {deliveryType}
                             </span>
                           </ButtonComponent>
@@ -1352,7 +1352,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="cardPayButtonDiv" style={{ background: 'linear-gradient(to right, rgb(16, 18, 240), rgb(141 149 232) 50%, rgb(16, 18, 240))'}}>
+                        <div className="e-card-btn-txt" id="cardPayButtonDiv" style={{ background: 'rgb(79, 70, 229)'}}>
                           <ButtonComponent
                             id="cardPayButton"
                             title="Click to enter card payment"
@@ -1373,7 +1373,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="UPIPayButtondiv" style={{ background: 'linear-gradient(to right, #15803d, #55e189 50%, #15803d)'}}>
+                        <div className="e-card-btn-txt" id="UPIPayButtondiv" style={{ background: 'green'}}>
                           <ButtonComponent
                             id="UPIPayButton"
                             title="Click to enter UPI payment"
@@ -1394,7 +1394,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
                   <div className="col-xs-3 col-sm-3 ">
                     <div className="e-card" id="poscards">
                       <div className="e-card-actions">
-                        <div className="e-card-btn-txt" id="totalNetAmount" style={{ background: 'linear-gradient(to right, rgb(251 60 60), rgb(239 179 87) 50%, rgb(251 60 60))'}}>
+                        <div className="e-card-btn-txt" id="totalNetAmount" style={{ background: 'black'}}>
                           <ButtonComponent
                             id="cashPayButton"
                             title="Click to enter cash payment"
