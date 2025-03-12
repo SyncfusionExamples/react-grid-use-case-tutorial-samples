@@ -134,7 +134,6 @@
     margin: 0;
     padding: 5px;
     text-align: center;
-    text-transform: uppercase;
     font-size: 19px;
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: bold;
@@ -418,13 +417,12 @@
 .e-card {
     margin: 10px 10px 0 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Dialogs */
 .e-dialog .e-header,
 #targetElement2 .e-footer-content .e-control.e-btn {
-    background-color: #fb923c;
+    background-color: rgb(79, 70, 229);
     color: white;
     font-weight: bold;
 }
@@ -471,12 +469,6 @@ body {
 
 .e-card-resize-container {
     overflow: hidden;
-}
-
-/* Additional Styling */
-#poscards {
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #cashCalculator {
@@ -533,7 +525,7 @@ body {
 #cashCalculator td:last-child {
     text-align: right;
     font-weight: bold;
-    color: #1b8ef2;
+    color: #111827;
     font-size: 17px;
     /* Text color for balance amount */
 }
