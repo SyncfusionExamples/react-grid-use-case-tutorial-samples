@@ -4,72 +4,75 @@ import {
     ColumnsDirective,
     ColumnDirective,
     Inject,
-    Page, Print
+    Page, Print,
+    DataResult,
+    Column,
+    PrintEventArgs
 } from '@syncfusion/ej2-react-grids';
 import { closest, isNullOrUndefined } from '@syncfusion/ej2-base';
-import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { DateRangePickerComponent, RangeEventArgs, RenderDayCellEventArgs } from '@syncfusion/ej2-react-calendars';
 import { ButtonComponent, ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej2-react-buttons';
 import { DialogComponent } from '@syncfusion/ej2-react-popups';
-import { NumericTextBoxComponent, TextBoxComponent, RatingComponent, SliderComponent, UploaderComponent, MaskedTextBoxComponent } from '@syncfusion/ej2-react-inputs';
+import { NumericTextBoxComponent, TextBoxComponent, RatingComponent, SliderComponent, UploaderComponent, MaskedTextBoxComponent, SliderChangeEventArgs, FormValidatorModel } from '@syncfusion/ej2-react-inputs';
 import { FormValidator } from '@syncfusion/ej2-react-inputs';
-import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
-import { TreeViewComponent, CarouselComponent } from '@syncfusion/ej2-react-navigations';
+import { ChangeEventArgs, DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
+import { TreeViewComponent, CarouselComponent, SlideChangingEventArgs, FieldsSettingsModel } from '@syncfusion/ej2-react-navigations';
 
 import { MapsComponent, LayersDirective, LayerDirective, MarkersDirective, MarkerDirective, Marker, MapsTooltip, DataLabel } from '@syncfusion/ej2-react-maps';
 import * as USA from './usa.json';
 
 import { DataManager, Query, Predicate } from '@syncfusion/ej2-data';
-import { data } from './DataCreation';
-import './HotelBookApp.css';
+import { CheckInOut, data, Hotel, Location } from './HotelData';
+import './HotelBook.css';
 
-function HotelBookApp() {
+function HotelBook() {
     // Hotel grid which render the hotel list using grid component
-    let hotelGrid;
-    let filterDataPredicate;
-    const hotelData = React.useRef(data);
-    const [showHotels, setShowHotels] = React.useState(true);
-    const [hotelGridData, setHotelGridData] = React.useState([]);
+    let hotelGrid: GridComponent;
+    let filterDataPredicate: Predicate;
+    const hotelData: React.MutableRefObject<Hotel[]> = React.useRef(data);
+    const [showHotels, setShowHotels]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = React.useState(true);
+    const [hotelGridData, setHotelGridData]: [Hotel[], React.Dispatch<React.SetStateAction<Hotel[]>>] = React.useState([]);
 
     // Menu ref property for opening and closing the menu when clicking menu button
-    let menu = React.useRef(null);
+    let menu: React.MutableRefObject<HTMLElement> = React.useRef(null);
 
     // Check in and check out information for rendering the hotel list according to user specified date
-    let checkInOutDate = React.useRef(null);
-    let defaultCheckInDate = new Date();
+    let checkInOutDate: React.MutableRefObject<DateRangePickerComponent> = React.useRef(null);
+    let defaultCheckInDate: Date = new Date();
     defaultCheckInDate = new Date(
         defaultCheckInDate.getFullYear(),
         defaultCheckInDate.getMonth(),
         defaultCheckInDate.getDate()
     );
-    const defaultCheckOutDate = new Date(defaultCheckInDate);
+    const defaultCheckOutDate: Date = new Date(defaultCheckInDate);
     defaultCheckOutDate.setDate(defaultCheckInDate.getDate() + 2);
-    const checkInDate = React.useRef(defaultCheckInDate);
-    const checkOutDate = React.useRef(defaultCheckOutDate);
+    const checkInDate: React.MutableRefObject<Date> = React.useRef(defaultCheckInDate);
+    const checkOutDate: React.MutableRefObject<Date> = React.useRef(defaultCheckOutDate);
 
     // Price range information for rendering the hotel list according to user expecting price
-    let priceRange = React.useRef(null);
-    let minPriceText = React.useRef(null);
-    let maxPriceText = React.useRef(null);
-    const defaultMinPrice = 50;
-    const defaultMaxPrice = 1000;
+    let priceRange: React.MutableRefObject<SliderComponent> = React.useRef(null);
+    let minPriceText: React.MutableRefObject<HTMLElement> = React.useRef(null);
+    let maxPriceText: React.MutableRefObject<HTMLElement> = React.useRef(null);
+    const defaultMinPrice: number = 50;
+    const defaultMaxPrice: number = 1000;
 
     // Map information for hotel location
-    let map = React.useRef(null);
-    const [showMapDialog, setShowMapDialog] = React.useState(false);
-    const [mapDataSource, setMapDataSource] = React.useState([]);
+    let map: React.MutableRefObject<MapsComponent> = React.useRef(null);
+    const [showMapDialog, setShowMapDialog]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = React.useState(false);
+    const [mapDataSource, setMapDataSource]: [Location[], React.Dispatch<React.SetStateAction<Location[]>>] = React.useState([]);
 
     // Sorting the hotels according to user specific choice
-    let sortOptionContainer = React.useRef(null);
-    const sortOption = [
+    let sortOptionContainer: React.MutableRefObject<DropDownListComponent> = React.useRef(null);
+    const sortOption: KeyData[] = [
         { key: 1, value: 'Top rating' },
         { key: 2, value: 'Price (low to high)' },
         { key: 3, value: 'Price (high to low)' },
     ];
-    let sortOptionValue = React.useRef(1);
+    let sortOptionValue: React.MutableRefObject<number> = React.useRef(1);
 
     // Hotel amenities infromation for rendering the hotel list according to user requirement that present in the hotel
-    let hotelAmenities = React.useRef(null);
-    let hotelAmenitiesData = [
+    let hotelAmenities: React.MutableRefObject<TreeViewComponent> = React.useRef(null);
+    let hotelAmenitiesData: KeyData[] = [
         { id: 1001, name: 'Amenities', hasChild: true, expanded: true, fieldValue: 'HotelFacility' },
         { id: 1002, pid: 1001, name: 'Parking' },
         { id: 1003, pid: 1001, name: 'Pet allowed' },
@@ -77,11 +80,11 @@ function HotelBookApp() {
         { id: 1005, pid: 1001, name: 'Restaurant' },
         { id: 1006, pid: 1001, name: 'Spa' },
     ];
-    const hotelAmenitiesField = { dataSource: hotelAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+    const hotelAmenitiesField: FieldsSettingsModel = { dataSource: hotelAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 
     // Room amenities infromation for rendering the hotel list according to user requirement that present in the room
-    let roomAmenities = React.useRef(null);
-    let roomAmenitiesData = [
+    let roomAmenities: React.MutableRefObject<TreeViewComponent> = React.useRef(null);
+    let roomAmenitiesData: KeyData[] = [
         { id: 2001, name: 'Room Amenities', hasChild: true, expanded: true, fieldValue: 'RoomFacility' },
         { id: 2002, pid: 2001, name: 'Television' },
         { id: 2003, pid: 2001, name: 'Projector' },
@@ -92,39 +95,39 @@ function HotelBookApp() {
         { id: 2008, pid: 2001, name: 'Shower' },
 
     ];
-    const roomAmenitiesField = { dataSource: roomAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+    const roomAmenitiesField: FieldsSettingsModel = { dataSource: roomAmenitiesData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 
     // Hotel images for user booking room
-    let backgroundBlurImage = React.useRef(null);
-    const [hotelImages, setHotelImages] = React.useState([]);
+    let backgroundBlurImage: React.MutableRefObject<HTMLImageElement> = React.useRef(null);
+    const [hotelImages, setHotelImages]: [Record<string, string | number>[], React.Dispatch<React.SetStateAction<Record<string, string | number>[]>>] = React.useState([]);
 
     // Obtaining user information via input field with validator while booking room in hotel
-    const [selectedRoom, setSelectedRoom] = React.useState({});
-    let formValidator = React.useRef(null);
-    let firstName = React.useRef(null);
-    let lastName = React.useRef(null);
-    let email = React.useRef(null);
-    let phno = React.useRef(null);
-    let address = React.useRef(null);
-    let city = React.useRef(null);
-    let code = React.useRef(null);
-    let country = React.useRef(null);
-    let person = React.useRef(null);
-    let extraBed = React.useRef(null);
+    const [selectedRoom, setSelectedRoom]: [Hotel, React.Dispatch<React.SetStateAction<Hotel>>] = React.useState({} as Hotel);
+    let formValidator: React.MutableRefObject<FormValidator> = React.useRef(null);
+    let firstName: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let lastName: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let email: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let phno: React.MutableRefObject<MaskedTextBoxComponent> = React.useRef(null);
+    let address: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let city: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let code: React.MutableRefObject<TextBoxComponent> = React.useRef(null);
+    let country: React.MutableRefObject<DropDownListComponent> = React.useRef(null);
+    let person: React.MutableRefObject<NumericTextBoxComponent> = React.useRef(null);
+    let extraBed: React.MutableRefObject<NumericTextBoxComponent> = React.useRef(null);
     let lineThroughPriceText = React.useRef(null);
     let taxedPriceText = React.useRef(null);
     let priceStatementText = React.useRef(null);
-    let priceCollectionData = React.useRef({});
+    let priceCollectionData: React.MutableRefObject<PriceDetails> = React.useRef({} as PriceDetails);
 
     // Printing the booked room infromation
-    let printInfo = React.useRef({});
-    let personalInfoGrid = React.useRef(null);
-    let hotelInfoGrid = React.useRef(null);
-    const [showPrintInfo, setShowPrintInfo] = React.useState(false);
+    let printInfo: React.MutableRefObject<BookingDetails> = React.useRef({} as BookingDetails);
+    let personalInfoGrid: React.MutableRefObject<GridComponent> = React.useRef(null);
+    let hotelInfoGrid: React.MutableRefObject<GridComponent> = React.useRef(null);
+    const [showPrintInfo, setShowPrintInfo]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = React.useState(false);
 
     // This method calls for checking the selected sorting option for generating hotel list
-    const checkSortOptions = (query) => {
-        const value = sortOptionContainer.current.value;
+    const checkSortOptions = (query: Query): void => {
+        const value: number = sortOptionContainer.current.value as number;
         switch (value) {
             case 1:
                 query.sortBy('Rating', 'descending');
@@ -139,22 +142,22 @@ function HotelBookApp() {
     }
 
     // This method calls for checking the selected hotel and room amenities options for generating hotel list
-    const checkAmenities = (ref) => {
-        const checkedNodes = ref.checkedNodes;
+    const checkAmenities = (ref: TreeViewComponent): void => {
+        const checkedNodes: string[] = ref.checkedNodes;
         for (let i = 0; i < checkedNodes.length; i++) {
-            const childInfo = ref.treeData.find((data) => {
+            const childInfo: KeyData = (ref.fields.dataSource as { [key: string]: Object; }[]).find((data) => {
                 return data.id.toString() === checkedNodes[i] && data.pid;
             });
             if (childInfo) {
-                const parentInfo = ref.treeData.find(data => data.id === childInfo.pid);
-                filterDataPredicate = filterDataPredicate.and(parentInfo.fieldValue, 'contains', childInfo.name);
+                const parentInfo: KeyData = (ref.fields.dataSource as { [key: string]: Object; }[]).find(data => data.id === childInfo.pid);
+                filterDataPredicate = filterDataPredicate.and(parentInfo.fieldValue as string, 'contains', childInfo.name as string);
             }
         }
     }
 
     // This method calls for checking both user expecting price and amenities for generating hotel list
-    const checkPriceRangeAndAmenities = (query) => {
-        const value = priceRange.current.value;
+    const checkPriceRangeAndAmenities = (query: Query): void => {
+        const value: number[] = priceRange.current.value as number[];
         filterDataPredicate = new Predicate('Price', 'greaterthanorequal', value[0]);
         filterDataPredicate = filterDataPredicate.and('Price', 'lessthanorequal', value[1]);
         checkAmenities(hotelAmenities.current);
@@ -163,32 +166,32 @@ function HotelBookApp() {
     }
 
     // This method will generate and assign data for hotel grid
-    const generateHotelData = () => {
+    const generateHotelData = (): void => {
         // Generating query here
-        let query = new Query();
+        let query: Query = new Query();
         checkPriceRangeAndAmenities(query);
         checkSortOptions(query);
 
         // Generating data according to query
         new DataManager(hotelData.current).executeQuery(query).then((e) => {
             // Assigning data to hotel grid
-            setHotelGridData(e.result);
+            setHotelGridData((e as unknown as DataResult).result as Hotel[]);
         });
     }
 
     // This method calls for generating hotel list when hotel grid is created
-    const hotelGridCreated = () => {
+    const hotelGridCreated = (): void => {
         generateHotelData();
     }
 
     // This method calls for generating hotel list when sort options is changed
-    const sortOptionsChange = (args) => {
-        sortOptionValue.current = args.value;
+    const sortOptionsChange = (args: ChangeEventArgs): void => {
+        sortOptionValue.current = args.value as number;
         generateHotelData();
     }
 
     // This method calls for generating hotel list when check in and check out date is changed
-    const checkInOutDateChange = (args) => {
+    const checkInOutDateChange = (args: RangeEventArgs): void => {
         if (args.startDate && args.endDate) {
             checkInDate.current = args.startDate;
             checkOutDate.current = args.endDate;
@@ -197,23 +200,24 @@ function HotelBookApp() {
     }
 
     // This method calls for generating hotel list when price range is changed
-    const priceRangeChanged = (args) => {
-        minPriceText.current.innerText = args.value[0];
-        maxPriceText.current.innerText = args.value[1];
+    const priceRangeChanged = (args: SliderChangeEventArgs): void => {
+        const value: number[] = args.value as number[];
+        minPriceText.current.innerText = value[0].toString();
+        maxPriceText.current.innerText = value[1].toString();
         generateHotelData();
     }
 
     // This method calls for generating hotel list when amenities is changed 
-    const amenitiesNodeChecked = (args) => {
+    const amenitiesNodeChecked = (): void => {
         generateHotelData();
     }
 
     // This method calls for showing hotel location in map
-    const showMap = (args) => {
-        const rowIndex = closest(args.target, 'tr').rowIndex;
-        const rowObject = hotelGrid.currentViewData[rowIndex];
+    const showMap = (args: React.MouseEvent<HTMLButtonElement>): void => {
+        const rowIndex: number = (closest(args.target as Element, 'tr') as HTMLTableRowElement).rowIndex;
+        const rowObject: Hotel = hotelGrid.currentViewData[rowIndex] as Hotel;
         setMapDataSource([rowObject.Location]);
-        const mapInst = map.current;
+        const mapInst: MapsComponent = map.current;
         setTimeout(() => {
             mapInst.refresh();
         }, 10);
@@ -221,18 +225,18 @@ function HotelBookApp() {
     }
 
     // This method calls for closing the map
-    const closeMap = () => {
+    const closeMap = (): void => {
         setShowMapDialog(false);
     }
 
     // This method calls for validating the input field in a custom way
-    const customValidation = (args) => {
-        const argsLength = args.element.ej2_instances[0].value.length;
+    const customValidation = (args: { [key: string]: string }): boolean => {
+        const argsLength: number = ((args.element as unknown as { ej2_instances: object[]; }).ej2_instances[0] as MaskedTextBoxComponent).value.length;
         return argsLength >= 10;
     };
 
     // This method calls for validating the first and last name input field in a custom way
-    const nameValidation = (args) => {
+    const nameValidation = (args: { [key: string]: string }): boolean => {
         // Regex to allow only letters and spaces
         if (/^[A-Za-z\s]*$/.test(args.value)) {
             return true;
@@ -241,14 +245,14 @@ function HotelBookApp() {
     };
 
     // This method calls for validating the proof input field in a custom way
-    const proofValidation = (args) => {
-        return args.element.ej2_instances[0].filesData.length ? true : false;
+    const proofValidation = (args: { [key: string]: string }): boolean => {
+        return ((args.element as unknown as { ej2_instances: object[]; }).ej2_instances[0] as UploaderComponent).filesData.length ? true : false;
     };
 
     // This method calls for rendering the room price with discount and tax
-    const renderRoomPrice = (selectedRoom) => {
-        const price = selectedRoom.Price + (extraBed.current.value * selectedRoom.ExtraBedCost);
-        const priceCollection = calculatePrice(price, selectedRoom.DiscountPercentage, selectedRoom.TaxPercentage);
+    const renderRoomPrice = (selectedRoom: Hotel): void => {
+        const price: number = selectedRoom.Price + (extraBed.current.value * selectedRoom.ExtraBedCost);
+        const priceCollection: PriceDetails = calculatePrice(price, selectedRoom.DiscountPercentage, selectedRoom.TaxPercentage);
         priceCollectionData.current = priceCollection;
         lineThroughPriceText.current.innerText = '$' + price.toFixed(2);
         taxedPriceText.current.innerText = '$' + priceCollection.TaxedPrice;
@@ -256,9 +260,9 @@ function HotelBookApp() {
     }
 
     // This method calls for navigate the user to booking page and rendering the input field with form validator
-    const goToRoomBookingPage = (args) => {
-        const rowIndex = closest(args.target, 'tr').rowIndex;
-        const rowObject = hotelGrid.currentViewData[rowIndex];
+    const goToRoomBookingPage = (args: React.MouseEvent<HTMLButtonElement>): void => {
+        const rowIndex: number = (closest(args.target as Element, 'tr') as HTMLTableRowElement).rowIndex;
+        const rowObject: Hotel = hotelGrid.currentViewData[rowIndex] as Hotel;
         setSelectedRoom(rowObject);
         setHotelImages([
             { ID: 1, Name: rowObject.HotelImgID, imageName: rowObject.HotelImgID },
@@ -266,7 +270,7 @@ function HotelBookApp() {
         ]);
         setShowHotels(false);
         setTimeout(() => {
-            const options = {
+            const options: FormValidatorModel = {
                 rules: {
                     firstname: {
                         required: [nameValidation, '* Please enter your first name (only letters accept)'],
@@ -309,24 +313,24 @@ function HotelBookApp() {
     }
 
     // This method calls for revisting the hotel list page
-    const backToHotels = () => {
+    const backToHotels = (): void => {
         checkInDate.current = defaultCheckInDate;
         checkOutDate.current = defaultCheckOutDate;
         setShowHotels(true);
     }
 
-    const getDate = (date) => {
+    const getDate = (date: Date): Date => {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
     // This method calls for checking the room whether it is available or not for the user choosed check in and check out date
-    const checkRoomAvailable = (checkInOut) => {
-        let isRoomAvailable = true;
-        const startDate = getDate(checkInDate.current);
-        const endDate = getDate(checkOutDate.current);
+    const checkRoomAvailable = (checkInOut: CheckInOut[]): boolean => {
+        let isRoomAvailable: boolean = true;
+        const startDate: Date = getDate(checkInDate.current);
+        const endDate: Date = getDate(checkOutDate.current);
         for (let i = 0; i < checkInOut.length; i++) {
-            const checkIn = getDate(checkInOut[i].CheckIn);
-            const checkOut = getDate(checkInOut[i].CheckOut);
+            const checkIn: Date = getDate(checkInOut[i].CheckIn);
+            const checkOut: Date = getDate(checkInOut[i].CheckOut);
             if ((checkIn <= startDate && startDate <= checkOut) || (checkIn <= endDate && endDate <= checkOut)) {
                 isRoomAvailable = false;
                 break;
@@ -336,26 +340,25 @@ function HotelBookApp() {
     }
 
     // This method calculate and return the price with discount and tax
-    const calculatePrice = (price, discount, tax) => {
-        const discountAmount = price * (discount * 0.01);
-        const discountedPrice = price - discountAmount;
-        const taxAmount = discountedPrice * (tax * 0.01);
-        const taxedPrice = discountedPrice + taxAmount;
+    const calculatePrice = (price: number, discount: number, tax: number): PriceDetails => {
+        const discountAmount: number = price * (discount * 0.01);
+        const discountedPrice: number = price - discountAmount;
+        const taxAmount: number = discountedPrice * (tax * 0.01);
+        const taxedPrice: number = discountedPrice + taxAmount;
         return { OriginalCost: price.toFixed(2), DiscountAmount: discountAmount.toFixed(2), DiscountedPrice: discountedPrice.toFixed(2), TaxAmount: taxAmount.toFixed(2), TaxedPrice: taxedPrice.toFixed(2) };
     }
 
     // This method calls for rendering hotel grid row in a custom way using rowTemplate feature
-    const renderHotelGridRow = (props) => {
-        const src = '/images/' + props.RoomImgID + '.jpg';
-        const hotelFacilityList = props.HotelFacility.split(', ');
-        const roomFacilityList = props.RoomFacility.split(', ');
-        const extrasList = props.Extras.split(', ');
-        const isRoomAvailable = checkRoomAvailable(props.CheckInOut);
-        const priceCollection = calculatePrice(props.Price, props.DiscountPercentage, props.TaxPercentage);
+    const renderHotelGridRow = (props: Hotel): React.JSX.Element => {
+        const src: string = './images/' + props.RoomImgID + '.jpg';
+        const hotelFacilityList: string[] = props.HotelFacility.split(', ');
+        const roomFacilityList: string[] = props.RoomFacility.split(', ');
+        const extrasList: string[] = props.Extras.split(', ');
+        const isRoomAvailable: boolean = checkRoomAvailable(props.CheckInOut);
+        const priceCollection: PriceDetails = calculatePrice(props.Price, props.DiscountPercentage, props.TaxPercentage);
         return (
             <tr className='templateRow primary-text-style'>
                 <td className='e-rowtemplate-border-applier'>
-                    {!isRoomAvailable && <div className='e-room-not-available-cover'></div>}
                     <div className='e-flex-layout e-img-info-container'>
                         <div className='e-img-container'>
                             <img src={src} alt={props.RoomImgID} className='e-img' />
@@ -367,16 +370,16 @@ function HotelBookApp() {
                                         <div>
                                             <span className='e-semi-bold-header-text'>{props.HotelName}</span>
                                         </div>
-                                        <div className='normal-text-color'>
-                                            <span className='e-address-text-styler'>{props.Address}</span>
-                                            <span className='e-map-text-spacer'><span className='e-map-text-styler e-semi-title-header-text' onClick={showMap}><img src="./images/map.png" className="e-map-img" alt="Map" title='Show on map' /></span></span>
+                                        <div className='normal-text-color e-flex-layout e-margin-top-10'>
+                                            <span className='e-map-text-styler e-semi-title-header-text' onClick={showMap}><img src="./images/map.png" className="e-map-img" alt="Map" title='Show on map' /></span>
+                                            <span className='e-address-text-styler e-map-text-spacer'>{props.Address}</span>
                                         </div>
                                     </div>
                                     <div className='e-info-flex-width-applier'>
                                         <div>
                                             <span className='e-semi-title-header-text'>Rating:</span>
                                         </div>
-                                        <div className='e-flex-layout e-rating-reviews-container'>
+                                        <div className='e-flex-layout e-rating-reviews-container e-margin-top-10'>
                                             <div>
                                                 <RatingComponent value={props.Rating} readOnly={true} cssClass='e-custom-rating e-custom-rating-color'></RatingComponent>
                                             </div>
@@ -453,7 +456,7 @@ function HotelBookApp() {
                             </div>
                         </div>
                         <div className='e-book-spacer'></div>
-                        <div className='e-book-button'>
+                        <div className='e-book-button e-padding-right'>
                             <ButtonComponent cssClass='e-primary e-outline' onClick={goToRoomBookingPage} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
                         </div>
                     </div>
@@ -463,10 +466,10 @@ function HotelBookApp() {
     };
 
     // This method calls for rendering the empty record template in the hotel grid when there is no hotel is available according to user specification
-    const renderHotelGridEmptyRecordRow = () => {
+    const renderHotelGridEmptyRecordRow = (): React.JSX.Element => {
         return (
             <div className='emptyRecordTemplate'>
-                <img src="/images/emptyRecordTemplate.svg" className="e-emptyRecord" alt="No record" />
+                <img src="./images/emptyRecordTemplate.svg" className="e-emptyRecord" alt="No record" />
                 <div>
                     There is no hotel available to display at the moment.
                 </div>
@@ -475,22 +478,22 @@ function HotelBookApp() {
     }
 
     // This method calls for rendering the hotel grid header in custom way using headerTemplate feature
-    const renderHotelGridHeader = (args) => {
+    const renderHotelGridHeader = (args: Column): React.JSX.Element => {
         return (
             <div className='primary-text-style'>
                 <div className='e-header-text'>{args.headerText}</div>
                 <div className='e-operation-container'>
-                    <DropDownListComponent ref={dd => sortOptionContainer.current = dd} width={160} dataSource={sortOption} fields={{ text: 'value', value: 'key' }} value={sortOptionValue.current} change={sortOptionsChange} />
+                    <DropDownListComponent ref={(dd: DropDownListComponent) => sortOptionContainer.current = dd} width={160} dataSource={sortOption} fields={{ text: 'value', value: 'key' }} value={sortOptionValue.current} change={sortOptionsChange} />
                 </div>
             </div>
         );
     }
 
     // Memoized the hotel grid to prevent unnecessary rerenders
-    const memoizedHotelGrid = React.useMemo(() => {
+    const memoizedHotelGrid: React.JSX.Element = React.useMemo((): React.JSX.Element => {
         return (
             <GridComponent
-                ref={g => hotelGrid = g}
+                ref={(g: GridComponent) => hotelGrid = g}
                 dataSource={hotelGridData}
                 height={'100%'}
                 allowPaging={true}
@@ -499,22 +502,22 @@ function HotelBookApp() {
                 emptyRecordTemplate={renderHotelGridEmptyRecordRow}
             >
                 <ColumnsDirective>
-                    <ColumnDirective headerText='Hotel Information' headerTextAlign='center' headerTemplate={renderHotelGridHeader} />
+                    <ColumnDirective headerText='Hotel Information' headerTextAlign='Center' headerTemplate={renderHotelGridHeader} />
                 </ColumnsDirective>
                 <Inject services={[Page]} />
             </GridComponent>
         );
     }, [hotelGridData]);
 
-    const renderDayCell = (args) => {
+    const renderDayCell = (args: RenderDayCellEventArgs): void => {
         if (!isNullOrUndefined(args.isOutOfRange) && !args.isOutOfRange) {
-            const bookedDate = [];
-            hotelGridData.map((data) => {
-                data.CheckInOut.map((date) => {
+            const bookedDate: CheckInOut[] = [];
+            hotelGridData.map((data: Hotel) => {
+                data.CheckInOut.map((date: CheckInOut) => {
                     bookedDate.push(date);
                 });
             });
-            const roomBooked = bookedDate.find(({ CheckIn, CheckOut }) => {
+            const roomBooked = bookedDate.find(({ CheckIn, CheckOut }: CheckInOut) => {
                 CheckIn.setHours(0, 0, 0, 0);
                 CheckOut.setHours(0, 0, 0, 0);
                 if (args.date >= CheckIn && args.date <= CheckOut) {
@@ -531,32 +534,32 @@ function HotelBookApp() {
     }
 
     // Memoized the check in, check out data picker to prevent unnecessary rerenders
-    const memoizedCheckInOutDate = React.useMemo(() => {
+    const memoizedCheckInOutDate: React.JSX.Element = React.useMemo((): React.JSX.Element => {
         return (
-            <DateRangePickerComponent ref={dr => checkInOutDate.current = dr} min={defaultCheckInDate} startDate={defaultCheckInDate} endDate={defaultCheckOutDate} change={checkInOutDateChange}
+            <DateRangePickerComponent ref={(dr: DateRangePickerComponent) => checkInOutDate.current = dr} min={defaultCheckInDate} startDate={defaultCheckInDate} endDate={defaultCheckOutDate} change={checkInOutDateChange}
                 renderDayCell={renderDayCell}
             />
         );
     }, [hotelGridData]);
 
     // This method calls for rendering the hotel images in a custom way in carousel using itemTemplate feature
-    const hotelImagesItemTemplate = (props) => {
-        return (<figure className="e-carousel-img-container"><img src={"/images/" + props.imageName + ".jpg"} alt={props.imageName} /></figure>);
+    const hotelImagesItemTemplate = (props: Record<string, string | number>): React.JSX.Element => {
+        return (<figure className="e-carousel-img-container"><img src={"./images/" + props.imageName + ".jpg"} alt={props.imageName as string} /></figure>);
     }
 
     // This method calls for rendering the room price when extra bed value change
-    const extraBedChange = (args) => {
+    const extraBedChange = (): void => {
         renderRoomPrice(selectedRoom);
     }
 
-    const getRandomNumber = (min, max) => {
+    const getRandomNumber = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     // The method calls for storing the user entered infromation for booking the room and display the receipt dialog to user
-    const bookRoom = (args) => {
+    const bookRoom = (): void => {
         if (formValidator.current.validate()) {
-            const dataIndex = hotelData.current.findIndex(data => data.HotelID === selectedRoom.HotelID && data.RoomID === selectedRoom.RoomID);
+            const dataIndex: number = hotelData.current.findIndex(data => data.HotelID === selectedRoom.HotelID && data.RoomID === selectedRoom.RoomID);
             hotelData.current[dataIndex].CheckInOut.push({ CheckIn: checkInDate.current, CheckOut: checkOutDate.current });
             checkInDate.current = defaultCheckInDate;
             checkOutDate.current = defaultCheckOutDate;
@@ -569,7 +572,7 @@ function HotelBookApp() {
                 Address: address.current.value,
                 City: city.current.value,
                 Code: code.current.value,
-                Country: country.current.value,
+                Country: country.current.value as string,
                 Person: person.current.value,
                 ExtraBed: extraBed.current.value,
                 HotelData: hotelData.current[dataIndex],
@@ -585,7 +588,7 @@ function HotelBookApp() {
     }
 
     // This method calls for opening the menu
-    const menuClick = (args) => {
+    const menuClick = (): void => {
         menu.current.style.display = 'block';
         setTimeout(() => {
             priceRange.current.refresh();
@@ -593,36 +596,36 @@ function HotelBookApp() {
     }
 
     // This method calls for closing the menu
-    const menuCloseClick = (args) => {
+    const menuCloseClick = (): void => {
         menu.current.style.display = 'none';
     }
 
     // This method calls for closing the print information dialog
-    const closePrintInfo = (args) => {
+    const closePrintInfo = (): void => {
         setShowPrintInfo(false);
     }
 
     // This method calls for printing the receipt using print method of grid 
-    const printInformation = (args) => {
+    const printInformation = (): void => {
         personalInfoGrid.current.print();
     }
 
     // This method calls for printing the receipt in a custom way
-    const beforePrint = (args) => {
+    const beforePrint = (args: PrintEventArgs): void => {
 
         args.cancel = true;
 
         // formating the booked date
-        const bookedDate = printInfo.current.BookedDate;
-        const formattedDate = bookedDate.toLocaleDateString();
-        const formattedTime = bookedDate.toLocaleTimeString([], {
+        const bookedDate: Date = printInfo.current.BookedDate;
+        const formattedDate: string = bookedDate.toLocaleDateString();
+        const formattedTime: string = bookedDate.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
         });
-        const formattedDateTime = formattedDate + " " + formattedTime;
+        const formattedDateTime: string = formattedDate + " " + formattedTime;
 
         // Creating the print window
-        let printWindow = window.open(
+        let printWindow: Window = window.open(
             "",
             "_blank",
             "width=" + window.outerWidth + ",height=" + window.outerHeight
@@ -788,9 +791,9 @@ function HotelBookApp() {
         }
     }
 
-    const onSlideChanging = (args) => {
-        backgroundBlurImage.current.src = "/images/" + hotelImages[args.nextIndex].imageName + ".jpg";
-        backgroundBlurImage.current.alt = hotelImages[args.nextIndex].imageName;
+    const onSlideChanging = (args: SlideChangingEventArgs): void => {
+        backgroundBlurImage.current.src = "./images/" + hotelImages[args.nextIndex].imageName + ".jpg";
+        backgroundBlurImage.current.alt = hotelImages[args.nextIndex].imageName as string;
     }
 
     return (
@@ -834,16 +837,17 @@ function HotelBookApp() {
                                     Price Range: $<span ref={e => minPriceText.current = e}>{defaultMinPrice}</span> to $<span ref={e => maxPriceText.current = e}>{defaultMaxPrice}</span>
                                 </div>
                                 <div className='e-slidercomponent-container'>
-                                    <SliderComponent ref={p => priceRange.current = p} type='Range' value={[defaultMinPrice, defaultMaxPrice]} min={defaultMinPrice} max={defaultMaxPrice} tooltip={{ placement: 'After', isVisible: true, showOn: 'Focus' }} changed={priceRangeChanged} />
+                                    <SliderComponent ref={(p: SliderComponent) => priceRange.current = p} type='Range' value={[defaultMinPrice, defaultMaxPrice]} min={defaultMinPrice} max={defaultMaxPrice} tooltip={{ placement: 'After', isVisible: true, format: 'C2' }}
+                                        ticks={{ placement: 'After', format: 'C2', largeStep: 400, smallStep: 100, showSmallTicks: true }} changed={priceRangeChanged} />
                                 </div>
                             </div>
                             <div className='e-line-separator'></div>
                             <div className='e-side-bar-treeview-separator'>
-                                <TreeViewComponent ref={a => hotelAmenities.current = a} fields={hotelAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
+                                <TreeViewComponent ref={(a: TreeViewComponent) => hotelAmenities.current = a} id="hotelamenities" fields={hotelAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
                             </div>
                             <div className='e-line-separator'></div>
                             <div className='e-side-bar-treeview-separator'>
-                                <TreeViewComponent ref={r => roomAmenities.current = r} fields={roomAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
+                                <TreeViewComponent ref={(r: TreeViewComponent) => roomAmenities.current = r} id="roomamenities" fields={roomAmenitiesField} showCheckBox={true} nodeChecked={amenitiesNodeChecked} />
                             </div>
                         </div>
                     </div>
@@ -852,7 +856,7 @@ function HotelBookApp() {
                             {memoizedHotelGrid}
                             <DialogComponent width='95%' height='95%' visible={showMapDialog} close={closeMap} isModal={true} target='.e-grid' header="Location" showCloseIcon={true} cssClass='e-dialog-map'>
                                 <div className="dialogContent">
-                                    <MapsComponent ref={m => map.current = m} background='#ffffff' mapsArea={{ background: '#ffffff' }}>
+                                    <MapsComponent ref={(m: MapsComponent) => map.current = m} background='#ffffff' mapsArea={{ background: '#ffffff' }} height='100%'>
                                         <Inject services={[Marker, MapsTooltip, DataLabel]} />
                                         <LayersDirective>
                                             <LayerDirective shapeData={USA} shapeSettings={{ fill: '#10b981' }} dataLabelSettings={{ visible: true, labelPath: 'iso_3166_2', smartLabelMode: 'Hide', textStyle: { color: 'black' } }}>
@@ -880,7 +884,7 @@ function HotelBookApp() {
                 <div className='e-details-container'>
                     <div className='e-back-button-carousel-container e-carousel-image-holder-height'>
                         <div className='e-background-blur-image-container e-carousel-image-holder-height'>
-                            <img ref={e => backgroundBlurImage.current = e} className='e-background-blur-image' src={"./images/" + hotelImages[0].imageName + ".jpg"} alt={hotelImages[0].imageName} />
+                            <img ref={e => backgroundBlurImage.current = e} className='e-background-blur-image' src={"./images/" + hotelImages[0].imageName + ".jpg"} alt={hotelImages[0].imageName as string} />
                         </div>
                         <div className='e-back-button-container'>
                             <span className='e-back-button' onClick={backToHotels}></span>
@@ -897,21 +901,21 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Personal information</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={f => firstName.current = f} width='75%' placeholder="First name *" name='firstname' floatLabelType="Always" type="text" data-msg-containerid="errorForFirstName" />
+                                            <TextBoxComponent ref={(f: TextBoxComponent) => firstName.current = f} width='95%' placeholder="First name *" name='firstname' floatLabelType="Always" type="text" data-msg-containerid="errorForFirstName" />
                                             <div id="errorForFirstName" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={l => lastName.current = l} width='75%' placeholder="Last name *" name='lastname' floatLabelType="Always" type="text" data-msg-containerid="errorForLastName" />
+                                            <TextBoxComponent ref={(l: TextBoxComponent) => lastName.current = l} width='95%' placeholder="Last name *" name='lastname' floatLabelType="Always" type="text" data-msg-containerid="errorForLastName" />
                                             <div id="errorForLastName" />
                                         </div>
                                     </div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={e => email.current = e} width='75%' placeholder="Email *" name='email' floatLabelType="Always" type='email' data-msg-containerid="errorForEmail" />
+                                            <TextBoxComponent ref={(e: TextBoxComponent) => email.current = e} width='95%' placeholder="Email *" name='email' floatLabelType="Always" type='email' data-msg-containerid="errorForEmail" />
                                             <div id="errorForEmail" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <MaskedTextBoxComponent ref={p => phno.current = p} width='75%' mask="(999) 999-9999" placeholder="Phone number *" name='phno' floatLabelType='Always' />
+                                            <MaskedTextBoxComponent ref={(p: MaskedTextBoxComponent) => phno.current = p} width='95%' mask="(999) 999-9999" placeholder="Phone number *" name='phno' floatLabelType='Always' />
                                             <label className='e-error' htmlFor='phno' />
                                         </div>
                                     </div>
@@ -921,21 +925,21 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Current address</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={a => address.current = a} width='75%' placeholder="Address *" name='address' floatLabelType="Always" type="text" data-msg-containerid="errorForAddress" />
+                                            <TextBoxComponent ref={(a: TextBoxComponent) => address.current = a} width='95%' placeholder="Address *" name='address' floatLabelType="Always" type="text" data-msg-containerid="errorForAddress" />
                                             <div id="errorForAddress" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={c => city.current = c} width='75%' placeholder="City *" name='city' floatLabelType="Always" type="text" data-msg-containerid="errorForCity" />
+                                            <TextBoxComponent ref={(c: TextBoxComponent) => city.current = c} width='95%' placeholder="City *" name='city' floatLabelType="Always" type="text" data-msg-containerid="errorForCity" />
                                             <div id="errorForCity" />
                                         </div>
                                     </div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <TextBoxComponent ref={c => code.current = c} width='75%' placeholder="Zip/Post code *" name='code' floatLabelType="Always" type="number" data-msg-containerid="errorForCode" />
+                                            <TextBoxComponent ref={(c: TextBoxComponent) => code.current = c} width='95%' placeholder="Zip/Post code *" name='code' floatLabelType="Always" type="number" data-msg-containerid="errorForCode" />
                                             <div id="errorForCode" />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <DropDownListComponent ref={c => country.current = c} width='75%' placeholder='Country/Region *' name='country' floatLabelType="Always" dataSource={['USA']} value="USA" data-msg-containerid="errorForCountry" />
+                                            <DropDownListComponent ref={(c: DropDownListComponent) => country.current = c} width='95%' placeholder='Country/Region *' name='country' floatLabelType="Always" dataSource={['USA']} value="USA" data-msg-containerid="errorForCountry" />
                                             <div id="errorForCountry" />
                                         </div>
                                     </div>
@@ -957,10 +961,10 @@ function HotelBookApp() {
                                     <div className='e-semi-header-text'>Room details</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
                                         <div className='e-info-flex-width-applier'>
-                                            <NumericTextBoxComponent ref={c => person.current = c} width='75%' placeholder={'No of person (capacity: ' + selectedRoom.Capacity + ')'} floatLabelType='Always' value={1} min={1} max={selectedRoom.Capacity} />
+                                            <NumericTextBoxComponent ref={(c: NumericTextBoxComponent) => person.current = c} width='95%' placeholder={'No of person (capacity: ' + selectedRoom.Capacity + ')'} floatLabelType='Always' value={1} min={1} max={selectedRoom.Capacity} />
                                         </div>
                                         <div className='e-info-flex-width-applier'>
-                                            <NumericTextBoxComponent ref={e => extraBed.current = e} width='75%' placeholder={'No of extra bed (capacity: ' + selectedRoom.ExtraBed + ' and per bed cost: $' + selectedRoom.ExtraBedCost + ')'} floatLabelType='Always' value={0} min={0} max={selectedRoom.ExtraBed} change={extraBedChange} />
+                                            <NumericTextBoxComponent ref={(e: NumericTextBoxComponent) => extraBed.current = e} width='95%' placeholder={'No of extra bed (capacity: ' + selectedRoom.ExtraBed + ' and per bed cost: $' + selectedRoom.ExtraBedCost + ')'} floatLabelType='Always' value={0} min={0} max={selectedRoom.ExtraBed} change={extraBedChange} />
                                         </div>
                                     </div>
                                 </div>
@@ -1013,15 +1017,18 @@ function HotelBookApp() {
                 </div>
             }
             <div className='e-print-info' style={{ display: showPrintInfo ? 'block' : 'none' }}>
-                <DialogComponent width='90%' height='75%' visible={showPrintInfo} close={closePrintInfo} isModal={true} target='.e-print-info' header='Hotel room booked successfully!' showCloseIcon={true}>
+                <DialogComponent cssClass='e-dialog-print-info' width='90%' height='80%' visible={showPrintInfo} close={closePrintInfo} isModal={true} target='.e-print-info' header='Hotel room booked successfully!' showCloseIcon={true} footerTemplate={() => {
+                    return (
+                        <div className='e-flex-layout'>
+                            <div className='e-flex-spacer'></div>
+                            <ButtonComponent cssClass='e-primary e-outline' onClick={printInformation}>Print</ButtonComponent>
+                        </div>
+                    )
+                }}>
                     <div className="dialogContent">
                         {showPrintInfo && <div className='e-print-info-container'>
-                            <div className='e-flex-layout'>
-                                <div className='e-flex-spacer'></div>
-                                <ButtonComponent cssClass='e-primary e-outline' onClick={printInformation}>Print</ButtonComponent>
-                            </div>
-                            <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Personal Information</div>
-                            <GridComponent ref={g => personalInfoGrid.current = g}
+                            <div className='e-print-info-separator'>Personal Information</div>
+                            <GridComponent ref={(g: GridComponent) => personalInfoGrid.current = g}
                                 width={'100%'}
                                 dataSource={[printInfo.current]}
                                 allowTextWrap={true}
@@ -1035,8 +1042,8 @@ function HotelBookApp() {
                                 </ColumnsDirective>
                                 <Inject services={[Print]} />
                             </GridComponent>
-                            <div className='e-header-text e-light-blue-border-bottom e-print-info-separator'>Room Information</div>
-                            <GridComponent ref={g => hotelInfoGrid.current = g} width={'100%'} dataSource={[printInfo.current]} allowTextWrap={true} enableHover={false} allowSelection={false}>
+                            <div className='e-print-info-separator e-print-info-separator-margin-top '>Room Information</div>
+                            <GridComponent ref={(g: GridComponent) => hotelInfoGrid.current = g} width={'100%'} dataSource={[printInfo.current]} allowTextWrap={true} enableHover={false} allowSelection={false}>
                                 <ColumnsDirective>
                                     <ColumnDirective field='HotelData.HotelName' headerText='Hotel name' width={120} customAttributes={{ class: 'e-grid-hotel-name' }} />
                                     <ColumnDirective field='HotelData.RoomName' headerText='Room name' width={120} customAttributes={{ class: 'e-grid-room-name' }} />
@@ -1054,4 +1061,36 @@ function HotelBookApp() {
         </div>
     );
 }
-export default HotelBookApp;
+export default HotelBook;
+
+interface PriceDetails {
+    OriginalCost: string;
+    DiscountAmount: string;
+    DiscountedPrice: string;
+    TaxAmount: string;
+    TaxedPrice: string;
+}
+
+interface BookingDetails {
+    FirstName: string;
+    LastName: string;
+    Email: string;
+    Phno: string;
+    Address: string;
+    City: string;
+    Code: string;
+    Country: string;
+    Person: number;
+    ExtraBed: number;
+    HotelData: Hotel;
+    PriceCollection: PriceDetails;
+    FinalPrice: number;
+    ReceiptID: number;
+    BookedDate: Date;
+    CheckIn: Date;
+    CheckOut: Date;
+}
+
+interface KeyData {
+    [key: string]: Object;
+}

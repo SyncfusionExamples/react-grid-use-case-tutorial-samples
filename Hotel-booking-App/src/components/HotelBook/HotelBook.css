@@ -187,7 +187,7 @@
 .e-semi-bold-header-text {
     font-weight: 700;
     color: #ec4899;
-    font-size: 24px;
+    font-size: 22px;
     font-family: "Josefin Sans", serif;
 }
 
@@ -223,7 +223,7 @@
 
 .e-rowtemplate-border-applier {
     box-shadow: none;
-    border: 1px solid #a5b4fc !important;
+    border-top: 1px solid #a5b4fc !important;
 }
 
 .e-room-not-available-cover {
@@ -252,10 +252,6 @@
 .e-map-img {
     height: 17px;
     width: 17px;
-}
-
-.e-grid .e-dialog-map {
-    max-height: none !important;
 }
 
 .e-info-container {
@@ -296,6 +292,11 @@
 
 .e-map-text-spacer {
     margin-left: 10px;
+    margin-top: 1px;
+}
+
+.e-margin-top-10 {
+    margin-top: 10px;
 }
 
 .e-map-text-styler {
@@ -382,7 +383,11 @@
 }
 
 .e-book-details-button {
-    padding-right: 13px;
+    padding-right: 65px;
+}
+
+.e-padding-right {
+    padding-right: 50px;
 }
 
 .emptyRecordTemplate {
@@ -400,7 +405,7 @@
 }
 
 .e-carousel-image-holder-height {
-    height: 280px;
+    height: 380px;
 }
 
 .e-back-button-carousel-container {
@@ -443,7 +448,7 @@
 
 .e-carouselcomponent-container,
 .e-carousel-img-container img {
-    height: 240px;
+    height: 340px;
     width: 520px;
 }
 
@@ -454,6 +459,7 @@
 
 .e-details-info-container {
     display: flex;
+    flex-direction: row-reverse;
     background-color: #ffffff;
     margin-top: 30px;
 }
@@ -493,6 +499,15 @@
 
 .e-print-info-separator {
     margin-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+    color: #14b8a6;
+    font-family: "Josefin Sans", serif;
+    font-size: 20px;
+}
+
+.e-print-info-separator.e-print-info-separator-margin-top {
+    margin-top: 20px;
 }
 
 .e-chip-list {
@@ -512,18 +527,64 @@
     color: #15803d !important;
 }
 
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-calendars/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
-@import "../node_modules/@syncfusion/ej2-react-grids/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-icons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css";
-@import '../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css';
+#hotelamenities,
+#roomamenities {
+    border: 0px;
+}
+
+.e-dialog.e-dialog-print-info .e-dlg-header {
+    text-align: center !important;
+    width: auto !important;
+}
+
+.e-dialog .e-footer-content .e-btn {
+    margin-right: 10px;
+}
+
+.e-dialog.e-dlg-modal.e-popup.e-popup-open.e-dialog-map {
+    max-width: 800px !important;
+    max-height: 530px !important;
+}
+
+.e-dialog.e-dlg-modal.e-popup.e-popup-open.e-dialog-print-info {
+    max-width: 950px !important;
+    max-height: 500px !important;
+}
+
+.e-dialog.e-dlg-modal.e-popup.e-popup-open.e-dialog-print-info .e-dlg-header-content {
+    padding-top: 16px;
+}
+
+.e-dialog.e-dlg-modal.e-popup.e-popup-open.e-dialog-print-info .e-footer-content {
+    padding-bottom: 16px;
+}
+
+.e-treeview .e-level-1>.e-text-content .e-list-text {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.e-slidercomponent-container {
+    width: 95%;
+    margin-left: 6px;
+}
+
+.e-upload {
+    width: 96%;
+}
+
+@import '../../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-calendars/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
+@import '../../../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
+@import "../../../node_modules/@syncfusion/ej2-react-grids/styles/tailwind3.css";
+@import "../../../node_modules/@syncfusion/ej2-icons/styles/tailwind3.css";
+@import "../../../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css";
+@import '../../../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css';
 
 @media only screen and (max-width: 1120px) {
 
@@ -634,7 +695,7 @@
 
     .e-carouselcomponent-container,
     .e-carousel-img-container img {
-        height: 240px;
+        height: 340px;
         width: 420px;
     }
 }
@@ -656,7 +717,7 @@
 
     .e-carouselcomponent-container,
     .e-carousel-img-container img {
-        height: 240px;
+        height: 340px;
         width: 320px;
     }
 }
