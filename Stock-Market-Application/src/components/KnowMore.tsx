@@ -9,30 +9,26 @@ export default function KnowMore() {
   const productDetails = [
     {
       ID: 1,
-      Content: 'The Syncfusion DataGrid component enables the real-time display of data updates, highlighting changes in values—whether they have increased, decreased, or remained stable compared to previous data. This allows you to easily compare live data changes without any performance impact. The Syncfusion DataGrid is a robust tool for managing data display and processing from your data source. It comes with numerous built-in features and offers extensive customization options to suit your needs.',
-      DocLink: 'https://ej2.syncfusion.com/react/documentation/grid/getting-started',
-      DemoLink: 'https://ej2.syncfusion.com/react/demos/#/fluent2/grid/overview',
+      ContentTitle: 'Understanding the Stock Market',
+      Content: 'The stock market is a platform where investors buy and sell shares of publicly traded companies. It plays a crucial role in the economy, allowing businesses to raise capital and investors to grow their wealth. Learning the fundamentals of stock trading can help you make informed financial decisions. Market movements are influenced by various factors, making it essential to stay updated. A strong foundation in market principles helps in minimizing risks and maximizing returns.',
       ImgPath: img1,
     },
     {
       ID: 2,
-      Content: 'The Syncfusion DataGrid component efficiently displays real-time data updates and processes data without any performance loss. Additionally, the Syncfusion Chart component is perfect for applying technical analysis using trading formulas such as RSI, EMA, ATR, SMA, TMA, MACD, Bollinger Bands, Stochastic, Accumulation Distribution, and more. The Syncfusion Chart component offers a wide range of features that allow you to visually compare your data, helping you identify both growth opportunities and challenges in your business.',
-      DocLink: 'https://ej2.syncfusion.com/react/documentation/chart/getting-started',
-      DemoLink: 'https://ej2.syncfusion.com/react/demos/#/fluent2/chart/overview',
+      ContentTitle: 'The Mechanics of Buying and Selling Stocks',
+      Content: 'Stock trading involves placing buy and sell orders through brokers or trading platforms. Prices fluctuate based on supply and demand, economic factors, and company performance. Investors can engage in different strategies such as day trading, swing trading, or long-term investing to maximize their returns. Understanding technical analysis and market trends can improve decision-making. Proper risk management is crucial to avoid significant losses.',
       ImgPath: img2,
     },
     {
       ID: 3,
-      Content: 'Syncfusion offers a wide range of tools to simplify app development. These include data visualization (charts, maps), data management (grids, spreadsheets), and file handling (PDFs, Excel). You can also find input controls, reporting tools, and various UI components like menus, calendars, and notifications. The tools are customizable, work across multiple platforms, and help you build feature-rich, high-performance applications efficiently.',
-      DocLink: 'https://ej2.syncfusion.com/react/documentation/introduction',
-      DemoLink: 'https://ej2.syncfusion.com/',
+      ContentTitle: 'What Influences Stock Prices?',
+      Content: 'Several factors impact stock prices, including economic indicators, company earnings, global events, and investor sentiment. Market trends, interest rates, and inflation also play significant roles. Keeping an eye on these factors helps investors make strategic investment choices. Unexpected news events or geopolitical tensions can cause sudden market shifts. Being adaptable and informed helps investors respond effectively to changes.',
       ImgPath: img3,
     },
     {
       ID: 4,
-      Content: 'Syncfusion offers a wide range of tools to simplify app development. These include data visualization (charts, maps), data management (grids, spreadsheets), and file handling (PDFs, Excel). You can also find input controls, reporting tools, and various UI components like menus, calendars, and notifications. The tools are customizable, work across multiple platforms, and help you build feature-rich, high-performance applications efficiently.',
-      DocLink: 'https://ej2.syncfusion.com/react/documentation/introduction',
-      DemoLink: 'https://ej2.syncfusion.com/',
+      ContentTitle: 'Smart Strategies for Stock Market Success',
+      Content: 'To succeed in the stock market, its essential to diversify your portfolio, conduct thorough research, and have a long-term investment perspective. Avoid emotional decision-making and always assess risk before investing. Continuous learning and staying updated with market trends will help you navigate the complexities of stock trading effectively. Setting realistic financial goals and maintaining discipline are key to long-term success. Investing with patience and consistency often leads to better results over time.',
       ImgPath: img4,
     }
   ];
@@ -42,14 +38,6 @@ export default function KnowMore() {
         <div className="col-sm-5 component-container">
           <div className="heading">{props.ContentTitle || 'Product Information'}</div>
           <div className="description">{props.Content}</div>
-          <p className="card-text">For more information, please refer to the {' '}
-          <a href={props.DocLink} target="_blank" rel="noopener noreferrer">
-            documentation
-          </a> and {' '}
-          <a href={props.DemoLink} target="_blank" rel="noopener noreferrer">
-            demo
-          </a>.
-          </p>
         </div>
         <div className="col-sm-5 image-container">
           <picture>
