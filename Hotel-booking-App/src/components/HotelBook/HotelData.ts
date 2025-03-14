@@ -1,35 +1,33 @@
-Object.defineProperty(exports, "__esModule", { value: true });
-
-const startDate1 = new Date();
-const endDate1 = new Date(startDate1);
+const startDate1: Date = new Date();
+const endDate1: Date = new Date(startDate1);
 endDate1.setDate(startDate1.getDate() + 2);
 
-const startDate2 = new Date(endDate1);
+const startDate2: Date = new Date(endDate1);
 startDate2.setDate(endDate1.getDate() + 1);
-const endDate2 = new Date(startDate2);
+const endDate2: Date = new Date(startDate2);
 endDate2.setDate(startDate2.getDate() + 2);
 
-const startDate3 = new Date(endDate2);
+const startDate3: Date = new Date(endDate2);
 startDate3.setDate(endDate2.getDate() + 5);
-const endDate3 = new Date(startDate3);
+const endDate3: Date = new Date(startDate3);
 endDate3.setDate(startDate3.getDate() + 5);
 
-const startDate4 = new Date(endDate3);
+const startDate4: Date = new Date(endDate3);
 startDate4.setDate(endDate3.getDate() + 5);
-const endDate4 = new Date(startDate4);
+const endDate4: Date = new Date(startDate4);
 endDate4.setDate(startDate4.getDate() + 5);
 
-const startDate5 = new Date(endDate4);
+const startDate5: Date = new Date(endDate4);
 startDate5.setDate(endDate4.getDate() + 2);
-const endDate5 = new Date(startDate5);
+const endDate5: Date = new Date(startDate5);
 endDate5.setDate(startDate5.getDate() + 2);
 
-var hotelData = [
+const hotelData: Hotel[] = [
     {
         HotelID: 102278,
         HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
-        Description: 'We are the king of the hotel in the vast beautiful world.',
+        Description: 'We are a top hotel, providing comfort and luxury. Our warm hospitality makes every stay special. Enjoy a memorable experience with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
@@ -52,7 +50,7 @@ var hotelData = [
         HotelID: 102278,
         HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
-        Description: 'We are the king of the hotel in the vast beautiful world.',
+        Description: 'We are a top hotel, providing comfort and luxury. Our warm hospitality makes every stay special. Enjoy a memorable experience with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
@@ -75,7 +73,7 @@ var hotelData = [
         HotelID: 102278,
         HotelName: 'Benor Hotel',
         Address: "59 rue de l'Abbaye",
-        Description: 'We are the king of the hotel in the vast beautiful world.',
+        Description: 'We are a top hotel, providing comfort and luxury. Our warm hospitality makes every stay special. Enjoy a memorable experience with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 20,
@@ -98,7 +96,7 @@ var hotelData = [
         HotelID: 117823,
         HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
-        Description: 'Pleasent hotel for pleasent people.',
+        Description: 'A pleasant hotel for pleasant people. We offer comfort, warmth, and great service. Stay with us for a relaxing experience.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
@@ -121,7 +119,7 @@ var hotelData = [
         HotelID: 117823,
         HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
-        Description: 'Pleasent hotel for pleasent people.',
+        Description: 'A pleasant hotel for pleasant people. We offer comfort, warmth, and great service. Stay with us for a relaxing experience.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
@@ -144,7 +142,7 @@ var hotelData = [
         HotelID: 117823,
         HotelName: 'Zabator Hotel',
         Address: "Luisenstr. 48",
-        Description: 'Pleasent hotel for pleasent people.',
+        Description: 'A pleasant hotel for pleasant people. We offer comfort, warmth, and great service. Stay with us for a relaxing experience.',
         HotelImgID: 'hotel_2',
         Rating: 4,
         ReviewCount: 30,
@@ -167,7 +165,7 @@ var hotelData = [
         HotelID: 322211,
         HotelName: 'Ben Swikator',
         Address: "Rua do Paço, 67",
-        Description: 'Want to explore wave silent see in marvelous hotel.',
+        Description: 'Want to explore the peaceful waves and a marvelous hotel? Experience serenity and luxury with us. Enjoy a stay like no other.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 18,
@@ -190,7 +188,7 @@ var hotelData = [
         HotelID: 322211,
         HotelName: 'Ben Swikator',
         Address: "Rua do Paço, 67",
-        Description: 'Want to explore wave silent see in marvelous hotel.',
+        Description: 'Want to explore the peaceful waves and a marvelous hotel? Experience serenity and luxury with us. Enjoy a stay like no other.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 18,
@@ -213,7 +211,7 @@ var hotelData = [
         HotelID: 322211,
         HotelName: 'Ben Swikator',
         Address: "Rua do Paço, 67",
-        Description: 'Want to explore wave silent see in marvelous hotel.',
+        Description: 'Want to explore the peaceful waves and a marvelous hotel? Experience serenity and luxury with us. Enjoy a stay like no other.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 18,
@@ -236,7 +234,7 @@ var hotelData = [
         HotelID: 112278,
         HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
-        Description: 'We are the queen of the hotel.',
+        Description: 'We are the queen of hospitality, offering elegance and comfort. Our hotel provides a royal experience for every guest. Stay with us and feel the luxury.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
@@ -259,7 +257,7 @@ var hotelData = [
         HotelID: 112278,
         HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
-        Description: 'We are the queen of the hotel.',
+        Description: 'We are the queen of hospitality, offering elegance and comfort. Our hotel provides a royal experience for every guest. Stay with us and feel the luxury.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
@@ -282,7 +280,7 @@ var hotelData = [
         HotelID: 112278,
         HotelName: 'Zentor Hotel',
         Address: "2, rue du Commerce",
-        Description: 'We are the queen of the hotel.',
+        Description: 'We are the queen of hospitality, offering elegance and comfort. Our hotel provides a royal experience for every guest. Stay with us and feel the luxury.',
         HotelImgID: 'hotel_4',
         Rating: 4,
         ReviewCount: 35,
@@ -305,7 +303,7 @@ var hotelData = [
         HotelID: 127823,
         HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
@@ -328,7 +326,7 @@ var hotelData = [
         HotelID: 127823,
         HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
@@ -351,7 +349,7 @@ var hotelData = [
         HotelID: 127823,
         HotelName: 'Bakator Hotel',
         Address: "Boulevard Tirou, 255",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 2,
         ReviewCount: 15,
@@ -374,7 +372,7 @@ var hotelData = [
         HotelID: 332211,
         HotelName: 'Zen Swikator',
         Address: "Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_6',
         Rating: 5,
         ReviewCount: 22,
@@ -397,7 +395,7 @@ var hotelData = [
         HotelID: 332211,
         HotelName: 'Zen Swikator',
         Address: "Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_6',
         Rating: 5,
         ReviewCount: 22,
@@ -420,7 +418,7 @@ var hotelData = [
         HotelID: 332211,
         HotelName: 'Zen Swikator',
         Address: "Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_6',
         Rating: 5,
         ReviewCount: 22,
@@ -443,7 +441,7 @@ var hotelData = [
         HotelID: 342211,
         HotelName: 'Cen Zwikator',
         Address: "Hauptstr. 31",
-        Description: 'Want to explore a marvelous hotel.',
+        Description: 'Want to explore a marvelous hotel? Experience luxury, comfort, and exceptional service. Stay with us for an unforgettable journey.',
         HotelImgID: 'hotel_7',
         Rating: 5,
         ReviewCount: 25,
@@ -466,7 +464,7 @@ var hotelData = [
         HotelID: 342211,
         HotelName: 'Cen Zwikator',
         Address: "Hauptstr. 31",
-        Description: 'Want to explore a marvelous hotel.',
+        Description: 'Want to explore a marvelous hotel? Experience luxury, comfort, and exceptional service. Stay with us for an unforgettable journey.',
         HotelImgID: 'hotel_7',
         Rating: 5,
         ReviewCount: 25,
@@ -489,7 +487,7 @@ var hotelData = [
         HotelID: 342211,
         HotelName: 'Cen Zwikator',
         Address: "Hauptstr. 31",
-        Description: 'Want to explore a marvelous hotel.',
+        Description: 'Want to explore a marvelous hotel? Experience luxury, comfort, and exceptional service. Stay with us for an unforgettable journey.',
         HotelImgID: 'hotel_7',
         Rating: 5,
         ReviewCount: 25,
@@ -512,7 +510,7 @@ var hotelData = [
         HotelID: 132278,
         HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
@@ -535,7 +533,7 @@ var hotelData = [
         HotelID: 132278,
         HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
@@ -558,7 +556,7 @@ var hotelData = [
         HotelID: 132278,
         HotelName: 'Bekaor Hotel',
         Address: "68 rue de l'Abbaye",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_8',
         Rating: 3,
         ReviewCount: 30,
@@ -581,7 +579,7 @@ var hotelData = [
         HotelID: 137823,
         HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
@@ -604,7 +602,7 @@ var hotelData = [
         HotelID: 137823,
         HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
@@ -627,7 +625,7 @@ var hotelData = [
         HotelID: 137823,
         HotelName: 'Zanator Hotel',
         Address: "Luisenstr. 56",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_9',
         Rating: 5,
         ReviewCount: 50,
@@ -650,7 +648,7 @@ var hotelData = [
         HotelID: 343211,
         HotelName: 'Bentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_10',
         Rating: 2,
         ReviewCount: 50,
@@ -673,7 +671,7 @@ var hotelData = [
         HotelID: 343211,
         HotelName: 'Bentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_10',
         Rating: 2,
         ReviewCount: 50,
@@ -696,7 +694,7 @@ var hotelData = [
         HotelID: 343211,
         HotelName: 'Bentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_10',
         Rating: 2,
         ReviewCount: 50,
@@ -719,7 +717,7 @@ var hotelData = [
         HotelID: 142278,
         HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
@@ -742,7 +740,7 @@ var hotelData = [
         HotelID: 142278,
         HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
@@ -765,7 +763,7 @@ var hotelData = [
         HotelID: 142278,
         HotelName: 'ZZntor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_11',
         Rating: 4,
         ReviewCount: 35,
@@ -788,7 +786,7 @@ var hotelData = [
         HotelID: 129823,
         HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
@@ -811,7 +809,7 @@ var hotelData = [
         HotelID: 129823,
         HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
@@ -834,7 +832,7 @@ var hotelData = [
         HotelID: 129823,
         HotelName: 'Oakator Hotel',
         Address: "255, RU Boulevard Tirou",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_1',
         Rating: 5,
         ReviewCount: 50,
@@ -857,7 +855,7 @@ var hotelData = [
         HotelID: 332221,
         HotelName: 'ZenZen Swikator',
         Address: "66, Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_2',
         Rating: 3,
         ReviewCount: 22,
@@ -880,7 +878,7 @@ var hotelData = [
         HotelID: 332221,
         HotelName: 'ZenZen Swikator',
         Address: "66, Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_2',
         Rating: 3,
         ReviewCount: 22,
@@ -903,7 +901,7 @@ var hotelData = [
         HotelID: 332221,
         HotelName: 'ZenZen Swikator',
         Address: "66, Rua do Paço, GG",
-        Description: 'Want to explore stunning silent see in a marvelous hotel.',
+        Description: 'Want to explore a stunning, silent sea in a marvelous hotel? Experience tranquility and luxury with us. Enjoy a peaceful and unforgettable stay.',
         HotelImgID: 'hotel_2',
         Rating: 3,
         ReviewCount: 22,
@@ -926,7 +924,7 @@ var hotelData = [
         HotelID: 342311,
         HotelName: 'CenCake Owikator',
         Address: "Hauptstr. 31 Mt GG",
-        Description: 'Want to explore a marvelous hotel in marvelous Ocean.',
+        Description: 'Want to explore a marvelous hotel by the marvelous ocean? Experience luxury, tranquility, and breathtaking views. Enjoy an unforgettable stay with us.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 30,
@@ -949,7 +947,7 @@ var hotelData = [
         HotelID: 342311,
         HotelName: 'CenCake Owikator',
         Address: "Hauptstr. 31 Mt GG",
-        Description: 'Want to explore a marvelous hotel in marvelous Ocean.',
+        Description: 'Want to explore a marvelous hotel by the marvelous ocean? Experience luxury, tranquility, and breathtaking views. Enjoy an unforgettable stay with us.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 30,
@@ -972,7 +970,7 @@ var hotelData = [
         HotelID: 342311,
         HotelName: 'CenCake Owikator',
         Address: "Hauptstr. 31 Mt GG",
-        Description: 'Want to explore a marvelous hotel in marvelous Ocean.',
+        Description: 'Want to explore a marvelous hotel by the marvelous ocean? Experience luxury, tranquility, and breathtaking views. Enjoy an unforgettable stay with us.',
         HotelImgID: 'hotel_3',
         Rating: 3,
         ReviewCount: 30,
@@ -995,7 +993,7 @@ var hotelData = [
         HotelID: 192278,
         HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
@@ -1018,7 +1016,7 @@ var hotelData = [
         HotelID: 192278,
         HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
@@ -1041,7 +1039,7 @@ var hotelData = [
         HotelID: 192278,
         HotelName: 'Zekaorza Hotel',
         Address: "68 rue de l'Abbaye GG",
-        Description: 'We have different theme hotel.',
+        Description: 'We have a variety of themed hotels, each offering a unique experience. Enjoy a stay that matches your style and preferences. Discover comfort with a creative touch.',
         HotelImgID: 'hotel_4',
         Rating: 1,
         ReviewCount: 30,
@@ -1064,7 +1062,7 @@ var hotelData = [
         HotelID: 197823,
         HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
@@ -1087,7 +1085,7 @@ var hotelData = [
         HotelID: 197823,
         HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
@@ -1110,7 +1108,7 @@ var hotelData = [
         HotelID: 197823,
         HotelName: 'Zabatorza Hotel',
         Address: "Luisenstr. 56 GG",
-        Description: 'Pleasent hotel for polite people.',
+        Description: 'A pleasant hotel for polite people. We offer comfort, warmth, and excellent service. Enjoy a relaxing and memorable stay with us.',
         HotelImgID: 'hotel_5',
         Rating: 3,
         ReviewCount: 10,
@@ -1133,7 +1131,7 @@ var hotelData = [
         HotelID: 393211,
         HotelName: 'Saentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_6',
         Rating: 3,
         ReviewCount: 10,
@@ -1156,7 +1154,7 @@ var hotelData = [
         HotelID: 393211,
         HotelName: 'Saentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_6',
         Rating: 3,
         ReviewCount: 10,
@@ -1179,7 +1177,7 @@ var hotelData = [
         HotelID: 393211,
         HotelName: 'Saentoo Swikator',
         Address: "66,RuRua do Paço",
-        Description: 'Want to explore shift silent water wave in ocean.',
+        Description: 'Want to experience the gentle, shifting waves of the silent ocean? Embrace tranquility and beauty as you explore the serene waters. Let the oceans calmness refresh your soul.',
         HotelImgID: 'hotel_6',
         Rating: 3,
         ReviewCount: 10,
@@ -1202,7 +1200,7 @@ var hotelData = [
         HotelID: 199278,
         HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
@@ -1225,7 +1223,7 @@ var hotelData = [
         HotelID: 199278,
         HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
@@ -1248,7 +1246,7 @@ var hotelData = [
         HotelID: 199278,
         HotelName: 'Zoontor Hotel',
         Address: "333, rue du Commerce",
-        Description: 'We are the winner hotel.',
+        Description: 'We are an award-winning hotel, offering exceptional service and luxury. Experience the best in hospitality with us. Your perfect stay starts here.',
         HotelImgID: 'hotel_7',
         Rating: 1,
         ReviewCount: 35,
@@ -1271,7 +1269,7 @@ var hotelData = [
         HotelID: 199923,
         HotelName: 'Sasktor Hotel',
         Address: "255, RU Boulevard Tirou GG",
-        Description: 'Pleasent hotel for sweet people.',
+        Description: 'A pleasant hotel for sweet people. We offer warmth, comfort, and great service. Enjoy a delightful stay with us.',
         HotelImgID: 'hotel_8',
         Rating: 2,
         ReviewCount: 50,
@@ -1293,4 +1291,39 @@ var hotelData = [
 
 ];
 
-exports.data = hotelData;
+export const data: Hotel[] = hotelData;
+
+export interface Location {
+    latitude: number;
+    longitude: number;
+    TooltipContent: string;
+}
+
+export interface CheckInOut {
+    CheckIn: Date;
+    CheckOut: Date;
+}
+
+export interface Hotel {
+    HotelID: number;
+    HotelName: string;
+    Address: string;
+    Description: string;
+    HotelImgID: string;
+    Rating: number;
+    ReviewCount: number;
+    Location: Location;
+    HotelFacility: string;
+    RoomID: number;
+    RoomImgID: string;
+    RoomName: string;
+    Capacity: number;
+    ExtraBed: number;
+    ExtraBedCost: number;
+    DiscountPercentage: number;
+    TaxPercentage: number;
+    Extras: string;
+    RoomFacility: string;
+    Price: number;
+    CheckInOut: CheckInOut[];
+}
