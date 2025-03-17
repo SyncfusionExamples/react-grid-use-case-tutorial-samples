@@ -216,7 +216,48 @@ body {
   padding: 20px;
 }
 
+
+.main-content:has(.announcementpage) {
+  padding-right: 0;
+}
+
 /* Overview */
+
+.grid-container {
+  height: calc(100vh - 220px);
+}
+
+.stock-chart-container-parent {
+  height: 100%;
+}
+
+.chart-container .e-stockchart {
+  height: calc(100vh - 230px);
+}
+
+.content-wrapper {
+  height: calc(100vh - 280px);
+}
+
+.content-area {
+  height: 100%;
+}
+
+#listSidebar {
+  background-color: #f3f4f6;
+  border-radius: 4px;
+}
+
+#listSidebarList {
+  border: none;
+}
+
+.card-control-section {
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 30px;
+}
 
 .stock-content-area {
   padding-left: 20px;
@@ -303,6 +344,7 @@ body {
 .section2 {
   width: 50%;
   padding: 15px 15px 0;
+  height: calc(100vh - 220px);
 }
 
 .section1 {
@@ -361,6 +403,7 @@ text#stockchartdefault_ChartTitle {
 .e-card .e-card-content {
   color: #333;
   max-height: 60px;
+  overflow: hidden;
 }
 
 .row .e-card .e-card-header {
@@ -402,11 +445,25 @@ text#stockchartdefault_ChartTitle {
 .e-card.card7 {
   background-color: #FFEDD5;
 }
+
 .e-card.card8 {
   background-color: #E7E5E4;
 }
+
 .e-card.card9 {
   background-color: #E8EAF6;
+}
+
+.e-card.card10 {
+  background-color: #FEF9C3;
+}
+
+.e-card.card11 {
+  background-color: #E0E7FF;
+}
+
+.e-card.card12 {
+  background-color: #FAE8E0;
 }
 
 .e-card .e-card-actions a,
@@ -418,8 +475,8 @@ text#stockchartdefault_ChartTitle {
 
 /* Know More */
 
-.kb-carousel.e-carousel .e-carousel-items .e-carousel-item {
-  height: 360px;
+.kb-carousel .e-carousel-items .e-carousel-item > *:first-child {
+  height: inherit;
 }
 
 .kb-carousel .e-carousel-items .e-carousel-item .product-container {
@@ -427,8 +484,9 @@ text#stockchartdefault_ChartTitle {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  margin-top: 15px;
+  margin-top: 10px;
   gap: 20px;
+  height: 100%;
 }
 
 .kb-carousel .e-carousel-items .e-carousel-item .product-container .heading {
@@ -452,6 +510,7 @@ text#stockchartdefault_ChartTitle {
   margin: 0 auto .5em;
   border-radius: 1.5em;
   background-color: #f5f9fd;
+  height: calc(100vh - 220px);
 }
 
 .kb-carousel .e-carousel-items .e-carousel-item .card-title,
