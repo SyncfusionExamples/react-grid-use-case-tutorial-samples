@@ -92,7 +92,7 @@
 }
 
 .e-side-bar-treeview-separator {
-    padding: 10px 3px;
+    padding: 10px;
 }
 
 .e-line-separator,
@@ -245,7 +245,7 @@
 
 .e-img {
     margin: 15px;
-    width: 210px;
+    width: 310px;
     height: 210px;
 }
 
@@ -383,7 +383,7 @@
 }
 
 .e-book-details-button {
-    padding-right: 65px;
+    padding-right: 95px;
 }
 
 .e-padding-right {
@@ -529,7 +529,13 @@
 
 #hotelamenities,
 #roomamenities {
-    border: 0px;
+    border-color: #D1D5DB;
+}
+
+.e-treeview .e-level-1.e-list-item>.e-fullrow,
+.e-treeview .e-level-1.e-list-item.e-active.e-hover>.e-fullrow,
+.e-treeview .e-level-1.e-list-item.e-active.e-node-focus>.e-fullrow {
+    background-color: #F3F4F6;
 }
 
 .e-dialog.e-dialog-print-info .e-dlg-header {
@@ -571,6 +577,50 @@
 
 .e-upload {
     width: 96%;
+}
+
+.vertical-divider {
+    width: 1px;
+    background-color: #a5b4fc;
+    flex-shrink: 0;
+    margin: 0px 15px;
+}
+
+.e-info-flex-direction-column {
+    flex-direction: column;
+}
+
+.e-info-flex-40-width {
+    width: 40%
+}
+
+.e-info-flex-50-width {
+    width: 50%
+}
+
+.e-info-flex-60-width {
+    width: 60%
+}
+
+.e-info-flex-40-height {
+    height: 40%
+}
+
+.e-info-flex-50-height {
+    height: 50%
+}
+
+.e-info-flex-60-height {
+    height: 60%
+}
+
+#form1 {
+    padding: 0px 30px;
+}
+
+.e-padding-side {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 @import '../../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';

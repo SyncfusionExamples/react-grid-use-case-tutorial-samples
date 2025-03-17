@@ -364,9 +364,9 @@ function HotelBook() {
                             <img src={src} alt={props.RoomImgID} className='e-img' />
                         </div>
                         <div className='e-info-container'>
-                            <div className='e-row-template-separator'>
-                                <div className='e-flex-layout'>
-                                    <div className='e-info-flex-width-applier'>
+                            <div className='e-flex-layout'>
+                                <div className='e-info-flex-60-width e-flex-layout e-info-flex-direction-column'>
+                                    <div className='e-row-template-separator e-info-flex-60-height'>
                                         <div>
                                             <span className='e-semi-bold-header-text'>{props.HotelName}</span>
                                         </div>
@@ -374,8 +374,24 @@ function HotelBook() {
                                             <span className='e-map-text-styler e-semi-title-header-text' onClick={showMap}><img src="./images/map.png" className="e-map-img" alt="Map" title='Show on map' /></span>
                                             <span className='e-address-text-styler e-map-text-spacer'>{props.Address}</span>
                                         </div>
+                                        <div className='normal-text-color e-margin-top-10'>
+                                            {props.Description}
+                                        </div>
                                     </div>
-                                    <div className='e-info-flex-width-applier'>
+                                    <div className='e-row-template-separator e-info-flex-40-height'>
+                                        <span className='e-semi-title-header-text'>Amenities:</span>
+                                        <ChipListComponent cssClass='e-outline'>
+                                            <ChipsDirective>
+                                                {hotelFacilityList.map((item, index) => (
+                                                    <ChipDirective key={index} text={item} cssClass="e-info" enabled={false}></ChipDirective>
+                                                ))}
+                                            </ChipsDirective>
+                                        </ChipListComponent>
+                                    </div>
+                                </div>
+                                <div className='vertical-divider'></div>
+                                <div className='e-info-flex-40-width e-flex-layout e-info-flex-direction-column'>
+                                    <div className='e-row-template-separator e-info-flex-50-height'>
                                         <div>
                                             <span className='e-semi-title-header-text'>Rating:</span>
                                         </div>
@@ -387,37 +403,14 @@ function HotelBook() {
                                                 ({props.ReviewCount} reviews)
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-                            <div className='e-row-template-separator'>
-                                <div className='e-flex-layout'>
-                                    <div className='e-info-flex-width-applier normal-text-color'>
-                                        {props.Description}
-                                    </div>
-                                    <div className='e-info-flex-width-applier'>
+                                    <div className='e-row-template-separator e-info-flex-50-height'>
                                         <div>
                                             <span className='e-semi-title-header-text'>Room Name:</span> <span className='e-semi-bold-title-header-text'>{props.RoomName}</span><span className='normal-text-color'> ({props.Capacity} person)</span>
                                         </div>
                                         <div className='e-semi-title-header-text normal-hint-text-color'>(Extra bed capacity: {props.ExtraBed} and per bed cost: ${props.ExtraBedCost})</div>
                                     </div>
-
-                                </div>
-                            </div>
-                            <div className='e-row-template-separator'>
-                                <div className='e-flex-layout'>
-                                    <div className='e-info-flex-width-applier'>
-                                        <span className='e-semi-title-header-text'>Amenities:</span>
-                                        <ChipListComponent cssClass='e-outline'>
-                                            <ChipsDirective>
-                                                {hotelFacilityList.map((item, index) => (
-                                                    <ChipDirective key={index} text={item} cssClass="e-info" enabled={false}></ChipDirective>
-                                                ))}
-                                            </ChipsDirective>
-                                        </ChipListComponent>
-                                    </div>
-                                    <div className='e-info-flex-width-applier'>
+                                    <div className='e-row-template-separator e-info-flex-50-height'>
                                         <span className='e-semi-title-header-text'>Room Amenities:</span>
                                         <ChipListComponent cssClass='e-outline'>
                                             <ChipsDirective>
@@ -432,7 +425,7 @@ function HotelBook() {
                         </div>
                     </div>
                     <div className='e-data-line-separator'></div>
-                    <div className='e-book-layout'>
+                    <div className='e-book-layout e-padding-side'>
                         <div className='e-extralist-price-info-container'>
                             <div className='e-extralist-container'>
                                 <ChipListComponent cssClass='e-outline'>
@@ -456,7 +449,7 @@ function HotelBook() {
                             </div>
                         </div>
                         <div className='e-book-spacer'></div>
-                        <div className='e-book-button e-padding-right'>
+                        <div className='e-book-button'>
                             <ButtonComponent cssClass='e-primary e-outline' onClick={goToRoomBookingPage} disabled={!isRoomAvailable}>{!isRoomAvailable ? "Room's not available" : "Book Room"}</ButtonComponent>
                         </div>
                     </div>
@@ -896,7 +889,7 @@ function HotelBook() {
                     <div className='e-details-info-container'>
                         <div className='e-booking-details-container'>
                             <div className='e-header-text e-light-blue-border-bottom'>Booking Details</div>
-                            <form id="form1" method="post">
+                            <form id="form1" method="post" className='e-margin-top-10'>
                                 <div className='e-booking-details-separator'>
                                     <div className='e-semi-header-text'>Personal information</div>
                                     <div className='e-flex-layout e-booking-details-separator'>
@@ -988,7 +981,7 @@ function HotelBook() {
                         </div>
                         <div className='e-hotel-details-container'>
                             <div className='e-header-text e-light-blue-border-bottom'>Information</div>
-                            <div className='e-hotel-details-side-bar-separator'><span className='e-semi-title-header-text'>Hotel Name: </span><span className='e-semi-bold-header-text'>{selectedRoom.HotelName}</span></div>
+                            <div className='e-hotel-details-side-bar-separator e-margin-top-10'><span className='e-semi-title-header-text'>Hotel Name: </span><span className='e-semi-bold-header-text'>{selectedRoom.HotelName}</span></div>
                             <div className='e-info-flex-items-center-applier e-hotel-details-side-bar-separator'><span className='e-semi-title-header-text'>Rating: </span><RatingComponent value={selectedRoom.Rating} readOnly={true} cssClass='e-custom-rating-color'></RatingComponent></div>
                             <div className='e-hotel-details-side-bar-separator'><span className='e-semi-title-header-text'>Room Name: </span><span className='e-semi-bold-title-header-text'>{selectedRoom.RoomName}</span></div>
                             <div className='e-hotel-details-side-bar-separator'><span className='e-semi-title-header-text'>Capacity: </span><span className='normal-text-color'>{selectedRoom.Capacity} person</span></div>
