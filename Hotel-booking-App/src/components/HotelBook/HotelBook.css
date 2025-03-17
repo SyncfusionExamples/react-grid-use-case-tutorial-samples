@@ -245,7 +245,7 @@
 
 .e-img {
     margin: 15px;
-    width: 210px;
+    width: 310px;
     height: 210px;
 }
 
@@ -529,13 +529,13 @@
 
 #hotelamenities,
 #roomamenities {
-    border-color: #a5b4fc;
+    border-color: #D1D5DB;
 }
 
 .e-treeview .e-level-1.e-list-item>.e-fullrow,
 .e-treeview .e-level-1.e-list-item.e-active.e-hover>.e-fullrow,
 .e-treeview .e-level-1.e-list-item.e-active.e-node-focus>.e-fullrow {
-    background-color: #eef2ff;
+    background-color: #F3F4F6;
 }
 
 .e-dialog.e-dialog-print-info .e-dlg-header {
