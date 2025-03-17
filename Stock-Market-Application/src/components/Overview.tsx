@@ -254,112 +254,114 @@ export default function Overview(props: { changeMarquee: Function, myStockDm: Da
           width={250}
           popupHeight="220px"/>
           </div>
-          {allStocks.isDataReady &&
-            <GridComponent
-              ref={gridIns}
-              dataSource={allStocks.data}
-              query={gridQuery}
-              queryCellInfo={queryCellInfo}
-              allowSorting={true}
-              allowPaging={true}
-              pageSettings={{ pageCount: 4, pageSize: 10 }}
-              enableHover={false}
-              commandClick={commandClick}
-              destroyed={destroyed}
-              height={250}
-            >
-              <ColumnsDirective>
-                <ColumnDirective
-                  field="ID"
-                  visible={false}
-                  textAlign="Center"
-                  isPrimaryKey={true}
-                  width="100"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="CompanyName"
-                  headerText="Company"
-                  width="160"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Sector"
-                  visible={false}
-                  width="100"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Net"
-                  visible={false}
-                  format="N2"
-                  textAlign="Center"
-                  width="100"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Last"
-                  format="N2"
-                  textAlign="Center"
-                  width="80"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="ChangeInValue"
-                  headerText="CHNG 1D"
-                  format="N2"
-                  textAlign="Center"
-                  width="90"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="ChangeInPercent"
-                  headerText="CHNG (%)"
-                  format="P2"
-                  textAlign="Center"
-                  width="80"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Rating"
-                  template="<span class='e-icons'></span><span class='rating'> ${Rating} </span >"
-                  width="140"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="High"
-                  format="N2"
-                  template="<span class='high'> ${High} </span ><span class='e-icons'></span>"
-                  textAlign="Center"
-                  width="80"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Low"
-                  format="N2"
-                  template="<span class='low'> ${Low} </span ><span class='e-icons'></span>"
-                  textAlign="Center"
-                  width="80"
-                ></ColumnDirective>
-                <ColumnDirective
-                  field="Volume"
-                  textAlign="Center"
-                  width="90"
-                ></ColumnDirective>
-                <ColumnDirective
-                  headerText=""
-                  commands={[
-                    {
-                      title: 'Add to Wishlist',
-                      buttonOption: {
-                        iconCss: 'addmywishlist e-icons',
-                        cssClass: 'e-primary' ,
+          <div className='grid-container'>
+            {allStocks.isDataReady &&
+              <GridComponent
+                ref={gridIns}
+                dataSource={allStocks.data}
+                query={gridQuery}
+                queryCellInfo={queryCellInfo}
+                allowSorting={true}
+                allowPaging={true}
+                pageSettings={{ pageCount: 4, pageSize: 10 }}
+                enableHover={false}
+                commandClick={commandClick}
+                destroyed={destroyed}
+                height={250}
+              >
+                <ColumnsDirective>
+                  <ColumnDirective
+                    field="ID"
+                    visible={false}
+                    textAlign="Center"
+                    isPrimaryKey={true}
+                    width="100"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="CompanyName"
+                    headerText="Company"
+                    width="160"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Sector"
+                    visible={false}
+                    width="100"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Net"
+                    visible={false}
+                    format="N2"
+                    textAlign="Center"
+                    width="100"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Last"
+                    format="N2"
+                    textAlign="Center"
+                    width="80"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="ChangeInValue"
+                    headerText="CHNG 1D"
+                    format="N2"
+                    textAlign="Center"
+                    width="90"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="ChangeInPercent"
+                    headerText="CHNG (%)"
+                    format="P2"
+                    textAlign="Center"
+                    width="80"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Rating"
+                    template="<span class='e-icons'></span><span class='rating'> ${Rating} </span >"
+                    width="140"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="High"
+                    format="N2"
+                    template="<span class='high'> ${High} </span ><span class='e-icons'></span>"
+                    textAlign="Center"
+                    width="80"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Low"
+                    format="N2"
+                    template="<span class='low'> ${Low} </span ><span class='e-icons'></span>"
+                    textAlign="Center"
+                    width="80"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="Volume"
+                    textAlign="Center"
+                    width="90"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    headerText=""
+                    commands={[
+                      {
+                        title: 'Add to Wishlist',
+                        buttonOption: {
+                          iconCss: 'addmywishlist e-icons',
+                          cssClass: 'e-primary',
+                        },
                       },
-                    },
-                    {
-                      title: 'Analysis',
-                      buttonOption: {
-                        iconCss: 'analysis e-icons'
+                      {
+                        title: 'Analysis',
+                        buttonOption: {
+                          iconCss: 'analysis e-icons'
+                        },
                       },
-                    },
-                  ]}
-                  width="100"
-                ></ColumnDirective>
-              </ColumnsDirective>
-              <Inject services={[Page, Sort, CommandColumn]} />
-            </GridComponent>
-          }
+                    ]}
+                    width="100"
+                  ></ColumnDirective>
+                </ColumnsDirective>
+                <Inject services={[Page, Sort, CommandColumn]} />
+              </GridComponent>
+            }
+          </div>
         </div>
       </div>
       <SidebarComponent

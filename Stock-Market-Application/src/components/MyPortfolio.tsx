@@ -152,7 +152,7 @@ export default function MyPortfolio(props: { changeMarquee: Function, myStockDm:
               queryCellInfo={queryCellInfo}
               allowSorting={true}
               allowPaging={true}
-              pageSettings={{ pageCount: 4, pageSize: 9 }}
+              pageSettings={{ pageCount: 4, pageSize: 20 }}
               enableHover={false}
               commandClick={commandClick}
               destroyed={destroyed}

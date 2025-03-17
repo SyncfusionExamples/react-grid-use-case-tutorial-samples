@@ -42,7 +42,7 @@ export default function StockAnalysis() {
     }
   };
   return (
-    <div className="">
+    <div className="stock-chart-container-parent">
       <div>
       <div className='companydd-container'>
       <DropDownListComponent
@@ -61,7 +61,7 @@ export default function StockAnalysis() {
       {chartData.isDataReady && (
         <div className="chart-container">
           <div className='chartHeader'>{chartData.CompanyName}</div>
-          <StockChartComponent ref={chartObj} id='stockchartdefault' primaryXAxis={{ valueType: 'DateTimeCategory', majorGridLines: { width: 0 }, majorTickLines: { color: 'transparent' }, crosshairTooltip: { enable: true } }} primaryYAxis={{ labelFormat: 'n0', lineStyle: { width: 0 }, rangePadding: 'None', majorTickLines: { height: 0 } }} chartArea={{ border: { width: 0 } }} tooltip={{ enable: true, shared: true }} crosshair={{ enable: true }} height='330px'>
+          <StockChartComponent ref={chartObj} id='stockchartdefault' primaryXAxis={{ valueType: 'DateTimeCategory', majorGridLines: { width: 0 }, majorTickLines: { color: 'transparent' }, crosshairTooltip: { enable: true } }} primaryYAxis={{ labelFormat: 'n0', lineStyle: { width: 0 }, rangePadding: 'None', majorTickLines: { height: 0 } }} chartArea={{ border: { width: 0 } }} tooltip={{ enable: true, shared: true }} crosshair={{ enable: true }} height={"100%"}>
                     <Inject services={[DateTime, DateTimeCategory, Tooltip, RangeTooltip, Crosshair, LineSeries, SplineSeries, CandleSeries, HiloOpenCloseSeries, HiloSeries, RangeAreaSeries, Trendlines, EmaIndicator, RsiIndicator, BollingerBands, TmaIndicator, MomentumIndicator, SmaIndicator, AtrIndicator, Export, AccumulationDistributionIndicator, MacdIndicator, StochasticIndicator]}/>
                     <StockChartSeriesCollectionDirective>
                         <StockChartSeriesDirective dataSource={chartData.data} xName='period' type='Candle' animation={{ enable: true }}/>

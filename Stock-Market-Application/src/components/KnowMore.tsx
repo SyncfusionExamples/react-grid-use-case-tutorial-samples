@@ -15,7 +15,7 @@ export default function KnowMore() {
     },
     {
       ID: 2,
-      ContentTitle: 'The Mechanics of Buying and Selling Stocks',
+      ContentTitle: 'The Mechanics of Buying and Selling',
       Content: 'Stock trading involves placing buy and sell orders through brokers or trading platforms. Prices fluctuate based on supply and demand, economic factors, and company performance. Investors can engage in different strategies such as day trading, swing trading, or long-term investing to maximize their returns. Understanding technical analysis and market trends can improve decision-making. Proper risk management is crucial to avoid significant losses.',
       ImgPath: img2,
     },
@@ -28,7 +28,7 @@ export default function KnowMore() {
     {
       ID: 4,
       ContentTitle: 'Smart Strategies for Stock Market Success',
-      Content: 'To succeed in the stock market, its essential to diversify your portfolio, conduct thorough research, and have a long-term investment perspective. Avoid emotional decision-making and always assess risk before investing. Continuous learning and staying updated with market trends will help you navigate the complexities of stock trading effectively. Setting realistic financial goals and maintaining discipline are key to long-term success. Investing with patience and consistency often leads to better results over time.',
+      Content: 'To succeed in the stock market, diversify your portfolio, research thoroughly, and maintain a long-term perspective. Avoid emotional decisions and assess risk before investing. Continuous learning and staying updated with market trends help navigate stock trading. Setting realistic goals and maintaining discipline are key to long-term success. Patience and consistency often lead to better results.',
       ImgPath: img4,
     }
   ];
