@@ -32,10 +32,6 @@ const Achievements = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="row card-layout">
                 <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
                   <div className="e-card" id="basic_card">
                     <div className="e-card-header">
@@ -94,10 +90,63 @@ const Achievements = () => {
                     </div>
                   </div>
                 </div>
+                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                  <div className="e-card" id="basic_card">
+                    <div className="e-card-header">
+                      <div className="e-card-header-caption">
+                        <div className="e-card-header-title">
+                          Professional Development and Skills Mastery
+                        </div>
+                        <div className="e-card-sub-title">
+                          Certification Attainment
+                        </div>
+                      </div>
+                    </div>
+                    <div className="e-card-content">
+                      Celebrating individuals who acquire new skills and
+                      certifications. Recognizing dedication to continuous
+                      learning and professional growth. Validating expertise and
+                      proficiency in specific technologies or methodologies.
+                      Encouraging a culture of lifelong learning and skill
+                      enhancement.
+                    </div>
+                    <div className="e-card-actions">
+                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row">
               <div className="row card-layout">
+                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                  <div className="e-card" id="basic_card">
+                    <div className="e-card-header">
+                      <div className="e-card-header-caption">
+                        <div className="e-card-header-title">
+                        Client Impact and Customer Success
+                        </div>
+                        <div className="e-card-sub-title">
+                        Customer Satisfaction Excellence
+                        </div>
+                      </div>
+                    </div>
+                    <div className="e-card-content">
+                    Recognizing teams that go above and beyond to deliver exceptional 
+                    customer experiences. Celebrating innovative solutions that address 
+                    client needs and enhance user satisfaction. Acknowledging effortsin 
+                    building strong customer relationships through reliable support and service. 
+                    Encouraging a customer-first mindset to drive long-term business success.
+                    </div>
+                    <div className="e-card-actions">
+                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
                 <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
                   <div className="e-card" id="basic_card">
                     <div className="e-card-header">

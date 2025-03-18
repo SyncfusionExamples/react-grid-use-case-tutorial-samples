@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TabComponent, TabItemDirective, TabItemsDirective } from '@syncfusion/ej2-react-navigations';
 import { Internationalization } from '@syncfusion/ej2-base';
 import { useLocation } from 'react-router-dom';
-import { EmployeeDetails } from '../interface';
+import { EmployeeDetails } from '../../interface';
 import EmployeeLeave from './EmployeeLeave';
 import EmployeePayStub from './EmployeePayStub';
 import EmployeePayRoll from './EmployeePayRoll';
@@ -90,6 +90,34 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                     <span className="sub-heading">Experience</span>
                     <span className="gap">:</span>
                     <span className="information">{experience}+ years</span>
+                </div>
+                <div className="detail">
+                    <span className="sub-heading">User Work Shift</span>
+                    <span className="gap">:</span>
+                    <span className="information">
+                        {"Regular"}
+                    </span>
+                </div>
+                <div className="detail">
+                    <span className="sub-heading">WFH</span>
+                    <span className="gap">:</span>
+                    <span className="information">
+                        {"Yes"}
+                    </span>
+                </div>
+                <div className="detail">
+                    <span className="sub-heading">Employment Type</span>
+                    <span className="gap">:</span>
+                    <span className="information">
+                        {"Full-Time"}
+                    </span>
+                </div>
+                <div className="detail">
+                    <span className="sub-heading">Company Benefits</span>
+                    <span className="gap">:</span>
+                    <span className="information">
+                        {"Health Insurance, Gift Cards"}
+                    </span>
                 </div>
             </div>
         );
@@ -192,6 +220,7 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                             <b>{employeeData.Name}</b>
                         </div>
                         <div className="profile-data">{employeeData.Designation}</div>
+                        <div className="profile-data">Mail Id: {employeeData.Mail}</div>
                         <div className="profile-data">Branch: {employeeData.Branch}</div>
                         <div className="profile-data">Lead: {employeeData.TeamLead}</div>
                     </div>
