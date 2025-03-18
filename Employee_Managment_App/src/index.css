@@ -26,7 +26,7 @@
 
 .xyz-management-content .col-md-2.sidebar .title {
   font-size: 1.2em;
-  text-align: center;
+  padding-left: 15px;
   color: #f3f3f4;
   font-weight: bolder;
   margin-bottom: 30px;
@@ -388,6 +388,10 @@ td.cardcell.separateline {
 .achievementspage .row,
 .announcementpage .row {
   padding: 0 0 10px 0;
+}
+
+.achievementspage .e-card-content {
+  height: 100px;
 }
 
 .announcementpage .e-card-content {
