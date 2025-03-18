@@ -2,8 +2,6 @@
   padding: 15px 20px 15px 20px;
   position: fixed;
   top: 0;
-  background-color: #ccccff;
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.08);
   height: 75px;
   width: 100%;
   z-index: 10001;
@@ -22,32 +20,35 @@
   height: 650px;
 }
 
+.col-md-10.main-content .row.card-layout {
+  padding: 20px;
+}
+
 .xyz-management-content .col-md-2.sidebar .title {
   font-size: 1.2em;
   text-align: center;
-  color: #2a2a72;
+  color: #f3f3f4;
   font-weight: bolder;
   margin-bottom: 30px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 } 
 
 .xyz-management-content .col-md-2.sidebar {
   width: 240px;
-  background-color: #ffffff;
-  color: #3a3b3c;
+  background-color: #2d323e;
+  color: white;
   position: fixed;
   height: 100%;
   padding-right: 0px;
   padding-top: 20px;
   border-right: 1px solid #e0e0e0;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .xyz-management-content .col-md-10.main-content {
   padding-right: 0px;
   padding-left: 0px;
   position: absolute;
-  left: 170px;
+  left: 225px;
+  width: calc(100% - 225px);
 }
 
 @media (max-width: 426px) {
@@ -75,12 +76,23 @@
 }
 @media (min-width:1024px) {
   .xyz-management-content .col-md-2.sidebar {
-    width: 185px;
+    width: 240px;
     float: left;
   }
   .xyz-management-content .col-md-10.main-content {
     width: calc(100% - 170px);
     float: left;
+  }
+  .xyz-management-content .col-md-10.main-content {
+    left: 170px;
+  }
+  #_tab_header_items .e-hscroll-content{
+    width: 100%;
+  }
+
+  #_tab_header_items .e-toolbar-item {
+    width: 20%;
+    text-align: center;
   }
 }
 
@@ -109,8 +121,19 @@ text-align: left;
 .nav > li > a.active,
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #D9E9FF;
+  background-color: rgb(0,0,0,0.1);;
 }
+
+.nav > li > a:hover {
+  text-decoration: none;
+  background-color: rgb(0,0,0,0.1);
+  color: #ffffff;
+}
+
+.xyz-management-content .col-md-2.sidebar a.active {
+  color: #ffffff;
+}
+
 .policiespage a:focus,
 .policiespage a.active,
 .policiespage a:hover {
@@ -138,18 +161,25 @@ text-align: left;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
 }
 
-.employeespage .employees-content,
-.employeeinfopage .employeeinfo-content,
-.policiespage .policies-content,
-.announcementpage .announcement-content,
-.achievementspage .achievements-content,
-.employeeinfopage .overview-content {
-  padding: 20px;
+#_tab_header_items {
+  width: 100%;
+}
+
+.overview-content #_tab_header_items .e-toolbar-item.e-active {
+  background-color: #1ab394;
+}
+.overview-content #_tab_header_items .e-toolbar-item.e-active .e-tab-text{
+  color: white;
+}
+.overview-content #_tab_header_items .e-indicator.e-ignore {
+  display: none;
 }
 
 .employeeinfopage .overview-header {
   padding: 20px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  display: flex;
+  background-color: #f3f3f4;
 }
 
 a.employee-popover:hover {
@@ -159,7 +189,7 @@ a.employee-popover:hover {
   padding: 20px 10px 20px 10px;
 }
 .xyz-management-content .e-tab-header {
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.07);
+  padding: 35px 10px 20px 35px;
 }
 
 /* Tooltip */
@@ -190,7 +220,7 @@ a.employee-popover:hover {
   font-family: 'Roboto', 'Segoe UI', 'GeezaPro', 'DejaVu Serif', 'sans-serif',
     '-apple-system', 'BlinkMacSystemFont';
   line-height: 20px;
-  padding: 0 0 20px 0;
+  padding: 0 0 50px 0;
 }
 
 .paystubinfo,
@@ -220,7 +250,11 @@ a.employee-popover:hover {
   float: left;
 }
 .profile-data {
-  padding: 2px 0;
+  padding: 5px 0;
+}
+
+.employees-content #content {
+  height: calc(100vh - 150px);
 }
 
 .employeeLeave-header {
@@ -228,7 +262,7 @@ a.employee-popover:hover {
   font-family: 'Roboto', 'Segoe UI', 'GeezaPro', 'DejaVu Serif', 'sans-serif',
     '-apple-system', 'BlinkMacSystemFont';
   line-height: 20px;
-  padding: 0 0 20px 0;
+  padding: 0 0 50px 0;
 }
 
 .employeeLeave-header span {
@@ -284,7 +318,7 @@ td.cardcell.separateline {
 }
 
 .detail {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 
 .sub-heading {
@@ -350,11 +384,6 @@ td.cardcell.separateline {
 
 /* Weather Card Layout Customization */
 
-.card-control-section.basic_card_layout .card-layout {
-  margin: auto;
-  max-width: 400px;
-}
-
 .policiespage .row,
 .achievementspage .row,
 .announcementpage .row {
@@ -377,10 +406,6 @@ td.cardcell.separateline {
     .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
     width: 100%;
   }
-
-  .card-control-section.basic_card_layout .card-layout {
-    max-width: 870px;
-  }
 }
 
 @media (max-width: 600px) {
@@ -397,17 +422,4 @@ td.cardcell.separateline {
   .card-control-section.basic_card_layout .card-layout {
     max-width: 600px;
   }
-}
-
-/* Horizontal Card Layout Customization */
-
-.card-control-section.horizontal_card_layout
-  .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
-  width: 100%;
-  margin: auto;
-}
-
-.card-control-section.horizontal_card_layout .card-layout {
-  margin: auto;
-  max-width: 870px;
 }
