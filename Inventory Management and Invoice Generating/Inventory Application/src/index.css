@@ -4,7 +4,7 @@
 }
 
 .e-grid {
-    flex: 9;
+    flex: 7;
 }
 
 .e-grid td.e-active {
@@ -32,10 +32,6 @@
     .e-cancelbutton.e-hide {
         display: block;
     }
-}
-
-.header .input-container .e-input-group.e-control-wrapper.e-ddl {
-    width: 86% !important;
 }
 
 .header {
@@ -76,7 +72,7 @@
     }
 
     .input-container-title {
-        font-size: 19px;
+        font-size: 22px;
     }
 }
 
@@ -108,6 +104,10 @@
     .card-control-section.vertical_card_layout .col-xs-3.col-sm-3 #poscards.e-card {
         height: 90px;
     }
+
+    .control-pane.amount .col-xs-6.col-sm-6 #poscards.e-card .e-card-btn-txt {
+        height: 70%;
+    }
 }
 
 .e-calendar .e-content td.e-today.e-selected:hover span.e-day,
@@ -127,14 +127,23 @@
     color: white
 }
 
+.e-grid tr.e-columnheader,
+.e-grid tr.e-row {
+    height: 40px !important;
+}
+
 .input-container-title {
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16);
-    background: linear-gradient(to right, #fb923c , #facc15  50%, #f97316 );
+    background: linear-gradient(to right, #fb923c, #facc15 50%, #f97316);
     color: black;
     margin: 0;
     padding: 5px;
     text-align: center;
-    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    font-size: 25px;
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: bold;
 }
@@ -219,19 +228,27 @@
 .primary-container .control-pane.amount {
     flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     min-width: 140px;
 }
 
 .control-pane.amount .control-section .card-layout #poscards {
-    height: 90px;
     background-color: #e2e0f2;
 }
 
+.control-pane.amount .control-section .row {
+    margin-top: 10px;
+}
+
+.header .input-container.custid td.customerID {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
 .control-pane.amount .control-section .card-layout #poscards .e-card-actions {
-    padding-top: 9px;
-    font-size: 30px;
+    font-size: 34px;
     font-weight: bold;
 }
 
@@ -243,10 +260,6 @@
 .row .card-layout {
     margin-right: 1px;
     margin-left: 1px;
-}
-
-.primary-container .e-card {
-    height: 140px;
 }
 
 /* Vertical card customization */
@@ -274,7 +287,6 @@
 .card-control-section.vertical_card_layout #poscards_profile.e-card {
     text-align: center;
     background-size: cover;
-    height: 55px;
 }
 
 .card-control-section.vertical_card_layout #poscards.e-card .e-card-header-caption .e-card-header-title,
@@ -351,7 +363,7 @@
 }
 
 .control-pane.payment .e-card:hover {
-    transform: scale(1.05) ;
+    transform: scale(1.05);
 }
 
 /* Button Text */
@@ -415,7 +427,7 @@
 
 /* Cards */
 .e-card {
-    margin: 10px 10px 0 10px;
+    margin: 0px 10px 20px 10px;
     border-radius: 5px;
 }
 
@@ -437,11 +449,14 @@
     background-color: #543cfb;
     /*necessary*/
     color: #333;
-    line-height: 32px;
+    line-height: 25px;
 }
 
 /* Card Buttons */
 .e-card .e-card-actions .e-card-btn-txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: black;
     cursor: pointer;
 }
@@ -455,10 +470,8 @@
 body {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     background-color: #f4f4f4;
-    margin: 5px;
     position: absolute;
     min-width: 50%;
-    height: auto;
 }
 
 .control-section {
@@ -531,7 +544,7 @@ body {
 }
 
 .e-card-btn-txt span {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
     color: white;
 }
@@ -555,12 +568,13 @@ body {
 
 .header .header-table {
     width: 35%;
-    margin-right:5%;
+    margin-right: 5%;
 }
 
 .e-grid .e-row.e-altrow {
     background-color: #e8ebea;
 }
+
 td {
     padding: 3px;
 }
@@ -572,30 +586,61 @@ td {
     width: 28px;
 }
 
-@media screen and (max-width: 1300px) {
+.control-pane.amount .col-xs-6 {
+    min-width: 20%;
+}
 
+.control-pane.payment .col-xs-3 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media screen and (max-width: 1300px) {
     .input-container-title {
-        font-size: 19px;
+        font-size: 22px;
     }
 
     .control-pane.amount .col-xs-6 {
         min-width: 20%;
-        margin-bottom: 10px;
-        margin-left: 2%;
     }
 
     .control-pane.payment .col-xs-3 {
         width: 25%;
+        padding-left: 20px;
     }
 
     .header .header-table {
         width: 28%;
-        margin-right:50px;
+        margin-right: 50px;
+    }
+
+    .card-control-section.vertical_card_layout .col-xs-3.col-sm-3 #poscards.e-card {
+        height: 70px !important;
     }
 }
 
-@media screen and (max-width: 1200px) {
-    .header .input-container .e-input-group.e-control-wrapper.e-ddl {
-        width: 83% !important;
+@media screen and (min-height: 550px) {
+    .control-pane.amount .control-section .card-layout .e-card {
+        height: calc((100vh - 405px) / 3);
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .control-pane.amount .control-section {
+        overflow-y: auto;
+    }
+}
+
+@media screen and (min-height: 700px) {
+
+    .e-card .e-card-header,
+    .e-card .e-card-header-caption {
+        line-height: calc((100vh - 405px) / 12);
+    }
+}
+
+@media screen and (min-height: 800px) {
+    .control-pane.amount .e-card-header-title {
+        font-size: 19px;
     }
 }

@@ -1020,7 +1020,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           ref={gridInstance}
           emptyRecordTemplate={(): any => null}
           gridLines="Both"
-          height="250px"
+          height='100%'
           width='100%'
           rowHeight={15}
           textWrapSettings={wrapSettings}
@@ -1140,9 +1140,9 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
 
     return (
       <div>
-  <div className="input-container-title">ShopNezt Supermarket Point Of Sale (POS)</div>
+      <div className="input-container-title">ShopNezt Supermarket Point Of Sale (POS)</div>
         {/* Customer details Header element */}
-        <div className="header" style={{marginTop: "15px", height: '20%'}}>
+        <div className="header" style={{marginTop: "15px", height: '120px'}}>
           <table className="header-table" style={{marginLeft: '40px'}}>
           <tr className="input-container billno"><td>
             <label>Bill Number:</label></td><td>
@@ -1153,7 +1153,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
             />
           </td></tr>
           <tr className="input-container custid"><td>
-            <label>Customer ID:</label></td><td>
+            <label>Customer ID:</label></td><td className="customerid">
             <AutoCompleteComponent
                 id="customerID"
                 placeholder="Enter customer id"
@@ -1164,7 +1164,6 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
               ref={plusButtonRef}
               title="Add New Customer"
               onClick={addNewCustomer}
-              style={{ marginLeft: "4px" }}
             >
               +
             </ButtonComponent>
@@ -1213,7 +1212,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           </td></tr></table>
         </div>
         {/* Main Content of the Body - Primary Grid and Vertical Amount details Card components */}
-        <div className="primary-container" style={{marginTop: "15px", height: '50%'}}>
+        <div className="primary-container" style={{marginTop: "15px", height: 'calc(100vh - 325px)'}}>
           {MemorizedGridComponent}
 
           {/* Product search by its name - Dialog popup */}
@@ -1264,7 +1263,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
           </DialogComponent>
 
           {/* Vertical Card components - Total Amount, Savings and Quantity details*/}
-          <div className="control-pane amount">
+          <div className="control-pane amount" style={{height: '100%', width: '230px'}}>
             <div className="control-section card-control-section vertical_card_layout">
               <div className="e-card-resize-container">
                 <div className="row">
@@ -1323,7 +1322,7 @@ import { isNullOrUndefined } from '@syncfusion/ej2-base';
         </div>
 
         {/* Horizontal Card components - Delivery type, Payment type Buttons*/}
-        <div className="control-pane payment" style={{marginTop: "15px", height: '20%'}}>
+        <div className="control-pane payment" style={{marginTop: "15px", height: '80px'}}>
           <div className="control-section card-control-section vertical_card_layout">
             <div className="e-card-resize-container">
               <div className="row">
