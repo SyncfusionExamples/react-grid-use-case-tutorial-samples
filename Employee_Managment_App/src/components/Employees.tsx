@@ -127,6 +127,7 @@ const Employees = (props?: { employeeData?: EmployeeDetails; userInfo?: Employee
           pageSettings={{ pageCount: 4, pageSize: 15 }}
           allowExcelExport={true}
           width={'100%'}
+          height={'100%'}
           allowGrouping={true}
           groupSettings={{ enableLazyLoading: true }}
           toolbar={toolbar}
