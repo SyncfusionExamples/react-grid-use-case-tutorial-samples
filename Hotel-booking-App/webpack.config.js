@@ -6,10 +6,18 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: {
-    index: glob.sync("./src/**/**/*.tsx")
-  },
+  entry: "./src/common/index.tsx",
   target: "web",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    open: true,
+    hot: true,
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
