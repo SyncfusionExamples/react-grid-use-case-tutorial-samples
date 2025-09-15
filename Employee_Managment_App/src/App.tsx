@@ -16,7 +16,10 @@ function App() {
         <div className="xyz-management-content" style={{ width: '100%' }}>
           <div className="row">
             <div className="col-md-2 sidebar">
-            <div className="title">NexGen7 Software</div>
+              <div className='sidebar-brand'>
+                <div className="title">NexGen7 Software</div>
+                <span className="e-icons e-line-very-small"></span>
+              </div>
               <ul className="nav flex-column">
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">
