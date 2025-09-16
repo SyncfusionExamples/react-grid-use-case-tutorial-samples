@@ -1,0 +1,211 @@
+/* src/components/Achievements.css */
+:root{
+  --bg: #0f1220;
+  --panel: #171a2b;
+  --text: #e7e9f5;
+  --muted: #aab0c0;
+  --border: #2a2f45;
+
+  --red: #ef5350;
+  --brown: #8d5a2b;
+  --orange: #ef7b2d;
+  --green: #2e7d32;
+
+  --you-bg: #23304a;
+  --shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+
+.achievements-container{
+  padding: 18px 22px 32px;
+  background: var(--bg);
+  min-height: 100%;
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Toolbar */
+.achievements-toolbar{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #1a1e33 0%, #14182a 100%);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+
+.toolbar-left .toolbar-title{
+  font-weight: 700;
+  letter-spacing: .2px;
+  font-size: 20px;
+}
+.toolbar-left .toolbar-sub{
+  color: var(--muted);
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.toolbar-right{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toolbar-field{
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.field-label{ opacity: .9; }
+.field-input{
+  background: #0c1020;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 8px;
+  min-width: 130px;
+  outline: none;
+}
+
+/* Banner */
+.celebrate-banner{
+  margin: 14px 2px 18px;
+  text-align: center;
+  color: #d9b6ff;
+  font-weight: 700;
+  letter-spacing: .3px;
+  font-size: 18px;
+}
+
+/* Cards */
+.cards-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 16px;
+}
+@media (max-width: 1280px){
+  .cards-grid{ grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+}
+@media (max-width: 640px){
+  .cards-grid{ grid-template-columns: 1fr; }
+}
+
+.lb-card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  min-height: 380px;
+}
+
+.lb-card-header{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.bg-red   { background: linear-gradient(135deg, #ef5350, #e53935); }
+.bg-brown { background: linear-gradient(135deg, #8d5a2b, #6f3c1c); }
+.bg-orange{ background: linear-gradient(135deg, #ef7b2d, #d65a16); }
+.bg-green { background: linear-gradient(135deg, #2e7d32, #1b5e20); }
+
+.lb-card-icon{
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(255,255,255,.18);
+  border-radius: 10px;
+}
+
+.lb-card-titles{ line-height: 1.1; }
+.lb-card-title{
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+.lb-card-sub{
+  font-size: 11px;
+  opacity: .9;
+  letter-spacing: 1.4px;
+}
+
+/* List */
+.lb-list{
+  list-style: none;
+  padding: 10px 10px 14px;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  overflow: auto;
+}
+
+.lb-item{
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: #0f1429;
+  border-radius: 10px;
+  transition: transform .15s ease, background .15s ease;
+}
+.lb-item:hover{ transform: translateY(-2px); background: #121937; }
+
+.lb-item.you{
+  border-color: #5b7cff;
+  background: var(--you-bg);
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(91,124,255,.25);
+}
+.lb-item.you::after{
+  content: "You";
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background: #5b7cff;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  letter-spacing: .3px;
+}
+
+.avatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #24304f;
+  color: #d6defa;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+}
+
+.name{
+  color: var(--text);
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.score{
+  color: #ffd27d;
+  font-weight: 800;
+  font-feature-settings: "tnum" on, "lnum" on;
+}

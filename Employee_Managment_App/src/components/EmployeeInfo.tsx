@@ -257,13 +257,6 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
             </div>
         );
     };
-    const myTeam = () => {
-        return (
-            <div className="tab-content">
-                <Employees employeeData={employeeData} userInfo={userInfo} />
-            </div>
-        );
-    };
     return (
         <div className="employeeinfopage">
             <div className="employeeinfo-content">
@@ -273,9 +266,6 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                             header={{ text: 'Overview' }}
                             content={overview}
                         />
-                        {employeeData.Name === userInfo.Name && (
-                            <TabItemDirective header={{ text: 'My Team' }} content={myTeam} />
-                        )}
                     </TabItemsDirective>
                 </TabComponent>
             </div>

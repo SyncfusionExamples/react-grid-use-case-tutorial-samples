@@ -2298,8 +2298,8 @@
   --color-sf-danger-lighter: #fef2f2;
   --color-sf-black: 0, 0, 0;
   --color-sf-white: 255, 255, 255;
-  --color-sf-primary-bg-color: #4f46e5;
-  --color-sf-primary-border-color: #4f46e5;
+  --color-sf-primary-bg-color: #1ab394;
+  --color-sf-primary-border-color: #1ab394;
   --color-sf-primary-text: #fff;
   --color-sf-primary-bg-color-hover: #4338ca;
   --color-sf-primary-border-color-hover: #4338ca;
@@ -70830,12 +70830,175 @@ td.cardcell.separateline {
   height: 14px;
   font-size: 1.8em;
   color:rgba(255, 255, 255, .8);
-  margin-bottom: 35px;
+  margin-bottom: 15px;
   padding-right: 15px;
 }
 
+/* Sidebar sizing that TopNav expects */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;                 /* expanded width */
+  height: 100vh;
+  background: #1f2937;          /* your existing sidebar color */
+  color: #fff;
+  overflow-y: auto;
+  border-right: 1px solid #111827;
+  padding-bottom: 24px;
+}
+
+.sidebar.collapsed { width: 72px; }
+
+/* Main content alignment: sit to the right of the sidebar and below topnav */
+.xyz-management-content {
+  padding-top: 56px;            /* match --topnav-height */
+  margin-left: 240px;           /* expanded width */
+}
+
+.sidebar.collapsed ~ .main-content,
+.sidebar.collapsed ~ .xyz-management-content {
+  /* not used with this DOM structure; kept for reference */
+}
+
+.row { margin: 0; }
+
+/* When sidebar collapses, shift content left */
+.sidebar.collapsed + .main-content,
+.sidebar.collapsed ~ .main-content {
+  margin-left: 72px;
+}
+
+.main-content {
+  margin-left: 240px;           /* expanded */
+  padding: 16px;
+}
+
+.sidebar.collapsed ~ .main-content,
+.sidebar.collapsed + .main-content {
+  margin-left: 72px;            /* collapsed */
+}
+
+/* Responsive: stack sidebar or overlay it if you prefer */
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    width: 72px;                /* collapsed feel on tablets/phones */
+  }
+  .xyz-management-content,
+  .main-content {
+    margin-left: 72px;
+    padding-top: 56px;
+  }
+}
+
+/* src/App.css */
+
+/* Fallbacks; App.tsx sets actual values via inline CSS variables */
+:root {
+  --header-h: 56px;
+  --sidebar-expanded: 240px;
+  --sidebar-collapsed: 72px;
+  --sidebar-current-width: var(--sidebar-expanded);
+}
+
+/* Container that holds header, sidebar, and main */
+.app-layout {
+  position: relative;
+  min-height: 100vh;
+  background: #f6f7f9;
+  color: #1f2937;
+}
+
+/* Fixed sidebar */
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-current-width);
+  background: #242a35;
+  color: #fff;
+  overflow: auto;
+  z-index: 1010; /* sits over header on mobile when open */
+  transition: width 220ms ease, transform 220ms ease;
+}
+
+/* Sidebar header row */
 .sidebar-brand {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
+  height: var(--header-h);
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+}
+
+/* Top navigation bar positioning (content styled in TopNav.css) */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-current-width);
+  width: calc(100% - var(--sidebar-current-width));
+  height: var(--header-h);
+  z-index: 1000;
+  transition: left 220ms ease, width 220ms ease;
+}
+
+/* Main content area takes the remaining space */
+.app-main {
+  position: relative;
+  margin-left: var(--sidebar-current-width);
+  padding: calc(var(--header-h) + 16px) 0 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #fff;
+  transition: margin-left 220ms ease;
+}
+
+/* Optional: collapse style tweaks */
+.sidebar-is-collapsed .sidebar-brand .title {
+  display: none;
+}
+
+/* Mobile/tablet: make sidebar off-canvas and let header+main take full width */
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-expanded);
+  }
+  .app-layout.mobile-sidebar-is-open .app-sidebar {
+    transform: translateX(0);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .topnav {
+    left: 0;
+    width: 100%;
+  }
+
+  .app-main {
+    margin-left: 0;
+    width: 100%;
+    padding: calc(var(--header-h) + 12px) 12px 20px;
+  }
+}
+
+/* Basic nav list resets (optional) */
+.nav {
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+}
+.nav .nav-item .nav-link {
+  display: block;
+  padding: 10px 16px;
+  color: #cfd6e4;
+  text-decoration: none;
+}
+.nav .nav-item .nav-link.active,
+.nav .nav-item .nav-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
 }

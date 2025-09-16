@@ -1,0 +1,33 @@
+/* Add to a global stylesheet like src/index.css or src/App.css */
+
+/* Filter bar layout */
+.org-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 12px;
+}
+
+/* Label */
+.org-filters__label {
+  font-weight: 600;
+  color: var(--text-color, #3f3f46);
+  margin-right: 4px;
+}
+
+/* Pill buttons */
+.org-pill {
+  border-radius: 9999px;
+  padding: 4px 12px;
+  line-height: 1.4;
+  transition: box-shadow 0.15s ease, transform 0.04s ease;
+}
+
+.org-pill:active {
+  transform: translateY(1px);
+}
+
+/* Active visual emphasis (keeps Syncfusion primary coloring) */
+.org-pill--active {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}

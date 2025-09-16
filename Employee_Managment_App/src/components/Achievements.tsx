@@ -1,182 +1,229 @@
-import * as React from 'react';
+// src/components/Achievements.tsx
+import React from 'react';
+import './Achievements.css';
 
-const Achievements = () => {
+const Achievements: React.FC = () => {
   return (
-    <div className="achievementspage">
-      <div className="achievements-content">
-        <div className="col-lg-12 control-section card-control-section horizontal_card_layout">
-          <div className="e-card-resize-container">
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Recognizing Excellence in Software Development
-                        </div>
-                        <div className="e-card-sub-title">Innovation Award</div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Celebrating groundbreaking solutions and inventive
-                      approaches. Acknowledging teams or individuals driving
-                      technological advancements. Honoring those who push
-                      boundaries and redefine industry standards. Encouraging a
-                      culture of creativity and forward-thinking.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Milestones and Accomplishments
-                        </div>
-                        <div className="e-card-sub-title">
-                          Product Launch Achievement
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Marking the successful release of a new software product
-                      or feature. Highlighting the collaborative efforts behind
-                      development, testing, and deployment. Recognizing the
-                      impact on customer satisfaction and business growth.
-                      Motivating teams to strive for continued excellence and
-                      innovation.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className="achievements-container">
+      {/* Top bar (purely visual) */}
+      <div className="achievements-toolbar">
+        <div className="toolbar-left">
+          <div className="toolbar-title">Leaderboard</div>
+          <div className="toolbar-sub">You can view only your team employees in leaderboard.</div>
+        </div>
+
+        <div className="toolbar-right">
+          <label className="toolbar-field">
+            <span className="field-label">Role</span>
+            <select className="field-input" defaultValue="Developer">
+              <option>Developer</option>
+              <option>QA</option>
+              <option>Designer</option>
+              <option>Manager</option>
+            </select>
+          </label>
+
+          <label className="toolbar-field">
+            <span className="field-label">Month</span>
+            <select className="field-input" defaultValue="All">
+              <option>All</option>
+              <option>Jan</option>
+              <option>Feb</option>
+              <option>Mar</option>
+              <option>Apr</option>
+              <option>May</option>
+              <option>Jun</option>
+              <option>Jul</option>
+              <option>Aug</option>
+              <option>Sep</option>
+              <option>Oct</option>
+              <option>Nov</option>
+              <option>Dec</option>
+            </select>
+          </label>
+
+          <label className="toolbar-field">
+            <span className="field-label">Year</span>
+            <select className="field-input" defaultValue="2025">
+              <option>2023</option>
+              <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div className="celebrate-banner">Congratulations to everyone!</div>
+
+      {/* Cards row */}
+      <div className="cards-grid">
+        {/* Overall */}
+        <div className="lb-card">
+          <div className="lb-card-header bg-red">
+            <div className="lb-card-icon" aria-hidden>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM12 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-7 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1H5zm10 0v-1a5 5 0 0 1 5-5h.5a1.5 1.5 0 0 1 1.5 1.5V17H15z" />
+              </svg>
             </div>
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Team Performance and Collaboration
-                        </div>
-                        <div className="e-card-sub-title">
-                          Project Completion Recognition
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Commending teams for delivering projects on time and
-                      within budget. Emphasizing effective communication,
-                      coordination, and problem-solving skills. Fostering a
-                      sense of achievement and pride in collective
-                      accomplishments. Inspiring a culture of teamwork and
-                      shared success within the organization.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Professional Development and Skills Mastery
-                        </div>
-                        <div className="e-card-sub-title">
-                          Certification Attainment
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Celebrating individuals who acquire new skills and
-                      certifications. Recognizing dedication to continuous
-                      learning and professional growth. Validating expertise and
-                      proficiency in specific technologies or methodologies.
-                      Encouraging a culture of lifelong learning and skill
-                      enhancement.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                        Client Impact and Customer Success
-                        </div>
-                        <div className="e-card-sub-title">
-                        Customer Satisfaction Excellence
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                    Recognizing teams that go above and beyond to deliver exceptional 
-                    customer experiences. Celebrating innovative solutions that address 
-                    client needs and enhance user satisfaction. Acknowledging effortsin 
-                    building strong customer relationships through reliable support and service. 
-                    Encouraging a customer-first mindset to drive long-term business success.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Professional Development and Skills Mastery
-                        </div>
-                        <div className="e-card-sub-title">
-                          Certification Attainment
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Celebrating individuals who acquire new skills and
-                      certifications. Recognizing dedication to continuous
-                      learning and professional growth. Validating expertise and
-                      proficiency in specific technologies or methodologies.
-                      Encouraging a culture of lifelong learning and skill
-                      enhancement.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="lb-card-titles">
+              <div className="lb-card-title">Overall</div>
+              <div className="lb-card-sub">LEADERBOARD</div>
             </div>
           </div>
+          <ul className="lb-list">
+            <li className="lb-item">
+              <span className="avatar">IR</span>
+              <span className="name">Indumathi Ravi</span>
+              <span className="score">421</span>
+            </li>
+            <li className="lb-item you">
+              <span className="avatar">YOU</span>
+              <span className="name">You</span>
+              <span className="score">319</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">HK</span>
+              <span className="name">Hariharan Sampath Kumar</span>
+              <span className="score">309</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">ST</span>
+              <span className="name">Sasikumar Thangavel</span>
+              <span className="score">252</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">AT</span>
+              <span className="name">Abirami Thirunangam</span>
+              <span className="score">201</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Performance */}
+        <div className="lb-card">
+          <div className="lb-card-header bg-brown">
+            <div className="lb-card-icon" aria-hidden>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            </div>
+            <div className="lb-card-titles">
+              <div className="lb-card-title">Performance</div>
+              <div className="lb-card-sub">LEADERBOARD</div>
+            </div>
+          </div>
+          <ul className="lb-list">
+            <li className="lb-item">
+              <span className="avatar">AT</span>
+              <span className="name">Abirami Thirunangam</span>
+              <span className="score">250</span>
+            </li>
+            <li className="lb-item you">
+              <span className="avatar">YOU</span>
+              <span className="name">You</span>
+              <span className="score">150</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">HK</span>
+              <span className="name">Hariharan Sampath Kumar</span>
+              <span className="score">125</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">SR</span>
+              <span className="name">Samyuktha Sambantham</span>
+              <span className="score">100</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">ST</span>
+              <span className="name">Sasikumar Thangavel</span>
+              <span className="score">75</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Task */}
+        <div className="lb-card">
+          <div className="lb-card-header bg-orange">
+            <div className="lb-card-icon" aria-hidden>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </div>
+            <div className="lb-card-titles">
+              <div className="lb-card-title">Task</div>
+              <div className="lb-card-sub">LEADERBOARD</div>
+            </div>
+          </div>
+          <ul className="lb-list">
+            <li className="lb-item">
+              <span className="avatar">IR</span>
+              <span className="name">Indumathi Ravi</span>
+              <span className="score">22</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">HK</span>
+              <span className="name">Hariharan Sampath Kumar</span>
+              <span className="score">20</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">AT</span>
+              <span className="name">Abirami Thirunangam</span>
+              <span className="score">18</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">SR</span>
+              <span className="name">Samyuktha Sambantham</span>
+              <span className="score">16</span>
+            </li>
+            <li className="lb-item you">
+              <span className="avatar">YOU</span>
+              <span className="name">You</span>
+              <span className="score">12</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Attendance */}
+        <div className="lb-card">
+          <div className="lb-card-header bg-green">
+            <div className="lb-card-icon" aria-hidden>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V8h14v11z" />
+              </svg>
+            </div>
+            <div className="lb-card-titles">
+              <div className="lb-card-title">Attendance</div>
+              <div className="lb-card-sub">LEADERBOARD</div>
+            </div>
+          </div>
+          <ul className="lb-list">
+            <li className="lb-item">
+              <span className="avatar">AT</span>
+              <span className="name">Abirami Thirunangam</span>
+              <span className="score">20</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">HK</span>
+              <span className="name">Hariharan Sampath Kumar</span>
+              <span className="score">10</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">IR</span>
+              <span className="name">Indumathi Ravi</span>
+              <span className="score">10</span>
+            </li>
+            <li className="lb-item">
+              <span className="avatar">SR</span>
+              <span className="name">Samyuktha Sambantham</span>
+              <span className="score">10</span>
+            </li>
+            <li className="lb-item you">
+              <span className="avatar">YOU</span>
+              <span className="name">You</span>
+              <span className="score">9</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
