@@ -5,7 +5,7 @@
   "author": "Syncfusion Inc.",
   "license": "SEE LICENSE IN license",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "ci-publish": "gulp publish-sample"
   },
@@ -20,10 +20,11 @@
     "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
-    "webpack": "^5.88.1",
+    "webpack": "^5.101.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "copy-webpack-plugin": "^12.0.2"
+    "webpack-dev-server": "^5.2.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "glob": "^10.3.3"
   },
   "dependencies": {
     "react": "^18.2.0",
