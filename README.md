@@ -1,5 +1,5 @@
 # Syncfusion Grid with real-time examples
-The [Syncfusion React Data Grid](https://ej2.syncfusion.com/react/demos/#/material3/grid/overview) (data table) is a feature-rich control for displaying data in a tabular format. The wide range of functionalities includes data binding, editing, Excel-like filtering, custom sorting, support to export data grids to Excel, CSV, and PDF formats, aggregating rows, selection, etc. It provides extensive appearance customization options and is very useful for generating complex grid-based reports with rich formatting.
+The [Syncfusion React Data Grid](https://ej2.syncfusion.com/react/demos/#/tailwind3/grid/overview) (data table) is a feature-rich control for displaying data in a tabular format. The wide range of functionalities includes data binding, editing, Excel-like filtering, custom sorting, support to export data grids to Excel, CSV, and PDF formats, aggregating rows, selection, etc. It provides extensive appearance customization options and is very useful for generating complex grid-based reports with rich formatting.
 ## Why Choose Syncfusion React Grid?
 Are you looking for a robust and powerful data grid to quench your UI requirements? If so, I will give you good reasons to choose Syncfusion React Grid and show you why it is the best data grid around.
 -	[High Performance](https://www.syncfusion.com/react-components/react-data-grid/performance): Load millions of records in seconds with optimized performance.
@@ -20,7 +20,7 @@ Additionally, it supports real-time applications with autofill capabilities and 
 [Top features](https://www.syncfusion.com/blogs/post/top-5-features-react-data-grid)
 
 ## Reference 
-[Demo](https://ej2.syncfusion.com/react/demos/#/material3/grid/overview)
+[Demo](https://ej2.syncfusion.com/react/demos/#/tailwind3/grid/overview)
 [Documentation](https://ej2.syncfusion.com/react/documentation/grid/getting-started)
 
 ## Realtime samples using Syncfusion React DataGrid
