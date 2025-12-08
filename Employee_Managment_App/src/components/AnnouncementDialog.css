@@ -1,0 +1,173 @@
+/* src/components/AnnouncementDialog.css */
+/* No CSS changes required for removing title and reference id in the card.
+   Keep your current styles. Included here unchanged for convenience. */
+
+/* Clean, professional layout. Also strips gradient backgrounds under .no-gradient scope. */
+
+/* Tokens */
+:root {
+  --annc-theme: #16a085;
+  --annc-text: #0f172a;
+  --annc-muted: #64748b;
+  --annc-border: #e5e7eb;
+  --annc-bg: #ffffff;
+  --annc-surface: #f8fafc;
+  --annc-shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
+}
+
+.no-gradient,
+.no-gradient * { background-image: none !important; }
+
+.e-annc-detail-dialog.e-dialog {
+  border-radius: 12px;
+  background: var(--annc-bg);
+  box-shadow: var(--annc-shadow);
+  overflow: hidden;
+}
+
+.e-annc-detail-dialog.e-dialog .e-dlg-content {
+  padding: 0;
+  max-height: min(72vh, 560px);
+  overflow: auto;
+}
+
+.e-annc-detail-dialog.e-dialog .e-dlg-header-content {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--annc-border);
+}
+
+.annc-dlg-header {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.annc-dlg-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #eaf8f4;
+  color: var(--annc-theme);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.annc-dlg-icon.announcement { background: #eaf8f4; color: #0b7a5b; }
+.annc-dlg-icon.notification { background: #eef6ff; color: #1d4ed8; }
+.annc-dlg-icon.message { background: #fff3e6; color: #b45309; }
+
+.annc-dlg-headings { min-width: 0; }
+.annc-dlg-title {
+  color: var(--annc-text);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.annc-dlg-content { padding: 16px 20px 14px 20px; }
+
+.annc-dlg-card {
+  border: 1px solid var(--annc-border);
+  background: var(--annc-bg);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.annc-dlg-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px 18px;
+}
+@media (max-width: 920px) {
+  .annc-dlg-details { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px) {
+  .annc-dlg-details { grid-template-columns: 1fr; }
+}
+
+.annc-dlg-details_item {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: min-content minmax(0, 1fr);
+  row-gap: 4px;
+}
+.annc-dlg-details_label {
+  font-size: 11px;
+  color: var(--annc-muted);
+  text-transform: uppercase;
+  letter-spacing: .25px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.annc-dlg-details_value {
+  font-size: 14px;
+  color: var(--annc-text);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.annc-dlg-section { margin-top: 6px; }
+.annc-dlg-section_title {
+  font-size: 12px;
+  color: var(--annc-muted);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.annc-dlg-paragraph {
+  color: var(--annc-text);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.type-badge,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  border: 1px solid var(--annc-border);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.type-badge { border-color: transparent; }
+.type-badge.announcement { background: #ecfdf5; color: #047857; border-color: #d1fae5; }
+.type-badge.notification { background: #eef6ff; color: #1d4ed8; border-color: #cfe1ff; }
+.type-badge.message { background: #fff3e6; color: #b45309; border-color: #fdebd3; }
+.status-badge.read { background: #f1f5f9; color: #0f172a; }
+.status-badge.unread { background: #fff1f2; color: #be123c; border-color: #fecdd3; }
+
+.e-annc-detail-dialog.e-dialog .e-dlg-footer-content {
+  padding: 12px 20px;
+  border-top: 1px solid var(--annc-border);
+  background: var(--annc-bg);
+}
+.annc-dlg-footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 520px) {
+  .annc-dlg-footer { flex-direction: column-reverse; align-items: stretch; }
+  .e-annc-detail-dialog.e-dialog { border-radius: 10px; }
+}

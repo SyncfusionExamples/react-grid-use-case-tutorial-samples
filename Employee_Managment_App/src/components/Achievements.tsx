@@ -1,231 +1,356 @@
 // src/components/Achievements.tsx
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
+import { DataManager, UrlAdaptor, Query } from '@syncfusion/ej2-data';
 import './Achievements.css';
 
-const Achievements: React.FC = () => {
+type EmployeeDetails = {
+  EmployeeCode: string;
+  Name: string;
+  Mail?: string;
+  Designation?: string;
+  Branch?: string;
+  Team?: string;
+  TeamLead?: string;
+  ManagerName?: string;
+  DateOfJoining?: string | Date;
+};
+
+type AchievementsProps = {
+  userInfo?: EmployeeDetails | null;
+  onlyTeamIfUser?: boolean;
+};
+
+const data = new DataManager({
+  url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesData',
+  adaptor: new UrlAdaptor(),
+});
+
+const roles = [
+  { text: 'All', value: 'All' },
+  { text: 'Developer', value: 'Developer' },
+  { text: 'QA', value: 'QA' },
+  { text: 'Designer', value: 'Designer' },
+  { text: 'Manager', value: 'Manager' },
+];
+
+const months = [
+  { text: 'All', value: 'All' },
+  { text: 'Jan', value: 'Jan' },
+  { text: 'Feb', value: 'Feb' },
+  { text: 'Mar', value: 'Mar' },
+  { text: 'Apr', value: 'Apr' },
+  { text: 'May', value: 'May' },
+  { text: 'Jun', value: 'Jun' },
+  { text: 'Jul', value: 'Jul' },
+  { text: 'Aug', value: 'Aug' },
+  { text: 'Sep', value: 'Sep' },
+  { text: 'Oct', value: 'Oct' },
+  { text: 'Nov', value: 'Nov' },
+  { text: 'Dec', value: 'Dec' },
+];
+
+const years = [
+  { text: '2022', value: 2022 },
+  { text: '2023', value: 2023 },
+  { text: '2024', value: 2024 },
+  { text: '2025', value: 2025 }
+];
+
+function mapDesignationToRole(designation?: string): 'Developer' | 'QA' | 'Designer' | 'Manager' {
+  const d = (designation ?? '').toLowerCase();
+  if (d.includes('qa') || d.includes('quality')) return 'QA';
+  if (d.includes('design')) return 'Designer';
+  if (d.includes('manager') || d.includes('lead') || d.includes('head')) return 'Manager';
+  return 'Developer';
+}
+
+function xmur3(str: string) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return function () {
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    h ^= h >>> 16;
+    return h >>> 0;
+  };
+}
+function mulberry32(a: number) {
+  return function () {
+    let t = (a += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function seededPRNG(seedStr: string) {
+  const seedFn = xmur3(seedStr);
+  return mulberry32(seedFn());
+}
+
+type ScoreTriple = { overall: number; task: number; attendance: number; };
+
+function monthIndex(m: string) {
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m);
+}
+
+function buildScores(emp: EmployeeDetails, month: string, year: number): ScoreTriple {
+  const seedKey = `${emp.EmployeeCode || emp.Name}-${year}-${month}`;
+  const rand = seededPRNG(seedKey);
+
+  const role = mapDesignationToRole(emp.Designation);
+  const roleTaskWeight = role === 'Manager' ? 0.9 : role === 'QA' ? 1.1 : role === 'Designer' ? 1.0 : 1.05;
+  const roleAttendWeight = role === 'Manager' ? 0.95 : 1.0;
+
+  let tenureYears = 1;
+  try {
+    const doj = new Date(emp.DateOfJoining || '');
+    if (!isNaN(+doj)) {
+      const now = new Date(year, month === 'All' ? 0 : monthIndex(month), 1);
+      const diff = (now.getTime() - doj.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+      tenureYears = Math.max(1, Math.min(10, Math.floor(diff)));
+    }
+  } catch {
+    tenureYears = 1;
+  }
+  const tenureBonus = 1 + tenureYears * 0.02;
+
+  const task = Math.round((12 + rand() * 18) * roleTaskWeight * tenureBonus);
+  const attendance = Math.round((8 + rand() * 14) * roleAttendWeight);
+  const overall = Math.round(task * 12 + attendance * 8 + rand() * 20);
+
+  return { task, attendance, overall };
+}
+
+function initials(name?: string) {
+  if (!name) return 'NA';
+  const parts = name.trim().split(/\s+/);
+  const s = (parts[0]?.[0] ?? '') + (parts[parts.length - 1]?.[0] ?? '');
+  return s.toUpperCase();
+}
+
+const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = true }) => {
+  const [role, setRole] = useState<string>('All');
+  const [month, setMonth] = useState<string>('All');
+  const [year, setYear] = useState<number>(new Date().getFullYear());
+
+  const [employees, setEmployees] = useState<EmployeeDetails[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function load() {
+      try {
+        setLoading(true);
+        const q = new Query().take(200);
+        const result: any = await (data as any).executeQuery(q);
+        const rows: EmployeeDetails[] = Array.isArray(result?.result) ? result.result : (result as any) ?? [];
+        if (isMounted) {
+          setEmployees(rows);
+          setError(null);
+        }
+      } catch {
+        if (isMounted) setError('Failed to load employees');
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+    load();
+    return () => { isMounted = false; };
+  }, []);
+
+  const { overallTop, taskTop, attendanceTop, youRowIds } = useMemo(() => {
+    const monthKey = month;
+    const base = employees
+      .filter((e) => {
+        if (onlyTeamIfUser && userInfo?.Team) return (e.Team || '').toLowerCase() === userInfo.Team.toLowerCase();
+        return true;
+      })
+      .filter((e) => (role === 'All' ? true : mapDesignationToRole(e.Designation) === role));
+
+    const rows = base.map((e) => {
+      const s = buildScores(e, monthKey, year);
+      return { ...e, scoreOverall: s.overall, scoreTask: s.task, scoreAttendance: s.attendance };
+    });
+
+    const topN = 5;
+    const overallTop = [...rows].sort((a, b) => b.scoreOverall - a.scoreOverall).slice(0, topN);
+    const taskTop = [...rows].sort((a, b) => b.scoreTask - a.scoreTask).slice(0, topN);
+    const attendanceTop = [...rows].sort((a, b) => b.scoreAttendance - a.scoreAttendance).slice(0, topN);
+
+    const youId = (userInfo?.EmployeeCode || userInfo?.Name || '').toLowerCase();
+    const youRowIds = new Set<string>();
+    if (youId) {
+      [overallTop, taskTop, attendanceTop].forEach((arr) =>
+        arr.forEach((r) => {
+          const id = (r.EmployeeCode || r.Name).toLowerCase();
+          if (id === youId) youRowIds.add(id);
+        })
+      );
+    }
+    return { overallTop, taskTop, attendanceTop, youRowIds };
+  }, [employees, role, month, year, userInfo?.Team, userInfo?.EmployeeCode, userInfo?.Name, onlyTeamIfUser]);
+
   return (
-    <div className="achievements-container">
-      {/* Top bar (purely visual) */}
-      <div className="achievements-toolbar">
+    <div className="achievements-container light-theme">
+      <div className="achievements-toolbar flat">
         <div className="toolbar-left">
           <div className="toolbar-title">Leaderboard</div>
-          <div className="toolbar-sub">You can view only your team employees in leaderboard.</div>
+          <div className="toolbar-sub">
+            {onlyTeamIfUser && userInfo?.Team
+              ? `You can view only your team employees in leaderboard. (Team: ${userInfo.Team})`
+              : 'Leaderboard generated from employee records.'}
+          </div>
         </div>
 
         <div className="toolbar-right">
           <label className="toolbar-field">
             <span className="field-label">Role</span>
-            <select className="field-input" defaultValue="Developer">
-              <option>Developer</option>
-              <option>QA</option>
-              <option>Designer</option>
-              <option>Manager</option>
-            </select>
+            <DropDownListComponent
+              id="role-ddl"
+              cssClass="sf-field-input"
+              dataSource={roles}
+              fields={{ text: 'text', value: 'value' }}
+              value={role}
+              width="180px"
+              placeholder="Select role"
+              change={(e: any) => setRole(e.value)}
+              aria-label="Filter by role"
+              floatLabelType="Never"
+              popupHeight="220px"
+            />
           </label>
 
           <label className="toolbar-field">
             <span className="field-label">Month</span>
-            <select className="field-input" defaultValue="All">
-              <option>All</option>
-              <option>Jan</option>
-              <option>Feb</option>
-              <option>Mar</option>
-              <option>Apr</option>
-              <option>May</option>
-              <option>Jun</option>
-              <option>Jul</option>
-              <option>Aug</option>
-              <option>Sep</option>
-              <option>Oct</option>
-              <option>Nov</option>
-              <option>Dec</option>
-            </select>
+            <DropDownListComponent
+              id="month-ddl"
+              cssClass="sf-field-input"
+              dataSource={months}
+              fields={{ text: 'text', value: 'value' }}
+              value={month}
+              placeholder="Select month"
+              change={(e: any) => setMonth(e.value)}
+              aria-label="Filter by month"
+              floatLabelType="Never"
+              popupHeight="260px"
+            />
           </label>
 
           <label className="toolbar-field">
             <span className="field-label">Year</span>
-            <select className="field-input" defaultValue="2025">
-              <option>2023</option>
-              <option>2024</option>
-              <option>2025</option>
-              <option>2026</option>
-            </select>
+            <DropDownListComponent
+              id="year-ddl"
+              cssClass="sf-field-input"
+              dataSource={years}
+              fields={{ text: 'text', value: 'value' }}
+              value={year}
+              placeholder="Select year"
+              change={(e: any) => setYear(e.value)}
+              aria-label="Filter by year"
+              floatLabelType="Never"
+              popupHeight="220px"
+            />
           </label>
         </div>
       </div>
 
-      <div className="celebrate-banner">Congratulations to everyone!</div>
+      {loading && <div style={{ margin: '16px 2px' }}>Loading employees…</div>}
+      {error && <div style={{ margin: '16px 2px', color: '#dc2626' }}>{error}</div>}
 
-      {/* Cards row */}
-      <div className="cards-grid">
-        {/* Overall */}
-        <div className="lb-card">
-          <div className="lb-card-header bg-red">
-            <div className="lb-card-icon" aria-hidden>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM12 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-7 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1H5zm10 0v-1a5 5 0 0 1 5-5h.5a1.5 1.5 0 0 1 1.5 1.5V17H15z" />
-              </svg>
-            </div>
-            <div className="lb-card-titles">
-              <div className="lb-card-title">Overall</div>
-              <div className="lb-card-sub">LEADERBOARD</div>
-            </div>
-          </div>
-          <ul className="lb-list">
-            <li className="lb-item">
-              <span className="avatar">IR</span>
-              <span className="name">Indumathi Ravi</span>
-              <span className="score">421</span>
-            </li>
-            <li className="lb-item you">
-              <span className="avatar">YOU</span>
-              <span className="name">You</span>
-              <span className="score">319</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">HK</span>
-              <span className="name">Hariharan Sampath Kumar</span>
-              <span className="score">309</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">ST</span>
-              <span className="name">Sasikumar Thangavel</span>
-              <span className="score">252</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">AT</span>
-              <span className="name">Abirami Thirunangam</span>
-              <span className="score">201</span>
-            </li>
-          </ul>
-        </div>
+      {!loading && !error && (
+        <>
+          <div className="celebrate-banner flat">Congratulations to everyone!</div>
 
-        {/* Performance */}
-        <div className="lb-card">
-          <div className="lb-card-header bg-brown">
-            <div className="lb-card-icon" aria-hidden>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-              </svg>
-            </div>
-            <div className="lb-card-titles">
-              <div className="lb-card-title">Performance</div>
-              <div className="lb-card-sub">LEADERBOARD</div>
-            </div>
-          </div>
-          <ul className="lb-list">
-            <li className="lb-item">
-              <span className="avatar">AT</span>
-              <span className="name">Abirami Thirunangam</span>
-              <span className="score">250</span>
-            </li>
-            <li className="lb-item you">
-              <span className="avatar">YOU</span>
-              <span className="name">You</span>
-              <span className="score">150</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">HK</span>
-              <span className="name">Hariharan Sampath Kumar</span>
-              <span className="score">125</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">SR</span>
-              <span className="name">Samyuktha Sambantham</span>
-              <span className="score">100</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">ST</span>
-              <span className="name">Sasikumar Thangavel</span>
-              <span className="score">75</span>
-            </li>
-          </ul>
-        </div>
+          {/* Flat HR-portal style: three simple sections with neutral headers */}
+          <div className="lb-sections">
+            <section className="lb-section">
+              <header className="lb-header bg-r-overall">
+                <div className="lb-header-icon icon-overall" aria-hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM12 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-7 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1H5zm10 0v-1a5 5 0 0 1 5-5h.5A1.5 1.5 0 0 1 22 12.5V17H15z" />
+                  </svg>
+                </div>
+                <div className="lb-header-text">
+                  <div className="lb-title">Overall</div>
+                  <div className="lb-sub">LEADERBOARD</div>
+                </div>
+              </header>
+              <ul className="lb-list flat">
+                {overallTop.map((e) => {
+                  const id = (e.EmployeeCode || e.Name).toLowerCase();
+                  const you = youRowIds.has(id);
+                  return (
+                    <li key={`o-${id}`} className={`lb-row ${you ? 'you' : ''}`}>
+                      <span className="avatar flat">{initials(e.Name)}</span>
+                      <span className="name">{e.Name}</span>
+                      <span className="score flat">{(e as any).scoreOverall}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
 
-        {/* Task */}
-        <div className="lb-card">
-          <div className="lb-card-header bg-orange">
-            <div className="lb-card-icon" aria-hidden>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-              </svg>
-            </div>
-            <div className="lb-card-titles">
-              <div className="lb-card-title">Task</div>
-              <div className="lb-card-sub">LEADERBOARD</div>
-            </div>
-          </div>
-          <ul className="lb-list">
-            <li className="lb-item">
-              <span className="avatar">IR</span>
-              <span className="name">Indumathi Ravi</span>
-              <span className="score">22</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">HK</span>
-              <span className="name">Hariharan Sampath Kumar</span>
-              <span className="score">20</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">AT</span>
-              <span className="name">Abirami Thirunangam</span>
-              <span className="score">18</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">SR</span>
-              <span className="name">Samyuktha Sambantham</span>
-              <span className="score">16</span>
-            </li>
-            <li className="lb-item you">
-              <span className="avatar">YOU</span>
-              <span className="name">You</span>
-              <span className="score">12</span>
-            </li>
-          </ul>
-        </div>
+            <section className="lb-section">
+              <header className="lb-header bg-r-task">
+                <div className="lb-header-icon icon-task" aria-hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                </div>
+                <div className="lb-header-text">
+                  <div className="lb-title">Task</div>
+                  <div className="lb-sub">LEADERBOARD</div>
+                </div>
+              </header>
+              <ul className="lb-list flat">
+                {taskTop.map((e) => {
+                  const id = (e.EmployeeCode || e.Name).toLowerCase();
+                  const you = youRowIds.has(id);
+                  return (
+                    <li key={`t-${id}`} className={`lb-row ${you ? 'you' : ''}`}>
+                      <span className="avatar flat">{initials(e.Name)}</span>
+                      <span className="name">{e.Name}</span>
+                      <span className="score flat">{(e as any).scoreTask}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
 
-        {/* Attendance */}
-        <div className="lb-card">
-          <div className="lb-card-header bg-green">
-            <div className="lb-card-icon" aria-hidden>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V8h14v11z" />
-              </svg>
-            </div>
-            <div className="lb-card-titles">
-              <div className="lb-card-title">Attendance</div>
-              <div className="lb-card-sub">LEADERBOARD</div>
-            </div>
+            <section className="lb-section">
+              <header className="lb-header bg-r-attendance">
+                <div className="lb-header-icon icon-att" aria-hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V8h14v11z" />
+                  </svg>
+                </div>
+                <div className="lb-header-text">
+                  <div className="lb-title">Attendance</div>
+                  <div className="lb-sub">LEADERBOARD</div>
+                </div>
+              </header>
+              <ul className="lb-list flat">
+                {attendanceTop.map((e) => {
+                  const id = (e.EmployeeCode || e.Name).toLowerCase();
+                  const you = youRowIds.has(id);
+                  return (
+                    <li key={`a-${id}`} className={`lb-row ${you ? 'you' : ''}`}>
+                      <span className="avatar flat">{initials(e.Name)}</span>
+                      <span className="name">{e.Name}</span>
+                      <span className="score flat">{(e as any).scoreAttendance}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
           </div>
-          <ul className="lb-list">
-            <li className="lb-item">
-              <span className="avatar">AT</span>
-              <span className="name">Abirami Thirunangam</span>
-              <span className="score">20</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">HK</span>
-              <span className="name">Hariharan Sampath Kumar</span>
-              <span className="score">10</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">IR</span>
-              <span className="name">Indumathi Ravi</span>
-              <span className="score">10</span>
-            </li>
-            <li className="lb-item">
-              <span className="avatar">SR</span>
-              <span className="name">Samyuktha Sambantham</span>
-              <span className="score">10</span>
-            </li>
-            <li className="lb-item you">
-              <span className="avatar">YOU</span>
-              <span className="name">You</span>
-              <span className="score">9</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

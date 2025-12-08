@@ -2205,6 +2205,10 @@
 }
 
 :root {
+  --font-family: 'Roboto', sans-serif;
+  --font-color-primary: rgba(0, 0, 0, 0.87);
+  --font-color-secondary: #757575;
+
   --color-sf-content-bg-color: rgba(255, 255, 255);
   --color-sf-content-bg-color-alt1: #f9fafb;
   --color-sf-content-bg-color-alt2: #f3f4f6;
@@ -67695,8 +67699,8 @@ li.e-separator.e-menu-item.e-excel-separator {
 }
 
 .e-grid .e-focused:not(.e-menu-item):not(.e-editedbatchcell) {
-  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary) inset;
-  box-shadow: 0 0 0 1px var(--color-sf-primary) inset;
+  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color) inset;
+  box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color) inset;
 }
 
 .e-grid .e-addedrow .e-normaledit .e-rowcell.e-focused {
@@ -70523,7 +70527,6 @@ li.e-separator.e-menu-item.e-excel-separator {
 /* Employees Page */
 
 .employeespage .employees-header,
-.policiespage .policies-header,
 .announcementpage .announcement-header,
 .achievementspage .achievements-header,
 .employeeinfopage .employeeinfo-header {
@@ -70620,6 +70623,9 @@ a.employee-popover:hover {
   .payrollinfo {
     padding-top: 8px;
     display: inline-block;
+    font-weight: 100;
+    font-size: 24px;
+    font-family: var(--font-family);
   }
 }
 
@@ -70636,6 +70642,41 @@ a.employee-popover:hover {
 
 .profile-data {
   padding: 5px 0;
+}
+
+.profile-data-name {
+  font-family: var(--font-family);
+  font-size: 24px;
+  font-weight: 100;
+  color: var(--font-color-primary);
+}
+
+.profile-data-mail {
+  color: var(--font-color-secondary);
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.profile-data-designation {
+  font-weight: 400;
+  height: 16px;
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: var(--font-family);
+}
+
+.profile-data-supervisor {
+  margin-top: 5px;
+  color: var(--font-color-secondary);
+  font-family: var(--font-family);
+}
+
+.profile-data-branch {
+  font-family: var(--font-family);
+  color: var(--font-color-primary);
+  margin-top: 5px;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .employees-content #content {
@@ -70703,7 +70744,8 @@ td.cardcell.separateline {
 }
 
 .detail {
-  padding-bottom: 20px;
+  padding-bottom: 15px;
+  font-size: 13px;
 }
 
 .sub-heading {
@@ -70992,7 +71034,6 @@ td.cardcell.separateline {
   margin: 0;
 }
 .nav .nav-item .nav-link {
-  display: block;
   padding: 10px 16px;
   color: #cfd6e4;
   text-decoration: none;
@@ -71001,4 +71042,87 @@ td.cardcell.separateline {
 .nav .nav-item .nav-link:hover {
   background: rgba(255,255,255,0.08);
   color: #fff;
+}
+
+#employees_grid .e-pager .e-currentitem, #employees_grid .e-pager .e-currentitem:hover {
+    background: var(--color-sf-primary-bg-color);
+    border-color: var(--color-sf-primary-bg-color);
+    color: var(--color-sf-primary-text-color);
+}
+
+/* Sidebar header with internal toggle */
+.app-sidebar .sidebar-brand {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 12px;
+  gap: 10px;
+  border-bottom: 1px solid #1f2937;
+}
+
+.app-sidebar .sidebar-brand .sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.app-sidebar .sidebar-brand .title {
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+/* Nav items: icon + text; hide text when docked */
+.app-sidebar .nav {
+  padding: 8px 6px;
+  margin: 0;
+}
+
+.app-sidebar .nav-item {
+  list-style: none;
+  margin: 2px 0;
+}
+
+.app-sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #cbd5e1;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.app-sidebar .nav-link.active,
+.app-sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+.app-sidebar .nav-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: #cbd5e1;
+}
+
+/* When the layout is collapsed (desktop dock), hide text and center icons */
+.app-layout.sidebar-is-collapsed .app-sidebar .nav-link {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.app-layout.sidebar-is-collapsed .app-sidebar .nav-text {
+  display: none;
+}
+
+/* Keep brand title minimal when collapsed (we render 'HR' text already) */
+.app-layout.sidebar-is-collapsed .app-sidebar .sidebar-brand {
+  justify-content: center;
 }

@@ -18,7 +18,7 @@ const MyProfile = () => {
     FatherName: 'David Anderson',
     MotherName: 'Pamela Anderson',
     Gender: 'Male',
-    BloodGroup: 'O+ve',
+    BloodGroup: 'O +ve',
     MaritalStatus: 'Married',
     DOB: new Date(new Date().getFullYear() - 42, 2, 20),
   };

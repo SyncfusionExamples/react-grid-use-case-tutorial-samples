@@ -1,66 +1,67 @@
 // src/components/TopNav.tsx
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './TopNav.css';
+import { AnnouncementPanel, PanelItem } from './Announcement';
 
 type TopNavProps = {
-  // Branding
-  portalShort?: string;              // e.g., "HR"
-  companyName?: string;              // e.g., "NexGen7 Software"
-
-  // Header-to-sidebar alignment
-  sidebarWidth?: number;             // expanded width in px (e.g., 240)
-  collapsedSidebarWidth?: number;    // collapsed width in px (e.g., 72)
-  sidebarCollapsed?: boolean;        // current sidebar state
-
-  // Counters
+  portalShort?: string;
+  companyName?: string;
+  headerOffsetLeft?: number;
   notifications?: {
-    bell?: number;   // general notifications
-    chat?: number;   // messages
-    tasks?: number;  // tasks or approvals
+    bell?: number;
+    chat?: number;
+    tasks?: number;
+    announcements?: number;
   };
-
-  // Handlers
-  onToggleSidebar?: () => void;
-  onToggleMobileSidebar?: () => void;
+  notificationItems?: PanelItem[];
+  announcementItems?: PanelItem[];
   onSearch?: (q: string) => void;
   onCreate?: () => void;
   onOpenNotifications?: () => void;
   onOpenChat?: () => void;
   onOpenTasks?: () => void;
   onOpenApps?: () => void;
+  onOpenAnnouncements?: () => void;
   onHelp?: () => void;
   onProfile?: () => void;
   onSignOut?: () => void;
-
-  // User
   userFullName?: string;
 };
 
 const TopNav: React.FC<TopNavProps> = ({
   portalShort = 'HR',
   companyName = 'NexGen7 Software',
-  sidebarWidth = 240,
-  collapsedSidebarWidth = 72,
-  sidebarCollapsed = false,
-
-  notifications = { bell: 3, chat: 2, tasks: 1 },
-
-  onToggleSidebar,
+  headerOffsetLeft = 0,
+  notifications = { bell: 3, chat: 2, tasks: 1, announcements: 3 },
+  notificationItems = [
+    { id: 1, title: 'Interview for Customer Support Specialist', subtitle: 'Announcement', date: 'Sep 18', type: 'notification', content: 'You are invited for the Customer Support Specialist interview on Sep 22 at 11:00 AM. Please bring your updated resume and ID.' },
+    { id: 2, title: 'Interview for Facilities Executive', subtitle: 'Announcement', date: 'Sep 9', type: 'notification', content: 'Facilities Executive interview is scheduled for Sep 23 at 2:30 PM in Meeting Room A.' },
+    { id: 3, title: 'Interview for Office Coordinator / Admin', subtitle: 'Announcement', date: 'Sep 5', type: 'notification', content: 'Your interview for the Office Coordinator / Admin position is scheduled on Sep 25 at 10:00 AM in Conference Room B. Please bring your updated resume and a government-issued ID.' },
+  ],
+  announcementItems = [
+    { id: 'a1', title: 'Policy Update: Remote Work Guidelines', subtitle: 'Corporate Communication', date: 'Sep 16', type: 'announcement', content: 'We have updated our Remote Work Guidelines effective Oct 1. Key changes include flexible core hours and equipment reimbursement policy. Please read the full policy on the intranet.' },
+    { id: 'a2', title: 'Holiday: Office Closed on 2nd Oct', subtitle: 'HR', date: 'Sep 14', type: 'announcement', content: 'In observance of a public holiday, all offices will remain closed on 2nd October. Normal operations resume on 3rd October.' },
+    { id: 'a3', title: 'Quarterly Town Hall this Friday', subtitle: 'Admin', date: 'Sep 12', type: 'announcement', content: 'Join us for the Quarterly Town Hall on Sep 20 at 4:00 PM in the Main Auditorium. Leadership will share company updates, upcoming initiatives, and answer your questions. Attendance is encouraged.' },
+  ],
   onSearch,
   onCreate,
   onOpenNotifications,
   onOpenChat,
   onOpenTasks,
   onOpenApps,
+  onOpenAnnouncements,
   onHelp,
   onProfile,
   onSignOut,
-
   userFullName = 'Test Person',
 }) => {
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [createMenuOpen, setCreateMenuOpen] = useState(false);
+
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
 
   const initials = useMemo(() => {
     const parts = userFullName.trim().split(/\s+/);
@@ -69,12 +70,48 @@ const TopNav: React.FC<TopNavProps> = ({
     return (f + l).toUpperCase();
   }, [userFullName]);
 
-  const effectiveSidebar = sidebarCollapsed ? collapsedSidebarWidth : sidebarWidth;
-
   const submitSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     onSearch?.(query.trim());
   };
+
+  const avatarRef = useRef<HTMLDivElement | null>(null);
+  const createRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleDocClick = (ev: MouseEvent) => {
+      if (avatarRef.current && !avatarRef.current.contains(ev.target as Node)) {
+        setAvatarMenuOpen(false);
+      }
+      if (createRef.current && !createRef.current.contains(ev.target as Node)) {
+        setCreateMenuOpen(false);
+      }
+    };
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setAvatarMenuOpen(false);
+        setCreateMenuOpen(false);
+        setMobileSearchOpen(false);
+        setPanelOpen(false);
+      }
+    };
+    document.addEventListener('click', handleDocClick);
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('click', handleDocClick);
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  const openAnnouncementsPanel = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setPanelTab('announcements');
+    setPanelOpen(true);
+    onOpenAnnouncements?.();
+  };
+
+  const TOPNAV_HEIGHT = 56;
 
   return (
     <>
@@ -82,44 +119,61 @@ const TopNav: React.FC<TopNavProps> = ({
         className="topnav parallel"
         role="banner"
         style={{
-          left: `${effectiveSidebar}px`,
-          width: `calc(100% - ${effectiveSidebar}px)`,
+          left: `${headerOffsetLeft}px`,
+          width: `calc(100% - ${headerOffsetLeft}px)`,
         }}
       >
         <div className="topnav-inner">
-          {/* Left region: brand + hamburger */}
           <div className="cluster-left">
             <div className="brand-line" title={`${portalShort} Portal`}>
               <span className="company-name">{companyName}</span>
             </div>
           </div>
 
-          {/* Center region: search */}
-          <div className={`cluster-center ${mobileSearchOpen ? 'hidden-md-up' : ''}`}>
-            <form className="search-form" role="search" onSubmit={submitSearch}>
-              <div className="search-field">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="currentColor"
-                    d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
-                  />
-                </svg>
+          <div className={`cluster-center ${mobileSearchOpen ? 'is-open' : ''}`}>
+            <form className="search-form" role="search" aria-label="Employee search" onSubmit={submitSearch}>
+              <div className={`search-field input-group ${query ? 'has-value' : ''}`}>
+                <span className="input-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
+                    />
+                  </svg>
+                </span>
                 <input
+                  className="form-control search-input"
                   type="search"
-                  placeholder="Search employees..."
-                  aria-label="Search employees"
+                  name="q"
+                  placeholder="Search Employee"
+                  aria-label="Search Employee"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape' && query) {
+                      e.preventDefault();
+                      setQuery('');
+                    }
+                  }}
+                  autoComplete="off"
                 />
+                <button
+                  type="button"
+                  className="clear-btn"
+                  onClick={() => setQuery('')}
+                  aria-label="Clear search"
+                  title="Clear"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.71 2.89 18.3 9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.29-6.3z" />
+                  </svg>
+                </button>
               </div>
             </form>
           </div>
 
-          {/* Right region: actions */}
           <div className="cluster-right">
-            {/* Mobile search toggle */}
-            <button
-              className="icon-btn show-md-down"
+            <button className="icon-btn show-md-down"
               aria-label={mobileSearchOpen ? 'Close search' : 'Open search'}
               type="button"
               onClick={() => setMobileSearchOpen((v) => !v)}
@@ -133,63 +187,61 @@ const TopNav: React.FC<TopNavProps> = ({
               </svg>
             </button>
 
-            {/* Create button */}
-            <button className="btn-create" type="button" onClick={onCreate} title="Create">
-              Create
-              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M7 10l5 5 5-5z" />
-              </svg>
-            </button>
+            <div className="btn-create-group" ref={createRef}>
+              <button
+                className="btn-create"
+                type="button"
+                onClick={() => setCreateMenuOpen((o) => !o)}
+                aria-haspopup="menu"
+                aria-expanded={createMenuOpen}
+                title="Create"
+              >
+                <span>Create</span>
+                <span className="e-icons e-chevron-down-fill" aria-hidden="true"></span>
+              </button>
 
-            {/* Tasks */}
-            <button className="icon-btn" type="button" onClick={onOpenTasks} title="Tasks">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-                />
-              </svg>
-              {!!notifications.tasks && <span className="badge">{notifications.tasks}</span>}
-            </button>
+              {createMenuOpen && (
+                <ul className="create-menu" role="menu">
+                  <li role="menuitem">
+                    <button type="button" onClick={onCreate}>Create Leave</button>
+                  </li>
+                  <li role="menuitem">
+                    <button type="button" onClick={onCreate}>Create Permission</button>
+                  </li>
+                </ul>
+              )}
+            </div>
 
-            {/* Chat */}
             <button className="icon-btn" type="button" onClick={onOpenChat} title="Messages">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M21 6H3v12h5v4l4-4h9z"
-                />
+                <path fill="currentColor" d="M21 6H3v12h5v4l4-4h9z" />
               </svg>
               {!!notifications.chat && <span className="badge">{notifications.chat}</span>}
             </button>
 
-            {/* Notifications */}
             <button
               className="icon-btn"
               type="button"
-              onClick={onOpenNotifications}
-              title="Notifications"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setPanelTab('announcements');
+                setPanelOpen(true);
+                onOpenAnnouncements?.();
+              }}
+              title="Announcements"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill="currentColor"
-                  d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"
+                  d="M3 10v4a1 1 0 0 0 1 1h1l3.89 2.6a2 2 0 0 0 3.11-1.65V7.05A2 2 0 0 0 8.89 5.4L5 8H4a1 1 0 0 0-1 1zm18-4v12l-8-4V10l8-4z"
                 />
               </svg>
-              {!!notifications.bell && <span className="badge">{notifications.bell}</span>}
+              {!!notifications.announcements && (
+                <span className="badge">{notifications.announcements}</span>
+              )}
             </button>
 
-            {/* Apps grid */}
-            <button className="icon-btn" type="button" onClick={onOpenApps} title="Apps">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
-                />
-              </svg>
-            </button>
-
-            {/* Help */}
             <button className="icon-btn" type="button" onClick={onHelp} title="Help">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -199,10 +251,9 @@ const TopNav: React.FC<TopNavProps> = ({
               </svg>
             </button>
 
-            {/* Avatar */}
-            <div className="avatar-wrapper">
+            <div className="topnav-avatar-wrapper" ref={avatarRef}>
               <button
-                className="avatar"
+                className="topnav-avatar"
                 type="button"
                 onClick={() => setAvatarMenuOpen((v) => !v)}
                 aria-haspopup="menu"
@@ -212,7 +263,7 @@ const TopNav: React.FC<TopNavProps> = ({
                 {initials}
               </button>
               {avatarMenuOpen && (
-                <ul className="avatar-menu" role="menu">
+                <ul className="topnav-avatar-menu" role="menu">
                   <li role="menuitem">
                     <button type="button" onClick={onProfile}>My Profile</button>
                   </li>
@@ -226,7 +277,6 @@ const TopNav: React.FC<TopNavProps> = ({
         </div>
       </header>
 
-      {/* Mobile search drawer */}
       {mobileSearchOpen && (
         <div className="mobile-search">
           <form
@@ -237,26 +287,38 @@ const TopNav: React.FC<TopNavProps> = ({
               onSearch?.(query.trim());
             }}
           >
-            <div className="search-field">
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
-                />
-              </svg>
+            <div className="search-field search-bootstrap input-group">
+              <span className="input-group-text" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
+                  />
+                </svg>
+              </span>
               <input
+                className="form-control"
                 autoFocus
                 type="search"
-                placeholder="Search employees..."
-                aria-label="Search employees"
+                placeholder="Search Employee"
+                aria-label="Search Employee"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <button className="btn" type="submit">Search</button>
             </div>
           </form>
         </div>
       )}
+
+      <AnnouncementPanel
+        open={panelOpen}
+        defaultTab={panelTab}
+        notificationItems={notificationItems}
+        announcementItems={announcementItems}
+        topOffset={TOPNAV_HEIGHT}
+        onClose={() => setPanelOpen(false)}
+        onChangeTab={(t) => setPanelTab(t)}
+      />
     </>
   );
 };

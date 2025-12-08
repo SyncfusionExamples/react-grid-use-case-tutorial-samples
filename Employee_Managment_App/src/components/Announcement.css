@@ -1,0 +1,185 @@
+/* src/components/Announcement.css */
+/* Scoped styles for the right-side Announcement/Notification drawer */
+:root {
+  --annc-theme: #1ab394;          /* primary theme */
+  --annc-border: #e5e7eb;         /* neutral border */
+  --annc-text: rgba(0,0,0,0.87);
+  --annc-muted: #64748b;
+  --annc-backdrop: rgba(2,6,23,0.35);
+  --annc-elev: 0 8px 20px rgba(2, 6, 23, 0.06);
+  --annc-panel-width: 380px;
+}
+
+/* Backdrop area that starts below the top bar (top offset applied inline) */
+.annc-panel-backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--annc-backdrop);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.annc-panel-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel */
+.annc-right-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--annc-panel-width);
+  max-width: 100%;
+  background: #fff;
+  border-left: 1px solid var(--annc-border);
+  box-shadow: -6px 0 16px rgba(2, 6, 23, 0.08);
+  transform: translateX(100%);
+  transition: transform 220ms ease;
+  display: flex;
+  flex-direction: column;
+}
+.annc-right-panel.open { transform: translateX(0%); }
+
+/* Header */
+.annc-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--annc-theme);
+  color: #fff;
+}
+.annc-panel-title {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.annc-panel-close {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.annc-panel-close:hover { background: rgba(255,255,255,0.28); }
+
+/* Tabs */
+.annc-panel-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 8px 8px 0 8px;
+  border-bottom: 1px solid var(--annc-border);
+}
+.annc-panel-tabs button {
+  background: transparent;
+  border: none;
+  color: #475569;
+  padding: 8px 10px;
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  cursor: pointer;
+}
+.annc-panel-tabs button.active { color: var(--annc-theme); }
+.annc-panel-tabs button.active::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--annc-theme);
+  border-radius: 2px;
+}
+
+/* Subheader */
+.annc-panel-subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  color: var(--annc-muted);
+  font-size: 13px;
+}
+.annc-panel-cta {
+  background: transparent;
+  border: none;
+  color: var(--annc-theme);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Content */
+.annc-panel-content {
+  padding: 6px 6px 10px 6px;
+  overflow: auto;
+  height: 100%;
+}
+.annc-panel-empty {
+  color: var(--annc-muted);
+  font-size: 13px;
+  padding: 16px;
+}
+
+/* List items */
+.annc-panel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.annc-panel-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.annc-panel-item:hover {
+  background: #f8fffb;
+  border-color: #e8f7f1;
+}
+.annc-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #eefcf7;
+  color: var(--annc-theme);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.annc-item-icon.bullhorn { background: #effcf3; }
+.annc-item-body { min-width: 0; }
+.annc-item-title {
+  color: var(--annc-text);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.annc-item-meta {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--annc-muted);
+}
+.annc-item-meta .meta + .meta.dot::before {
+  content: '•';
+  margin: 0 6px;
+  color: #cbd5e1;
+}
+
+@media (max-width: 480px) {
+  :root { --annc-panel-width: 100%; }
+}

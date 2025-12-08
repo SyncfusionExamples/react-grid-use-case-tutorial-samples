@@ -1,232 +1,186 @@
-import * as React from 'react';
+// src/components/Announcement.tsx
+// Reusable right-side drawer that shows Notifications and Announcements
+// Adds Syncfusion Dialog for item details
 
-const Announcement = () => {
+import React from 'react';
+import './Announcement.css';
+import { AnnouncementDetailDialog } from './AnnouncementDetailDialog';
+
+export type PanelItem = {
+  id: string | number;
+  title: string;
+  subtitle?: string;
+  date?: string;
+  type?: 'announcement' | 'notification' | 'message';
+  content?: string; // full body to show in dialog
+  read?: boolean;   // optional read flag
+};
+
+export type AnnouncementPanelProps = {
+  open: boolean;
+  defaultTab?: 'notifications' | 'announcements';
+  notificationItems: PanelItem[];
+  announcementItems: PanelItem[];
+  topOffset?: number;
+  onClose: () => void;
+  onChangeTab?: (tab: 'notifications' | 'announcements') => void;
+  onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
+  onMarkRead?: (item: PanelItem) => void;
+};
+
+export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
+  open,
+  defaultTab = 'announcements',
+  notificationItems,
+  announcementItems,
+  topOffset = 56,
+  onClose,
+  onChangeTab,
+  onMarkAllRead,
+  onMarkRead,
+}) => {
+  const [tab, setTab] = React.useState<'notifications' | 'announcements'>(defaultTab);
+  const panelRef = React.useRef<HTMLDivElement | null>(null);
+
+  // dialog state
+  const [detailOpen, setDetailOpen] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState<PanelItem | null>(null);
+
+  React.useEffect(() => {
+    if (open) setTab(defaultTab);
+  }, [open, defaultTab]);
+
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  React.useEffect(() => {
+    const handleDocClick = (ev: MouseEvent) => {
+      if (!open) return;
+      if (panelRef.current && !panelRef.current.contains(ev.target as Node)) onClose();
+    };
+    document.addEventListener('click', handleDocClick);
+    return () => document.removeEventListener('click', handleDocClick);
+  }, [open, onClose]);
+
+  const setActiveTab = (t: 'notifications' | 'announcements') => {
+    setTab(t);
+    onChangeTab?.(t);
+  };
+
+  const openDetail = (item: PanelItem) => {
+    setSelectedItem(item);
+    setDetailOpen(true);
+  };
+
+  const closeDetail = () => {
+    setDetailOpen(false);
+    setSelectedItem(null);
+  };
+
+  const items = tab === 'notifications' ? notificationItems : announcementItems;
+
   return (
-    <div className="announcementpage">
-      <div className="announcement-content">
-        <div className="col-lg-12 card-control-section basic_card_layout">
-          <div className="e-card-resize-container">
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Company Expansion Announcement
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      We are thrilled to announce our expansion into new
-                      markets. This strategic move reflects our commitment to
-                      growth and innovation. Expanding our reach allows us to
-                      better serve our diverse clientele. Join us as we embark
-                      on this exciting journey of expansion and opportunity.
-                      We look forward to collaborating with new partners and strengthening our global presence.
-                      This expansion will unlock new possibilities and create exciting opportunities for our customers and employees alike.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="weather_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          New Product Launch Announcement
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Introducing our latest product innovation to revolutionize
-                      the industry. This cutting-edge solution addresses
-                      emerging market demands and challenges. Experience
-                      unparalleled features designed to enhance productivity and
-                      efficiency. Stay tuned for the official launch event and
-                      product demonstrations. Be among the first to explore how this breakthrough technology can transform your workflow.
-                      We are committed to pushing the boundaries of technology to bring you smarter, more efficient solutions.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Employee Recognition and Appreciation
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Celebrating the dedication and hard work of our
-                      exceptional team members. Their contributions have been
-                      invaluable in driving our company's success. We extend our
-                      heartfelt appreciation for their commitment and passion.
-                      Let's continue to inspire and support each other in
-                      achieving greatness. Together, we create a workplace where excellence and teamwork thrive.
-                      Your dedication and perseverance are the foundation of our continued success and innovation.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="weather_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Upcoming Training and Development Programs
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Empowering our workforce through comprehensive training
-                      and development initiatives. Equip yourself with the
-                      latest skills and knowledge to excel in your role. Explore
-                      a range of professional development opportunities tailored
-                      to your needs. Invest in your future success and unleash
-                      your full potential with us. Continuous learning is key to staying ahead in today’s evolving industry landscape.
-                      Take this opportunity to expand your expertise and gain a competitive edge in your field.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Company Milestone Celebration
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Marking a significant milestone in our company's journey
-                      of growth and achievement. Reflecting on our past
-                      accomplishments and looking forward to the future. Join us
-                      as we celebrate this momentous occasion with gratitude and
-                      pride. Together, we celebrate our resilience, dedication,
-                      and shared success. This achievement is a testament to our unwavering commitment and hard work.
-                      We couldn't have reached this milestone without the collective efforts of our incredible team.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="weather_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Corporate Social Responsibility Initiatives
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Announcing our commitment to making a positive impact on
-                      society and the environment. Engage in meaningful CSR
-                      activities that contribute to sustainable development
-                      goals. Join us in giving back to the community and
-                      creating a brighter future for all. Together, we can drive
-                      positive change and leave a lasting legacy. By working together, we can make a tangible difference in the world.
-                      Through collective action and responsibility, we aim to build a more sustainable and inclusive future.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="row card-layout">
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="basic_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Important Policy Updates
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Informing our employees about recent updates to company
-                      policies and procedures. Ensuring clarity and transparency
-                      in our operational guidelines and protocols. Stay informed
-                      about changes that may affect your work and
-                      responsibilities. Your compliance and cooperation are
-                      vital in upholding our standards of excellence. Adapting to these 
-                      updates ensures smooth operations and continued workplace efficiency.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-                  <div className="e-card" id="weather_card">
-                    <div className="e-card-header">
-                      <div className="e-card-header-caption">
-                        <div className="e-card-header-title">
-                          Employee Wellness Programs Launch
-                        </div>
-                      </div>
-                    </div>
-                    <div className="e-card-content">
-                      Introducing new initiatives to promote health, wellness,
-                      and work-life balance. Prioritize your well-being with our
-                      range of wellness programs and resources. Join us in
-                      fostering a supportive and healthy workplace culture for
-                      all. Invest in your physical, mental, and emotional
-                      wellness with us. A healthier workforce leads to greater 
-                      productivity and overall happiness.
-                    </div>
-                    <div className="e-card-actions">
-                      <a href="https://ej2.syncfusion.com/" target="_blank" rel="noopener noreferrer">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <>
+      <div
+        className={`annc-panel-backdrop ${open ? 'open' : ''}`}
+        style={{ top: `${topOffset}px` }}
+        aria-hidden={!open}
+      >
+        <aside
+          ref={panelRef}
+          className={`annc-right-panel ${open ? 'open' : ''}`}
+          role="dialog"
+          aria-label="Notification panel"
+          aria-modal="false"
+        >
+          <div className="annc-panel-header">
+            <div className="annc-panel-title">Notification</div>
+            <button className="annc-panel-close" type="button" aria-label="Close" onClick={onClose} title="Close">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>
+            </button>
           </div>
-        </div>
+
+          <div className="annc-panel-tabs" role="tablist" aria-label="Notification categories">
+            <button role="tab" aria-selected={tab === 'notifications'} className={tab === 'notifications' ? 'active' : ''} onClick={() => setActiveTab('notifications')} title="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z" />
+              </svg>
+            </button>
+            <button role="tab" aria-selected={tab === 'announcements'} className={tab === 'announcements' ? 'active' : ''} onClick={() => setActiveTab('announcements')} title="Announcements">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M3 10v4a1 1 0 0 0 1 1h1l3.89 2.6a2 2 0 0 0 3.11-1.65V7.05A2 2 0 0 0 8.89 5.4L5 8H4a1 1 0 0 0-1 1zm18-4v12l-8-4V10l8-4z" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="annc-panel-subhead">
+            {tab === 'notifications' ? <span>Notifications for the last 15 days</span> : <span>Announcements</span>}
+            <button className="annc-panel-cta" type="button" onClick={() => onMarkAllRead?.(tab)}>
+              Mark all read
+            </button>
+          </div>
+
+          <div className="annc-panel-content" role="region" aria-live="polite">
+            {items.length ? (
+              <ul className="annc-panel-list">
+                {items.map((it) => (
+                  <li
+                    key={it.id}
+                    className="annc-panel-item"
+                    onClick={() => openDetail(it)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && openDetail(it)}
+                    title="View details"
+                  >
+                    <span className={`annc-item-icon ${tab === 'announcements' ? 'bullhorn' : ''}`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d={
+                            tab === 'announcements'
+                              ? 'M3 10v4a1 1 0 0 0 1 1h1l3.89 2.6a2 2 0 0 0 3.11-1.65V7.05A2 2 0 0 0 8.89 5.4L5 8H4a1 1 0 0 0-1 1zm18-4v12l-8-4V10l8-4z'
+                              : 'M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z'
+                          }
+                        />
+                      </svg>
+                    </span>
+                    <div className="annc-item-body">
+                      <div className="annc-item-title">{it.title}</div>
+                      {(it.subtitle || it.date) && (
+                        <div className="annc-item-meta">
+                          {it.subtitle && <span className="meta">{it.subtitle}</span>}
+                          {it.date && <span className="meta dot">{it.date}</span>}
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="annc-panel-empty">
+                {tab === 'notifications' ? 'No notification for the last 15 days.' : 'No announcements for the last 15 days.'}
+              </div>
+            )}
+          </div>
+        </aside>
       </div>
-    </div>
+
+      {detailOpen && selectedItem && (
+        <AnnouncementDetailDialog
+          open={detailOpen}
+          item={selectedItem}
+          onClose={closeDetail}
+          onMarkRead={(it) => onMarkRead?.(it)}
+        />
+      )}
+    </>
   );
 };
 
-export default Announcement;
+export default AnnouncementPanel;

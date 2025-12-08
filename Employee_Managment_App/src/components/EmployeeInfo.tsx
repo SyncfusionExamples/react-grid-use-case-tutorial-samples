@@ -22,10 +22,16 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
             ? props.userInfo
             : {};
     let intl: Internationalization = new Internationalization();
-    let dFormatter: Function = intl.getDateFormat({ type: 'date', skeleton: 'medium' });
-    let dateOfJoining: string = employeeData && dFormatter(employeeData.DateOfJoining);
-    let dob: string = employeeData && dFormatter(employeeData.DOB);
+    // Format the date to the desired output
+    const custom = {
+        day: "numeric",  // Displays day as a number (e.g., 1)
+        month: "short",  // Displays the short month name (e.g., Feb)
+        year: "numeric"  // Displays the full year (e.g., 2005)
+    };
+    let dateOfJoining = employeeData && employeeData.DateOfJoining.toLocaleDateString("en-GB", custom);
+    let dob: string = employeeData && employeeData.DOB.toLocaleDateString("en-GB", custom);
     let experience: number = new Date().getFullYear() - employeeData.DateOfJoining.getFullYear();
+    let experienceMonth: number = new Date().getMonth() - employeeData.DateOfJoining.getMonth();
     let headerText: Object[] = [
         { text: 'Official' },
         { text: 'Personal' },
@@ -89,7 +95,7 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                 <div className="detail">
                     <span className="sub-heading">Experience</span>
                     <span className="gap">:</span>
-                    <span className="information">{experience}+ years</span>
+                    <span className="information">{experience} Years {experienceMonth} Months</span>
                 </div>
                 <div className="detail">
                     <span className="sub-heading">User Work Shift</span>
@@ -216,13 +222,11 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                         </svg>
                     </div>
                     <div>
-                        <div className="profile-data">
-                            <b>{employeeData.Name}</b>
-                        </div>
-                        <div className="profile-data">{employeeData.Designation}</div>
-                        <div className="profile-data">Mail Id: {employeeData.Mail}</div>
-                        <div className="profile-data">Branch: {employeeData.Branch}</div>
-                        <div className="profile-data">Lead: {employeeData.TeamLead}</div>
+                        <div className="profile-data-name">{employeeData.Name}</div>
+                        <div className="profile-data-mail">{employeeData.Mail}</div>
+                        <div className="profile-data-designation">{employeeData.Designation}</div>
+                        <div className="profile-data-supervisor">Supervisor: {employeeData.TeamLead}</div>
+                        <div className="profile-data-branch">Branch: {employeeData.Branch}</div>
                     </div>
                 </div>
                 <div className="overview-content">
