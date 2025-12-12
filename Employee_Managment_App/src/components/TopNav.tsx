@@ -58,7 +58,6 @@ const TopNav: React.FC<TopNavProps> = ({
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const [createMenuOpen, setCreateMenuOpen] = useState(false);
 
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
@@ -84,13 +83,11 @@ const TopNav: React.FC<TopNavProps> = ({
         setAvatarMenuOpen(false);
       }
       if (createRef.current && !createRef.current.contains(ev.target as Node)) {
-        setCreateMenuOpen(false);
       }
     };
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setAvatarMenuOpen(false);
-        setCreateMenuOpen(false);
         setMobileSearchOpen(false);
         setPanelOpen(false);
       }
@@ -186,31 +183,6 @@ const TopNav: React.FC<TopNavProps> = ({
                 />
               </svg>
             </button>
-
-            <div className="btn-create-group" ref={createRef}>
-              <button
-                className="btn-create"
-                type="button"
-                onClick={() => setCreateMenuOpen((o) => !o)}
-                aria-haspopup="menu"
-                aria-expanded={createMenuOpen}
-                title="Create"
-              >
-                <span>Create</span>
-                <span className="e-icons e-chevron-down-fill" aria-hidden="true"></span>
-              </button>
-
-              {createMenuOpen && (
-                <ul className="create-menu" role="menu">
-                  <li role="menuitem">
-                    <button type="button" onClick={onCreate}>Create Leave</button>
-                  </li>
-                  <li role="menuitem">
-                    <button type="button" onClick={onCreate}>Create Permission</button>
-                  </li>
-                </ul>
-              )}
-            </div>
 
             <button className="icon-btn" type="button" onClick={onOpenChat} title="Messages">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
