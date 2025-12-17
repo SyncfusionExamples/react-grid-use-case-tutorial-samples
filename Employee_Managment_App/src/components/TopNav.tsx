@@ -49,6 +49,7 @@ const TopNav: React.FC<TopNavProps> = ({
   onOpenTasks,
   onOpenApps,
   onOpenAnnouncements,
+  onHelp,
   onProfile,
   onSignOut,
   userFullName = 'Test Person',
