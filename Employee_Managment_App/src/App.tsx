@@ -90,6 +90,7 @@ function App() {
           width={`${SIDEBAR_WIDTH}px`}
           dockSize={`${SIDEBAR_WIDTH_COLLAPSED}px`}
           enableDock={sbEnableDock}
+          enableGestures={false}
           isOpen={sbIsOpen}
           type={sbType as any}
           position="Left"

@@ -22,13 +22,12 @@
   --bs-success: #1ab394;
 
   /* Component sizing to match HR portal */
-  --control-height: 38px;   /* search and create height */
   --create-width: 96px;     /* button width similar to screenshots */
   --search-max: 600px;      /* desktop search width similar to HR portal */
   
   --hr-search-width: 210px;
 
-  --control-height: 40px;
+  --control-height: 35px;
   --radius-pill: 9999px;
 
   --accent: #10b981;                   /* focus ring + border accent */
@@ -103,13 +102,13 @@
 
 /* Input group container */
 .search-field.input-group {
+  pointer-events: none;
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
   height: var(--control-height);
   background: var(--search-bg);
-  border-radius: var(--radius-pill);
   box-shadow: var(--shadow-rest);
   transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease, transform 120ms ease;
 }
@@ -224,7 +223,6 @@
 
 .icon-btn {
   position: relative;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
@@ -332,7 +330,14 @@
 }
 
 /* Avatar */
-.topnav-avatar-wrapper { position: relative; }
+.topnav-avatar-wrapper { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topnav-avatar-name{
+  margin-left: 10px;
+}
 
 .topnav-avatar {
   width: 36px;
