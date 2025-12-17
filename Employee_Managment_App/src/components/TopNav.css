@@ -85,6 +85,7 @@
 
 .company-name {
   font-size: 16px;
+  font-weight: bold;
   color: rgba(0, 0, 0, 0.87);
 }
 
@@ -315,6 +316,7 @@
 /* Badge */
 .badge {
   position: absolute;
+  font-family: 'Roboto', sans-serif;
   top: -4px;
   right: -4px;
   min-width: 18px;

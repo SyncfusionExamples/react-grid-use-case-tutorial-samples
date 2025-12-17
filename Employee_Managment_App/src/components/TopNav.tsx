@@ -22,7 +22,6 @@ type TopNavProps = {
   onOpenTasks?: () => void;
   onOpenApps?: () => void;
   onOpenAnnouncements?: () => void;
-  onHelp?: () => void;
   onProfile?: () => void;
   onSignOut?: () => void;
   userFullName?: string;
@@ -50,7 +49,6 @@ const TopNav: React.FC<TopNavProps> = ({
   onOpenTasks,
   onOpenApps,
   onOpenAnnouncements,
-  onHelp,
   onProfile,
   onSignOut,
   userFullName = 'Test Person',
@@ -240,15 +238,6 @@ const TopNav: React.FC<TopNavProps> = ({
               {!!notifications.announcements && (
                 <span className="badge">{notifications.announcements}</span>
               )}
-            </button>
-
-            <button className="icon-btn" type="button" onClick={onHelp} title="Help">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M11 18h2v2h-2zm1-16c-5 0-9 4-9 9s4 9 9 9s9-4 9-9s-4-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7s7 3.14 7 7s-3.14 7-7 7zm-.88-5h1.76v-1c0-1.1 2.12-1.38 2.12-3.25c0-1.65-1.35-2.75-3-2.75c-1.52 0-2.64.83-3.02 2.06l1.64.66c.16-.54.63-1.06 1.38-1.06c.69 0 1.24.42 1.24 1.06c0 1.18-2.12 1.45-2.12 3.28v1z"
-                />
-              </svg>
             </button>
 
             <div className="topnav-avatar-wrapper" ref={avatarRef}>
