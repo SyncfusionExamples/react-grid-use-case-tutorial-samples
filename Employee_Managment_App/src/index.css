@@ -2711,12 +2711,6 @@
   --color-sf-chip-info-bg-color-disabled: #ecfeff;
   --color-sf-chip-info-border-color-disabled: #cffafe;
   --color-sf-chip-info-text-disabled: #67e8f9;
-    /* Accent (emerald) */
-  --accent: #10b981;
-  --accent-600: #059669;
-  --accent-700: #047857;
-  --accent-100: #d1fae5;
-  --accent-50: #ecfdf5;
 }
 
 .e-dark-mode {
