@@ -125,6 +125,11 @@ const Employees = (props?: EmployeesProps) => {
   };
 
   const beforeRender = (args: TooltipEventArgs) => {
+   
+    if(args.target.classList.contains('e-headercell')) {
+      (tooltipObj.current as any).content =args.target.innerText;
+    }
+    else {
     const rowInfo: RowInfo = employeeGridIns.current?.getRowInfo(args.target.closest('td') as HTMLElement) as RowInfo;
     const rowData = rowInfo?.rowData as EmployeeDetails;
     (tooltipObj.current as any).content = `
@@ -140,6 +145,7 @@ const Employees = (props?: EmployeesProps) => {
           </div>
         </div>
       </div>`;
+    }
   };
 
   return (
@@ -147,7 +153,7 @@ const Employees = (props?: EmployeesProps) => {
       <TooltipComponent
         id="content"
         cssClass="e-tooltip-template-css"
-        target="td.infotooltip"
+        target="#employees_grid .e-headercell, #employees_grid td.infotooltip"
         beforeRender={beforeRender}
         ref={tooltipObj}
       >
@@ -160,6 +166,7 @@ const Employees = (props?: EmployeesProps) => {
           allowExcelExport={true}
           //width={'100%'}
           //height={'100%'}
+          
           allowGrouping={true}
           groupSettings={{ enableLazyLoading: true }}
           toolbar={toolbar}
@@ -177,6 +184,7 @@ const Employees = (props?: EmployeesProps) => {
               field="Image"
               headerText="Image"
               template={imageTemplate}
+              clipMode='Clip'
               allowFiltering={false}
               allowSorting={false}
               allowGrouping={false}

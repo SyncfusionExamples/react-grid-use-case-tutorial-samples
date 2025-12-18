@@ -31,8 +31,6 @@
 
 .policies-grid-wrapper {
   padding: 28px 24px;
-  max-width: 1160px;
-  margin: 0 auto;
   color: var(--text-strong);
 }
 
@@ -89,6 +87,7 @@
   color: var(--primary-800);
   text-decoration: underline;
 }
+
 
 /* Section headers and Reset link */
 .section-header {
@@ -183,12 +182,11 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  text-align: center;
   gap: 8px;
-  padding-left: 22px;
 }
 
 .filter-chip .filter-chip__label::before {
-  content: '🏷️';
   position: absolute;
   left: 0;
   top: 50%;
@@ -196,31 +194,6 @@
   font-size: 14px;
 }
 
-.filter-chip-row .filter-chip:nth-child(1) .filter-chip__label::before {
-  content: '📚';
-}
-
-.filter-chip-row .filter-chip:nth-child(2) .filter-chip__label::before {
-  content: '🔒';
-}
-
-.filter-chip-row .filter-chip:nth-child(3) .filter-chip__label::before {
-  content: '🗓️';
-}
-
-.filter-chip-row .filter-chip:nth-child(4) .filter-chip__label::before {
-  content: '🧾';
-}
-
-.filter-chip-row .filter-chip:nth-child(5) .filter-chip__label::before {
-  content: '💻';
-}
-
-.filter-chip-row .filter-chip:nth-child(6) .filter-chip__label::before {
-  content: '👔';
-}
-
-/* Employment */
 
 /* Grid styling (unchanged core look from previous refresh) */
 .policy-name-cell {
@@ -236,19 +209,13 @@
   filter: saturate(1.05);
 }
 
-.status {
-  font-size: 12px;
-  font-weight: 900;
-  padding: 6px 10px;
-  border-radius: 999px;
-  display: inline-block;
-  box-shadow: var(--shadow-xs);
-}
+
 
 .status--active {
-  color: #065f46;
-  background: #d1fae5;
-  border: 1px solid #b7f3d4;
+
+    font-size: 12px;
+    background: #d1fae5;
+    color: #065f46;
 }
 
 .status--review {
@@ -307,54 +274,13 @@
   font-size: 16px;
 }
 
-/* Category pills in the grid */
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Category"] {
-  position: relative;
-  padding-left: 28px;
-}
-
 .policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Category"]::before {
-  content: '🏷️';
   position: absolute;
   left: 8px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   opacity: .95;
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Security"]::before {
-  content: '🔒';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="HR & Leave"]::before {
-  content: '🗓️';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Compliance"]::before {
-  content: '🧾';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="IT & Devices"]::before {
-  content: '💻';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Employment"]::before {
-  content: '👔';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Code of Conduct"]::before {
-  content: '📜';
-}
-
-.policies-grid-wrapper .e-grid .e-rowcell[aria-label*="Category"]>span {
-  display: inline-block;
-  padding: 4px 10px 4px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: #f9fafb;
-  font-weight: 700;
-  color: #1f2937;
 }
 
 /* Dialog */
@@ -403,25 +329,19 @@
 }
 
 .meta-value {
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 11px;
+  padding-top: 5px;
   color: var(--text-strong);
 }
 
-.meta-badge {
-  font-size: 12px;
-  font-weight: 900;
-  padding: 6px 10px;
-  border-radius: 999px;
-  display: inline-block;
-  box-shadow: var(--shadow-xs);
-}
-
 .meta-badge.status--active {
-  color: #065f46;
-  background: #d1fae5;
-  border: 1px solid #b7f3d4;
+  font-size: 11px;
 }
-
+.policy-description{
+  line-height: 1.75;
+  padding-top: 10px;
+}
 .meta-badge.status--review {
   color: #92400e;
   background: #fef3c7;

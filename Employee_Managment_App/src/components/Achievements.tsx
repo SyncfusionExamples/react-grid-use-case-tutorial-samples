@@ -209,14 +209,14 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
         <div className="toolbar-right">
           <label className="toolbar-field">
-            <span className="field-label">Role</span>
+            <span className="field-label" >Role</span>
             <DropDownListComponent
               id="role-ddl"
               cssClass="sf-field-input"
               dataSource={roles}
               fields={{ text: 'text', value: 'value' }}
               value={role}
-              width="180px"
+              width="135px"
               placeholder="Select role"
               change={(e: any) => setRole(e.value)}
               aria-label="Filter by role"
@@ -231,6 +231,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               id="month-ddl"
               cssClass="sf-field-input"
               dataSource={months}
+              width="100px"
               fields={{ text: 'text', value: 'value' }}
               value={month}
               placeholder="Select month"
@@ -247,6 +248,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               id="year-ddl"
               cssClass="sf-field-input"
               dataSource={years}
+              width="100px"
               fields={{ text: 'text', value: 'value' }}
               value={year}
               placeholder="Select year"
@@ -270,10 +272,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="lb-sections">
             <section className="lb-section">
               <header className="lb-header bg-r-overall">
-                <div className="lb-header-icon icon-overall" aria-hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM12 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-7 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1H5zm10 0v-1a5 5 0 0 1 5-5h.5A1.5 1.5 0 0 1 22 12.5V17H15z" />
-                  </svg>
+                <div className="lb-header-icon icon-overall e-icons e-user" aria-hidden>
                 </div>
                 <div className="lb-header-text">
                   <div className="lb-title">Overall</div>
@@ -297,10 +296,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-task">
-                <div className="lb-header-icon icon-task" aria-hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                  </svg>
+                <div className="lb-header-icon icon-task e-icons e-check-tick" aria-hidden>
                 </div>
                 <div className="lb-header-text">
                   <div className="lb-title">Task</div>
@@ -324,10 +320,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-attendance">
-                <div className="lb-header-icon icon-att" aria-hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V8h14v11z" />
-                  </svg>
+                <div className="lb-header-icon icon-att e-icons e-day" aria-hidden>
                 </div>
                 <div className="lb-header-text">
                   <div className="lb-title">Attendance</div>
