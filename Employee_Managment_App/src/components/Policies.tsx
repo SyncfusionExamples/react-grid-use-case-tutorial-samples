@@ -30,14 +30,14 @@ type Policy = {
 
 const Policies: React.FC = () => {
   const policyData: Policy[] = [
-    { id: 1, policyName: 'Assets Policy', policyDesciption: 'Our company provides employees with necessary work devices to enhance productivity. Employees may take these devices home but are responsible for their safekeeping and proper usage. Devices must remain in good condition and be returned in working order when no longer needed or upon employment termination. Employees are not permitted to install unauthorized software, modify device settings, or use company assets for personal gain.', category: 'IT & Devices', lastUpdated: 'May 15, 2023', enrolledOn: 'May 15, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 2, policyName: 'Attendance Policy', policyDesciption: 'Punctuality and consistent attendance are crucial for maintaining workflow efficiency and team collaboration. Employees should adhere to their assigned work schedules and inform supervisors promptly about any absences. Repeated lateness or unexcused absences may lead to corrective measures. Remote employees are also expected to maintain a professional work routine and be available during business hours.', category: 'Employment', lastUpdated: 'May 12, 2023', enrolledOn: 'May 12, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 3, policyName: 'Protecting Information Policy', policyDesciption: 'Protecting our company information is the responsibility of every associate, and we all share a common interest in making sure information is not improperly or accidentally disclosed.Employees must follow strict security protocols, including password protection, data encryption, and secure file sharing. Confidential business data should not be shared with unauthorized personnel or stored on personal devices.', category: 'Security', lastUpdated: 'May 11, 2023', enrolledOn: 'May 11, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 4, policyName: 'Leave Policy', policyDesciption: 'Our company values employee well-being and offers 36 annual leave days to support work-life balance. Employees are required to submit leave requests in advance for approval. Leave categories include annual leave, medical leave, family leave, and emergency leave. Unused leave may be carried over based on company policy. Employees must ensure that their responsibilities are covered during their absence to maintain workflow efficiency.', category: 'HR & Leave', lastUpdated: 'May 10, 2023', enrolledOn: 'May 10, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 5, policyName: 'Remote Work Policy', policyDesciption: 'We support flexible work arrangements, allowing employees to work remotely when feasible. Remote employees must ensure they have a reliable internet connection, use approved work devices, and maintain clear communication with their teams. Productivity is measured by performance rather than work hours, but availability during core business hours is expected.', category: 'Employment', lastUpdated: 'May 15, 2023', enrolledOn: 'May 15, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 6, policyName: 'Security Policy', policyDesciption: 'Ensuring the security of company assets and information is a collective responsibility. Employees must follow security protocols such as using strong passwords, securing physical devices, and reporting any suspicious activity. Unauthorized system access, data breaches, or sharing of confidential information with unauthorized parties is strictly prohibited.', category: 'Security', lastUpdated: 'May 9, 2023', enrolledOn: 'May 9, 2023', statusText: 'Active', statusClass: 'status status--active' },
-    { id: 7, policyName: 'Internet Usage Policy', policyDesciption: 'Employees must use company-provided internet access responsibly. Engaging in illegal activities, excessive personal browsing, or accessing restricted content is prohibited. Downloading unapproved software or violating copyright laws is strictly forbidden. Internet activity may be monitored to ensure compliance with security and productivity guidelines.', category: 'IT & Devices', lastUpdated: 'May 7, 2023', enrolledOn: 'May 7, 2023', statusText: 'Under Review', statusClass: 'status status--review' },
-    { id: 8, policyName: 'Expense Reimbursement Policy', policyDesciption: 'Employees may request reimbursement for approved work-related expenses, including travel, meals, and lodging, provided they submit receipts and supporting documents within the required timeframe. All expense claims must align with company budgetary policies. Unauthorized or personal expenses will not be reimbursed unless specifically approved.', category: 'Compliance', lastUpdated: 'May 6, 2023', enrolledOn: 'May 6, 2023', statusText: 'Active', statusClass: 'status status--active' }
+    { id: 1, policyName: 'Assets Policy', policyDesciption: 'Our company provides employees with necessary work devices to enhance productivity. Employees may take these devices home but are responsible for their safekeeping and proper usage. Devices must remain in good condition and be returned in working order when no longer needed or upon employment termination. Employees are not permitted to install unauthorized software, modify device settings, or use company assets for personal gain.', category: 'IT & Devices', lastUpdated: 'May 15, 2023', enrolledOn: 'May 15, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 2, policyName: 'Attendance Policy', policyDesciption: 'Punctuality and consistent attendance are crucial for maintaining workflow efficiency and team collaboration. Employees should adhere to their assigned work schedules and inform supervisors promptly about any absences. Repeated lateness or unexcused absences may lead to corrective measures. Remote employees are also expected to maintain a professional work routine and be available during business hours.', category: 'Employment', lastUpdated: 'May 12, 2023', enrolledOn: 'May 12, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 3, policyName: 'Protecting Information Policy', policyDesciption: 'Protecting our company information is the responsibility of every associate, and we all share a common interest in making sure information is not improperly or accidentally disclosed.Employees must follow strict security protocols, including password protection, data encryption, and secure file sharing. Confidential business data should not be shared with unauthorized personnel or stored on personal devices.', category: 'Security', lastUpdated: 'May 11, 2023', enrolledOn: 'May 11, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 4, policyName: 'Leave Policy', policyDesciption: 'Our company values employee well-being and offers 36 annual leave days to support work-life balance. Employees are required to submit leave requests in advance for approval. Leave categories include annual leave, medical leave, family leave, and emergency leave. Unused leave may be carried over based on company policy. Employees must ensure that their responsibilities are covered during their absence to maintain workflow efficiency.', category: 'HR & Leave', lastUpdated: 'May 10, 2023', enrolledOn: 'May 10, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 5, policyName: 'Remote Work Policy', policyDesciption: 'We support flexible work arrangements, allowing employees to work remotely when feasible. Remote employees must ensure they have a reliable internet connection, use approved work devices, and maintain clear communication with their teams. Productivity is measured by performance rather than work hours, but availability during core business hours is expected.', category: 'Employment', lastUpdated: 'May 15, 2023', enrolledOn: 'May 15, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 6, policyName: 'Security Policy', policyDesciption: 'Ensuring the security of company assets and information is a collective responsibility. Employees must follow security protocols such as using strong passwords, securing physical devices, and reporting any suspicious activity. Unauthorized system access, data breaches, or sharing of confidential information with unauthorized parties is strictly prohibited.', category: 'Security', lastUpdated: 'May 9, 2023', enrolledOn: 'May 9, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 7, policyName: 'Internet Usage Policy', policyDesciption: 'Employees must use company-provided internet access responsibly. Engaging in illegal activities, excessive personal browsing, or accessing restricted content is prohibited. Downloading unapproved software or violating copyright laws is strictly forbidden. Internet activity may be monitored to ensure compliance with security and productivity guidelines.', category: 'IT & Devices', lastUpdated: 'May 7, 2023', enrolledOn: 'May 7, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' },
+    { id: 8, policyName: 'Expense Reimbursement Policy', policyDesciption: 'Employees may request reimbursement for approved work-related expenses, including travel, meals, and lodging, provided they submit receipts and supporting documents within the required timeframe. All expense claims must align with company budgetary policies. Unauthorized or personal expenses will not be reimbursed unless specifically approved.', category: 'Compliance', lastUpdated: 'May 6, 2023', enrolledOn: 'May 6, 2023', statusText: 'Active', statusClass: 'e-badge status--active e-badge-pill' }
   ];
 
   const [open, setOpen] = React.useState(false);
@@ -71,7 +71,6 @@ const Policies: React.FC = () => {
 
   const policyNameTemplate = (props: any) => (
     <div className="policy-name-cell">
-      <span className="policy-icon" aria-hidden="true">📄</span>
       <span className="policy-name-text">{props.policyName}</span>
     </div>
   );
@@ -121,21 +120,23 @@ const Policies: React.FC = () => {
         <section className="policy-filters" aria-labelledby="policy-filters-title">
           <div className="section-header">
             <h3 id="policy-filters-title" className="section-title">Policy Categories</h3>
-            <a className="view-all-link" href="#" onClick={clearCategoryFilter} aria-label="Clear category filter">Reset</a>
           </div>
 
           <div className="filter-chip-row" role="tablist" aria-label="Filter by category">
             {categoryChips.map(chip => (
-              <button
-                key={chip.key}
-                onClick={handleChipClick(chip.key)}
-                className={`filter-chip ${activeCategory === chip.key ? 'is-active' : ''}`}
-                aria-pressed={activeCategory === chip.key}
-                type="button"
-              >
-                <span className="filter-chip__label">{chip.name}</span>
-                <span className="filter-chip__count">{chip.count}</span>
-              </button>
+            <ButtonComponent
+              key={chip.key}
+              // Keep your chip classes and add Syncfusion state class when active
+              cssClass={`filter-chip ${activeCategory === chip.key ? 'is-active e-active' : ''}`}
+              // If you want built-in toggle semantics/styles, enable this:
+              isToggle={true}
+              onClick={handleChipClick(chip.key)}
+              aria-pressed={activeCategory === chip.key}
+              type="button"
+            >
+              <span className="filter-chip__label">{chip.name}</span>
+              <span className="filter-chip__count">{chip.count}</span>
+            </ButtonComponent>
             ))}
           </div>
         </section>
@@ -189,7 +190,7 @@ const Policies: React.FC = () => {
               </div>
               <div>
                 <div className="meta-label">Status</div>
-                <div className={`meta-badge ${selected.statusClass}`}>{selected.statusText}</div>
+                <div className={`meta-badge e-badge status--active e-badge-pill`}>{selected.statusText}</div>
               </div>
               <div>
                 <div className="meta-label">Last Updated</div>
@@ -202,7 +203,7 @@ const Policies: React.FC = () => {
             </div>
 
             <div className="policy-dialog__section">
-              <div className="section-title">Description</div>
+              <div className="section-title">Description:</div>
               <p className="policy-description">{selected.policyDesciption}</p>
             </div>
 

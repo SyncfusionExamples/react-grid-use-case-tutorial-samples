@@ -34,6 +34,9 @@
   /* background: linear-gradient(180deg, var(--org-bg), #ffffff); */
   padding: 4px 0 0;
 }
+.org-theme .org-page .employees-content{
+  padding: 0px 24px;
+}
 
 /* =========================
    Tabs: professional green
@@ -84,7 +87,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 10px 25px;
   margin: 12px 0 14px;
   /* border: 1px solid var(--org-border); */
   /* background: linear-gradient(180deg, var(--org-surface), var(--org-surface-2)); */

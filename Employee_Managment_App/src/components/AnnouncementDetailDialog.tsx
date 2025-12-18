@@ -21,20 +21,16 @@ export type AnnouncementDetailDialogProps = {
   open: boolean;
   item: DetailItem;
   onClose: () => void;
-  onMarkRead?: (item: DetailItem) => void;
+  onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
 };
 
 const dialogAnimation: AnimationSettingsModel = { effect: 'Zoom', duration: 140 };
 
 const BullhornIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="currentColor" d="M3 10v4a1 1 0 0 0 1 1h1l3.89 2.6a2 2 0 0 0 3.11-1.65V7.05A2 2 0 0 0 8.89 5.4L5 8H4a1 1 0 0 0-1 1zm18-4v12l-8-4V10l8-4z" />
-  </svg>
+  <div className="e-icons e-audio"></div>
 );
 const BellIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z" />
-  </svg>
+  <div className='e-icons e-multiple-comment'></div>
 );
 const MessageIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -96,8 +92,12 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
 
   const footerTemplate = () => (
     <div className="annc-dlg-footer">
-      {item && (
-        <ButtonComponent cssClass="e-primary" onClick={() => onMarkRead?.(item)}>
+      {item && !item.read && (
+        <ButtonComponent cssClass="e-primary" onClick={() => {
+          const isNotification = item.type === 'notification';
+          onMarkRead?.(item.id, isNotification);
+          onClose();
+        }}>
           Mark as read
         </ButtonComponent>
       )}

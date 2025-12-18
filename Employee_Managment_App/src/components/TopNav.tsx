@@ -2,6 +2,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './TopNav.css';
 import { AnnouncementPanel, PanelItem } from './Announcement';
+import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 
 type TopNavProps = {
   portalShort?: string;
@@ -26,6 +27,8 @@ type TopNavProps = {
   onProfile?: () => void;
   onSignOut?: () => void;
   userFullName?: string;
+  onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
+  onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
 };
 
 const TopNav: React.FC<TopNavProps> = ({
@@ -54,21 +57,15 @@ const TopNav: React.FC<TopNavProps> = ({
   onProfile,
   onSignOut,
   userFullName = 'Test Person',
+  onMarkRead,
+  onMarkAllRead,
 }) => {
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
-
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
-
-  const initials = useMemo(() => {
-    const parts = userFullName.trim().split(/\s+/);
-    const f = parts[0]?.[0] ?? '';
-    const l = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? '' : '';
-    return (f + l).toUpperCase();
-  }, [userFullName]);
 
   const submitSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -112,6 +109,24 @@ const TopNav: React.FC<TopNavProps> = ({
   };
 
   const TOPNAV_HEIGHT = 56;
+
+  const notificationItemsWithIcon = useMemo<PanelItem[]>(
+    () =>
+      (notificationItems || []).map((it) => ({
+        ...it,
+        iconClass: 'e-icons e-multiple-comment',
+      })),
+    [notificationItems]
+  );
+
+  const announcementItemsWithIcon = useMemo<PanelItem[]>(
+    () =>
+      (announcementItems || []).map((it) => ({
+        ...it,
+        iconClass: 'e-icons e-audio',
+      })),
+    [announcementItems]
+  );
 
   return (
     <>
@@ -157,9 +172,9 @@ const TopNav: React.FC<TopNavProps> = ({
                   }}
                   autoComplete="off"
                 />
-                <button
+                <ButtonComponent
                   type="button"
-                  className="clear-btn"
+                  cssClass="clear-btn"
                   onClick={() => setQuery('')}
                   aria-label="Clear search"
                   title="Clear"
@@ -167,13 +182,14 @@ const TopNav: React.FC<TopNavProps> = ({
                   <svg width="16" height="16" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                     <path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.71 2.89 18.3 9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.29-6.3z" />
                   </svg>
-                </button>
+                </ButtonComponent>
               </div>
             </form>
           </div>
 
           <div className="cluster-right">
-            <button className="icon-btn show-md-down"
+            <ButtonComponent
+              cssClass="icon-btn show-md-down"
               aria-label={mobileSearchOpen ? 'Close search' : 'Open search'}
               type="button"
               onClick={() => setMobileSearchOpen((v) => !v)}
@@ -185,42 +201,50 @@ const TopNav: React.FC<TopNavProps> = ({
                   d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
                 />
               </svg>
-            </button>
+            </ButtonComponent>
 
             <div className="btn-create-group" ref={createRef}>
-              <button
-                className="btn-create"
+              <ButtonComponent
+                cssClass="btn-create"
                 type="button"
                 onClick={() => setCreateMenuOpen((o) => !o)}
                 aria-haspopup="menu"
                 aria-expanded={createMenuOpen}
                 title="Create"
+                iconCss="e-icons e-chevron-down-fill"
+                iconPosition="Right"
               >
                 <span>Create</span>
-                <span className="e-icons e-chevron-down-fill" aria-hidden="true"></span>
-              </button>
+              </ButtonComponent>
 
               {createMenuOpen && (
                 <ul className="create-menu" role="menu">
                   <li role="menuitem">
-                    <button type="button" onClick={onCreate}>Create Leave</button>
+                    <ButtonComponent type="button" onClick={onCreate}>
+                      Create Leave
+                    </ButtonComponent>
                   </li>
                   <li role="menuitem">
-                    <button type="button" onClick={onCreate}>Create Permission</button>
+                    <ButtonComponent type="button" onClick={onCreate}>
+                      Create Permission
+                    </ButtonComponent>
                   </li>
                 </ul>
               )}
             </div>
 
-            <button className="icon-btn" type="button" onClick={onOpenChat} title="Messages">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M21 6H3v12h5v4l4-4h9z" />
-              </svg>
+            <button className="icon-btn e-icons e-multiple-comment" type="button" onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setPanelTab('notifications');
+                setPanelOpen(true);
+                onOpenNotifications?.();
+              }} title="Messages">
               {!!notifications.chat && <span className="badge">{notifications.chat}</span>}
             </button>
 
             <button
-              className="icon-btn"
+              className="icon-btn e-icons e-audio"
               type="button"
               onClick={(e) => {
                 e.preventDefault();
@@ -231,12 +255,6 @@ const TopNav: React.FC<TopNavProps> = ({
               }}
               title="Announcements"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M3 10v4a1 1 0 0 0 1 1h1l3.89 2.6a2 2 0 0 0 3.11-1.65V7.05A2 2 0 0 0 8.89 5.4L5 8H4a1 1 0 0 0-1 1zm18-4v12l-8-4V10l8-4z"
-                />
-              </svg>
               {!!notifications.announcements && (
                 <span className="badge">{notifications.announcements}</span>
               )}
@@ -252,26 +270,18 @@ const TopNav: React.FC<TopNavProps> = ({
             </button>
 
             <div className="topnav-avatar-wrapper" ref={avatarRef}>
-              <button
-                className="topnav-avatar"
+              <ButtonComponent
+                cssClass="topnav-avatar"
+                iconCss="e-icons e-user"
                 type="button"
-                onClick={() => setAvatarMenuOpen((v) => !v)}
                 aria-haspopup="menu"
                 aria-expanded={avatarMenuOpen}
                 title="Account"
-              >
-                {initials}
-              </button>
-              {avatarMenuOpen && (
-                <ul className="topnav-avatar-menu" role="menu">
-                  <li role="menuitem">
-                    <button type="button" onClick={onProfile}>My Profile</button>
-                  </li>
-                  <li role="menuitem">
-                    <button type="button" onClick={onSignOut}>Sign out</button>
-                  </li>
-                </ul>
-              )}
+                onClick={() => setAvatarMenuOpen((o) => !o)}
+              />
+              <div>
+                <span className="topnav-avatar-name">Hi, Michael Anderson</span>
+              </div>
             </div>
           </div>
         </div>
@@ -313,11 +323,13 @@ const TopNav: React.FC<TopNavProps> = ({
       <AnnouncementPanel
         open={panelOpen}
         defaultTab={panelTab}
-        notificationItems={notificationItems}
-        announcementItems={announcementItems}
+        notificationItems={notificationItemsWithIcon}
+        announcementItems={announcementItemsWithIcon}
         topOffset={TOPNAV_HEIGHT}
         onClose={() => setPanelOpen(false)}
         onChangeTab={(t) => setPanelTab(t)}
+        onMarkAllRead={onMarkAllRead}
+        onMarkRead={onMarkRead}
       />
     </>
   );

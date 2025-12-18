@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import TopNav from './components/TopNav';
@@ -8,6 +8,7 @@ import Policies from './components/Policies';
 import Achievements from './components/Achievements';
 import Organization from './components/Organization';
 import EmployeeInfo from './components/EmployeeInfo';
+import { PanelItem } from './components/Announcement';
 
 // Syncfusion Sidebar
 import { SidebarComponent } from '@syncfusion/ej2-react-navigations';
@@ -45,10 +46,61 @@ function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop dock
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // mobile overlay
   const isDesktop = useMediaQuery('(min-width: 992px)');
+  
+  // Notification items with read status
+  const [notificationItems, setNotificationItems] = useState<PanelItem[]>([
+    { id: 1, title: 'Interview for Customer Support Specialist', subtitle: 'Announcement', date: 'Sep 18', type: 'notification', content: 'You are invited for the Customer Support Specialist interview on Sep 22 at 11:00 AM. Please bring your updated resume and ID.', read: false },
+    { id: 2, title: 'Interview for Facilities Executive', subtitle: 'Announcement', date: 'Sep 9', type: 'notification', content: 'Facilities Executive interview is scheduled for Sep 23 at 2:30 PM in Meeting Room A.', read: false },
+    { id: 3, title: 'Interview for Office Coordinator / Admin', subtitle: 'Announcement', date: 'Sep 5', type: 'notification', content: 'Your interview for the Office Coordinator / Admin position is scheduled on Sep 25 at 10:00 AM in Conference Room B. Please bring your updated resume and a government-issued ID.', read: false },
+  ]);
+
+  const [announcementItems, setAnnouncementItems] = useState<PanelItem[]>([
+    { id: 'a1', title: 'Policy Update: Remote Work Guidelines', subtitle: 'Corporate Communication', date: 'Sep 16', type: 'announcement', content: 'We have updated our Remote Work Guidelines effective Oct 1. Key changes include flexible core hours and equipment reimbursement policy. Please read the full policy on the intranet.', read: false },
+    { id: 'a2', title: 'Holiday: Office Closed on 2nd Oct', subtitle: 'HR', date: 'Sep 14', type: 'announcement', content: 'In observance of a public holiday, all offices will remain closed on 2nd October. Normal operations resume on 3rd October.', read: false },
+    { id: 'a3', title: 'Quarterly Town Hall this Friday', subtitle: 'Admin', date: 'Sep 12', type: 'announcement', content: 'Join us for the Quarterly Town Hall on Sep 20 at 4:00 PM in the Main Auditorium. Leadership will share company updates, upcoming initiatives, and answer your questions. Attendance is encouraged.', read: false },
+  ]);
 
   useEffect(() => {
     if (isDesktop) setMobileSidebarOpen(false);
   }, [isDesktop]);
+
+  // Calculate unread counts
+  const notifications = useMemo(() => ({
+    bell: 3,
+    chat: notificationItems.filter(item => !item.read).length,
+    tasks: 1,
+    announcements: announcementItems.filter(item => !item.read).length,
+  }), [notificationItems, announcementItems]);
+
+  // Handler to mark a single item as read
+  const handleMarkRead = (itemId: string | number, isNotification: boolean) => {
+    if (isNotification) {
+      setNotificationItems((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, read: true } : item
+        )
+      );
+    } else {
+      setAnnouncementItems((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, read: true } : item
+        )
+      );
+    }
+  };
+
+  // Handler to mark all as read
+  const handleMarkAllRead = (tab: 'notifications' | 'announcements') => {
+    if (tab === 'notifications') {
+      setNotificationItems((prev) =>
+        prev.map((item) => ({ ...item, read: true }))
+      );
+    } else {
+      setAnnouncementItems((prev) =>
+        prev.map((item) => ({ ...item, read: true }))
+      );
+    }
+  };
 
   const layoutVars: LayoutCSSVars = {
     '--sidebar-expanded': `${SIDEBAR_WIDTH}px`,
@@ -82,7 +134,12 @@ function App() {
           companyName="NexGen7 Software"
           userFullName="Test Person"
           headerOffsetLeft={isDesktop ? (sidebarCollapsed ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH) : 0}
+          notifications={notifications}
+          notificationItems={notificationItems}
+          announcementItems={announcementItems}
           onSearch={(q) => console.log('Search:', q)}
+          onMarkRead={handleMarkRead}
+          onMarkAllRead={handleMarkAllRead}
         />
 
         {/* Syncfusion Sidebar */}
@@ -90,6 +147,7 @@ function App() {
           width={`${SIDEBAR_WIDTH}px`}
           dockSize={`${SIDEBAR_WIDTH_COLLAPSED}px`}
           enableDock={sbEnableDock}
+          enableGestures={false}
           isOpen={sbIsOpen}
           type={sbType as any}
           position="Left"

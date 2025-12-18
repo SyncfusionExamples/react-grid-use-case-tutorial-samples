@@ -137,16 +137,36 @@
 }
 .annc-panel-item {
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 36px 1fr 20px;
   gap: 10px;
   padding: 10px 8px;
   border-radius: 12px;
   border: 1px solid transparent;
-  transition: background 160ms ease, border-color 160ms ease;
+  transition: background 160ms ease, border-color 160ms ease, opacity 160ms ease;
+  position: relative;
+}
+.annc-panel-item.is-unread {
+  background: #f0fdf9;
+  border-color: #d1fae5;
+}
+.annc-panel-item.is-read {
+  opacity: 0.75;
 }
 .annc-panel-item:hover {
   background: #f8fffb;
   border-color: #e8f7f1;
+}
+.annc-panel-item.is-unread:hover {
+  background: #ecfdf5;
+}
+.unread-indicator {
+  width: 8px;
+  height: 8px;
+  background: var(--annc-theme);
+  border-radius: 50%;
+  align-self: center;
+  justify-self: end;
+  margin-right: 4px;
 }
 .annc-item-icon {
   width: 36px;
@@ -168,6 +188,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.annc-item-title.unread {
+  font-weight: 700;
+  color: var(--annc-text);
+}
+.annc-item-title.read {
+  font-weight: 500;
+  color: #94a3b8;
 }
 .annc-item-meta {
   margin-top: 2px;
