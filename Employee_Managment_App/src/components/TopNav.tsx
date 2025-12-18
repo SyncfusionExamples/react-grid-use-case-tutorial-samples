@@ -63,7 +63,6 @@ const TopNav: React.FC<TopNavProps> = ({
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const [createMenuOpen, setCreateMenuOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
 
@@ -80,14 +79,10 @@ const TopNav: React.FC<TopNavProps> = ({
       if (avatarRef.current && !avatarRef.current.contains(ev.target as Node)) {
         setAvatarMenuOpen(false);
       }
-      if (createRef.current && !createRef.current.contains(ev.target as Node)) {
-        setCreateMenuOpen(false);
-      }
     };
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setAvatarMenuOpen(false);
-        setCreateMenuOpen(false);
         setMobileSearchOpen(false);
         setPanelOpen(false);
       }
@@ -202,36 +197,6 @@ const TopNav: React.FC<TopNavProps> = ({
                 />
               </svg>
             </ButtonComponent>
-
-            <div className="btn-create-group" ref={createRef}>
-              <ButtonComponent
-                cssClass="btn-create"
-                type="button"
-                onClick={() => setCreateMenuOpen((o) => !o)}
-                aria-haspopup="menu"
-                aria-expanded={createMenuOpen}
-                title="Create"
-                iconCss="e-icons e-chevron-down-fill"
-                iconPosition="Right"
-              >
-                <span>Create</span>
-              </ButtonComponent>
-
-              {createMenuOpen && (
-                <ul className="create-menu" role="menu">
-                  <li role="menuitem">
-                    <ButtonComponent type="button" onClick={onCreate}>
-                      Create Leave
-                    </ButtonComponent>
-                  </li>
-                  <li role="menuitem">
-                    <ButtonComponent type="button" onClick={onCreate}>
-                      Create Permission
-                    </ButtonComponent>
-                  </li>
-                </ul>
-              )}
-            </div>
 
             <button className="icon-btn e-icons e-multiple-comment" type="button" onClick={(e) => {
                 e.preventDefault();

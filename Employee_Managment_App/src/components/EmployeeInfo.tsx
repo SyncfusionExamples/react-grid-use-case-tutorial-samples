@@ -235,14 +235,12 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                             <TabItemDirective header={headerText[0]} content={content0} />
                             {employeeData &&
                                 userInfo &&
-                                (userInfo.Name === employeeData.Name ||
-                                    userInfo.Name === employeeData.TeamLead) && (
+                                (userInfo.Name === employeeData.Name) && (
                                     <TabItemDirective header={headerText[1]} content={content1} />
                                 )}
                             {employeeData &&
                                 userInfo &&
-                                (userInfo.Name === employeeData.Name ||
-                                    userInfo.Name === employeeData.TeamLead) && (
+                                (userInfo.Name === employeeData.Name) && (
                                     <TabItemDirective header={headerText[2]} content={content2} />
                                 )}
                             {employeeData &&
