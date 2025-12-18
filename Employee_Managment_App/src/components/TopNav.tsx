@@ -28,6 +28,7 @@ type TopNavProps = {
   userFullName?: string;
   onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
   onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
+  onOpenSidebar?: () => void;
 };
 
 const TopNav: React.FC<TopNavProps> = ({
@@ -57,6 +58,7 @@ const TopNav: React.FC<TopNavProps> = ({
   userFullName = 'Test Person',
   onMarkRead,
   onMarkAllRead,
+  onOpenSidebar,
 }) => {
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
@@ -93,14 +95,6 @@ const TopNav: React.FC<TopNavProps> = ({
     };
   }, []);
 
-  const openAnnouncementsPanel = (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setPanelTab('announcements');
-    setPanelOpen(true);
-    onOpenAnnouncements?.();
-  };
-
   const TOPNAV_HEIGHT = 56;
 
   const notificationItemsWithIcon = useMemo<PanelItem[]>(
@@ -133,6 +127,17 @@ const TopNav: React.FC<TopNavProps> = ({
       >
         <div className="topnav-inner">
           <div className="cluster-left">
+            <ButtonComponent
+              cssClass="icon-btn show-md-down topnav-menu-btn"
+              aria-label="Open sidebar"
+              title="Menu"
+              type="button"
+              onClick={onOpenSidebar}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
+              </svg>
+            </ButtonComponent>
             <div className="brand-line" title={`${portalShort} Portal`}>
               <span className="company-name">{companyName}</span>
             </div>

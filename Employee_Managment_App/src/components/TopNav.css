@@ -423,3 +423,29 @@
 
 /* Utility (when we hide center due to mobile search toggle) */
 .hidden-md-up { display: none; }
+
+.hidden-md-up { display: none; }
+
+/* Show only on widths below 992px */
+.show-md-down {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .show-md-down {
+    display: none !important;
+  }
+}
+
+/* Keep left cluster items aligned (menu button + brand) */
+.topnav .cluster-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topnav .topnav-menu-btn {
+  margin-right: 4px;
+}

@@ -146,10 +146,14 @@
   position: relative;
 }
 .annc-panel-item.is-unread {
+  margin-bottom: 5px;
+  padding: 6px;
   background: #f0fdf9;
   border-color: #d1fae5;
 }
 .annc-panel-item.is-read {
+  margin-bottom: 5px;
+  padding: 6px;
   opacity: 0.75;
 }
 .annc-panel-item:hover {
