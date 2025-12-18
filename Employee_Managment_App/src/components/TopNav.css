@@ -11,7 +11,436 @@
   --icon: #475569;
   --elevation: 0 8px 20px rgba(2, 6, 23, 0.06);
 
+  /* Accent (emerald) *//* src/components/TopNav.css */
+:root {
+  --topnav-height: 56px;
+
+  /* Base neutrals */
+  --topnav-bg: #ffffff;
+  --surface: #ffffff;
+  --topnav-border: #e5e7eb;
+  --topnav-text: rgba(0, 0, 0, 0.87);
+  --text-muted: #64748b;
+  --icon: #475569;
+  --elevation: 0 8px 20px rgba(2, 6, 23, 0.06);
+
   /* Accent (emerald) */
+  --accent: #10b981;
+  --accent-600: #059669;
+  --accent-700: #047857;
+  --accent-100: #d1fae5;
+  --accent-50: #ecfdf5;
+
+  /* Bootstrap-like green for Create */
+  --bs-success: #1ab394;
+
+  /* Component sizing to match HR portal */
+  --create-width: 96px;     /* button width similar to screenshots */
+  --search-max: 600px;      /* desktop search width similar to HR portal */
+  
+  --hr-search-width: 210px;
+
+  --control-height: 35px;
+  --radius-pill: 9999px;
+
+  --accent: #10b981;                   /* focus ring + border accent */
+  --search-bg: #f7f7f8;                /* filled background */
+  --search-border: #d6d7db;
+  --search-text: #111827;
+  --search-muted: #6b7280;
+  --search-icon: #6b7280;
+
+  --shadow-rest: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-focus: 0 6px 18px rgba(16, 185, 129, 0.16);
+  --focus-ring: 0 0 0 4px rgba(16, 185, 129, 0.14);
+
+  --color-sf-icon-color: #6b7280;
+  --color-sf-secondary-border-color-hover: #d1d5db;
+  --color-sf-secondary-bg-color-hover:rgba(158, 158, 158, 0.2);
+  --color-sf-content-text-color: #111827;
+}
+
+/* Parallel fixed header */
+.topnav.parallel {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  height: var(--topnav-height);
+  background: var(--topnav-bg);
+  border-bottom: 2px solid var(--topnav-border);
+}
+
+/* Optional green accent line/shadow */
+.topnav.parallel.theme-green {
+  border-bottom-color: var(--accent);
+  box-shadow: 0 1px 0 rgba(16, 185, 129, 0.12), var(--elevation);
+}
+
+.topnav-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+/* Left cluster */
+.cluster-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.company-name {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Center cluster: search */
+.cluster-center {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center; /* center like HR portal */
+}
+
+.search-form { 
+  width: var(--hr-search-width);
+  margin-left: auto;           /* push to the right side */
+}
+
+
+/* Input group container */
+.search-field.input-group {
+  pointer-events: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--control-height);
+  background: var(--search-bg);
+  box-shadow: var(--shadow-rest);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease, transform 120ms ease;
+}
+
+/* Hover: slightly lift and sharpen border */
+.search-field.input-group:hover {
+  border-color: color-mix(in srgb, var(--search-border) 70%, var(--accent));
+}
+
+/* Left icon */
+.search-field .input-icon {
+  position: absolute;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--search-icon);
+  pointer-events: none; /* decorative */
+}
+
+/* The input itself */
+.search-field .search-input.form-control {
+  appearance: none;
+  background: transparent;
+  color: var(--search-text);
+  font-size: 14px;
+  line-height: 1;
+  height: 100%;
+  width: 100%;
+  padding: 0 36px 0 42px; /* left: icon; right: clear */
+  outline: none;
+  box-shadow: none;
+}
+
+.search-field.input-group .search-input.form-control:not(:first-child):not(:last-child) {
+  border-radius: 4px;
+}
+
+/* Placeholder color */
+.search-field .search-input::placeholder {
+  color: var(--search-muted);
+  opacity: 1;
+}
+
+/* Clear button (hidden until there's text) */
+.search-field .clear-btn {
+  position: absolute;
+  right: 6px;
+  height: 28px;
+  width: 28px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  background: transparent;
+  color: var(--search-muted);
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease, transform 80ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.search-field.has-value .clear-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-field .clear-btn:hover {
+  background: color-mix(in srgb, var(--search-bg), #000 6%);
+  color: var(--search-text);
+}
+
+.search-field .clear-btn:active {
+  transform: scale(0.96);
+}
+
+/* Remove native WebKit clear icon for consistency */
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* High-contrast / forced colors */
+@media (forced-colors: active) {
+  .search-field.input-group {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+  .search-field .search-input {
+    color: CanvasText;
+  }
+  .search-field .input-icon,
+  .search-field .clear-btn { color: CanvasText; }
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .search-field.input-group,
+  .search-field .clear-btn {
+    transition: none;
+  }
+}
+
+/* Right cluster: actions */
+.cluster-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--topnav-border);
+  background: #fff;
+  color: var(--icon);
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 80ms ease, background 160ms ease;
+}
+
+.icon-btn:hover {
+  border-color: var(--focus-ring);
+  background: transparent;
+  color: var(--color-sf-icon-color);
+}
+
+.icon-btn:active { transform: translateY(1px); }
+
+.icon-btn:focus-visible,
+.topnav-avatar:focus-visible,
+.btn-create:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Create button (Bootstrap look, fixed size like HR portal) */
+.btn-create-group { position: relative; }
+
+.btn-create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  height: var(--control-height);
+  min-width: var(--create-width);
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--bs-success);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: background 160ms ease, transform 80ms ease, filter 160ms ease;
+}
+
+.btn-create:active { transform: translateY(1px); }
+
+.btn-create .material-icons {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Create dropdown menu */
+.create-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--topnav-border);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: var(--elevation);
+  z-index: 10;
+}
+
+.create-menu li { list-style: none; }
+
+.create-menu button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--topnav-text);
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.create-menu button:hover {
+  background: var(--color-sf-secondary-bg-color-hover);
+  border-color: var(--color-sf-content-text-color);
+  color: var(--color-sf-content-text-color);
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 10px;
+  background: var(--bs-success);
+  color: #fff;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
+}
+
+/* Avatar */
+.topnav-avatar-wrapper { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topnav-avatar-name{
+  margin-left: 10px;
+}
+
+.topnav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--topnav-text);
+  border: 1px solid var(--topnav-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.topnav-avatar:hover {
+  border-color: var(--focus-ring);
+  background: transparent;
+  color: var(--color-sf-icon-color);
+}
+
+.topnav-avatar-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--topnav-border);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: var(--elevation);
+}
+
+.topnav-avatar-menu li { list-style: none; }
+
+.topnav-avatar-menu button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--topnav-text);
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.topnav-avatar-menu button:hover {
+  background: var(--accent-50);
+  color: var(--accent-700);
+}
+
+/* Mobile handling */
+.show-md-down { display: none; }
+
+@media (max-width: 992px) {
+  .topnav.parallel {
+    left: 0 !important;
+    width: 100% !important;
+  }
+  .company-name { display: none; }
+}
+
+@media (max-width: 768px) {
+  .cluster-center { display: none; } /* collapse center search to icon */
+  .show-md-down { display: inline-flex; }
+
+  .mobile-search {
+    position: sticky;
+    top: var(--topnav-height);
+    z-index: 999;
+    border-bottom: 1px solid var(--topnav-border);
+    padding: 8px;
+    background: #fff;
+  }
+
+  .mobile-search .search-form { max-width: 100%; }
+}
+
+/* Utility (when we hide center due to mobile search toggle) */
+.hidden-md-up { display: none; }
   --accent: #10b981;
   --accent-600: #059669;
   --accent-700: #047857;
