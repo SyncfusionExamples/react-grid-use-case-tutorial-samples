@@ -54921,6 +54921,10 @@ ejs-sidebar {
   display: block;
 }
 
+.e-sidebar.app-nav-sidebar {
+  overflow: hidden;
+}
+
 .e-menu-wrapper.e-hamburger .e-popup.e-menu-popup,
 .e-menu-container.e-hamburger .e-popup.e-menu-popup {
   border: 0;

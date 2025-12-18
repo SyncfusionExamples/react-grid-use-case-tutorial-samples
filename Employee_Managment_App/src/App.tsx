@@ -93,6 +93,7 @@ function App() {
           isOpen={sbIsOpen}
           type={sbType as any}
           position="Left"
+          className='app-nav-sidebar'
           showBackdrop={!isDesktop}
           closeOnDocumentClick={!isDesktop}
           open={() => {
