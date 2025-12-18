@@ -70472,7 +70472,7 @@ li.e-separator.e-menu-item.e-excel-separator {
   }
 
   #_tab_header_items .e-toolbar-item {
-    width: 20%;
+    width: 19.95%;
     text-align: center;
   }
 }
@@ -71125,6 +71125,9 @@ td.cardcell.separateline {
 
 .app-sidebar .nav-icon {
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
   width: 18px;
   height: 18px;
   color: #cbd5e1;

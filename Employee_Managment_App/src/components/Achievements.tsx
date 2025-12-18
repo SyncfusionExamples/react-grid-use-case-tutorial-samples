@@ -272,7 +272,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="lb-sections">
             <section className="lb-section">
               <header className="lb-header bg-r-overall">
-                <div className="lb-header-icon icon-overall e-icons e-user" aria-hidden>
+                <div className="lb-header-icon icon-overall e-icons e-people" aria-hidden>
                 </div>
                 <div className="lb-header-text">
                   <div className="lb-title">Overall</div>

@@ -62,11 +62,34 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
   React.useEffect(() => {
     const handleDocClick = (ev: MouseEvent) => {
       if (!open) return;
-      if (panelRef.current && !panelRef.current.contains(ev.target as Node)) onClose();
+
+      const target = ev.target as Node;
+
+      // If detail dialog is open, ignore clicks inside dialog or its overlay
+      if (detailOpen) {
+        const dialogEl = document.querySelector('.e-annc-detail-dialog') as HTMLElement | null;
+        const overlayEl = document.querySelector('.e-dlg-overlay') as HTMLElement | null;
+
+        const clickedInsideDialog =
+          (dialogEl && dialogEl.contains(target)) ||
+          (overlayEl && overlayEl.contains(target));
+
+        if (clickedInsideDialog) {
+          // Let the dialog handle its own close via overlayClick; don't close the aside
+          return;
+        }
+      }
+
+      // Close aside only when clicking outside both the aside and (if open) the dialog
+      if (panelRef.current && !panelRef.current.contains(target)) {
+        onClose();
+      }
     };
-    document.addEventListener('click', handleDocClick);
-    return () => document.removeEventListener('click', handleDocClick);
-  }, [open, onClose]);
+
+    // Use capture to catch the click before Syncfusion might stop propagation
+    document.addEventListener('click', handleDocClick, true);
+    return () => document.removeEventListener('click', handleDocClick, true);
+  }, [open, onClose, detailOpen]);
 
   const setActiveTab = (t: 'notifications' | 'announcements') => {
     setTab(t);

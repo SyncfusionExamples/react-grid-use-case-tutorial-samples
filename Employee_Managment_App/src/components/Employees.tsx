@@ -34,7 +34,6 @@ const Employees = (props?: EmployeesProps) => {
 
   // Apply/clear remote filters on pill changes or routed context
   useEffect(() => {
-    debugger;
     const grid = employeeGridIns.current;
     if (!grid) return;
 
