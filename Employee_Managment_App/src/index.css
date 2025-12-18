@@ -15,7 +15,18 @@
   line-height: 1;
   text-transform: none;
 }
-
+#payroll_grid .e-summaryrow .e-leftfreeze.e-summarycell[data-index="2"] {
+  border-right-color: #818cf8;
+  border-right-width: 2px;
+}
+ 
+#payroll_grid.e-grid.e-left-shadow .e-summaryrow .e-leftfreeze.e-summarycell[data-index="2"] {
+    clip-path: inset(0 -15px 0 0);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.12);
+    border-right-width: 0px;
+}
+ 
+ 
 .e-icons.e-small {
   font-size: 8px;
 }
@@ -386,6 +397,86 @@
 
 .e-icons.e-auto-fit-window:before {
   content: "\e759";
+}
+
+
+
+/* Primary/OK button: hover/focus in Column Chooser */
+.e-dialog .e-footer-content .e-btn.e-primary:hover,
+.e-dialog .e-footer-content .e-btn.e-primary:focus {
+  background-color: var(--color-sf-success) !important; /* subtle green */
+  border-color: var(--color-sf-success) !important;
+  color: var(--color-sf-dialog-border) !important;
+}
+
+/*Disabled primary button on hover */
+
+.e-dialog .e-footer-content .e-btn.e-primary:disabled:hover,
+.e-dialog .e-footer-content .e-btn.e-primary.e-disabled:hover,
+.e-dialog .e-footer-content .e-btn.e-primary[aria-disabled="true"]:hover { 
+  background-color: var(--color-sf-success-bg-color-disabled) !important;
+  border-color: var( --color-sf-success-border-color-disabled) !important;
+}
+
+/* Cancel button: keep subtle grey on hover/focus (not green) */
+.e-dialog .e-footer-content .e-btn:not(.e-primary) {
+  background-color:var(--color-sf-appbar-bg-color-alt1);           
+  border-color: var(--color-sf-rating-unrated-disabled-color);      
+  color: var(--color-sf-rating-unrated-hover-color);
+}
+.e-dialog .e-footer-content .e-btn:not(.e-primary):hover,
+.e-dialog .e-footer-content .e-btn:not(.e-primary):focus {
+  background-color: var(--color-sf-rating-unrated-disabled-color) !important;
+  border-color: var(--color-sf-primary-lighter) !important; 
+  color: var(--color-sf-appbar-bg-color-alt2) !important;         
+}
+
+/* Checkbox hover styles inside Column Chooser list */
+.e-checkbox-wrapper:hover .e-frame {
+  border-color: var(--color-sf-primary-bg-color) !important;
+}
+.e-checkbox-wrapper:hover .e-frame.e-check,
+.e-checkbox-wrapper:hover .e-frame.e-stop {
+  background-color: var(--color-sf-primary-bg-color) !important;
+  border-color: var(--color-sf-primary-bg-color) !important;
+}
+/* Improve hover via list item hover as well */
+.e-list-item:hover .e-checkbox-wrapper .e-frame {
+  border-color: var(--color-sf-primary-bg-color) !important;
+}
+.e-list-item:hover .e-checkbox-wrapper .e-frame.e-check,
+.e-list-item:hover .e-checkbox-wrapper .e-frame.e-stop {
+  background-color: var(--color-sf-primary-bg-color) !important;
+  border-color: var(--color-sf-primary-bg-color) !important;
+}
+/* Checked / indeterminate visuals anywhere in the chooser */
+.e-column-chooser .e-checkbox-wrapper .e-frame.e-check,
+.e-column-chooser .e-checkbox-wrapper .e-frame.e-stop,
+.e-dialog .e-checkbox-wrapper .e-frame.e-check,
+.e-dialog .e-checkbox-wrapper .e-frame.e-stop {
+  background-color: var(--color-sf-primary-bg-color) !important;
+  border-color: var(--color-sf-primary-border-color) !important;
+}
+.e-dialog .e-checkbox-wrapper .e-frame.e-check:before,
+.e-dialog .e-checkbox-wrapper .e-frame.e-stop:before {
+  color: #fff !important;
+}
+/* List item selected (Select All) */
+.e-column-chooser .e-list-item.e-active .e-frame {
+  background-color: var(--color-sf-success) !important;
+  border-color: var(--color-sf-success) !important;
+}
+
+/* Columns trigger and generic focus outlines: remove blue ring */
+.e-toolbar .e-tbar-btn:focus,
+.e-toolbar .e-tbar-btn:active,
+.e-dropdown-btn:focus,
+.e-dropbtn:focus,
+.e-btn:focus,
+.e-input:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35) !important; /* soft green */
 }
 
 .e-icons.e-italic:before {
@@ -1908,6 +1999,43 @@
   content: "\e8d5";
 }
 
+/* Override Calendar/DatePicker colors: set selected date and Today to green */
+/* Selected date cell */
+.e-calendar .e-content td.e-selected span,
+.e-calendar .e-content td.e-selected:hover span,
+.e-datepicker .e-calendar .e-content td.e-selected span {
+  background-color: var(--color-sf-success) !important;
+  border-color: var(--color-sf-success) !important;
+  color: #fff !important;
+}
+/* Today cell (outline/foreground) */
+.e-calendar .e-content td.e-today span,
+.e-datepicker .e-calendar .e-content td.e-today span {
+  color: var(--color-sf-success) !important;
+  border-color: var(--color-sf-success) !important;
+}
+/* Today button in footer */
+.e-calendar .e-footer-container .e-btn.e-today,
+.e-datepicker .e-footer-container .e-btn.e-today {
+  background-color: var(--color-sf-success) !important;
+  border-color: var(--color-sf-success) !important;
+  color: #fff !important;
+}
+/* Footer Today button hover/focus */
+.e-calendar .e-footer-container .e-btn.e-today:hover,
+.e-calendar .e-footer-container .e-btn.e-today:focus,
+.e-datepicker .e-footer-container .e-btn.e-today:hover,
+.e-datepicker .e-footer-container .e-btn.e-today:focus {
+  background-color: var(--color-sf-success) !important;
+  border-color: var(--color-sf-success) !important;
+}
+
+/* Also adjust keyboard focus ring on day cells to green */
+.e-calendar .e-content td:focus span,
+.e-datepicker .e-calendar .e-content td:focus span {
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35) !important;
+}
+
 .e-icons.e-frame-mat:before {
   content: "\e8d6";
 }
@@ -2610,6 +2738,12 @@
   --color-sf-chip-info-bg-color-disabled: #ecfeff;
   --color-sf-chip-info-border-color-disabled: #cffafe;
   --color-sf-chip-info-text-disabled: #67e8f9;
+    /* Accent (emerald) */
+  --accent: #10b981;
+  --accent-600: #059669;
+  --accent-700: #047857;
+  --accent-100: #d1fae5;
+  --accent-50: #ecfdf5;
 }
 
 .e-dark-mode {
@@ -5504,7 +5638,7 @@
 
 .e-splitter .e-split-bar.e-split-bar-horizontal .e-navigate-arrow:not(.e-icon-hidden)::before,
 .e-splitter .e-split-bar.e-split-bar-horizontal .e-navigate-arrow:not(.e-icon-hidden)::after {
-  background-color: var(--color-sf-primary);
+  background-color: var(--color-sf-primary-bg-color);
   opacity: 0;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -5514,7 +5648,7 @@
 
 .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover,
 .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active {
-  background: var(--color-sf-primary);
+  background: var(--color-sf-primary-bg-color);
   border-left: none;
   border-right: none;
 }
@@ -5522,7 +5656,7 @@
 .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler,
 .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler {
   background: var(--color-sf-content-bg-color);
-  color: var(--color-sf-primary);
+  color: var(---color-sf-primary-bg-color);
 }
 
 .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-navigate-arrow.e-arrow-left,
@@ -7116,8 +7250,8 @@
 
 .e-btn.e-primary:hover,
 .e-css.e-btn.e-primary:hover {
-  background: var(--color-sf-primary-bg-color-hover);
-  border-color: var(--color-sf-primary-border-color-hover);
+  background: var(--color-sf-success-bg-color-hover);
+  border-color: var(--color-sf-success-border-color-hover);
   -webkit-box-shadow: none;
   box-shadow: none;
   color: var(--color-sf-primary-text-hover);
@@ -7125,8 +7259,8 @@
 
 .e-btn.e-primary:focus,
 .e-css.e-btn.e-primary:focus {
-  background: var(--color-sf-primary-bg-color-focus);
-  border-color: var(--color-sf-primary-border-color-focus);
+  background: var(--color-sf-success-bg-color-hover);
+  border-color: var(--color-sf-success-bg-color-hover);
   color: var(--color-sf-primary-text-focus);
   outline: var(--color-sf-secondary-bg-color) 0 solid;
 }
@@ -7135,14 +7269,14 @@
 .e-css.e-btn.e-primary:focus-visible {
   background: var(--color-sf-primary-bg-color);
   color: var(--color-sf-primary-text-color);
-  -webkit-box-shadow: 0 0 0 2px var(--color-sf-content-bg-color), 0 0 0 4px var(--color-sf-primary);
-  box-shadow: 0 0 0 2px var(--color-sf-content-bg-color), 0 0 0 4px var(--color-sf-primary);
+  -webkit-box-shadow: 0 0 0 2px var(--color-sf-content-bg-color), 0 0 0 4px var(--color-sf-success-bg-color-hover);
+  box-shadow: 0 0 0 2px var(--color-sf-content-bg-color), 0 0 0 4px var(--color-sf-success-bg-color-hover);
 }
 
 .e-btn.e-primary:active,
 .e-css.e-btn.e-primary:active {
-  background: var(--color-sf-primary-bg-color-pressed);
-  border-color: var(--color-sf-primary-border-color-pressed);
+  background: var(--color-sf-success-bg-color-pressed);
+  border-color: var(--color-sf-success-border-color-pressed);
   color: var(--color-sf-primary-text-pressed);
   outline: var(--color-sf-secondary-bg-color) 0 solid;
   -webkit-box-shadow: 0 0 0 4px rgba(var(--color-sf-secondary-shadow), 0.5);
@@ -7484,8 +7618,8 @@
 
 .e-btn.e-flat.e-primary:hover,
 .e-css.e-btn.e-flat.e-primary:hover {
-  background: var(--color-sf-primary-bg-color-hover);
-  border-color: var(--color-sf-primary-border-color-hover);
+  background: var(--color-sf-success-bg-color-hover);
+  border-color: var(--color-sf-success-border-color-hover);
   color: var(--color-sf-primary-text-color);
 }
 
@@ -7517,11 +7651,11 @@
 .e-btn.e-flat.e-primary.e-disabled,
 .e-css.e-btn.e-flat.e-primary:disabled,
 .e-css.e-btn.e-flat.e-primary.e-disabled {
-  background: var(--color-sf-primary-bg-color-disabled);
+  background: var(--color-sf-success-bg-color-disabled);
   border-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: var(--color-sf-primary-text-disabled);
+  color: var(--color-sf-success-text-disabled);
 }
 
 .e-btn.e-flat.e-primary .e-ripple-element,
@@ -8740,15 +8874,15 @@
 
 .e-checkbox-wrapper .e-frame.e-check,
 .e-css.e-checkbox-wrapper .e-frame.e-check {
-  background-color: var(--color-sf-primary);
-  border-color: var(--color-sf-primary);
+  background-color: var(--color-sf-primary-bg-color);
+  border-color: var(--color-sf-primary-border-color);
   color: var(--color-sf-primary-text-color);
 }
 
 .e-checkbox-wrapper .e-frame.e-stop,
 .e-css.e-checkbox-wrapper .e-frame.e-stop {
-  background-color: var(--color-sf-primary);
-  border-color: var(--color-sf-primary);
+  background-color: var(--color-sf-primary-bg-color);
+  border-color: var(--color-sf-primary-border-color);
   color: var(--color-sf-primary-text-color);
 }
 
@@ -8812,14 +8946,14 @@
 .e-checkbox-wrapper:hover .e-frame,
 .e-css.e-checkbox-wrapper:hover .e-frame {
   background-color: var(--color-sf-text-input-bg-color);
-  border-color: var(--color-sf-border);
+  border-color: var(--color-sf-primary-border-color);
 }
 
 .e-checkbox-wrapper:hover .e-frame.e-check,
 .e-css.e-checkbox-wrapper:hover .e-frame.e-check {
-  background-color: var(--color-sf-primary);
-  border-color: var(--color-sf-primary);
-  color: var(--color-sf-primary-text-color);
+  background-color: var(--color-sf-primary-bg-color) !important;
+  border-color: var(--color-sf-primary-bg-color) !important;
+  color: var(--color-sf-primary-text-color) !important;
 }
 
 .e-checkbox-wrapper:hover .e-frame.e-stop,
@@ -9375,9 +9509,10 @@
   border-color: var(--color-sf-border);
 }
 
+
 .e-radio:checked+label::before {
-  background-color: var(--color-sf-primary);
-  border-color: var(--color-sf-primary);
+  background-color: var(--color-sf-primary-bg-color);
+  border-color: var(--color-sf-primary-bg-color);
 }
 
 .e-radio:checked+label::after {
@@ -17716,7 +17851,7 @@ ejs-calendar {
 }
 
 .e-daterangepicker.e-popup .e-calendar .e-content .e-range-hover:not(.e-other-month) span {
-  background: var(--color-sf-primary-lighter);
+  background: var(--color-sf-msg-info-bg-color);
   border: none;
   color: var(--color-sf-content-text-color);
 }
@@ -17764,12 +17899,13 @@ ejs-calendar {
 }
 
 .e-daterangepicker.e-popup .e-presets .e-list-item.e-active {
-  background-color: var(--color-sf-content-bg-color-selected);
+    background-color: var(--color-sf-primary-bg-color);
+    color: var(--color-sf-warning-text-focus);
 }
 
 .e-daterangepicker.e-popup .e-presets .e-list-item.e-hover {
-  background-color: var(--color-sf-content-bg-color-hover);
-  color: var(--color-sf-content-text-color-hover);
+  background-color: var(--color-sf-primary-bg-color);
+  color: var(--color-sf-warning-text-focus);
 }
 
 .e-daterangepicker.e-popup .e-start-label,
@@ -17812,7 +17948,7 @@ ejs-calendar {
 
 .e-daterangepicker.e-popup .e-calendar .e-content .e-end-date.e-selected span.e-day,
 .e-daterangepicker.e-popup .e-calendar .e-content .e-start-date.e-selected span.e-day {
-  background: var(--color-sf-primary);
+  background: var(--color-sf-primary-bg-color);
   border-radius: 0;
 }
 
@@ -33088,10 +33224,10 @@ textarea.e-input::selection,
 .e-float-input.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-input-group) textarea:focus,
 .e-float-input:not(.e-success):not(.e-warning):not(.e-error):not(.e-input-group).e-input-focus input,
 .e-float-input.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-input-group).e-input-focus input {
-  border-color: var(--color-sf-primary);
+  border-color: var(--color-sf-primary-bg-color);
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary);
-  box-shadow: 0 0 0 1px var(--color-sf-primary);
+  -webkit-box-shadow: 0 0 0 1px var(---color-sf-primary-bg-color);
+  box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color);
 }
 
 .e-input-group .e-input:focus:not(.e-success):not(.e-warning):not(.e-error),
@@ -33116,10 +33252,10 @@ textarea.e-input::selection,
 
 .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error),
 .e-input-group.e-control-wrapper.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) {
-  border-color: var(--color-sf-primary);
+  border-color: var(--color-sf-primary-bg-color);
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary);
-  box-shadow: 0 0 0 1px var(--color-sf-primary);
+  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color);
+  box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color);
 }
 
 .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) .e-input:first-child:focus,
@@ -33154,8 +33290,8 @@ textarea.e-input::selection,
 .e-input-group:not(.e-success):not(.e-warning):not(.e-error),
 .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error) {
   border-color: var(--color-sf-border);
-  -webkit-box-shadow: 0 1px 2px 0 rgba(var(--color-sf-black), 0.05);
-  box-shadow: 0 1px 2px 0 rgba(var(--color-sf-black), 0.05);
+  -webkit-box-shadow: 0 1px 2px 0 rgba(var(--color-sf-primary-bg-color), 0.05);
+  box-shadow: 0 1px 2px 0 rgba(var(--color-sf-primary-bg-color), 0.05);
 }
 
 .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) .e-input:focus,
@@ -33418,7 +33554,7 @@ textarea.e-input::selection,
 .e-float-input.e-control-wrapper:not(.e-error).e-input-focus input~label.e-float-text,
 .e-float-input.e-control-wrapper.e-small:not(.e-error).e-input-focus input~label.e-float-text,
 .e-small .e-float-input.e-control-wrapper:not(.e-error).e-input-focus input~label.e-float-text {
-  color: rgba(var(--color-sf-primary));
+  color: rgba(var(--color-sf-primary-bg-color));
 }
 
 .e-input-group.e-input-focus:hover:not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled),
@@ -33429,7 +33565,7 @@ textarea.e-input::selection,
 .e-float-input.e-control-wrapper.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) input:not([disabled]),
 .e-float-input.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) textarea:not([disabled]),
 .e-float-input.e-control-wrapper.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) textarea:not([disabled]) {
-  border-color: var(--color-sf-primary);
+  border-color: var(--color-sf-primary-bg-color);
 }
 
 .e-underline.e-input-group:hover:not(.e-input-focus):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled),
@@ -57628,7 +57764,7 @@ ejs-sidebar {
 }
 
 .e-dialog .e-dlg-header-content+.e-dlg-content {
-  padding-top: 16px;
+  padding-top: 0px !important;
 }
 
 .e-dialog .e-btn .e-btn-icon.e-icon-dlg-close {
@@ -71076,6 +71212,7 @@ td.cardcell.separateline {
 .app-sidebar .sidebar-brand .title {
   color: #e5e7eb;
   font-weight: 600;
+  font-size: 16px;
 }
 
 /* Nav items: icon + text; hide text when docked */

@@ -8,6 +8,14 @@
   --annc-backdrop: rgba(2,6,23,0.35);
   --annc-elev: 0 8px 20px rgba(2, 6, 23, 0.06);
   --annc-panel-width: 380px;
+
+
+    /* Accent (emerald) */
+  --accent: #10b981;
+  --accent-600: #059669;
+  --accent-700: #047857;
+  --accent-100: #d1fae5;
+  --accent-50: #ecfdf5;
 }
 
 /* Backdrop area that starts below the top bar (top offset applied inline) */
@@ -145,8 +153,8 @@
   transition: background 160ms ease, border-color 160ms ease;
 }
 .annc-panel-item:hover {
-  background: #f8fffb;
-  border-color: #e8f7f1;
+    background: var(--accent-50);
+    color: var(--accent-700);
 }
 .annc-item-icon {
   width: 36px;
