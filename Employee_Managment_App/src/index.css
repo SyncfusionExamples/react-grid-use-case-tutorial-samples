@@ -54154,6 +54154,9 @@ ejs-sidebar {
   visibility: hidden;
   will-change: transform;
 }
+.e-sidebar.app-nav-sidebar {
+  overflow: hidden;
+}
 
 .e-sidebar.e-right.e-open,
 .e-sidebar.e-left.e-open {
