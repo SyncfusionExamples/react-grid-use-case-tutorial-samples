@@ -27,6 +27,8 @@ type TopNavProps = {
   onProfile?: () => void;
   onSignOut?: () => void;
   userFullName?: string;
+  onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
+  onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
 };
 
 const TopNav: React.FC<TopNavProps> = ({
@@ -55,6 +57,8 @@ const TopNav: React.FC<TopNavProps> = ({
   onProfile,
   onSignOut,
   userFullName = 'Test Person',
+  onMarkRead,
+  onMarkAllRead,
 }) => {
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
@@ -236,7 +240,7 @@ const TopNav: React.FC<TopNavProps> = ({
                 setPanelOpen(true);
                 onOpenNotifications?.();
               }} title="Messages">
-              {!!notifications.chat && <span className="badge">{notifications.announcements}</span>}
+              {!!notifications.chat && <span className="badge">{notifications.chat}</span>}
             </button>
 
             <button
@@ -324,6 +328,8 @@ const TopNav: React.FC<TopNavProps> = ({
         topOffset={TOPNAV_HEIGHT}
         onClose={() => setPanelOpen(false)}
         onChangeTab={(t) => setPanelTab(t)}
+        onMarkAllRead={onMarkAllRead}
+        onMarkRead={onMarkRead}
       />
     </>
   );

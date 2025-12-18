@@ -26,7 +26,7 @@ export type AnnouncementPanelProps = {
   onClose: () => void;
   onChangeTab?: (tab: 'notifications' | 'announcements') => void;
   onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
-  onMarkRead?: (item: PanelItem) => void;
+  onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
 };
 
 export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
@@ -84,19 +84,8 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
   };
 
   const handleMarkAllRead = () => {
-    // Notify parent (if provided)
+    // Notify parent to update notification counts
     onMarkAllRead?.(tab);
-
-    // Keep your existing badge-hiding logic (targets TopNav icon buttons)
-    const selector =
-      tab === 'announcements'
-        ? '.icon-btn.e-icons.e-audio span'
-        : '.icon-btn.e-icons.e-multiple-comment span';
-    document.querySelectorAll(selector).forEach((el) => {
-      const span = el as HTMLElement;
-      span.style.display = 'none';
-      span.setAttribute('aria-hidden', 'true');
-    });
   };
 
   const items = tab === 'notifications' ? notificationItems : announcementItems;
@@ -162,18 +151,18 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
                 {items.map((it) => (
                   <li
                     key={it.id}
-                    className="annc-panel-item"
+                    className={`annc-panel-item ${it.read ? 'is-read' : 'is-unread'}`}
                     onClick={() => openDetail(it)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => e.key === 'Enter' && openDetail(it)}
-                    title="View details"
+                    title={`${it.read ? 'Read' : 'Unread'} - ${it.title}`}
                   >
                     <span className="panel-item-icon" aria-hidden="true">
                       <i className={it.iconClass ?? (it.type === 'announcement' ? 'e-icons e-audio' : 'e-icons e-multiple-comment')} />
                     </span>
                     <div className="annc-item-body">
-                      <div className="annc-item-title">{it.title}</div>
+                      <div className={`annc-item-title ${it.read ? 'read' : 'unread'}`}>{it.title}</div>
                       {(it.subtitle || it.date) && (
                         <div className="annc-item-meta">
                           {it.subtitle && <span className="meta">{it.subtitle}</span>}
@@ -181,6 +170,7 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
                         </div>
                       )}
                     </div>
+                    {!it.read && <span className="unread-indicator" aria-label="Unread"></span>}
                   </li>
                 ))}
               </ul>
@@ -200,7 +190,7 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
           open={detailOpen}
           item={selectedItem}
           onClose={closeDetail}
-          onMarkRead={(it) => onMarkRead?.(it)}
+          onMarkRead={onMarkRead}
         />
       )}
     </>

@@ -21,7 +21,7 @@ export type AnnouncementDetailDialogProps = {
   open: boolean;
   item: DetailItem;
   onClose: () => void;
-  onMarkRead?: (item: DetailItem) => void;
+  onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
 };
 
 const dialogAnimation: AnimationSettingsModel = { effect: 'Zoom', duration: 140 };
@@ -92,8 +92,12 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
 
   const footerTemplate = () => (
     <div className="annc-dlg-footer">
-      {item && (
-        <ButtonComponent cssClass="e-primary" onClick={onClose}>
+      {item && !item.read && (
+        <ButtonComponent cssClass="e-primary" onClick={() => {
+          const isNotification = item.type === 'notification';
+          onMarkRead?.(item.id, isNotification);
+          onClose();
+        }}>
           Mark as read
         </ButtonComponent>
       )}
