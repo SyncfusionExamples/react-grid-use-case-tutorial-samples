@@ -180,6 +180,7 @@ const Policies: React.FC = () => {
         target=".policies-grid-wrapper"
         cssClass="policy-dialog"
         close={onDialogClose}
+        animationSettings={{ duration: 0 }} 
       >
         {selected && (
           <div className="policy-dialog__content">
