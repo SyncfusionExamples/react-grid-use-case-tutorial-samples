@@ -12,6 +12,7 @@ import { TooltipComponent, TooltipEventArgs } from '@syncfusion/ej2-react-popups
 import { EmployeeDetails } from '../interface.ts';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 import type { SelectedFilter } from './Organization';
+import './Employees.css';
 
 DataUtil.serverTimezoneOffset = 0;
 
@@ -192,10 +193,10 @@ const Employees = (props?: EmployeesProps) => {
             />
             <ColumnDirective
               field="EmployeeCode"
-              headerText="Code"
+              headerText="Employee ID"
               template={codeTemplate}
               customAttributes={{ class: 'infotooltip' }}
-              width="120"
+              width="140"
             />
             <ColumnDirective field="Name" customAttributes={{ class: 'infotooltip' }} width="150" />
             <ColumnDirective field="Mail" clipMode="EllipsisWithTooltip" width="260" />

@@ -181,31 +181,30 @@ function App() {
               >
               </button>
             </div>
-
             <ul className="nav flex-column">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/" end>
+                <NavLink className="nav-link" to="/" end title={collapsed ? 'My Profile' : undefined} aria-label="My Profile">
                   <span className="nav-icon e-icons e-user" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">My Profile</span>}
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/organization">
+                <NavLink className="nav-link" to="/organization" title={collapsed ? 'Organization' : undefined} aria-label="Organization">
                   <span className="nav-icon e-icons e-xml-mapping" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">Organization</span>}
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/policies">
+                <NavLink className="nav-link" to="/policies" title={collapsed ? 'Policies' : undefined} aria-label="Policies">
                   <span className="nav-icon e-icons e-file-format" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">Policies</span>}
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/achievements">
+                <NavLink className="nav-link" to="/achievements" title={collapsed ? 'Achievements' : undefined} aria-label="Achievements">
                   <span className="nav-icon e-icons e-activities" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">Achievements</span>}
