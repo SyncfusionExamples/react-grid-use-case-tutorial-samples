@@ -1,0 +1,124 @@
+.drp-left-icon.e-daterangepicker .e-range-icon::before {
+  color: #0078d4; /* Blue for icon */
+}
+.drp-left-icon.e-daterangepicker input.e-input {
+  color: #666; /* Gray text */
+  border-radius: 4px; /* Subtle rounding */
+}
+.drp-left-icon.e-daterangepicker .e-input-group {
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+/* Outer wrapper to position custom icons */
+.drp-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Use the Syncfusion-generated wrapper element as our visible control.
+   We tweak its border to match the target screenshot. */
+.custom-syncfusion-drp .e-date-range-wrapper.e-input-group.e-control-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 4px;      /* squared, not pill */
+  box-shadow: none;
+}
+
+/* Keep the built-in range icon hidden (we use our overlay icons instead). */
+.custom-syncfusion-drp .e-input-group-icon.e-range-icon {
+  display: none !important; /* built-in icon suppressed */
+}
+/* Make sure the input has enough padding for our custom icons. */
+.custom-syncfusion-drp .e-date-range-wrapper .e-input {
+  /* give more room on the left so text doesn't sit under the calendar icon */
+  padding: 0 34px 0 52px;   /* top/right/bottom/left */
+  cursor: pointer;         /* matches expectation: click to open */
+} 
+
+/* Common styles for our overlay buttons */
+.drp-icon-left,
+.drp-caret-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;             /* clickable area */
+  border: 0;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* above the input text */
+}
+
+/* Place icons slightly inset from edges so they don't touch the border */
+.drp-icon-left   { left: 8px; }
+.drp-caret-right { right: 6px; }
+
+.calendar-svg, .caret-svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Optional hover feedback (subtle) */
+.drp-icon-left:hover,
+.drp-caret-right:hover {
+  color: #000;
+}
+
+/* size and align Syncfusion icon font elements inside the overlay buttons */
+.drp-icon-left .e-icons,
+.drp-caret-right .e-icons,
+.calendar-i,
+.caret-i {
+  font-family: "e-icons" !important;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  color: inherit;
+}
+
+/* ensure icon button sits above the input text */
+.drp-icon-left,
+.drp-caret-right {
+  z-index: 3;
+}
+
+/* Compact size tweaks to better match the target screenshot */
+.custom-syncfusion-drp .e-date-range-wrapper.e-input-group.e-control-wrapper {
+  height: 36px;
+  padding: 6px 8px;
+  background: #fff;
+}
+
+
+.custom-syncfusion-drp .e-date-range-wrapper .e-input,
+.e-control .e-daterangepicker.e-input{
+  font-size: 13px;
+  /* make the input fill the control height and vertically center the single-line text */
+  height: 100%;
+  box-sizing: border-box;
+  /* room for left calendar icon (52px) and right caret (34px) */
+  padding: 0 34px 0 52px;
+  line-height: 36px; /* match control height (36px) to vertically center text */
+  caret-color: #333;
+  z-index: 1;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: center !important;
+}  
+
+/* slightly darker border on focus */
+.custom-syncfusion-drp .e-date-range-wrapper.e-input-group.e-control-wrapper:focus-within {
+  border-color: #b3d4fc;
+  box-shadow: none;
+}
+
+/* (icon height handled above) */

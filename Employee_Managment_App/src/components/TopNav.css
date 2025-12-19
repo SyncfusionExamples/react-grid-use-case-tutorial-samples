@@ -40,6 +40,11 @@
   --shadow-rest: 0 1px 2px rgba(0,0,0,.06);
   --shadow-focus: 0 6px 18px rgba(16, 185, 129, 0.16);
   --focus-ring: 0 0 0 4px rgba(16, 185, 129, 0.14);
+
+  --color-sf-icon-color: #6b7280;
+  --color-sf-secondary-border-color-hover: #d1d5db;
+  --color-sf-secondary-bg-color-hover:rgba(158, 158, 158, 0.2);
+  --color-sf-content-text-color: #111827;
 }
 
 /* Parallel fixed header */
@@ -237,9 +242,9 @@
 }
 
 .icon-btn:hover {
-  border-color: var(--accent-100);
-  background: var(--accent-50);
-  color: var(--accent-700);
+  border-color: var(--focus-ring);
+  background: transparent;
+  color: var(--color-sf-icon-color);
 }
 
 .icon-btn:active { transform: translateY(1px); }
@@ -307,8 +312,9 @@
 }
 
 .create-menu button:hover {
-  background: var(--accent-50);
-  color: var(--accent-700);
+  background: var(--color-sf-secondary-bg-color-hover);
+  border-color: var(--color-sf-content-text-color);
+  color: var(--color-sf-content-text-color);
 }
 
 /* Badge */
@@ -358,9 +364,9 @@
 }
 
 .topnav-avatar:hover {
-  border-color: var(--accent-100);
-  background: var(--accent-50);
-  color: var(--accent-700);
+  border-color: var(--focus-ring);
+  background: transparent;
+  color: var(--color-sf-icon-color);
 }
 
 .topnav-avatar-menu {

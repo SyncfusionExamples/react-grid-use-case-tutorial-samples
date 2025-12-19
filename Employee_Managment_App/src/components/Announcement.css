@@ -8,7 +8,11 @@
   --annc-backdrop: rgba(2,6,23,0.35);
   --annc-elev: 0 8px 20px rgba(2, 6, 23, 0.06);
   --annc-panel-width: 380px;
-}
+
+  --color-sf-icon-color: #6b7280;
+  --color-sf-secondary-border-color-hover: #d1d5db;
+  --color-sf-secondary-bg-color-hover: rgba(158, 158, 158, 0.2);
+  --color-sf-content-text-color: #111827;
 
 /* Backdrop area that starts below the top bar (top offset applied inline) */
 .annc-panel-backdrop {
@@ -157,8 +161,8 @@
   opacity: 0.75;
 }
 .annc-panel-item:hover {
-  background: #f8fffb;
-  border-color: #e8f7f1;
+    background: var(--color-sf-secondary-bg-color-hover);
+    color: var(--color-sf-content-text-color);
 }
 .annc-panel-item.is-unread:hover {
   background: #ecfdf5;

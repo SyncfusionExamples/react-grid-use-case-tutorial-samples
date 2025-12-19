@@ -33,6 +33,16 @@ const Employees = (props?: EmployeesProps) => {
   const employeeGridIns = useRef<GridComponent>(null);
   const tooltipObj = useRef<TooltipComponent>(null);
 
+   // Use Syncfusion Grid API to auto-fit column widths and keep height auto-sized
+  const onGridDataBound = React.useCallback(() => {
+    const grid: any = employeeGridIns.current;
+    if (!grid) return;
+    // Ensure grid height is set to auto so it adapts to content (Syncfusion supports 'auto')
+    if (grid.element) {
+      grid.height = 'auto';
+    }
+  }, []);
+
   // Apply/clear remote filters on pill changes or routed context
   useEffect(() => {
     const grid = employeeGridIns.current;
@@ -178,6 +188,7 @@ const Employees = (props?: EmployeesProps) => {
           allowFiltering={true}
           filterSettings={{ type: 'Excel', enableInfiniteScrolling: true }}
           recordClick={recordClick}
+          dataBound={onGridDataBound}
         >
           <ColumnsDirective>
             <ColumnDirective
@@ -206,7 +217,7 @@ const Employees = (props?: EmployeesProps) => {
               headerText="Date Joined"
               textAlign="Right"
               type="date"
-              format={{ type: 'date', skeleton: 'medium' }}
+              format={{ type: 'date', format: "d MMM yyyy"}}
               clipMode="EllipsisWithTooltip"
               width="150"
             />

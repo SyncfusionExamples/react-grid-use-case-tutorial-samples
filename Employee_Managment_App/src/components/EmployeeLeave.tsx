@@ -15,6 +15,7 @@ import {
   Inject,
   RowInfo
 } from '@syncfusion/ej2-react-grids';
+import './EmployeeLeave.css';
 import { ChangeEventArgs, SwitchComponent } from '@syncfusion/ej2-react-buttons';
 import { DataManager, Query, UrlAdaptor, Predicate } from '@syncfusion/ej2-data';
 import {
@@ -53,21 +54,51 @@ const Presets = (props: { dateRangeChange: (args: RangeEventArgs) => void }) => 
   const lastSixEnd: Date = new Date(
     new Date(new Date(new Date().setMonth(new Date().getMonth() + 1)).setDate(0)).toDateString()
   );
+  const dateRangePickerRef = React.useRef<DateRangePickerComponent>(null);
 
   return (
-    <DateRangePickerComponent
-      placeholder="Select a range"
-      value={[yearStart, yearEnd]}
-      change={props.dateRangeChange}
-      width={190}
-    >
-      <PresetsDirective>
-        <PresetDirective label="This Month" start={monthStart} end={monthEnd}></PresetDirective>
-        <PresetDirective label="Last Month" start={lastStart} end={lastEnd}></PresetDirective>
-        <PresetDirective label="Last 6 Months" start={lastSixStart} end={lastSixEnd}></PresetDirective>
-        <PresetDirective label="This Year" start={yearStart} end={yearEnd}></PresetDirective>
-      </PresetsDirective>
-    </DateRangePickerComponent>
+    <div className="drp-input-wrapper">
+      {/* left calendar icon (overlay) - opens the picker */}
+      <button
+        type="button"
+        className="drp-icon-left"
+        aria-hidden
+        onClick={() => dateRangePickerRef.current && (dateRangePickerRef.current as any).show()}
+      >
+        {/* Syncfusion icon (e-icons) for calendar */}
+        <span className="e-input-group-icon e-range-icon e-icons" aria-hidden="true"></span>
+      </button>
+      
+      <DateRangePickerComponent
+        ref={dateRangePickerRef}
+        placeholder="Select a range"
+        value={[yearStart, yearEnd]}
+        format={'MMM d, yyyy'}
+        change={props.dateRangeChange}
+        width={240}
+        cssClass="custom-syncfusion-drp drp-left-icon"
+        showClearButton={false}
+      >
+        <PresetsDirective>
+          <PresetDirective label="This Month" start={monthStart} end={monthEnd}></PresetDirective>
+          <PresetDirective label="Last Month" start={lastStart} end={lastEnd}></PresetDirective>
+          <PresetDirective label="Last 6 Months" start={lastSixStart} end={lastSixEnd}></PresetDirective>
+          <PresetDirective label="This Year" start={yearStart} end={yearEnd}></PresetDirective>
+        </PresetsDirective>
+      </DateRangePickerComponent>
+
+      
+
+      {/* right caret icon (overlay) - also opens the picker */}
+      <button
+        type="button"
+        className="drp-caret-right"
+        aria-hidden
+        onClick={() => dateRangePickerRef.current && (dateRangePickerRef.current as any).show()}
+      >
+        <span className="e-icons e-chevron-down caret-i" aria-hidden="true"></span>
+      </button>
+    </div>
   );
 };
 
@@ -247,8 +278,8 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
         actionComplete={actionComplete}
       >
         <ColumnsDirective>
-          <ColumnDirective field="EmployeeCode" headerText="Code" visible={false} width="120" />
-          <ColumnDirective field="AttendanceID" headerText="Task ID" isPrimaryKey={true} width="140" />
+          <ColumnDirective field="EmployeeCode" headerText="ID" visible={false} width="120" />
+          <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} width="140" />
           <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" />
           <ColumnDirective field="ShiftName" headerText="Shift Name" width="120" />
           <ColumnDirective field="From" type="date" format="d MMM yyyy" textAlign="Right" width="120" />
