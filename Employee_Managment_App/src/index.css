@@ -16,7 +16,7 @@
   text-transform: none;
 }
 #payroll_grid .e-summaryrow .e-leftfreeze.e-summarycell[data-index="2"] {
-  border-right-color: #818cf8;
+  border-right-color: #7ee098;
   border-right-width: 2px;
 }
  
@@ -2380,7 +2380,7 @@
   --color-sf-dialog-border: #fff;
   --color-sf-primary: #1ab394;
   --color-sf-primary-text-color: #fff;
-  --color-sf-primary-light: #818cf8;
+  --color-sf-primary-light: #7ee098;
   --color-sf-primary-lighter: #e0e7ff;
   --color-sf-primary-dark: #4338ca;
   --color-sf-primary-darker: #3730a3;
@@ -2784,7 +2784,7 @@
   --color-sf-dialog-border: rgba(255, 255, 255, .1);
   --color-sf-primary: rgba(99, 102, 241);
   --color-sf-primary-text-color: #000;
-  --color-sf-primary-light: #3730a3;
+  --color-sf-primary-light: #58d378;
   --color-sf-primary-lighter: #1e1b4b;
   --color-sf-primary-dark: #818cf8;
   --color-sf-primary-darker: #4f46e5;
@@ -58138,15 +58138,45 @@ ejs-sidebar {
     width: auto;
   }
 }
-
+.payrollpage .CardTable{
+  margin-left: 35px;
+}
+.e-leftfreeze .CardTable {
+  margin-left: 0px;
+}
+.e-rightalign .CardTable {
+  margin-left: 25px;
+}
 @media (max-width: 768px) {
+
+  .payrollpage .CardTable{
+  margin-left: 25px;
+}
+.e-leftfreeze .CardTable{
+  margin-left: 0px;
+}
+
+td[aria-label=" is template cell column header Total"] .CardTable {
+  margin-left: 20px; /* Adjust as needed */
+}
 
   .e-prompt-dialog.e-dialog.e-popup,
   .e-prompt-dialog.e-dialog.e-popup {
     margin: 30px;
     width: auto;
   }
+  #payroll_grid .e-summaryrow .e-leftfreeze.e-summarycell[data-index="1"] {
+    border-right-color: #7ee098;
+    border-right-width: 2px;
+  }
+ 
+  #payroll_grid.e-grid.e-left-shadow .e-summaryrow .e-leftfreeze.e-summarycell[data-index="1"] {
+    clip-path: inset(0 -15px 0 0);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.12);
+    border-right-width: 0px;
+  }
 }
+
 
 @media (min-width: 768px) {
 
@@ -70905,6 +70935,28 @@ td.cardcell.separateline {
 .statustxt.approved {
   color: #654321;
 }
+.Profile-data-availability{
+  margin-top: 5px;
+  background-color: #58d378;
+  color: white;
+  font-size: 11px;
+  animation-name: blinker;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .statustemp.needtoapprove {
   background-color: #df2222;
@@ -71061,201 +71113,8 @@ td.cardcell.separateline {
     margin-left: 72px;
     padding-top: 56px;
   }
+  .employeeLeave-header .e-input-group.e-control-wrapper{
+    margin-top: 5px;
+    width: 240px !important;
 }
-
-/* src/App.css */
-
-/* Fallbacks; App.tsx sets actual values via inline CSS variables */
-:root {
-  --header-h: 56px;
-  --sidebar-expanded: 240px;
-  --sidebar-collapsed: 72px;
-  --sidebar-current-width: var(--sidebar-expanded);
-}
-
-/* Container that holds header, sidebar, and main */
-.app-layout {
-  position: relative;
-  min-height: 100vh;
-  background: #f6f7f9;
-  color: #1f2937;
-}
-
-/* Fixed sidebar */
-.app-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--sidebar-current-width);
-  background: #242a35;
-  color: #fff;
-  overflow: auto;
-  z-index: 1010; /* sits over header on mobile when open */
-  transition: width 220ms ease, transform 220ms ease;
-}
-
-/* Sidebar header row */
-.sidebar-brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--header-h);
-  padding: 0 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  font-weight: 600;
-}
-
-/* Top navigation bar positioning (content styled in TopNav.css) */
-.topnav {
-  position: fixed;
-  top: 0;
-  left: var(--sidebar-current-width);
-  width: calc(100% - var(--sidebar-current-width));
-  height: var(--header-h);
-  z-index: 1000;
-  transition: left 220ms ease, width 220ms ease;
-}
-
-/* Main content area takes the remaining space */
-.app-main {
-  position: relative;
-  margin-left: var(--sidebar-current-width);
-  padding: calc(var(--header-h) + 16px) 0 24px;
-  min-height: 100vh;
-  box-sizing: border-box;
-  background: #fff;
-  transition: margin-left 220ms ease;
-}
-
-/* Optional: collapse style tweaks */
-.sidebar-is-collapsed .sidebar-brand .title {
-  display: none;
-}
-
-/* Mobile/tablet: make sidebar off-canvas and let header+main take full width */
-@media (max-width: 991.98px) {
-  .app-sidebar {
-    transform: translateX(-100%);
-    width: var(--sidebar-expanded);
-  }
-  .app-layout.mobile-sidebar-is-open .app-sidebar {
-    transform: translateX(0);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  }
-
-  .topnav {
-    left: 0;
-    width: 100%;
-  }
-
-  .app-main {
-    margin-left: 0;
-    width: 100%;
-    padding: calc(var(--header-h) + 12px) 12px 20px;
-  }
-}
-
-/* Basic nav list resets (optional) */
-.nav {
-  list-style: none;
-  padding: 8px 0;
-  margin: 0;
-}
-.nav .nav-item .nav-link {
-  padding: 10px 16px;
-  color: #cfd6e4;
-  text-decoration: none;
-}
-.nav .nav-item .nav-link.active,
-.nav .nav-item .nav-link:hover {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-}
-
-#employees_grid .e-pager .e-currentitem, #employees_grid .e-pager .e-currentitem:hover {
-    background: var(--color-sf-primary-bg-color);
-    border-color: var(--color-sf-primary-bg-color);
-    color: var(--color-sf-primary-text-color);
-}
-
-/* Sidebar header with internal toggle */
-.app-sidebar .sidebar-brand {
-  display: flex;
-  align-items: center;
-  height: 56px;
-  padding: 0 12px;
-  gap: 10px;
-  border-bottom: 1px solid #1f2937;
-}
-
-.app-sidebar .sidebar-brand .sidebar-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #e5e7eb;
-  cursor: pointer;
-}
-
-.app-sidebar .sidebar-brand .title {
-  color: #e5e7eb;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-/* Nav items: icon + text; hide text when docked */
-.app-sidebar .nav {
-  padding: 8px 6px;
-  margin: 0;
-}
-
-.app-sidebar .nav-item {
-  list-style: none;
-  margin: 2px 0;
-}
-
-.app-sidebar .nav-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  color: #cbd5e1;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-.app-sidebar .nav-link.active,
-.app-sidebar .nav-link:hover {
-  background: rgba(255,255,255,0.06);
-  color: #fff;
-}
-
-.app-sidebar .nav-icon {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  width: 18px;
-  height: 18px;
-  color: #cbd5e1;
-}
-
-/* When the layout is collapsed (desktop dock), hide text and center icons */
-.app-layout.sidebar-is-collapsed .app-sidebar .nav-link {
-  justify-content: center;
-  padding: 10px 0;
-}
-
-.app-layout.sidebar-is-collapsed .app-sidebar .nav-text {
-  display: none;
-}
-
-/* Keep brand title minimal when collapsed (we render 'HR' text already) */
-.app-layout.sidebar-is-collapsed .app-sidebar .sidebar-brand {
-  justify-content: center;
 }

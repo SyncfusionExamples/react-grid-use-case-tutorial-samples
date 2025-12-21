@@ -13,7 +13,7 @@
   --color-sf-secondary-border-color-hover: #d1d5db;
   --color-sf-secondary-bg-color-hover: rgba(158, 158, 158, 0.2);
   --color-sf-content-text-color: #111827;
-
+}
 /* Backdrop area that starts below the top bar (top offset applied inline) */
 .annc-panel-backdrop {
   position: fixed;

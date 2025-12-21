@@ -89,8 +89,9 @@
 
 .company-name {
   font-size: 16px;
-  font-weight: bold;
   color: rgba(0, 0, 0, 0.87);
+  font-family: math;
+  font-weight: 800;
 }
 
 /* Center cluster: search */
@@ -420,7 +421,9 @@
     top: var(--topnav-height);
     z-index: 999;
     border-bottom: 1px solid var(--topnav-border);
-    padding: 8px;
+    padding-right:66px;
+    padding-top:8px;
+    padding-bottom: 8px;
     background: #fff;
   }
 

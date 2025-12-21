@@ -152,6 +152,28 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
     return { casual, sick, others, request };
   }
 
+
+const leaveTypeTemplate = (args: any) => {
+  const rawType = String(args.AbsenceType || '').trim();
+  const type = rawType.toLowerCase();
+
+  // Normalize common variants
+  const normalized =
+    type === 'casual' ? 'casual' :
+    type === 'sick' ? 'sick' :
+    type === 'emergency' ? 'emergency' :
+    'others'; // default bucket
+
+  return (
+    <div className="leave-type-badge">
+      <span className={`e-badge lt-${normalized}`} title={rawType}>
+        {rawType || 'N/A'}
+      </span>
+    </div>
+  );
+};
+
+
   const recomputeFromView = () => {
     if (!leaveGridIns.current) return;
     const viewRows = leaveGridIns.current.getCurrentViewRecords() as EmployeeLeaveDetails[];
@@ -243,14 +265,18 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
   };
 
   return (
-    <div>
+    <div className='employee-leave-detail'>
       <div className="employeeLeave-header">
         <div className="leaveinfo">
+          <div className='leave-headerinfo'>
           <b>Leave:</b>{' '}
-          <span className="e-badge badge-casual">{leaveCount.casual} d</span> Casual |{' '}
-          <span className="e-badge badge-sick">{leaveCount.sick} d</span> Sick |{' '}
-          <span className="e-badge badge-others">{leaveCount.others} d</span> Others |{' '}
-          <span className="e-badge badge-request">{leaveCount.request} d</span> Request
+          </div>
+          <div className='leave-value'>
+            <span className="e-badge badge-casual">{leaveCount.casual} d</span> Casual |{' '}
+            <span className="e-badge badge-sick">{leaveCount.sick} d</span> Sick |{' '}
+            <span className="e-badge badge-others">{leaveCount.others} d</span> Others |{' '}
+            <span className="e-badge badge-request">{leaveCount.request} d</span> Request
+          </div>
         </div>
         <div className="daterange">
           <Presets dateRangeChange={dateRangeChange} />
@@ -263,7 +289,7 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
         dataSource={gridData}
         editSettings={{ allowEditing: true }}
         query={query}
-        allowPaging={false}
+        allowPaging={true}
         allowFiltering={true}
         filterSettings={{ type: 'Excel' }}
         toolbar={toolbar}
@@ -280,10 +306,10 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
         <ColumnsDirective>
           <ColumnDirective field="EmployeeCode" headerText="ID" visible={false} width="120" />
           <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} width="140" />
-          <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" />
+          <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" template={leaveTypeTemplate} />
           <ColumnDirective field="ShiftName" headerText="Shift Name" width="120" />
-          <ColumnDirective field="From" type="date" format="d MMM yyyy" textAlign="Right" width="120" />
-          <ColumnDirective field="To" type="date" format="d MMM yyyy" textAlign="Right" width="120" />
+          <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
+          <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
           <ColumnDirective field="Days" headerText="Day(s)" textAlign="Right" width="120" />
           <ColumnDirective field="Status" template={statusTemplate} width="150" />
           {props.employeeData &&

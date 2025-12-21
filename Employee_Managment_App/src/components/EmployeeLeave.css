@@ -122,3 +122,106 @@
 }
 
 /* (icon height handled above) */
+
+/* --- Base badge look --- */
+.employee-leave-detail .e-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .2px;
+}
+
+/* Container for grid cell alignment */
+.leave-type-badge {
+  display: flex;
+  align-items: center;
+}
+
+/* --- Leave Type (grid cells) --- */
+.lt-casual { 
+  background-color: #D0E6FF; /* light blue */
+  color: #0B63B6;           /* dark blue text for contrast */
+  border: 1px solid #9BC0F5;
+}
+
+.lt-sick {
+  background-color: #A8E6CF; /* light green */
+  color: #11624C;            /* dark green */
+  border: 1px solid #7BD4B4;
+}
+
+.lt-emergency {
+  background-color: #FFD6D6; /* light red */
+  color: #9B1C1C;            /* dark red */
+  border: 1px solid #F5A8A8;
+}
+
+.lt-others {
+  background-color: #F2E6FF; /* light purple */
+  color: #5B2E91;            /* dark purple */
+  border: 1px solid #D6C2F5;
+}
+
+/* --- Header badges (summary) use same palette --- */
+.badge-casual { 
+  background-color: #D0E6FF; 
+  color: #0B63B6; 
+  border: 1px solid #9BC0F5;
+}
+
+.badge-sick {
+  background-color: #A8E6CF; 
+  color: #11624C; 
+  border: 1px solid #7BD4B4;
+}
+
+.badge-others {
+  background-color: #F2E6FF; 
+  color: #5B2E91; 
+  border: 1px solid #D6C2F5;
+}
+
+.badge-request {
+  background-color: #FFF3C4; /* light yellow for pending/request */
+  color: #8A6A00;            /* dark gold/brown */
+  border: 1px solid #FFE28A;
+}
+
+/* Optional: subtle hover for interactive feel in grid cells */
+.leave-type-badge .e-badge:hover {
+  filter: brightness(0.97);
+}
+
+/* Optional: Dark mode support if your app has a dark theme class */
+.dark .lt-casual, .dark .badge-casual { 
+  background-color: #193B59;
+  color: #CBE1FF;
+  border-color: #274B6B;
+}
+
+.dark .lt-sick, .dark .badge-sick { 
+  background-color: #124033;
+  color: #CBEFE2;
+  border-color: #1A5A47;
+}
+
+.dark .lt-emergency, .dark .badge-emergency { 
+  background-color: #4E1919;
+  color: #FFD9D9;
+  border-color: #6A2A2A;
+}
+
+.dark .lt-others, .dark .badge-others { 
+  background-color: #2E2150;
+  color: #E8DAFF;
+  border-color: #463775;
+}
+
+.dark .badge-request {
+  background-color: #4B3F16;
+  color: #FFECA6;
+  border-color: #6A5617;
+}
