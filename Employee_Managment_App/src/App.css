@@ -1,237 +1,195 @@
-/* 1. GENERAL: Container paddings shrink, stacking, font adapt for mobile */
-@media (max-width: 768px) {
-  .app-layout {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    min-width: 0;
-    font-size: 15px;
-  }
-  .app-main {
-    padding: 6px 0 0 0 !important;
-  }
-  .achievements-container,
-  .policies-content,
-  .employees-content {
-    padding: 10px 5px !important;
-  }
+/* Fallbacks; App.tsx sets actual values via inline CSS variables */
+:root {
+  --header-h: 56px;
+  --sidebar-expanded: 240px;
+  --sidebar-collapsed: 72px;
+  --sidebar-current-width: var(--sidebar-expanded);
 }
 
-/* 2. SIDEBAR: overlay, hide, and usability tweaks for mobile */
-@media (max-width: 991px) {
-  .e-sidebar {
-    width: 80vw !important;
-    min-width: 200px !important;
-    max-width: 97vw !important;
-    left: 0 !important;
-    top: 0 !important;
-    height: 100vh !important;
-    border-radius: 0 !important;
-    box-shadow: 0 2px 24px rgba(0,0,0,0.22);
-    z-index: 1111;
-  }
+/* Container that holds header, sidebar, and main */
+.app-layout {
+  position: relative;
+  min-height: 100vh;
+  background: #f6f7f9;
+  color: #1f2937;
+}
+
+/* Fixed sidebar */
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-image: url(../public/background.png);
+  width: var(--sidebar-current-width);
+  background-color: #242a35;
+  color: #fff;
+  overflow: auto;
+  z-index: 1010; /* sits over header on mobile when open */
+  transition: width 220ms ease, transform 220ms ease;
+}
+
+/* Sidebar header row */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+}
+
+/* Top navigation bar positioning (content styled in TopNav.css) */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-current-width);
+  width: calc(100% - var(--sidebar-current-width));
+  height: var(--header-h);
+  z-index: 1000;
+  transition: left 220ms ease, width 220ms ease;
+}
+
+/* Main content area takes the remaining space */
+.app-main {
+  position: relative;
+  margin-left: var(--sidebar-current-width);
+  padding: calc(var(--header-h) + 16px) 0 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #fff;
+  transition: margin-left 220ms ease;
+}
+
+/* Optional: collapse style tweaks */
+.sidebar-is-collapsed .sidebar-brand .title {
+  display: none;
+}
+
+/* Mobile/tablet: make sidebar off-canvas and let header+main take full width */
+@media (max-width: 991.98px) {
   .app-sidebar {
-    min-width: 0;
-    width: 100% !important;
-    padding: 0 !important;
+    transform: translateX(-100%);
+    width: var(--sidebar-expanded);
   }
-  .sidebar-brand {
-    gap: 8px !important;
-    font-size: 19px;
-    padding: 8px 0 9px 12px !important;
+  .app-layout.mobile-sidebar-is-open .app-sidebar {
+    transform: translateX(0);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
-  .sidebar-toggle {
-    margin-left: auto;
+
+  .topnav {
+    left: 0;
+    width: 100%;
   }
-  .nav.flex-column {
-    gap: 0;
-    padding: 2px 0;
+
+  .app-main {
+    margin-left: 0;
+    width: 100%;
+    padding: calc(var(--header-h) + 12px) 12px 20px;
   }
 }
 
-/* 3. TOP NAV: squash items, stack user info, hide create if needed */
-@media (max-width: 768px) {
-  .topnav-inner {
-    gap: 3px !important;
-    padding: 0 4px !important;
-  }
-  .cluster-right {
-    gap: 3px !important;
-  }
-  .btn-create-group, .btn-create {
-    min-width: 70px !important;
-    padding: 0 7px;
-    font-size: 13px !important;
-  }
-  .topnav-avatar-name {
-    font-size: 12px;
-    margin-left: 4px !important;
-    word-break: break-all;
-  }
+/* Basic nav list resets (optional) */
+.nav {
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+}
+.nav .nav-item .nav-link {
+  padding: 10px 16px;
+  color: #cfd6e4;
+  text-decoration: none;
+}
+.nav .nav-item .nav-link.active,
+.nav .nav-item .nav-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
 }
 
-/* 4. SEARCH: search bar fills width, form controls height shrink */
-@media (max-width: 768px) {
-  .cluster-center, .search-form {
-    width: 97vw !important;
-    min-width: 0 !important;
-    max-width: 99vw !important;
-  }
-  .search-form .search-field {
-    height: 32px !important;
-    font-size: 14px;
-  }
-}
-/* Mobile search field needs full width */
-@media (max-width: 530px) {
-  .search-form,
-  .search-field.input-group {
-    width: 99vw !important;
-    min-width: 0 !important;
-    max-width: 100vw !important;
-  }
+#employees_grid .e-pager .e-currentitem, #employees_grid .e-pager .e-currentitem:hover {
+    background: var(--color-sf-primary-bg-color);
+    border-color: var(--color-sf-primary-bg-color);
+    color: var(--color-sf-primary-text-color);
 }
 
-/* 5. BUTTONS, CHIPS, and TOOLBARS: stack and compress */
-@media (max-width: 640px) {
-  .toolbar-right,
-  .org-filters__pills,
-  .filter-chip-row {
-    flex-wrap: wrap !important;
-    gap: 7px !important;
-    row-gap: 6px !important;
-    justify-content: flex-start !important;
-  }
-  .toolbar-field, .filter-chip {
-    font-size: 13px !important;
-    padding: 6px 10px !important;
-  }
-  .annc-panel-tabs button {
-    padding: 8px 4px !important;
-  }
+/* Sidebar header with internal toggle */
+.app-sidebar .sidebar-brand {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 12px;
+  gap: 10px;
+  border-bottom: 1px solid #1f2937;
 }
 
-/* 6. GRIDS/TABLES: Horizontal scroll for overflow columns on mobile */
-@media (max-width: 900px) {
-  .e-grid, .lb-sections, .policies-grid-wrapper .e-grid {
-    overflow-x: auto !important;
-    min-width: 360px !important;
-    width: 100vw !important;
-  }
-}
-/* For actual grid row cells, allow wrapping */
-@media (max-width: 640px) {
-  .e-grid .e-rowcell, .lb-row, .policy-name-cell {
-    font-size: 13px !important;
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-    white-space: normal !important;
-  }
-}
-/* Keep action buttons visible in grid on small screens */
-@media (max-width: 640px) {
-  .policy-dialog, .e-dialog {
-    max-width: 97vw !important;
-    min-width: 0 !important;
-  }
+.app-sidebar .sidebar-brand .sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #e5e7eb;
+  cursor: pointer;
 }
 
-/* 7. EMPLOYEE PROFILE (tabs, avatar, flexing) */
-@media (max-width: 600px) {
-  .overview-header {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 3px !important;
-  }
-  .profile-data-name, .profile-data-mail, .profile-data-designation, .profile-data-supervisor, .profile-data-branch {
-    font-size: 14px !important;
-  }
-  .profile-image svg {
-    width: 48px !important;
-    height: 48px !important;
-  }
+.app-sidebar .sidebar-brand .title {
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-/* 8. DIALOGS/ANNOUNCEMENTS: Center and fill for mobile */
-@media (max-width: 570px) {
-  .e-annc-detail-dialog.e-dialog, .policy-dialog.e-dialog {
-    width: 97vw !important;
-    max-width: 97vw !important;
-    left: 1vw !important;
-    right: 1vw !important;
-    min-width: 0 !important;
-    border-radius: 11px !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .annc-dlg-content {
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
-  }
+/* Nav items: icon + text; hide text when docked */
+.app-sidebar .nav {
+  padding: 8px 6px;
+  margin: 0;
 }
 
-/* 9. ANNOUNCEMENTS PANEL: right panel covers full width on tiny screens */
-@media (max-width: 480px) {
-  .annc-right-panel {
-    width: 99vw !important;
-    min-width: 0 !important;
-    left: 0 !important;
-    border-radius: 0 !important;
-    max-width: 100vw !important;
-    font-size: 14px !important;
-  }
-  .annc-panel-header, .annc-panel-tabs, .annc-panel-content {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
+.app-sidebar .nav-item {
+  list-style: none;
+  margin: 2px 0;
 }
 
-/* 10. LEADERBOARD/ACHIEVEMENTS: Stacked layout for sections on mobile */
-@media (max-width: 640px) {
-  .lb-sections {
-    grid-template-columns: 1fr !important;
-  }
-  .lb-section {
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    margin-bottom: 14px !important;
-  }
+.app-sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #cbd5e1;
+  border-radius: 8px;
+  text-decoration: none;
 }
 
-/* 11. GENERAL: Shrink font slightly on XS mobile, compress app-body paddings */
-@media (max-width: 420px) {
-  html, body {
-    font-size: 13.6px !important;
-  }
-  .app-layout {
-    padding: 0 0 !important;
-  }
+.app-sidebar .nav-link.active,
+.app-sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
 }
 
-@media (max-width: 991px) {
-  .e-sidebar {
-    width: 68vw !important;
-    font-size: 30px;
-    min-width: 160px !important;
-    max-width: 88vw !important;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 3px 0 10px rgba(0,0,0,0.34);
-    background: #222b3c;
-  }
-  .nav-icon{
-    font-size:30px !important;
-    margin-right:15px;
-  }
-  .sidebar-brand{
-    font-size: 35px;
-  }
-  .title{
-    font-size: 35px !important;
-  }
-  .nav .flex-column{
-    margin-top: 15px;
-  }
-  .sidebar-toggle{
-    margin-right: 10px !important;
-  }
+.app-sidebar .nav-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  width: 18px;
+  height: 18px;
+  color: #cbd5e1;
+}
+
+/* When the layout is collapsed (desktop dock), hide text and center icons */
+.app-layout.sidebar-is-collapsed .app-sidebar .nav-link {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.app-layout.sidebar-is-collapsed .app-sidebar .nav-text {
+  display: none;
+}
+
+/* Keep brand title minimal when collapsed (we render 'HR' text already) */
+.app-layout.sidebar-is-collapsed .app-sidebar .sidebar-brand {
+  justify-content: center;
 }

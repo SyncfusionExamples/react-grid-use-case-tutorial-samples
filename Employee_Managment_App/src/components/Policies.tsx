@@ -151,6 +151,7 @@ const Policies: React.FC = () => {
             dataSource={filteredData}
             allowPaging
             allowSorting
+            enableAdaptiveUI={true}
             allowResizing
             toolbar={['Search']}
             pageSettings={{ pageSize: 5 }}
