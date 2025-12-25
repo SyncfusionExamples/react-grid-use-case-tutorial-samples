@@ -20,7 +20,6 @@
   top: 0;
   left: 0;
   bottom: 0;
-  background-image: url(../public/background.png);
   width: var(--sidebar-current-width);
   background-color: #242a35;
   color: #fff;

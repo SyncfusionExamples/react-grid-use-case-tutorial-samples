@@ -220,25 +220,23 @@ const leaveTypeTemplate = (args: any) => {
     }
   };
 
-  const statusTemplate = (args: any) => {
-    return (
-      <div>
-        {args.Status === 'Closed' ? (
-          <div id="status" className="statustemp closed">
-            <span className="statustxt closed">{args.Status}</span>
-          </div>
-        ) : args.Status === 'Approved' ? (
-          <div id="status" className="statustemp approved">
-            <span className="statustxt approved">{args.Status}</span>
-          </div>
-        ) : (
-          <div id="status" className="statustemp needtoapprove">
-            <span className="statustxt needtoapprove">{args.Status}</span>
-          </div>
-        )}
-      </div>
-    );
-  };
+const statusTemplate = (args: any) => {
+  const rawStatus = args.Status || 'N/A';
+  // normalize id-safe key, e.g. "Need to Approve" → "need-to-approve"
+  const key = rawStatus
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+
+  return (
+    <div className="status-badge-wrapper">
+      <span className={`e-badge status-${key}`} title={rawStatus}>
+        {rawStatus}
+      </span>
+    </div>
+  );
+};
 
   const approveChange = (args: ChangeEventArgs) => {
     const td = ((args.event as any).target as HTMLElement)?.closest('td');
@@ -268,15 +266,11 @@ const leaveTypeTemplate = (args: any) => {
     <div className='employee-leave-detail'>
       <div className="employeeLeave-header">
         <div className="leaveinfo">
-          <div className='leave-headerinfo'>
-          <b>Leave:</b>{' '}
-          </div>
-          <div className='leave-value'>
+            <b>Leave:</b>{' '}
             <span className="e-badge badge-casual">{leaveCount.casual} d</span> Casual |{' '}
             <span className="e-badge badge-sick">{leaveCount.sick} d</span> Sick |{' '}
             <span className="e-badge badge-others">{leaveCount.others} d</span> Others |{' '}
             <span className="e-badge badge-request">{leaveCount.request} d</span> Request
-          </div>
         </div>
         <div className="daterange">
           <Presets dateRangeChange={dateRangeChange} />
@@ -311,7 +305,7 @@ const leaveTypeTemplate = (args: any) => {
           <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
           <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
           <ColumnDirective field="Days" headerText="Day(s)" textAlign="Right" width="120" />
-          <ColumnDirective field="Status" template={statusTemplate} width="150" />
+          <ColumnDirective field="Status" headerText="Status" template={statusTemplate} width="150" />
           {props.employeeData &&
             props.userInfo &&
             props.employeeData.TeamLead === props.userInfo.Name && (

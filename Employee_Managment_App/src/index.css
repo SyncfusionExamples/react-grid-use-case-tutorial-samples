@@ -70812,6 +70812,13 @@ a.employee-popover:hover {
   margin-top: 5px;
   font-family: var(--font-family);
 }
+.profile-data-Teamname{
+  font-weight: 400;
+    height: 16px;
+    font-size: 14px;
+    margin-top: 5px;
+    font-family: var(--font-family);
+}
 
 .profile-data-supervisor {
   margin-top: 5px;
@@ -70929,7 +70936,6 @@ td.cardcell.separateline {
 
 .statustemp.approved {
   background-color: #ffff99;
-  width: 75px;
 }
 
 .statustxt.approved {
@@ -70960,12 +70966,10 @@ td.cardcell.separateline {
 
 .statustemp.needtoapprove {
   background-color: #df2222;
-  width: 120px;
 }
 
 .statustemp.closed {
   background-color: #00b300;
-  width: 54px;
 }
 
 .statustxt.closed {
@@ -70974,13 +70978,6 @@ td.cardcell.separateline {
 
 .statustxt.needtoapprove {
   color: white;
-}
-
-.statustemp {
-  position: relative;
-  height: 25px;
-  border-radius: 5px;
-  text-align: center;
 }
 
 #listSidebar .e-listview:not(.e-list-template) .e-list-item {
@@ -71027,11 +71024,17 @@ td.cardcell.separateline {
   .achievements-content .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
     width: 100%;
   }
+  .paystubpage, .employee-leave-detail, .payrollpage{
+    margin-right: 25px;
+  }
 }
 
 @media (max-width: 600px) {
   .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
     width: 100%;
+  }
+  .org-filters__pills .org-pill{
+    margin-bottom: 7px;
   }
 
   .achievements-content .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
@@ -71040,6 +71043,9 @@ td.cardcell.separateline {
 
   .card-control-section.basic_card_layout .card-layout {
     max-width: 600px;
+  }
+  .employeeLeave-header span {
+  margin: 2px 2px
   }
 }
 
