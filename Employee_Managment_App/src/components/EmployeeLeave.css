@@ -134,6 +134,7 @@
   letter-spacing: .2px;
 }
 
+
 /* Container for grid cell alignment */
 .leave-type-badge {
   display: flex;
@@ -224,4 +225,45 @@
   background-color: #4B3F16;
   color: #FFECA6;
   border-color: #6A5617;
+}
+
+/* container if you need any extra padding or alignment */
+.status-badge-wrapper {
+  display: flex;
+  justify-content: center; /* or flex-start/ end as you like */
+  align-items: center;
+}
+
+/* base badge overrides (optional) */
+.status-badge-wrapper .e-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .2px;            /* white text */
+}
+
+/* now per-status background colors */
+.status-approved {
+  background-color: #FFF3C4; /* light yellow for pending/request */
+  color: #8A6A00;            /* dark gold/brown */
+  border: 1px solid #FFE28A; /* green */
+}
+.status-closed {
+    background-color: #A8E6CF; /* light green */
+  color: #11624C;            /* dark green */
+  border: 1px solid #7BD4B4; /* gray */
+}
+.status-need-to-approve {
+    background-color: #FFD6D6; /* light red */
+  color: #9B1C1C;            /* dark red */
+  border: 1px solid #F5A8A8; /* orange */
+}
+.status-requested {
+  background-color: #17a2b8; /* teal */
+}
+.status-pending {
+  background-color: #007bff; /* blue */
 }

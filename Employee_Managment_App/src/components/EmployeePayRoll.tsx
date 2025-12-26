@@ -354,7 +354,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
         id="payroll_grid"
         ref={payRollGridIns}
         dataSource={gridData}
-        allowPaging={true}
+        allowPaging={false}
         query={query}
         width={'100%'}
         height={'auto'}

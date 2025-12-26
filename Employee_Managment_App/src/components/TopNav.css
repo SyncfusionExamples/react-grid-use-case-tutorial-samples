@@ -352,6 +352,7 @@
   width: 36px;
   height: 36px;
   border-radius: 999px;
+  pointer-events: none;
   background: #f1f5f9;
   color: var(--topnav-text);
   border: 1px solid var(--topnav-border);

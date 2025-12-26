@@ -225,14 +225,15 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
                         <div className="profile-data-name">{employeeData.Name}</div>
                         <div className="profile-data-mail">{employeeData.Mail}</div>
                         <div className="profile-data-designation">{employeeData.Designation}</div>
+                        <div className='profile-data-Teamname'>{employeeData.Team}</div>
                         <div className="profile-data-supervisor">Supervisor: {employeeData.TeamLead}</div>
                         <div className="profile-data-branch">Branch: {employeeData.Branch}</div>
                         <div className="Profile-data-availability e-badge"> Available - {employeeData.Branch}</div>
                     </div>
                 </div>
                 <div className="overview-content">
-                    <TabComponent heightAdjustMode="Auto"  overflowMode='Scrollable'>
-                        <TabItemsDirective>
+                    <TabComponent heightAdjustMode="Auto" swipeMode="None" overflowMode='Scrollable'>
+                        <TabItemsDirective >
                             <TabItemDirective header={headerText[0]} content={content0} />
                             {employeeData &&
                                 userInfo &&
