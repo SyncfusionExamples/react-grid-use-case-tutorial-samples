@@ -3,6 +3,10 @@ import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './TopNav.css';
 import { AnnouncementPanel, PanelItem } from './Announcement';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
+import { AutoCompleteComponent } from '@syncfusion/ej2-react-dropdowns';
+import { DataManager, UrlAdaptor, Query, Predicate } from '@syncfusion/ej2-data';
+import { useNavigate } from 'react-router-dom';
+import { EmployeeDetails } from '../interface';
 
 type TopNavProps = {
   portalShort?: string;
@@ -30,6 +34,13 @@ type TopNavProps = {
   onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
   onOpenSidebar?: () => void;
 };
+
+// Employee data source
+const employeeDataSource: DataManager = new DataManager({
+  url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesData',
+  adaptor: new UrlAdaptor(),
+  crossDomain: true,
+});
 
 const TopNav: React.FC<TopNavProps> = ({
   portalShort = 'HR',
@@ -60,19 +71,88 @@ const TopNav: React.FC<TopNavProps> = ({
   onMarkAllRead,
   onOpenSidebar,
 }) => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
+  const autoCompleteRef = useRef<AutoCompleteComponent>(null);
 
   const submitSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     onSearch?.(query.trim());
   };
 
+  // Handle employee selection from AutoComplete
+  const handleEmployeeSelect = (args: any) => {
+    if (args.itemData) {
+      const employeeData = args.itemData as EmployeeDetails;
+      // Navigate to employee info page
+      navigate('/employeeinfo', {
+        // Pass both employeeData and userInfo so tabs and defaults render for the selected account
+        state: { employeeID: employeeData, userInfo: employeeData },
+      });
+      // Clear the search after navigation
+      if (autoCompleteRef.current) {
+        autoCompleteRef.current.value = '';
+      }
+      setQuery('');
+      setMobileSearchOpen(false);
+    }
+  };
+
+  // Enable searching by Name, EmployeeCode (ID), or Mail (Email)
+  const debounceRef = useRef<number | undefined>(undefined);
+  const handleFiltering = (e: any) => {
+    const text: string = e.text ?? '';
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = window.setTimeout(() => {
+      let query = new Query();
+      if (text.trim().length > 0) {
+        const predicate = new Predicate('Name', 'contains', text, true)
+          .or('EmployeeCode', 'contains', text, true)
+          .or('Mail', 'contains', text, true);
+        query = query.where(predicate).take(20);
+      } else {
+        query = query.take(20);
+      }
+      e.updateData(employeeDataSource, query);
+    }, 250);
+  };
+
+  // Template for displaying employee suggestions
+  const itemTemplate = (data: any) => {
+    return (
+      <a href="#" className="employee-suggestion-link" onClick={(e) => e.preventDefault()}>
+        <div className="employee-suggestion-item">
+          <div className="employee-avatar-small">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <circle cx="8" cy="6" r="3" />
+              <path
+                fillRule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+              />
+            </svg>
+          </div>
+          <div className="employee-info-group">
+            <div className="employee-name-link">{data.Name}</div>
+            <div className="employee-id-email">{data.EmployeeCode} • {data.Mail}</div>
+          </div>
+        </div>
+      </a>
+    );
+  };
+
   const avatarRef = useRef<HTMLDivElement | null>(null);
-  const createRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleDocClick = (ev: MouseEvent) => {
@@ -144,9 +224,9 @@ const TopNav: React.FC<TopNavProps> = ({
           </div>
 
           <div className={`cluster-center ${mobileSearchOpen ? 'is-open' : ''}`}>
-            <form className="search-form" role="search" aria-label="Employee search" onSubmit={submitSearch}>
-              <div className={`search-field input-group ${query ? 'has-value' : ''}`}>
-                <span className="input-icon" aria-hidden="true">
+            <div className="search-form" role="search" aria-label="Employee search">
+              <div className="search-field-autocomplete">
+                <span className="input-icon-autocomplete" aria-hidden="true">
                   <svg width="18" height="18" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                     <path
                       fill="currentColor"
@@ -154,35 +234,26 @@ const TopNav: React.FC<TopNavProps> = ({
                     />
                   </svg>
                 </span>
-                <input
-                  className="form-control search-input"
-                  type="search"
-                  name="q"
-                  placeholder="Search Employee"
-                  aria-label="Search Employee"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Escape' && query) {
-                      e.preventDefault();
-                      setQuery('');
-                    }
-                  }}
-                  autoComplete="off"
+                <AutoCompleteComponent
+                  ref={autoCompleteRef}
+                  dataSource={employeeDataSource}
+                  fields={{ value: 'Name' }}
+                  placeholder="Search by name, ID, or email"
+                  popupHeight="300px"
+                  filterType="Contains"
+                  minLength={2}
+                  itemTemplate={itemTemplate}
+                  select={handleEmployeeSelect}
+                  filtering={handleFiltering}
+                  showClearButton={true}
+                  cssClass="employee-autocomplete"
+                  floatLabelType="Never"
+                  suggestionCount={20}
+                  ignoreCase={true}
+                  onChange={(e: any) => setQuery(e.value || '')}
                 />
-                <ButtonComponent
-                  type="button"
-                  cssClass="clear-btn"
-                  onClick={() => setQuery('')}
-                  aria-label="Clear search"
-                  title="Clear"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                    <path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.71 2.89 18.3 9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.29-6.3z" />
-                  </svg>
-                </ButtonComponent>
               </div>
-            </form>
+            </div>
           </div>
 
           <div className="cluster-right">
@@ -248,16 +319,9 @@ const TopNav: React.FC<TopNavProps> = ({
 
       {mobileSearchOpen && (
         <div className="mobile-search">
-          <form
-            className="search-form"
-            role="search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSearch?.(query.trim());
-            }}
-          >
-            <div className="search-field search-bootstrap input-group">
-              <span className="input-group-text" aria-hidden="true">
+          <div className="search-form" role="search">
+            <div className="search-field-autocomplete-mobile">
+              <span className="input-icon-autocomplete-mobile" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     fill="currentColor"
@@ -265,17 +329,24 @@ const TopNav: React.FC<TopNavProps> = ({
                   />
                 </svg>
               </span>
-              <input
-                className="form-control"
-                autoFocus
-                type="search"
-                placeholder="Search Employee"
-                aria-label="Search Employee"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+              <AutoCompleteComponent
+                dataSource={employeeDataSource}
+                fields={{ value: 'Name' }}
+                placeholder="Search by name, ID, or email"
+                popupHeight="300px"
+                filterType="Contains"
+                minLength={2}
+                itemTemplate={itemTemplate}
+                select={handleEmployeeSelect}
+                filtering={handleFiltering}
+                showClearButton={true}
+                cssClass="employee-autocomplete-mobile"
+                floatLabelType="Never"
+                suggestionCount={20}
+                ignoreCase={true}
               />
             </div>
-          </form>
+          </div>
         </div>
       )}
 
