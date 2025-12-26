@@ -275,7 +275,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <span>Net Pay</span>;
+                  return <strong>Net Pay</strong>;
                 }}
               />
               {months.map((x, index) => {
@@ -286,7 +286,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteNetPayAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <strong>$ {props.Custom}</strong>;
                     }}
                   />
                 );

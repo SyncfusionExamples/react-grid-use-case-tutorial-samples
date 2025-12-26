@@ -36,6 +36,7 @@
   --search-text: #111827;
   --search-muted: #6b7280;
   --search-icon: #6b7280;
+  --nav-border:rgb(150, 150, 160);
 
   --shadow-rest: 0 1px 2px rgba(0,0,0,.06);
   --shadow-focus: 0 6px 18px rgba(16, 185, 129, 0.16);
@@ -54,7 +55,8 @@
   z-index: 1000;
   height: var(--topnav-height);
   background: var(--topnav-bg);
-  border-bottom: 2px solid var(--topnav-border);
+  border-bottom: 0.5px solid var(--nav-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
 }
 
 /* Optional green accent line/shadow */

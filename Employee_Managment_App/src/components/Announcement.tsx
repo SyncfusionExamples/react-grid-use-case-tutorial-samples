@@ -162,6 +162,7 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
             <ButtonComponent
               cssClass="annc-panel-cta"
               type="button"
+              disabled={!items.some((it) => !it.read)}
               onClick={handleMarkAllRead}
             >
               Mark all read
@@ -185,7 +186,7 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
                       <i className={it.iconClass ?? (it.type === 'announcement' ? 'e-icons e-audio' : 'e-icons e-multiple-comment')} />
                     </span>
                     <div className="annc-item-body">
-                      <div className={`annc-item-title ${it.read ? 'read' : 'unread'}`}>{it.title}</div>
+                      <div className={`annc-item-title ${!it.read ? 'unread' : ''}`}>{it.title}</div>
                       {(it.subtitle || it.date) && (
                         <div className="annc-item-meta">
                           {it.subtitle && <span className="meta">{it.subtitle}</span>}

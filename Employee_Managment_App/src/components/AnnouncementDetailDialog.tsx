@@ -56,6 +56,11 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
   onMarkRead,
 }) => {
   const { label, Icon } = getMeta(item?.type);
+  // Use dialog ref to trigger built-in hide animation for custom buttons
+  const dialogRef = React.useRef<DialogComponent | null>(null);
+  const hideWithAnimation = () => {
+    dialogRef.current?.hide();
+  };
 
   const headerTemplate = () => (
     <div className="annc-dlg-header" role="group" aria-label="Announcement header">
@@ -96,17 +101,19 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
         <ButtonComponent cssClass="e-primary" onClick={() => {
           const isNotification = item.type === 'notification';
           onMarkRead?.(item.id, isNotification);
-          onClose();
+          // trigger dialog close with animation; onClose will be fired on close event
+          hideWithAnimation();
         }}>
           Mark as read
         </ButtonComponent>
       )}
-      <ButtonComponent onClick={onClose}>Close</ButtonComponent>
+      <ButtonComponent onClick={hideWithAnimation}>Close</ButtonComponent>
     </div>
   );
 
   return (
     <DialogComponent
+      ref={dialogRef}
       isModal
       visible={open}
       showCloseIcon
@@ -118,7 +125,7 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
       header={headerTemplate}
       footerTemplate={footerTemplate}
       target="body"
-      overlayClick={onClose}
+      overlayClick={hideWithAnimation}
       close={onClose}
     >
       <div className="annc-dlg-content">

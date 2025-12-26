@@ -470,7 +470,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <span>Net Pay</span>;
+                  return <strong>Net Pay</strong>;
                 }}
               />
               <AggregateColumnDirective
@@ -478,7 +478,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteNetPayInYear}
                 footerTemplate={(props: any) => {
-                  return <span>$ {props.Custom}</span>;
+                  return <strong>$ {props.Custom}</strong>;
                 }}
               />
               {months.map((x, index) => {
