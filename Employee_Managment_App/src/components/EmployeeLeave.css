@@ -82,6 +82,16 @@
   color: inherit;
 }
 
+/* Apply icon vertical adjustment only on mobile screens */
+@media (max-width: 768px) {
+  .drp-icon-left .e-icons,
+  .drp-caret-right .e-icons,
+  .calendar-i,
+  .caret-i {
+    margin-top: 8px;
+  }
+}
+
 /* ensure icon button sits above the input text */
 .drp-icon-left,
 .drp-caret-right {
@@ -266,4 +276,23 @@
 }
 .status-pending {
   background-color: #007bff; /* blue */
+}
+
+/* Mobile tab next-arrow should be perfectly vertical (remove skew from scroll buttons) */
+@media (max-width: 768px) {
+  /* Horizontal Tab header scroll buttons */
+  .e-tab .e-hscroll.e-scroll-device .e-scroll-nav,
+  .e-tab .e-rtl.e-hscroll.e-scroll-device .e-scroll-nav,
+  .e-tab .e-vscroll.e-scroll-device .e-scroll-nav,
+  .e-tab .e-rtl.e-vscroll.e-scroll-device .e-scroll-nav {
+    -webkit-transform: none !important;
+    transform: none !important;
+  }
+  .e-tab .e-hscroll.e-scroll-device .e-scroll-nav .e-nav-arrow,
+  .e-tab .e-rtl.e-hscroll.e-scroll-device .e-scroll-nav .e-nav-arrow,
+  .e-tab .e-vscroll.e-scroll-device .e-scroll-nav .e-nav-arrow,
+  .e-tab .e-rtl.e-vscroll.e-scroll-device .e-scroll-nav .e-nav-arrow {
+    -webkit-transform: none !important;
+    transform: none !important;
+  }
 }
