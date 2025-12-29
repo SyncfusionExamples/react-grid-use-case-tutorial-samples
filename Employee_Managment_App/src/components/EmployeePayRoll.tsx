@@ -208,21 +208,25 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
   ];
 
   const queryCellInfo = (args: QueryCellInfoEventArgs): void => {
-    if (args.column?.field === 'Total') {
-      for (let i: number = 0; i < elemClass.length; i++) {
-        const elem: HTMLElement = args.cell?.querySelector('.' + elemClass[i]) as HTMLElement;
-        let value: number = 0;
-        for (let j: number = 0; j < months.length; j++) {
-          if ((args.data as any)[months[j].field]) {
-            value += (args.data as any)[months[j].field][elemClass[i]] * (isPreviousYearRef.current ? 0.9 : 1);
-          }
-        }
-        if (elem) {
-          elem.innerText = '$ ' + value.toFixed(2);
+  if (args.column?.field === 'Total') {
+    for (let i: number = 0; i < elemClass.length; i++) {
+      const elem: HTMLElement = args.cell?.querySelector('.' + elemClass[i]) as HTMLElement;
+      let value: number = 0;
+      for (let j: number = 0; j < months.length; j++) {
+        if ((args.data as any)[months[j].field]) {
+          value += (args.data as any)[months[j].field][elemClass[i]] * (isPreviousYearRef.current ? 0.9 : 1);
         }
       }
+      if (elem) {
+        elem.innerText = '$ ' + value.toFixed(2);
+      }
     }
-  };
+
+    // Make all Total column values bold
+    const totalCells = args.cell?.querySelectorAll('.cardcell') ?? [];
+    totalCells.forEach((c) => ((c as HTMLElement).style.fontWeight = '700'));
+  }
+};
 
   const calculteGrossAggregate = (data: any, aggColumn: AggregateColumnModel): string => {
     const payStubData: MonthPayStub =
@@ -412,7 +416,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteGrossInYear}
                 footerTemplate={(props: any) => {
-                  return <span>$ {props.Custom}</span>;
+                  return <strong>$ {props.Custom}</strong>;
                 }}
               />
               {months.map((x, index) => {
@@ -445,7 +449,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteDeductionInYear}
                 footerTemplate={(props: any) => {
-                  return <span>$ {props.Custom}</span>;
+                  return <strong>$ {props.Custom}</strong>;
                 }}
               />
               {months.map((x, index) => {
@@ -470,7 +474,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <strong>Net Pay</strong>;
+                  return <span>Net Pay</span>;
                 }}
               />
               <AggregateColumnDirective
@@ -489,7 +493,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteNetPayAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <strong>$ {props.Custom}</strong>;
                     }}
                   />
                 );

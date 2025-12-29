@@ -111,7 +111,6 @@
 
 /* Input group container */
 .search-field.input-group {
-  pointer-events: none;
   position: relative;
   display: flex;
   align-items: center;
