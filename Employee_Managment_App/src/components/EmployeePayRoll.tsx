@@ -73,42 +73,42 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
   }, []);
 
   const itemTemplate = () => {
-    return (
-      <div>
-        <table className="CardTable">
-          <colgroup>
-            <col />
-          </colgroup>
-          <tbody>
-            <tr>
-              <td className="cardcell"> Regular Hours Worked </td>
-            </tr>
-            <tr>
-              <td className="cardcell">OverTime Hours Worked </td>
-            </tr>
-            <tr>
-              <td className="cardcell"> Bonus </td>
-            </tr>
-            <tr>
-              <td className="cardcell separateline"> Commission </td>
-            </tr>
-            <tr>
-              <td className="cardcell"> Federal Income Tax </td>
-            </tr>
-            <tr>
-              <td className="cardcell"> State Income Tax </td>
-            </tr>
-            <tr>
-              <td className="cardcell"> Social Security Tax </td>
-            </tr>
-            <tr>
-              <td className="cardcell"> MedicareTax </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  };
+  return (
+    <div>
+      <table className="CardTable">
+        <colgroup>
+          <col />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> Regular Hours Worked </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}>OverTime Hours Worked </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> Bonus </td>
+          </tr>
+          <tr>
+            <td className="cardcell separateline" style={{ fontWeight: 400 }}> Commission </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> Federal Income Tax </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> State Income Tax </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> Social Security Tax </td>
+          </tr>
+          <tr>
+            <td className="cardcell" style={{ fontWeight: 400 }}> MedicareTax </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
   const totalTemplate = () => {
     return (
@@ -209,10 +209,11 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
 
   const queryCellInfo = (args: QueryCellInfoEventArgs): void => {
   if (args.column?.field === 'Total') {
-    for (let i: number = 0; i < elemClass.length; i++) {
-      const elem: HTMLElement = args.cell?.querySelector('.' + elemClass[i]) as HTMLElement;
-      let value: number = 0;
-      for (let j: number = 0; j < months.length; j++) {
+    // Compute totals into the Total column
+    for (let i = 0; i < elemClass.length; i++) {
+      const elem = args.cell?.querySelector('.' + elemClass[i]) as HTMLElement;
+      let value = 0;
+      for (let j = 0; j < months.length; j++) {
         if ((args.data as any)[months[j].field]) {
           value += (args.data as any)[months[j].field][elemClass[i]] * (isPreviousYearRef.current ? 0.9 : 1);
         }
@@ -222,9 +223,9 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
       }
     }
 
-    // Make all Total column values bold
+    // Make all Total column values medium (500)
     const totalCells = args.cell?.querySelectorAll('.cardcell') ?? [];
-    totalCells.forEach((c) => ((c as HTMLElement).style.fontWeight = '700'));
+    totalCells.forEach((c) => ((c as HTMLElement).style.fontWeight = '500'));
   }
 };
 
@@ -416,7 +417,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteGrossInYear}
                 footerTemplate={(props: any) => {
-                  return <strong>$ {props.Custom}</strong>;
+                  return <span style={{ fontWeight: 500 }}>$ {props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -449,7 +450,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteDeductionInYear}
                 footerTemplate={(props: any) => {
-                  return <strong>$ {props.Custom}</strong>;
+                  return <span style={{ fontWeight: 500 }}>$ {props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -474,7 +475,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <span>Net Pay</span>;
+                  return <span style={{ fontWeight: 600 }}>Net Pay</span>;
                 }}
               />
               <AggregateColumnDirective
@@ -482,22 +483,22 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteNetPayInYear}
                 footerTemplate={(props: any) => {
-                  return <strong>$ {props.Custom}</strong>;
+                  return <span style={{ fontWeight: 600 }}>$ {props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
-                return (
-                  <AggregateColumnDirective
-                    key={index + 3}
-                    field={x.field}
-                    type="Custom"
-                    customAggregate={calculteNetPayAggregate}
-                    footerTemplate={(props: any) => {
-                      return <strong>$ {props.Custom}</strong>;
-                    }}
-                  />
-                );
-              })}
+              return (
+                <AggregateColumnDirective
+                  key={index + 3}
+                  field={x.field}
+                  type="Custom"
+                  customAggregate={calculteNetPayAggregate}
+                  footerTemplate={(props: any) => {
+                    return <span style={{ fontWeight: 600 }}>$ {props.Custom}</span>;
+                  }}
+                />
+              );
+            })}
             </AggregateColumnsDirective>
           </AggregateDirective>
         </AggregatesDirective>
