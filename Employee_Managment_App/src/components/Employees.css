@@ -1,3 +1,66 @@
 #employees_grid .e-content {
   overflow-y: hidden !important;
 }
+
+/* Fix border styling for filter popup items with primary color */
+#employees_grid .e-filtercell {
+  border-color: var(--color-sf-primary-bg-color, #10b981) !important;
+}
+
+#employees_grid .e-filterbar .e-filtercell {
+  border: 1px solid var(--color-sf-primary-bg-color, #10b981) !important;
+  border-bottom: 1px solid var(--color-sf-primary-bg-color, #10b981) !important;
+}
+
+/* Reduce spacing in filter popup items */
+#employees_grid .e-popup .e-list-item {
+  padding: 6px 12px !important;
+  height: auto !important;
+  min-height: 28px !important;
+}
+
+#employees_grid .e-popup .e-list-item:hover {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  padding: 6px 12px !important;
+}
+
+#employees_grid .e-popup .e-list-item.e-active {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  color: var(--color-sf-primary-bg-color, #10b981) !important;
+  padding: 6px 12px !important;
+}
+
+/* Reduce row height padding for compact display */
+#employees_grid .e-row {
+  height: auto !important;
+}
+
+#employees_grid .e-rowcell {
+  padding: 8px 4px !important;
+}
+
+/* Ensure header cells have proper border with primary color */
+#employees_grid .e-headercell {
+  border-right: 1px solid var(--color-sf-primary-bg-color, #10b981) !important;
+  border-bottom: 2px solid var(--color-sf-primary-bg-color, #10b981) !important;
+}
+
+/* Adjust dropdown popup styling */
+#employees_grid .e-dropdown-popup {
+  border: 1px solid var(--color-sf-primary-bg-color, #10b981) !important;
+}
+
+#employees_grid .e-popup .e-list-parent .e-list-item {
+  padding: 6px 12px !important;
+  line-height: 1.4 !important;
+}
+
+/* Reduce margin and padding in popup container */
+#employees_grid .e-popup {
+  border: 1px solid var(--color-sf-primary-bg-color, #10b981) !important;
+}
+
+#employees_grid .e-popup .e-ul {
+  padding: 0 !important;
+  margin: 0 !important;
+}

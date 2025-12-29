@@ -3,6 +3,9 @@ import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './TopNav.css';
 import { AnnouncementPanel, PanelItem } from './Announcement';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
+import { AutoCompleteComponent, SelectEventArgs, FilteringEventArgs } from '@syncfusion/ej2-react-dropdowns';
+import { useNavigate } from 'react-router-dom';
+import { fetchEmployees, transformEmployeesForSearch, filterEmployees, EmployeeSearchItem } from '../services/employeeService';
 
 type TopNavProps = {
   portalShort?: string;
@@ -65,6 +68,40 @@ const TopNav: React.FC<TopNavProps> = ({
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
+  const [employees, setEmployees] = useState<EmployeeSearchItem[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchEmployees().then(data => {
+      setEmployees(transformEmployeesForSearch(data));
+    });
+  }, []);
+
+  const suggestionItemTemplate = (data: EmployeeSearchItem) => {
+    return (
+      <div className="employee-suggestion">
+        <div className="suggestion-name">{data.Name}</div>
+        <div className="suggestion-details">
+          <span className="suggestion-id">{data.EmployeeCode}</span>
+          <span className="suggestion-email">{data.Mail}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const handleFiltering = (e: FilteringEventArgs) => {
+    // Filter based on the combined search text using helper service
+    setQuery(e.text);
+    let filteredData = filterEmployees(employees, e.text);
+    e.updateData(filteredData as any);
+  };
+
+  const handleSelect = (e: SelectEventArgs) => {
+    // Navigate to profile details page with the selected employee object
+    navigate('/employeeinfo', { state: { employeeID: e.itemData } });
+    setQuery('');
+    setMobileSearchOpen(false);
+  };
 
   const submitSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -144,9 +181,23 @@ const TopNav: React.FC<TopNavProps> = ({
           </div>
 
           <div className={`cluster-center ${mobileSearchOpen ? 'is-open' : ''}`}>
-            <form className="search-form" role="search" aria-label="Employee search" onSubmit={submitSearch}>
-              <div className={`search-field input-group ${query ? 'has-value' : ''}`}>
-                <span className="input-icon" aria-hidden="true">
+            <div className={`search-field input-group ${query ? 'has-value' : ''}`} style={{ border: 'none', background: 'transparent' }}>
+              <div className="e-input-group" style={{ padding: 0, border: 'none' }}>
+                <AutoCompleteComponent
+                  id="employee-search"
+                  dataSource={employees as any}
+                  fields={{ value: 'Name' }}
+                  placeholder="Search Employee (ID, Name, Email)"
+                  itemTemplate={suggestionItemTemplate}
+                  filtering={handleFiltering}
+                  select={handleSelect}
+                  cssClass="employee-search-box"
+                  width="100%"
+                  popupHeight="300px"
+                  highlight={true}
+                  suggestionCount={10}
+                />
+                <span className="input-icon" aria-hidden="true" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', zIndex: 1 }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                     <path
                       fill="currentColor"
@@ -154,35 +205,8 @@ const TopNav: React.FC<TopNavProps> = ({
                     />
                   </svg>
                 </span>
-                <input
-                  className="form-control search-input"
-                  type="search"
-                  name="q"
-                  placeholder="Search Employee"
-                  aria-label="Search Employee"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Escape' && query) {
-                      e.preventDefault();
-                      setQuery('');
-                    }
-                  }}
-                  autoComplete="off"
-                />
-                <ButtonComponent
-                  type="button"
-                  cssClass="clear-btn"
-                  onClick={() => setQuery('')}
-                  aria-label="Clear search"
-                  title="Clear"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                    <path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.71 2.89 18.3 9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.29-6.3z" />
-                  </svg>
-                </ButtonComponent>
               </div>
-            </form>
+            </div>
           </div>
 
           <div className="cluster-right">
@@ -202,12 +226,12 @@ const TopNav: React.FC<TopNavProps> = ({
             </ButtonComponent>
 
             <button className="icon-btn e-icons e-multiple-comment" type="button" onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setPanelTab('notifications');
-                setPanelOpen(true);
-                onOpenNotifications?.();
-              }} title="Messages">
+              e.preventDefault();
+              e.stopPropagation();
+              setPanelTab('notifications');
+              setPanelOpen(true);
+              onOpenNotifications?.();
+            }} title="Messages">
               {!!notifications.chat && <span className="badge">{notifications.chat}</span>}
             </button>
 
@@ -253,27 +277,33 @@ const TopNav: React.FC<TopNavProps> = ({
             role="search"
             onSubmit={(e) => {
               e.preventDefault();
-              onSearch?.(query.trim());
             }}
           >
-            <div className="search-field search-bootstrap input-group">
-              <span className="input-group-text" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="currentColor"
-                    d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
-                  />
-                </svg>
-              </span>
-              <input
-                className="form-control"
-                autoFocus
-                type="search"
-                placeholder="Search Employee"
-                aria-label="Search Employee"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
+            <div className="search-field search-bootstrap input-group" style={{ border: 'none', background: 'transparent' }}>
+              <div className="e-input-group" style={{ padding: 0, border: 'none', width: '100%' }}>
+                <AutoCompleteComponent
+                  id="employee-search-mobile"
+                  dataSource={employees as any}
+                  fields={{ value: 'Name' }}
+                  placeholder="Search Employee"
+                  itemTemplate={suggestionItemTemplate}
+                  filtering={handleFiltering}
+                  select={handleSelect}
+                  cssClass="employee-search-box"
+                  width="100%"
+                  popupHeight="300px"
+                  highlight={true}
+                  suggestionCount={10}
+                />
+                <span className="input-group-text" aria-hidden="true" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', zIndex: 1, border: 'none', background: 'transparent', padding: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                    <path
+                      fill="currentColor"
+                      d="M9.5 3a6.5 6.5 0 0 1 5.19 10.55l5.38 5.38-1.41 1.41-5.38-5.38A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z"
+                    />
+                  </svg>
+                </span>
+              </div>
             </div>
           </form>
         </div>
