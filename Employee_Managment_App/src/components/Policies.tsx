@@ -215,7 +215,7 @@ const Policies: React.FC = () => {
             </div>
 
             <div className="policy-dialog__section">
-              <div className="section-title">Description:</div>
+              <div className="policy-dialog-title">Description:</div>
               <p className="policy-description">{selected.policyDesciption}</p>
             </div>
 

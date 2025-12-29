@@ -105,6 +105,13 @@
 }
 
 .section-title {
+  margin: 0;
+  font-size: 18px; 
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+
+.policy-dialog-title {
   font-size: 12px;
   color: var(--annc-muted);
   text-transform: uppercase;
