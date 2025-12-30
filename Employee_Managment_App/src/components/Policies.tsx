@@ -13,7 +13,7 @@ import {
   CommandModel,
   CommandClickEventArgs
 } from '@syncfusion/ej2-react-grids';
-import { DialogComponent } from '@syncfusion/ej2-react-popups';
+import { DialogComponent, AnimationSettingsModel } from '@syncfusion/ej2-react-popups';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import './Policies.css';
 
@@ -97,6 +97,12 @@ const Policies: React.FC = () => {
     setActiveCategory('All');
   };
 
+  // Dialog animation
+  const dialogAnimation: AnimationSettingsModel = { effect: 'Zoom', duration: 140 };
+  // ref to trigger built-in hide animation before unmounting
+  const dialogRef = React.useRef<DialogComponent | null>(null);
+  const hideWithAnimation = () => dialogRef.current?.hide();
+
   return (
     <div className="policiespage policiespage--green">
       <div className="policies-content policies-grid-wrapper">
@@ -164,7 +170,7 @@ const Policies: React.FC = () => {
               <ColumnDirective field="category" headerText="Category" width="170" template={categoryTemplate} />
               <ColumnDirective field="lastUpdated" headerText="Last Updated" width="150" type="date" format="d MMM yyyy" textAlign="Right" />
               <ColumnDirective field="enrolledOn" headerText="Enrolled On" width="150" type="date" format="d MMM yyyy" textAlign="Right" />
-              <ColumnDirective field="statusText" headerText="Status" width="130" template={statusTemplate} />
+              <ColumnDirective field="statusText" headerText="Status" width="130" template={statusTemplate} textAlign="Center" />
               <ColumnDirective headerText="Actions" width="110" commands={viewCommands} textAlign="Center" />
             </ColumnsDirective>
             <Inject services={[Page, Sort, Toolbar, Resize, CommandColumn]} />
@@ -173,15 +179,19 @@ const Policies: React.FC = () => {
       </div>
 
       <DialogComponent
+        ref={dialogRef}
         visible={open}
         isModal
         showCloseIcon
+        closeOnEscape
+        width="min(92vw, 720px)"
+        height="auto"
         header={selected ? selected.policyName : 'Policy Details'}
-        width="600px"
         target=".policies-grid-wrapper"
-        cssClass="policy-dialog"
+        cssClass="policy-dialog no-gradient"
         close={onDialogClose}
-        animationSettings={{ duration: 0 }}
+        overlayClick={hideWithAnimation}
+        animationSettings={dialogAnimation}
       >
         {selected && (
           <div className="policy-dialog__content">
@@ -205,12 +215,12 @@ const Policies: React.FC = () => {
             </div>
 
             <div className="policy-dialog__section">
-              <div className="section-title">Description:</div>
+              <div className="policy-dialog-title">Description:</div>
               <p className="policy-description">{selected.policyDesciption}</p>
             </div>
 
             <div className="policy-dialog__footer">
-              <ButtonComponent cssClass="e-primary" onClick={onDialogClose} type="button">Close</ButtonComponent>
+              <ButtonComponent cssClass="e-primary" onClick={hideWithAnimation} type="button">Close</ButtonComponent>
             </div>
           </div>
         )}

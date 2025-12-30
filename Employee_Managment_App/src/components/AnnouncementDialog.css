@@ -123,6 +123,7 @@
 }
 .annc-dlg-details_value {
   font-size: 14px;
+  font-weight: 500;
   color: var(--annc-text);
   min-width: 0;
   overflow: hidden;
