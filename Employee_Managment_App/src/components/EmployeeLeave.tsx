@@ -298,10 +298,10 @@ const statusTemplate = (args: any) => {
         actionComplete={actionComplete}
       >
         <ColumnsDirective>
-          <ColumnDirective field="EmployeeCode" headerText="ID" visible={false} width="120" />
-          <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} width="140" />
-          <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" template={leaveTypeTemplate} />
-          <ColumnDirective field="ShiftName" headerText="Shift Name" width="120" />
+          <ColumnDirective field="EmployeeCode" headerText="ID" visible={false} clipMode="EllipsisWithTooltip" width="120" />
+          <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} clipMode="EllipsisWithTooltip" width="140" />
+          <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" clipMode="EllipsisWithTooltip" template={leaveTypeTemplate} />
+          <ColumnDirective field="ShiftName" headerText="Shift Name" clipMode="EllipsisWithTooltip" width="120" />
           <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
           <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
           <ColumnDirective field="Days" headerText="Day(s)" textAlign="Right" width="120" />

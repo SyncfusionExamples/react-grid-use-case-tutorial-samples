@@ -30520,7 +30520,7 @@ input.e-input::-ms-clear,
 .e-input-group.e-control-wrapper .e-clear-icon.e-clear-icon-hide,
 .e-float-input.e-control-wrapper.e-hidden,
 .e-input-group.e-control-wrapper.e-hidden {
-  display: none;
+  display: none !important;
 }
 
 input.e-input[type=search]::-webkit-search-decoration,
@@ -57986,6 +57986,7 @@ ejs-sidebar {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  max-height: 600px !important;
 }
 
 .e-dlg-container {
@@ -58118,7 +58119,7 @@ ejs-sidebar {
 
 .e-content-placeholder.e-dialog.e-placeholder-dialog {
   background-size: 400px 210px;
-  min-height: 210px;
+  min-height: 250px;
 }
 
 @media (min-width: 768px) {
