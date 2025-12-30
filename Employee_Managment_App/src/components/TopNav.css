@@ -22,29 +22,33 @@
   --bs-success: #1ab394;
 
   /* Component sizing to match HR portal */
-  --create-width: 96px;     /* button width similar to screenshots */
-  --search-max: 600px;      /* desktop search width similar to HR portal */
-  
-  --hr-search-width: 210px;
+  --create-width: 96px;
+  /* button width similar to screenshots */
+  --search-max: 600px;
+  /* desktop search width similar to HR portal */
+
+  --hr-search-width: 160px;
 
   --control-height: 35px;
   --radius-pill: 9999px;
 
-  --accent: #10b981;                   /* focus ring + border accent */
-  --search-bg: #f7f7f8;                /* filled background */
+  --accent: #10b981;
+  /* focus ring + border accent */
+  --search-bg: #f7f7f8;
+  /* filled background */
   --search-border: #d6d7db;
   --search-text: #111827;
   --search-muted: #6b7280;
   --search-icon: #6b7280;
-  --nav-border:rgb(150, 150, 160);
+  --nav-border: rgb(150, 150, 160);
 
-  --shadow-rest: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-rest: 0 1px 2px rgba(0, 0, 0, .06);
   --shadow-focus: 0 6px 18px rgba(16, 185, 129, 0.16);
   --focus-ring: 0 0 0 4px rgba(16, 185, 129, 0.14);
 
   --color-sf-icon-color: #6b7280;
   --color-sf-secondary-border-color-hover: #d1d5db;
-  --color-sf-secondary-bg-color-hover:rgba(158, 158, 158, 0.2);
+  --color-sf-secondary-bg-color-hover: rgba(158, 158, 158, 0.2);
   --color-sf-content-text-color: #111827;
 }
 
@@ -100,12 +104,14 @@
 .cluster-center {
   flex: 1 1 auto;
   display: flex;
-  justify-content: center; /* center like HR portal */
+  justify-content: flex-end;
+  /* center like HR portal */
 }
 
-.search-form { 
+.search-form {
   width: var(--hr-search-width);
-  margin-left: auto;           /* push to the right side */
+  margin-left: auto;
+  /* push to the right side */
 }
 
 
@@ -114,11 +120,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
-  height: var(--control-height);
-  background: var(--search-bg);
-  box-shadow: var(--shadow-rest);
-  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease, transform 120ms ease;
+  border-radius: var(--radius-pill);
+  line-height: var(--control-height);
+
 }
 
 /* Hover: slightly lift and sharpen border */
@@ -136,7 +140,8 @@
   width: 28px;
   height: 28px;
   color: var(--search-icon);
-  pointer-events: none; /* decorative */
+  pointer-events: none;
+  /* decorative */
 }
 
 /* The input itself */
@@ -148,7 +153,8 @@
   line-height: 1;
   height: 100%;
   width: 100%;
-  padding: 0 36px 0 42px; /* left: icon; right: clear */
+  padding: 0 36px 0 42px;
+  /* left: icon; right: clear */
   outline: none;
   box-shadow: none;
 }
@@ -206,15 +212,20 @@
     border: 1px solid CanvasText;
     background: Canvas;
   }
+
   .search-field .search-input {
     color: CanvasText;
   }
+
   .search-field .input-icon,
-  .search-field .clear-btn { color: CanvasText; }
+  .search-field .clear-btn {
+    color: CanvasText;
+  }
 }
 
 /* Reduced motion respect */
 @media (prefers-reduced-motion: reduce) {
+
   .search-field.input-group,
   .search-field .clear-btn {
     transition: none;
@@ -249,7 +260,9 @@
   color: var(--color-sf-icon-color);
 }
 
-.icon-btn:active { transform: translateY(1px); }
+.icon-btn:active {
+  transform: translateY(1px);
+}
 
 .icon-btn:focus-visible,
 .topnav-avatar:focus-visible,
@@ -259,7 +272,9 @@
 }
 
 /* Create button (Bootstrap look, fixed size like HR portal) */
-.btn-create-group { position: relative; }
+.btn-create-group {
+  position: relative;
+}
 
 .btn-create {
   display: inline-flex;
@@ -279,7 +294,9 @@
   transition: background 160ms ease, transform 80ms ease, filter 160ms ease;
 }
 
-.btn-create:active { transform: translateY(1px); }
+.btn-create:active {
+  transform: translateY(1px);
+}
 
 .btn-create .material-icons {
   font-size: 20px;
@@ -299,7 +316,9 @@
   z-index: 10;
 }
 
-.create-menu li { list-style: none; }
+.create-menu li {
+  list-style: none;
+}
 
 .create-menu button {
   width: 100%;
@@ -340,12 +359,13 @@
 }
 
 /* Avatar */
-.topnav-avatar-wrapper { 
+.topnav-avatar-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.topnav-avatar-name{
+
+.topnav-avatar-name {
   margin-left: 10px;
 }
 
@@ -384,7 +404,9 @@
   box-shadow: var(--elevation);
 }
 
-.topnav-avatar-menu li { list-style: none; }
+.topnav-avatar-menu li {
+  list-style: none;
+}
 
 .topnav-avatar-menu button {
   width: 100%;
@@ -404,38 +426,55 @@
 }
 
 /* Mobile handling */
-.show-md-down { display: none; }
+.show-md-down {
+  display: none;
+}
 
 @media (max-width: 992px) {
   .topnav.parallel {
     left: 0 !important;
     width: 100% !important;
   }
-  .company-name { display: none; }
+
+  .company-name {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .cluster-center { display: none; } /* collapse center search to icon */
-  .show-md-down { display: inline-flex; }
+  .cluster-center {
+    display: none;
+  }
+
+  /* collapse center search to icon */
+  .show-md-down {
+    display: inline-flex;
+  }
 
   .mobile-search {
     position: sticky;
     top: var(--topnav-height);
     z-index: 999;
     border-bottom: 1px solid var(--topnav-border);
-    padding-right:66px;
-    padding-top:8px;
+    padding-right: 66px;
+    padding-top: 8px;
     padding-bottom: 8px;
     background: #fff;
   }
 
-  .mobile-search .search-form { max-width: 100%; }
+  .mobile-search .search-form {
+    max-width: 100%;
+  }
 }
 
 /* Utility (when we hide center due to mobile search toggle) */
-.hidden-md-up { display: none; }
+.hidden-md-up {
+  display: none;
+}
 
-.hidden-md-up { display: none; }
+.hidden-md-up {
+  display: none;
+}
 
 /* Show only on widths below 992px */
 .show-md-down {
@@ -459,4 +498,167 @@
 
 .topnav .topnav-menu-btn {
   margin-right: 4px;
+}
+
+/* Suggestion Item Template */
+.employee-suggestion {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--search-text);
+}
+
+.suggestion-details {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.suggestion-id {
+  font-weight: 500;
+}
+
+/* Force Syncfusion AutoComplete to be transparent to fit our container */
+.employee-search-box.e-input-group.e-control-wrapper,
+.employee-search-box .e-input-group.e-control-wrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.employee-search-box .e-input {
+  background: transparent !important;
+  font-size: 14px !important;
+  color: var(--search-text) !important;
+  height: var(--control-height) !important;
+  line-height: var(--control-height) !important;
+  padding-left: 42px !important;
+  /* space for search icon */
+  padding-right: 36px !important;
+  border: none !important;
+  outline: none !important;
+  /* Adjust padding for icon */
+}
+
+
+
+.employee-search-box .e-input::placeholder {
+  color: var(--search-muted) !important;
+}
+
+/* Ensure the search field container has proper styling */
+.search-field.input-group {
+  border-radius: 4px !important;
+  overflow: hidden;
+  height: var(--control-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  border: 1px solid var(--search-border) !important;
+  background: var(--search-bg) !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.search-field.input-group:hover {
+  border-color: var(--accent) !important;
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.2) !important;
+}
+
+.search-field.input-group:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+
+
+
+
+/* Fix the e-input-group wrapper inside search-field */
+.search-field .e-input-group {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* AutoComplete popup border styling with primary color */
+#employee-search-popup,
+#employee-search-mobile-popup {
+  border: 2px solid var(--accent, #10b981) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Target the list inside autocomplete popup */
+.e-autocomplete .e-list {
+  border: none !important;
+}
+
+.e-autocomplete .e-list-item {
+  padding: 8px 12px !important;
+  height: auto !important;
+  min-height: 32px !important;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
+  line-height: 1.4 !important;
+}
+
+.e-autocomplete .e-list-item:hover {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+.e-autocomplete .e-list-item.e-active,
+.e-autocomplete .e-list-item.e-item-focus {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: var(--accent, #10b981) !important;
+}
+
+/* Target any popup for employee search */
+.employee-search-box .e-popup {
+  border: 2px solid var(--accent, #10b981) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Autocomplete input styling */
+.employee-search-box.e-input-group,
+.employee-search-box.e-control-wrapper {
+  border: 1px solid var(--search-border) !important;
+  border-radius: 4px !important;
+  background: var(--search-bg) !important;
+}
+
+.employee-search-box:hover {
+  border-color: var(--accent) !important;
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.3) !important;
+}
+
+.employee-search-box:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Reduce spacing in popup */
+.e-autocomplete .e-list-item .employee-suggestion {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.e-autocomplete .e-list-item .suggestion-name {
+  margin: 0 !important;
+  padding: 2px 0 !important;
+  line-height: 1.3 !important;
+}
+
+.e-autocomplete .e-list-item .suggestion-details {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  gap: 4px !important;
 }
