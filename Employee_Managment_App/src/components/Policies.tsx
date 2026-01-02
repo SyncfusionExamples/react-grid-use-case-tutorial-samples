@@ -168,8 +168,8 @@ const Policies: React.FC = () => {
             <ColumnsDirective>
               <ColumnDirective field="policyName" headerText="Policy Name" width="220" template={policyNameTemplate} />
               <ColumnDirective field="category" headerText="Category" width="170" template={categoryTemplate} />
-              <ColumnDirective field="lastUpdated" headerText="Last Updated" width="150" type="date" format="d MMM yyyy" textAlign="Right" />
-              <ColumnDirective field="enrolledOn" headerText="Enrolled On" width="150" type="date" format="d MMM yyyy" textAlign="Right" />
+              <ColumnDirective field="lastUpdated" headerText="Last Updated" width="150" type="date" format="MMM d yyyy" textAlign="Right" />
+              <ColumnDirective field="enrolledOn" headerText="Enrolled On" width="150" type="date" format="MMM d yyyy" textAlign="Right" />
               <ColumnDirective field="statusText" headerText="Status" width="130" template={statusTemplate} textAlign="Center" />
               <ColumnDirective headerText="Actions" width="110" commands={viewCommands} textAlign="Center" />
             </ColumnsDirective>

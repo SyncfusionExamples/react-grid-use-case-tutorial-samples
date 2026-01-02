@@ -87,9 +87,9 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
     let employeeData: EmployeeDetails = (routeEmployee as any) ?? (props.employeeData as any) ?? (userInfo as any) ?? (defaultEmployee as any) ?? defaultEmployeeData;
     // Format the date to the desired output
     const custom: Intl.DateTimeFormatOptions = {
-        day: 'numeric',  // Displays day as a number (e.g., 1)
-        month: 'short',  // Displays the short month name (e.g., Feb)
-        year: 'numeric'  // Displays the full year (e.g., 2005)
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
     };
 
     // Normalize possible string dates to Date objects and guard for missing values
@@ -100,8 +100,8 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
         ? new Date((employeeData as any).DOB)
         : null;
 
-    const dateOfJoining: string = dojDate ? dojDate.toLocaleDateString('en-GB', custom) : '-';
-    const dob: string = dobDate ? dobDate.toLocaleDateString('en-GB', custom) : '-';
+    const dateOfJoining: string = dojDate ? dojDate.toLocaleDateString('en-US', custom).replace(/,/g, ''): '-';
+    const dob: string = dobDate ? dobDate.toLocaleDateString('en-US', custom).replace(/,/g, ''): '-';
 
     const now = new Date();
     let experienceYears = 0;
@@ -329,7 +329,7 @@ const canSeePrivateTabs =
                             />
                         </svg>
                     </div>
-                    <div>
+                    <div className="profile-content">
                         <div className="profile-data-name">{employeeData.Name}</div>
                         <div className="profile-data-mail">{employeeData.Mail}</div>
                         <div className="profile-data-designation">{employeeData.Designation}</div>
