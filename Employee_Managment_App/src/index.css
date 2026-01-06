@@ -58156,6 +58156,10 @@ ejs-sidebar {
 .e-leftfreeze .CardTable{
   margin-left: 0px;
 }
+.profile-content{
+  display: ruby;
+  margin-left: 15px;
+}
 
 td[aria-label=" is template cell column header Total"] .CardTable {
   margin-left: 20px; /* Adjust as needed */

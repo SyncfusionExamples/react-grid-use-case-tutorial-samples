@@ -217,7 +217,7 @@ const Employees = (props?: EmployeesProps) => {
               headerText="Date Joined"
               textAlign="Right"
               type="date"
-              format={{ type: 'date', format: "d MMM yyyy"}}
+              format={{ type: 'date', format: "MMM d yyyy"}}
               clipMode="EllipsisWithTooltip"
               width="150"
             />
