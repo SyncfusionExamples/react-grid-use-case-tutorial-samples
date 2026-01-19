@@ -32,7 +32,7 @@ const Employees = (props?: EmployeesProps) => {
 
   const employeeGridIns = useRef<GridComponent>(null);
   const tooltipObj = useRef<TooltipComponent>(null);
-
+  const gridRef = React.useRef<GridComponent | null>(null);
    // Use Syncfusion Grid API to auto-fit column widths and keep height auto-sized
   const onGridDataBound = React.useCallback(() => {
     const grid: any = employeeGridIns.current;
@@ -47,6 +47,8 @@ const Employees = (props?: EmployeesProps) => {
   useEffect(() => {
     const grid = employeeGridIns.current;
     if (!grid) return;
+    const gridEl = gridRef.current?.element;
+  if (!gridEl) return;
 
     // Clear existing filters and search when the pill changes
     grid.clearFiltering();
@@ -169,7 +171,7 @@ const Employees = (props?: EmployeesProps) => {
       >
         <GridComponent
           id="employees_grid"
-          ref={employeeGridIns}
+          ref={gridRef}
           dataSource={data}
           allowPaging={true}
           pageSettings={{ pageCount: 4, pageSize: 15 }}
