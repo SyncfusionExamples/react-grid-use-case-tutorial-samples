@@ -22324,7 +22324,7 @@ label[for*=_wholeWord_e-de-rtl] {
 
 .e-de-tc-pmark {
   font-size: 14px;
-  font-family: Roboto-Regular;
+  font-family: 'Roboto', sans-serif;
   font-weight: 600;
   color: rgb(1, 22, 119);
   margin: 0 2px;
@@ -71040,6 +71040,9 @@ td.cardcell.separateline {
   }
   .org-filters__pills .org-pill{
     margin-bottom: 7px;
+  }
+  #employees_grid .e-popup.e-popup-open.e-dialog{
+    top: 135.8px !important;
   }
 
   .achievements-content .card-control-section.basic_card_layout .col-xs-6.col-sm-6.col-lg-6.col-md-6 {
