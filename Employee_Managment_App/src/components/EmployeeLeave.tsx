@@ -302,10 +302,10 @@ const statusTemplate = (args: any) => {
           <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} clipMode="EllipsisWithTooltip" width="140" />
           <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" clipMode="EllipsisWithTooltip" template={leaveTypeTemplate} />
           <ColumnDirective field="ShiftName" headerText="Shift Name" clipMode="EllipsisWithTooltip" width="120" />
-          <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
-          <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
-          <ColumnDirective field="Days" headerText="Day(s)" textAlign="Right" width="120" />
-          <ColumnDirective field="Status" headerText="Status" template={statusTemplate} width="150" />
+          <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Left" width="120" />
+          <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Left" width="120" />
+          <ColumnDirective field="Days" headerText="Day(s)" textAlign="Left" width="120" />
+          <ColumnDirective field="Status" headerText="Status" textAlign="Left" template={statusTemplate} width="150" />
           {props.employeeData &&
             props.userInfo &&
             props.employeeData.TeamLead === props.userInfo.Name && (

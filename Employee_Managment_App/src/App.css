@@ -57,7 +57,7 @@
   padding: calc(var(--header-h) + 16px) 0 24px;
   min-height: 100vh;
   box-sizing: border-box;
-  background: #fff;
+  background: #f3f3f4;
   transition: margin-left 220ms ease;
 }
 

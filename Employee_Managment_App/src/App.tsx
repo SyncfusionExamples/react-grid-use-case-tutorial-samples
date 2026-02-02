@@ -162,9 +162,13 @@ function App() {
           showBackdrop={!isDesktop}
           closeOnDocumentClick={!isDesktop}
           open={() => {
+             if(document.querySelector('.employeeinfo-content .e-tab'))
+            (document.querySelector('.employeeinfo-content .e-tab') as any).ej2_instances[0].refreshActiveTab();
             if (!isDesktop) setMobileSidebarOpen(true);
           }}
           close={() => {
+            if(document.querySelector('.employeeinfo-content .e-tab'))
+            (document.querySelector('.employeeinfo-content .e-tab')as any).ej2_instances[0].refreshActiveTab();
             if (!isDesktop) setMobileSidebarOpen(false);
           }}
         >

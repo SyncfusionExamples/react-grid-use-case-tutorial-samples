@@ -272,8 +272,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="lb-sections">
             <section className="lb-section">
               <header className="lb-header bg-r-overall">
-                <div className="lb-header-icon icon-overall e-icons e-people" aria-hidden>
-                </div>
+                <span id="categoryImageName" className="sficon-leaderboard-overall icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Overall</div>
                   <div className="lb-sub">LEADERBOARD</div>
@@ -296,8 +295,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-task">
-                <div className="lb-header-icon icon-task e-icons e-check-tick" aria-hidden>
-                </div>
+               <span id="categoryImageName" className="sficon-tasks icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Task</div>
                   <div className="lb-sub">LEADERBOARD</div>
@@ -320,8 +318,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-attendance">
-                <div className="lb-header-icon icon-att e-icons e-day" aria-hidden>
-                </div>
+                <span id="categoryImageName" className="sficon-user-time-wf icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Attendance</div>
                   <div className="lb-sub">LEADERBOARD</div>

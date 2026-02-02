@@ -240,8 +240,6 @@
 /* container if you need any extra padding or alignment */
 .status-badge-wrapper {
   display: flex;
-  justify-content: center; /* or flex-start/ end as you like */
-  align-items: center;
 }
 
 /* base badge overrides (optional) */

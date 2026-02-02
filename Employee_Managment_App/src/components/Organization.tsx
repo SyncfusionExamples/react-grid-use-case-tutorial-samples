@@ -84,13 +84,7 @@ const Organization = () => {
 
   return (
     <div className="employeespage org-theme">
-      <div className="employees-content">
-        <TabComponent heightAdjustMode="Auto" cssClass="org-tab">
-          <TabItemsDirective>
-            <TabItemDirective header={{ text: 'Employees' }} content={content0} />
-          </TabItemsDirective>
-        </TabComponent>
-      </div>
+      <div className="employees-content">{content0()} </div>
     </div>
   );
 };

@@ -37,7 +37,7 @@
 }
 
 .policies-grid-wrapper {
-  padding: 28px 24px;
+  padding: 5px 24px;
   color: var(--text-strong);
 }
 
@@ -47,11 +47,10 @@
 }
 
 .policies-title {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
-  font-style: normal;
   font-family: 'Roboto', sans-serif;
-  line-height: 1.1;
+  line-height: 2.1;
   margin: 0;
 }
 
@@ -105,8 +104,8 @@
 
 .section-title {
   margin: 0;
-  font-size: 18px; 
-  font-weight: 700;
+  font-size: 15px; 
+  font-weight: 600;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -214,7 +213,6 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 800;
   color: #1f2937;
 }
 
@@ -250,9 +248,7 @@
 
 .policies-grid-wrapper .e-grid .e-rowcell {
   border-color: #f2f4f7;
-  font-size: 13.5px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  font-size: 13px;
   color: var(--text-strong);
 }
 
@@ -444,4 +440,9 @@
   background: var(--color-sf-primary-bg-color);
   border-color: var(--color-sf-primary-border-color);
   color: --surface;
+}
+
+.recent-policies,
+.policy-filters {
+  margin: 18px 0px 18px 0px;
 }

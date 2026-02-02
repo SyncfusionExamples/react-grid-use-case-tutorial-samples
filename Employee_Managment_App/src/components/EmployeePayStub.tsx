@@ -180,7 +180,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
             value={months[currentMonth].headerText}
             fields={{ text: 'headerText', value: 'headerText' }}
             change={paystubChange}
-            width={250}
+            width={90}
           />
         </div>
       </div>

@@ -7,6 +7,14 @@
   font-style: normal;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+}
+
+h2 {
+    font-size: 24px;
+}
+
 .e-icons {
   font-family: "e-icons";
   font-style: normal;
@@ -45004,8 +45012,8 @@ body.e-colorpicker-overflow {
 .e-toolbar {
   border-radius: 6px;
   display: block;
-  height: 48px;
-  min-height: 48px;
+  height: 40px !important;
+  min-height: 40px;
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -45160,7 +45168,7 @@ body.e-colorpicker-overflow {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  min-height: 48px;
+  min-height: 38px;
   vertical-align: middle;
   width: auto;
   -webkit-box-flex: 0;
@@ -54307,8 +54315,8 @@ ejs-sidebar {
 .e-sidebar.e-right.e-close.e-dock {
   -webkit-transform: translateX(0%);
   transform: translateX(0%);
-  -webkit-transition: width 0.5s ease, visibility 500ms;
-  transition: width 0.5s ease, visibility 500ms;
+  -webkit-transition: transform 0.5s ease;
+   transition: transform 0.5s ease;
   visibility: visible;
 }
 
@@ -58487,7 +58495,6 @@ td[aria-label=" is template cell column header Total"] .CardTable {
 }
 
 .e-tooltip-wrap.e-popup {
-  background-color: var(--color-sf-tooltip-bg-color);
   border: 1px solid var(--color-sf-tooltip-border);
 }
 
@@ -63868,7 +63875,7 @@ li.e-separator.e-menu-item.e-excel-separator {
 .e-grid .e-cc-icon::before,
 .e-grid-menu .e-columnchooser-btn::before,
 .e-grid-menu .e-cc-icon::before {
-  content: "\e729";
+  content: "\e70d";
 }
 
 .e-grid .e-icon-reorderdownarrow::before,
@@ -65309,7 +65316,7 @@ li.e-separator.e-menu-item.e-excel-separator {
   border-style: solid;
   border-width: 1px 0 0;
   display: table-cell;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   padding: 12px 8px;
   overflow: hidden;
@@ -65415,7 +65422,8 @@ li.e-separator.e-menu-item.e-excel-separator {
 }
 
 .e-grid .e-unboundcelldiv>button {
-  margin: 0 4px;
+  margin: 0 !important;
+  padding: 2px 4px;
 }
 
 .e-grid .e-unboundcelldiv {
@@ -66253,7 +66261,7 @@ li.e-separator.e-menu-item.e-excel-separator {
   font-weight: 400;
   border-top-width: 1px;
   opacity: 1;
-  padding: 12px 0;
+  padding: 9px 0;
   text-align: center;
   text-indent: 1pt;
   -webkit-user-select: none;
@@ -67983,7 +67991,7 @@ li.e-separator.e-menu-item.e-excel-separator {
 
 .e-grid .e-gridheader {
   background-color: var(--color-sf-content-bg-color);
-  color: var(--color-sf-content-text-color);
+  color: rgba(0,0,0,.54)!important;
   border-bottom-color: var(--color-sf-border-light);
   border-top-color: var(--color-sf-border-light);
 }
@@ -70711,6 +70719,10 @@ li.e-separator.e-menu-item.e-excel-separator {
   display: none;
 }
 
+.overview-content .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
+  color: rgba(0, 0, 0, 0.87);
+}
+
 .employeeinfopage .overview-header {
   padding: 20px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.2);
@@ -70729,7 +70741,6 @@ a.employee-popover:hover {
 /* Tooltip */
 
 .e-tooltip-wrap.e-popup {
-  background-color: #eaddff;
   border: 1px solid #e0e0e0;
 }
 
@@ -70738,7 +70749,7 @@ a.employee-popover:hover {
 }
 
 .e-tooltip-wrap .e-tip-content {
-  color: rgba(0, 0, 0, 0.87);
+  color: #ffffff;
 }
 
 .e-tooltip-wrap {
@@ -70747,7 +70758,7 @@ a.employee-popover:hover {
 
 .e-tooltip-wrap .e-arrow-tip-inner.e-tip-bottom,
 .e-tooltip-wrap .e-arrow-tip-inner.e-tip-top {
-  color: #eaddff;
+  color: #000000;
 }
 
 /* Employee Pay Stub and PayRoll */
@@ -70802,12 +70813,15 @@ a.employee-popover:hover {
   font-size: 24px;
   font-weight: 100;
   color: var(--font-color-primary);
+  line-height: 1.1;
 }
 
 .profile-data-mail {
   color: var(--font-color-secondary);
   font-weight: 400;
   font-size: 13px;
+  margin: 5px 0px 10px 0px;
+  line-height: 1.1;
 }
 
 .profile-data-designation {
@@ -70816,6 +70830,8 @@ a.employee-popover:hover {
   font-size: 14px;
   margin-top: 5px;
   font-family: var(--font-family);
+  margin: 5px 0px 10px 0px;
+  line-height: 1.1;
 }
 .profile-data-Teamname{
   font-weight: 400;
@@ -70823,12 +70839,16 @@ a.employee-popover:hover {
     font-size: 14px;
     margin-top: 5px;
     font-family: var(--font-family);
+    margin: 5px 0px 10px 0px;
+    line-height: 1.1;
 }
 
 .profile-data-supervisor {
   margin-top: 5px;
   color: var(--font-color-secondary);
   font-family: var(--font-family);
+  font-size: 13px;
+  margin: 5px 0px 10px 0px;
 }
 
 .profile-data-branch {
@@ -70844,7 +70864,7 @@ a.employee-popover:hover {
 }
 
 .employeeLeave-header {
-  font-size: 13px;
+  font-size: 12px;
   font-family: 'Roboto', sans-serif;
   line-height: 20px;
   padding: 0 0 25px 0;
@@ -70856,6 +70876,7 @@ a.employee-popover:hover {
 
 .leaveinfo {
   color: rgba(0, 0, 0, 0.87);
+  font-weight: 500 !important;
 }
 
 @media (min-width: 600px) {
@@ -70947,7 +70968,6 @@ td.cardcell.separateline {
   color: #654321;
 }
 .Profile-data-availability{
-  margin-top: 5px;
   background-color: #58d378;
   color: white;
   font-size: 11px;
@@ -71131,4 +71151,8 @@ td.cardcell.separateline {
     margin-top: 5px;
     width: 240px !important;
 }
+}
+
+.e-tab.employee-header .e-toolbar-item {
+  width: 50px;
 }
