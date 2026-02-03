@@ -174,6 +174,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
           Paystub for the selected month in {currentYear}
         </div>
         <div className="paystubdd-container">
+          Choose Month: &nbsp;&nbsp;
           <DropDownListComponent
             id="paystubdd"
             dataSource={months}
@@ -275,7 +276,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <strong>Net Pay</strong>;
+                  return <span>Net Pay</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -286,7 +287,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteNetPayAggregate}
                     footerTemplate={(props: any) => {
-                      return <strong>$ {props.Custom}</strong>;
+                      return <span>$ {props.Custom}</span>;
                     }}
                   />
                 );

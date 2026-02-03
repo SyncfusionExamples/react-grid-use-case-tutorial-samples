@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap);
+/* @import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap); */
 
 @font-face {
   font-family: "e-icons";
@@ -7221,12 +7221,13 @@ h2 {
   background: var(--color-sf-primary-bg-color);
   border-color: var(--color-sf-primary-border-color);
   color: var(--color-sf-primary-text-color);
+   border-radius: 2px;
 }
 
 .e-btn.e-primary:hover,
 .e-css.e-btn.e-primary:hover {
-  background: var(--color-sf-success-bg-color-hover);
-  border-color: var(--color-sf-success-border-color-hover);
+  background:#17987e;
+  border-color: #17987e;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: var(--color-sf-primary-text-hover);
@@ -8626,7 +8627,7 @@ h2 {
   cursor: pointer;
   display: inline-block;
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   line-height: 16px;
   -webkit-user-select: none;
@@ -8635,7 +8636,7 @@ h2 {
   user-select: none;
   vertical-align: middle;
   white-space: normal;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .e-checkbox-wrapper .e-checkbox,
@@ -25645,17 +25646,15 @@ label[for*=_wholeWord_e-de-rtl] {
 
 .e-dropdownbase .e-list-item {
   /* stylelint-disable property-no-vendor-prefix */
-  -webkit-tap-highlight-color: transparent;
-  border-bottom: 0;
-  border-color: var(--color-sf-border-light);
-  color: var(--color-sf-flyout-text-color);
-  font-family: var(--font-family);
-  font-size: 14px;
-  line-height: 32px;
-  min-height: 32px;
-  padding-right: 16px;
-  text-indent: 12px;
-  background-color: var(--color-sf-flyout-bg-color);
+    -webkit-tap-highlight-color: transparent;
+    border-bottom: 0;
+    border-color: var(--color-sf-border-light);
+    color: var(--color-sf-flyout-text-color);
+    font-family: var(--font-family);
+    font-size: 14px;
+    padding-right: 16px;
+    text-indent: 12px;
+    background-color: var(--color-sf-flyout-bg-color);
 }
 
 .e-dropdownbase .e-list-group-item,
@@ -29563,7 +29562,7 @@ textarea.e-input,
 .e-float-input.e-input-group textarea,
 .e-float-input.e-control-wrapper textarea,
 .e-float-input.e-control-wrapper.e-input-group textarea {
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .e-input.e-small,
@@ -33226,10 +33225,10 @@ textarea.e-input::selection,
 
 .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error),
 .e-input-group.e-control-wrapper.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) {
-  border-color: var(--color-sf-primary-bg-color);
+  border-color:#ccc;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color);
-  box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) .e-input:first-child:focus,
@@ -33539,7 +33538,7 @@ textarea.e-input::selection,
 .e-float-input.e-control-wrapper.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) input:not([disabled]),
 .e-float-input.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) textarea:not([disabled]),
 .e-float-input.e-control-wrapper.e-input-focus:hover:not(.e-input-group):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled) textarea:not([disabled]) {
-  border-color: var(--color-sf-primary-bg-color);
+  border-color: #ccc;
 }
 
 .e-underline.e-input-group:hover:not(.e-input-focus):not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled),
@@ -48306,8 +48305,8 @@ body.e-colorpicker-overflow {
 .e-tab .e-tab-header .e-toolbar-item .e-tab-text {
   display: inherit;
   font-family: var(--font-family);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   text-transform: capitalize;
   -ms-flex-item-align: auto;
   align-self: auto;
@@ -57756,8 +57755,8 @@ ejs-sidebar {
 
 .e-dialog .e-dlg-header {
   display: block;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-user-select: none;
@@ -66257,7 +66256,7 @@ li.e-separator.e-menu-item.e-excel-separator {
   cursor: default;
   border-style: solid none;
   border-width: 1px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   border-top-width: 1px;
   opacity: 1;
@@ -67855,11 +67854,6 @@ li.e-separator.e-menu-item.e-excel-separator {
   background-color: var(--color-sf-content-bg-color);
 }
 
-.e-grid .e-focused:not(.e-menu-item):not(.e-editedbatchcell) {
-  -webkit-box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color) inset;
-  box-shadow: 0 0 0 1px var(--color-sf-primary-bg-color) inset;
-}
-
 .e-grid .e-addedrow .e-normaledit .e-rowcell.e-focused {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -68284,7 +68278,7 @@ li.e-separator.e-menu-item.e-excel-separator {
 .e-grid .e-groupdroparea {
   background-color: var(--color-sf-content-bg-color);
   border-top-color: var(--color-sf-border-light);
-  color: var(--color-sf-content-text-color-alt3);
+  color: rgba(33, 37, 41, .25);
 }
 
 .e-grid .e-groupdroparea.e-hover {
@@ -70749,7 +70743,32 @@ a.employee-popover:hover {
 }
 
 .e-tooltip-wrap .e-tip-content {
-  color: #ffffff;
+  border-radius: inherit;
+    color: var(--color-sf-tooltip-text-color);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif, "apple color emoji", "Segoe UI emoji", "Segoe UI Symbol", "Noto color emoji";
+    font-size: 12px;
+}
+
+/* Tooltip wrapper */
+.e-tooltip-wrap {
+  z-index: 10000 !important;
+  background: #fff !important;
+  border: 1px solid #e0e0e0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Tooltip content */
+.e-tip-content {
+  background: #fff !important;
+  color: #333 !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  z-index: 10001 !important;
+}
+
+/* Ensure popover has proper stacking */
+.e-popover {
+  z-index: 10000 !important;
 }
 
 .e-tooltip-wrap {
@@ -70787,7 +70806,7 @@ a.employee-popover:hover {
   .payrollinfo {
     padding-top: 8px;
     display: inline-block;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 24px;
     font-family: var(--font-family);
   }
@@ -70811,7 +70830,7 @@ a.employee-popover:hover {
 .profile-data-name {
   font-family: var(--font-family);
   font-size: 24px;
-  font-weight: 100;
+  font-weight: 300;
   color: var(--font-color-primary);
   line-height: 1.1;
 }
@@ -70907,7 +70926,7 @@ a.employee-popover:hover {
   background-color: #23c6c8;
   color: #fff;
   border-radius: 20px;
-  padding: 2px 10px;
+  padding: 2px 7px;
   display: inline-block;
 }
 

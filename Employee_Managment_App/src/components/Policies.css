@@ -47,11 +47,13 @@
 }
 
 .policies-title {
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Roboto', sans-serif;
-  line-height: 2.1;
-  margin: 0;
+  font-family: var(--font-family);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--font-color-primary);
+  line-height: 1.1;
+  margin-bottom: 15px;
+  margin-top: 0;
 }
 
 /* SECTION: Intro – icon removed, simplified note style */
@@ -79,6 +81,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
+  margin-bottom: 15px;
 }
 
 .policies-intro__link {
@@ -105,8 +108,9 @@
 .section-title {
   margin: 0;
   font-size: 15px; 
-  font-weight: 600;
+  font-weight: 500;
   font-family: 'Roboto', sans-serif;
+  margin-bottom: 15px;
 }
 
 .policy-dialog-title {
@@ -141,23 +145,26 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-bottom: 35px;
 }
 
 .filter-chip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 14px;
+  padding: 4px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-strong);
   cursor: pointer;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   font-family: 'Roboto', sans-serif;
   transition: background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .12s ease;
   box-shadow: var(--shadow-xs);
+  height: 23px;
+  line-height: 1;
 }
 
 .filter-chip:hover {
@@ -174,15 +181,15 @@
 
 .filter-chip__count {
   display: inline-flex;
-  min-width: 22px;
-  height: 22px;
+  width: 15px;
+  height: 16px;
   padding: 0 6px;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
   background: #f3f4f6;
   color: #111827;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
 }
 

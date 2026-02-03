@@ -136,6 +136,14 @@ const Employees = (props?: EmployeesProps) => {
     );
   };
 
+  const nameTemplate = (args: any) => {
+    return (
+      <span className="empName employee-popover">
+        {args[args.column.field]}
+      </span>
+    );
+  };
+
   const beforeRender = (args: TooltipEventArgs) => {
    
     if(args.target.classList.contains('e-headercell')) {
@@ -147,13 +155,13 @@ const Employees = (props?: EmployeesProps) => {
     (tooltipObj.current as any).content = `
     <div id="democontent" className="democontent">
         <div style="display: inline-block; padding: 4px 4px 0 4px">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 15" color="#ffffff">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 15" color="#000000">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
           <div style="display: inline-block; padding: 0 0 8px 8px">
-            <div>${rowData?.Name ?? ''}</div>
-            <div>${rowData?.Designation ?? ''}</div>
+            <div style="color: #707070; font-weight: bold; font-size: 12px;">${rowData?.Name ?? ''}</div>
+            <div style="color: #707070; font-size: 11px;">${rowData?.Designation ?? ''}</div>
           </div>
         </div>
       </div>`;
@@ -165,9 +173,10 @@ const Employees = (props?: EmployeesProps) => {
       <TooltipComponent
         id="content"
         cssClass="e-tooltip-template-css"
-        target="#employees_grid .e-headercell, #employees_grid td.infotooltip"
+        target="#employees_grid .e-headercell, #employees_grid td.infotooltip, .employee-popover"
         beforeRender={beforeRender}
         ref={tooltipObj}
+        position='TopRight'
       >
         <GridComponent
           id="employees_grid"
@@ -211,8 +220,8 @@ const Employees = (props?: EmployeesProps) => {
               customAttributes={{ class: 'infotooltip' }}
               width="140"
             />
-            <ColumnDirective field="Name" customAttributes={{ class: 'infotooltip' }} width="150" />
-            <ColumnDirective field="Mail" clipMode="EllipsisWithTooltip" width="260" />
+            <ColumnDirective field="Name" template={nameTemplate} customAttributes={{ class: 'infotooltip' }} width="150" />
+            <ColumnDirective field="Mail" headerText="Email ID" clipMode="EllipsisWithTooltip" width="260" />
             <ColumnDirective field="Designation" clipMode="EllipsisWithTooltip" width="260" />
             <ColumnDirective
               field="DateOfJoining"

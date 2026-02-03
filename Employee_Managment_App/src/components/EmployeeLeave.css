@@ -136,7 +136,6 @@
 /* --- Base badge look --- */
 .employee-leave-detail .e-badge {
   display: inline-block;
-  padding: 4px 10px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
@@ -153,52 +152,49 @@
 
 /* --- Leave Type (grid cells) --- */
 .lt-casual { 
-  background-color: #D0E6FF; /* light blue */
-  color: #0B63B6;           /* dark blue text for contrast */
-  border: 1px solid #9BC0F5;
+   background-color: #1ab394;
+  color: #fff;
+  padding: 4px 10px;
 }
 
 .lt-sick {
-  background-color: #A8E6CF; /* light green */
-  color: #11624C;            /* dark green */
-  border: 1px solid #7BD4B4;
+  background-color: rgb(35, 198, 200);
+  color: #fff;
+  padding: 4px 10px;
 }
 
 .lt-emergency {
-  background-color: #FFD6D6; /* light red */
-  color: #9B1C1C;            /* dark red */
-  border: 1px solid #F5A8A8;
+  background-color: #f37070;
+  color: #fff;
+  padding: 4px 10px;
 }
 
 .lt-others {
-  background-color: #F2E6FF; /* light purple */
-  color: #5B2E91;            /* dark purple */
-  border: 1px solid #D6C2F5;
+   background-color: #999;
+  color: #fff;         /* dark purple */
+  padding: 4px 10px;
 }
 
 /* --- Header badges (summary) use same palette --- */
 .badge-casual { 
-  background-color: #D0E6FF; 
-  color: #0B63B6; 
-  border: 1px solid #9BC0F5;
+  background-color: #1ab394;
+  color: #fff;
 }
 
 .badge-sick {
-  background-color: #A8E6CF; 
-  color: #11624C; 
-  border: 1px solid #7BD4B4;
+  background-color: #23c6c8; 
+  color: #fff; 
+  height: 18px;
 }
 
 .badge-others {
-  background-color: #F2E6FF; 
-  color: #5B2E91; 
-  border: 1px solid #D6C2F5;
+ background-color: #999;
+  color: #fff;
 }
 
 .badge-request {
-  background-color: #FFF3C4; /* light yellow for pending/request */
-  color: #8A6A00;            /* dark gold/brown */
-  border: 1px solid #FFE28A;
+    background-color: #f3ce85;
+    color: #fff;
 }
 
 /* Optional: subtle hover for interactive feel in grid cells */
@@ -255,19 +251,16 @@
 
 /* now per-status background colors */
 .status-approved {
-  background-color: #FFF3C4; /* light yellow for pending/request */
-  color: #8A6A00;            /* dark gold/brown */
-  border: 1px solid #FFE28A; /* green */
+  background-color: #FFE28A;
+  color: #fff;
 }
 .status-closed {
-    background-color: #A8E6CF; /* light green */
-  color: #11624C;            /* dark green */
-  border: 1px solid #7BD4B4; /* gray */
+  background-color: #7BD4B4;
+  color: #fff;
 }
 .status-need-to-approve {
-    background-color: #FFD6D6; /* light red */
-  color: #9B1C1C;            /* dark red */
-  border: 1px solid #F5A8A8; /* orange */
+  background-color: #F5A8A8;
+  color: #fff;
 }
 .status-requested {
   background-color: #17a2b8; /* teal */

@@ -475,7 +475,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <span style={{ fontWeight: 600 }}>Net Pay</span>;
+                  return <span>Net Pay</span>;
                 }}
               />
               <AggregateColumnDirective
@@ -483,7 +483,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteNetPayInYear}
                 footerTemplate={(props: any) => {
-                  return <span style={{ fontWeight: 600 }}>$ {props.Custom}</span>;
+                  return <span>$ {props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -494,7 +494,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                   type="Custom"
                   customAggregate={calculteNetPayAggregate}
                   footerTemplate={(props: any) => {
-                    return <span style={{ fontWeight: 600 }}>$ {props.Custom}</span>;
+                    return <span>$ {props.Custom}</span>;
                   }}
                 />
               );

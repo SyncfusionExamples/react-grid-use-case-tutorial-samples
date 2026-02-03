@@ -26,7 +26,7 @@
   --search-max: 600px;      /* desktop search width similar to HR portal */
   
   --hr-search-width: 250px;
-  --hr-search-width-focused: 1000px;
+  --hr-search-width-focused: 100%;
 
   --control-height: 35px;
   --radius-pill: 9999px;
@@ -495,7 +495,6 @@
 }
 
 .search-field-autocomplete:focus-within {
-  box-shadow: var(--shadow-focus);
   background: #fff;
 }
 
@@ -633,11 +632,8 @@
 }
 
 .e-ddl.e-popup .e-list-item {
-  padding: 4px 6px !important;
-  border-radius: 3px !important;
-  margin: 1px 4px !important;
+  padding: 4px 0px 4px 0px !important;
   height: auto !important;
-  min-height: 42px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
@@ -645,7 +641,7 @@
   border: none !important;
   background: transparent !important;
   transition: all 100ms ease !important;
-  width: calc(100% - 8px) !important;
+  width: calc(100% - 0px) !important;
 }
 
 /* Ensure all child elements are properly aligned */
@@ -662,12 +658,12 @@
 }
 
 .e-ddl.e-popup .e-list-item.e-active {
-  background: #d1fae5 !important;
-  color: #047857 !important;
+  background:  rgb(26, 179, 148) !important;
+  color: #fff !important;
 }
 
 .e-ddl.e-popup .e-list-item.e-active:hover {
-  background: #a7f3d0 !important;
+  background: rgb(26, 179, 148) !important;
 }
 
 /* Employee Suggestion Link Wrapper */

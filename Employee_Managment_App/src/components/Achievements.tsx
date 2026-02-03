@@ -54,7 +54,8 @@ const years = [
   { text: '2022', value: 2022 },
   { text: '2023', value: 2023 },
   { text: '2024', value: 2024 },
-  { text: '2025', value: 2025 }
+  { text: '2025', value: 2025 },
+  { text: '2026', value: 2026 }
 ];
 
 function mapDesignationToRole(designation?: string): 'Developer' | 'QA' | 'Designer' | 'Manager' {
@@ -135,7 +136,7 @@ function initials(name?: string) {
 const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = true }) => {
   const [role, setRole] = useState<string>('All');
   const [month, setMonth] = useState<string>('All');
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const [year, setYear] = useState<number>(2026);
 
   const [employees, setEmployees] = useState<EmployeeDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -203,7 +204,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="toolbar-sub">
             {onlyTeamIfUser && userInfo?.Team
               ? `You can view only your team employees in leaderboard. (Team: ${userInfo.Team})`
-              : 'Leaderboard generated from employee records.'}
+              : 'You can view only your team employees in leaderboard.'}
           </div>
         </div>
 
@@ -222,6 +223,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               aria-label="Filter by role"
               floatLabelType="Never"
               popupHeight="220px"
+              allowFiltering={true}
             />
           </label>
 
@@ -239,6 +241,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               aria-label="Filter by month"
               floatLabelType="Never"
               popupHeight="260px"
+              allowFiltering={true}
             />
           </label>
 

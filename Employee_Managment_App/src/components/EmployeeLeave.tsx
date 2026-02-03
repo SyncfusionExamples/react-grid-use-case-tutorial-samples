@@ -17,7 +17,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import './EmployeeLeave.css';
 import { ChangeEventArgs, SwitchComponent } from '@syncfusion/ej2-react-buttons';
-import { DataManager, Query, UrlAdaptor, Predicate } from '@syncfusion/ej2-data';
+import { DataManager, Query, UrlAdaptor, Predicate, WebApiAdaptor } from '@syncfusion/ej2-data';
 import {
   DateRangePickerComponent,
   PresetsDirective,
@@ -29,7 +29,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 const gridData: DataManager = new DataManager({
   url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesLeaveData',
-  adaptor: new UrlAdaptor()
+  adaptor: new UrlAdaptor(),
 });
 
 const yearStart: Date = new Date(new Date(new Date().getFullYear(), 0, 1).toDateString());
@@ -313,6 +313,13 @@ const statusTemplate = (args: any) => {
             )}
           <ColumnDirective field="CreatedBy" headerText="Created By" width="150" />
         </ColumnsDirective>
+        {/* <ColumnsDirective>
+                        <ColumnDirective field='OrderID' headerText='Order ID' width='120' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='CustomerID' headerText='Customer ID' width='160'></ColumnDirective>
+                        <ColumnDirective field='EmployeeID' headerText='Employee ID' width='120' textAlign='Right' />
+                        <ColumnDirective field='Freight' headerText='Freight' width='150' format='C2' textAlign='Right' />
+                        <ColumnDirective field='ShipCountry' headerText='Ship Country' width='150'></ColumnDirective>
+                    </ColumnsDirective> */}
         <Inject services={[Page, Filter, Sort, Toolbar, ExcelExport, ColumnChooser, Edit]} />
       </GridComponent>
     </div>

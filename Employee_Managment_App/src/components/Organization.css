@@ -187,7 +187,7 @@
 /* Optional: improve search/toolbar areas inside Employees (if they inherit) */
 .org-theme .e-input-group .e-input,
 .org-theme .e-input-group input {
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Mobile adjustments */
@@ -206,7 +206,7 @@
 .employeespage .org-theme .e-toolbar .e-search .e-input-group.e-input-focus,
 .employeespage .org-theme .e-input-group input:focus,
 .employeespage .org-theme .e-input-group.e-input-focus {
-  border-color: #1ab394 !important;
+  border-color: #ccc !important;
 }
 
 #employees_grid_e-popup .e-popup .e-checkbox-wrapper .e-frame.e-check,
@@ -220,4 +220,8 @@
 .e-grid .e-headercelldiv {
     font-weight: 500 !important;
     font-size: 13px !important;
+}
+
+.e-grid .e-toolbar-items .e-toolbar-item.e-search-wrapper:hover {
+  background-color: #ebebeb !important;
 }
