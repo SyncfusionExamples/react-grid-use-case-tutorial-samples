@@ -98,13 +98,15 @@ function monthIndex(m: string) {
   return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m);
 }
 
+
 function buildScores(emp: EmployeeDetails, month: string, year: number): ScoreTriple {
-  const seedKey = `${emp.EmployeeCode || emp.Name}-${year}-${month}`;
-  const rand = seededPRNG(seedKey);
+  const baseSeed = `${emp.EmployeeCode || emp.Name}-${year}-${month}`;
+  const randTask = seededPRNG(baseSeed + '-task-score');
+  const randAttend = seededPRNG(baseSeed + '-attendance-unique');
+  const randOverall = seededPRNG(baseSeed + '-overall-calc');
 
   const role = mapDesignationToRole(emp.Designation);
   const roleTaskWeight = role === 'Manager' ? 0.9 : role === 'QA' ? 1.1 : role === 'Designer' ? 1.0 : 1.05;
-  const roleAttendWeight = role === 'Manager' ? 0.95 : 1.0;
 
   let tenureYears = 1;
   try {
@@ -119,12 +121,18 @@ function buildScores(emp: EmployeeDetails, month: string, year: number): ScoreTr
   }
   const tenureBonus = 1 + tenureYears * 0.02;
 
-  const task = Math.round((12 + rand() * 18) * roleTaskWeight * tenureBonus);
-  const attendance = Math.round((8 + rand() * 14) * roleAttendWeight);
-  const overall = Math.round(task * 12 + attendance * 8 + rand() * 20);
+  // Task scores: 200-600 range
+  const task = Math.round((150 + randTask() * 400) * roleTaskWeight * tenureBonus);
+  
+  // Attendance: Use PRNG for proper unique distribution (25-95 range)
+  const attendance = Math.round(25 + randAttend() * 70);
+  
+  // Overall: combination of task, attendance (weighted heavily), and bonus
+  const overall = Math.round(task + (attendance * 4) + randOverall() * 200);
 
   return { task, attendance, overall };
 }
+
 
 function initials(name?: string) {
   if (!name) return 'NA';

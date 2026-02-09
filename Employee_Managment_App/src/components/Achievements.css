@@ -35,7 +35,7 @@ body,
 }
 
 .achievements-container {
-  padding: 18px 22px 32px;
+  padding: 5px 22px 32px;
   background: #f3f3f4;
   /* removed decorative radial gradients */
   min-height: 100%;
@@ -64,6 +64,7 @@ body,
   font-size: 13px;
   font-weight: 400;
   font-family: 'Roboto', sans-serif;
+  color: #6B7280;
 }
 
 .toolbar-right {

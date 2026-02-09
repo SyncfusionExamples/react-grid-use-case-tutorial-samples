@@ -84,7 +84,7 @@ const Organization = () => {
 
   return (
     <div className="employeespage org-theme">
-      <div className="employees-content">{content0()} </div>
+      <div className="employees-content" style={{paddingTop: "11px"}}>{content0()} </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
   Page, Inject, ContextMenu, CommandColumn, Freeze, LazyLoadGroup, RecordClickEventArgs, RowInfo,
   ExcelExport, Column, Search // <-- add Search
 } from '@syncfusion/ej2-react-grids';
-import { DataManager, UrlAdaptor, DataUtil } from '@syncfusion/ej2-data';
+import { DataManager, UrlAdaptor, DataUtil, Query } from '@syncfusion/ej2-data';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { TooltipComponent, TooltipEventArgs } from '@syncfusion/ej2-react-popups';
@@ -16,9 +16,24 @@ import './Employees.css';
 
 DataUtil.serverTimezoneOffset = 0;
 
-const data: DataManager = new DataManager({
+
+const MAX_COUNT = 3000;
+
+class CappedUrlAdaptor extends UrlAdaptor {
+  public processResponse(data: any, ds: any, query: Query, xhr: any, request: any, changes?: any) {
+    const res: any = super.processResponse(data, ds, query, xhr, request, changes);
+    // res can be array or { result, count } depending on server
+    if (res && typeof res === 'object' && 'result' in res && 'count' in res) {
+      // Clamp the reported total
+      res.count = Math.min(res.count ?? 0, MAX_COUNT);
+    }
+    return res;
+  }
+}
+
+const data = new DataManager({
   url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesData',
-  adaptor: new UrlAdaptor(),
+  adaptor: new CappedUrlAdaptor(),
 });
 
 type EmployeesProps = {
@@ -169,7 +184,7 @@ const Employees = (props?: EmployeesProps) => {
   };
 
   return (
-    <div className="employees-content">
+    <div className="employees-content" >
       <TooltipComponent
         id="content"
         cssClass="e-tooltip-template-css"
@@ -183,10 +198,10 @@ const Employees = (props?: EmployeesProps) => {
           ref={gridRef}
           dataSource={data}
           allowPaging={true}
-          pageSettings={{ pageCount: 4, pageSize: 15 }}
+          pageSettings={{ pageCount: 8, pageSize: 12 }}
           allowExcelExport={true}
           //width={'100%'}
-          //height={'100%'}
+          height={'100%'}
           
           allowGrouping={true}
           groupSettings={{ enableLazyLoading: true }}
@@ -218,24 +233,23 @@ const Employees = (props?: EmployeesProps) => {
               headerText="Employee ID"
               template={codeTemplate}
               customAttributes={{ class: 'infotooltip' }}
-              width="140"
+              width="120"
             />
             <ColumnDirective field="Name" template={nameTemplate} customAttributes={{ class: 'infotooltip' }} width="150" />
-            <ColumnDirective field="Mail" headerText="Email ID" clipMode="EllipsisWithTooltip" width="260" />
-            <ColumnDirective field="Designation" clipMode="EllipsisWithTooltip" width="260" />
+            <ColumnDirective field="Mail" headerText="Email ID" clipMode="EllipsisWithTooltip" width="230" />
+            <ColumnDirective field="Designation" clipMode="EllipsisWithTooltip" width="220" />
             <ColumnDirective
               field="DateOfJoining"
               headerText="Date Joined"
-              textAlign="Right"
               type="date"
               format={{ type: 'date', format: "MMM d yyyy"}}
               clipMode="EllipsisWithTooltip"
-              width="150"
+              width="100"
             />
-            <ColumnDirective field="Branch" clipMode="EllipsisWithTooltip" width="120" />
-            <ColumnDirective field="Team" headerText="Team(s)" clipMode="EllipsisWithTooltip" width="220" />
-            <ColumnDirective field="TeamLead" headerText="Reporter" clipMode="EllipsisWithTooltip" width="150" />
-            <ColumnDirective field="ManagerName" headerText="Manager" clipMode="EllipsisWithTooltip" width="150" />
+            <ColumnDirective field="Branch" clipMode="EllipsisWithTooltip" width="100" />
+            <ColumnDirective field="Team" headerText="Team(s)" clipMode="EllipsisWithTooltip" width="170" />
+            <ColumnDirective field="TeamLead" headerText="Reporter" clipMode="EllipsisWithTooltip" width="130" />
+            <ColumnDirective field="ManagerName" headerText="Manager" clipMode="EllipsisWithTooltip" width="140" />
           </ColumnsDirective>
           <Inject
             // IMPORTANT: include Search here so the toolbar Search works with remote data

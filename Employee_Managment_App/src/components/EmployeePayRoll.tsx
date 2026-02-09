@@ -39,7 +39,9 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
   const query: Query = new Query().where('EmployeeCode', 'equal', props.employeeData.EmployeeCode);
   const currentDate: Date = new Date();
   const currentYear: number = currentDate.getFullYear() - 1;
-
+  const headerTextRef = useRef<HTMLDivElement>(null);
+  const initialYear: number = currentDate.getFullYear() - 1;
+  
   const months: { field: string; headerText: string }[] = [
     { field: 'JanPayStub', headerText: 'Jan' },
     { field: 'FebPayStub', headerText: 'Feb' },
@@ -81,28 +83,28 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
         </colgroup>
         <tbody>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> Regular Hours Worked </td>
+            <td className="cardcell"> Regular Hours Worked </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}>OverTime Hours Worked </td>
+            <td className="cardcell">OverTime Hours Worked </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> Bonus </td>
+            <td className="cardcell"> Bonus </td>
           </tr>
           <tr>
-            <td className="cardcell separateline" style={{ fontWeight: 400 }}> Commission </td>
+            <td className="cardcell separateline"> Commission </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> Federal Income Tax </td>
+            <td className="cardcell"> Federal Income Tax </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> State Income Tax </td>
+            <td className="cardcell"> State Income Tax </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> Social Security Tax </td>
+            <td className="cardcell"> Social Security Tax </td>
           </tr>
           <tr>
-            <td className="cardcell" style={{ fontWeight: 400 }}> MedicareTax </td>
+            <td className="cardcell"> MedicareTax </td>
           </tr>
         </tbody>
       </table>
@@ -119,28 +121,28 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
           </colgroup>
           <tbody>
             <tr>
-              <td className="cardcell RegularHoursWorked"></td>
+              <td className="cardcell RegularHoursWorked" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell OverTimeHoursWorked"></td>
+              <td className="cardcell OverTimeHoursWorked" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell Bonus"></td>
+              <td className="cardcell Bonus" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell Commission separateline"></td>
+              <td className="cardcell Commission separateline" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell FederalIncomeTax"></td>
+              <td className="cardcell FederalIncomeTax" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell StateIncomeTax"></td>
+              <td className="cardcell StateIncomeTax" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell SocialSecurityTax"></td>
+              <td className="cardcell SocialSecurityTax" style={{fontWeight: 400}}></td>
             </tr>
             <tr>
-              <td className="cardcell MedicareTax"></td>
+              <td className="cardcell MedicareTax" style={{fontWeight: 400}}></td>
             </tr>
           </tbody>
         </table>
@@ -338,13 +340,16 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
 
   const payrollChange = (args: { value: number }) => {
     isPreviousYearRef.current = args.value !== currentYear;
+    if (headerTextRef.current) {
+      headerTextRef.current.textContent = `Payroll Summary for ${args.value}`;
+    }
     payRollGridIns.current?.refresh();
   };
 
   return (
     <div className="payrollpage">
       <div className="payroll-header">
-        <div className="payrollinfo">Payroll for the selected year </div>
+        <div className="payrollinfo" ref={headerTextRef}>Payroll Summary for {initialYear} </div>
         <div className="payrolldd-container">
           <DropDownListComponent
             id="payrolldd"

@@ -111,7 +111,7 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
 
   const [query, setQuery] = useState(() => new Query().where(predicate));
   const leaveGridIns = useRef<GridComponent>(null);
-  const toolbar: string[] = ['ColumnChooser', 'Search', 'ExcelExport'];
+  const toolbar: string[] = ['Search', 'ColumnChooser', 'ExcelExport'];
 
   const emptyRecordTemplate = useCallback(() => {
     return <div> No Results Found </div>;

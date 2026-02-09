@@ -54,11 +54,12 @@
 .app-main {
   position: relative;
   margin-left: var(--sidebar-current-width);
-  padding: calc(var(--header-h) + 16px) 0 24px;
+  padding: calc(var(--header-h) + 16px) 0 0;
   min-height: 100vh;
   box-sizing: border-box;
   background: #f3f3f4;
   transition: margin-left 220ms ease;
+  padding-top: 58px;
 }
 
 /* Optional: collapse style tweaks */

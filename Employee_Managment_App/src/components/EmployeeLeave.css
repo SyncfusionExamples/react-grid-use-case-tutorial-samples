@@ -164,7 +164,7 @@
 }
 
 .lt-emergency {
-  background-color: #f37070;
+  background-color: #999;
   color: #fff;
   padding: 4px 10px;
 }
@@ -251,15 +251,15 @@
 
 /* now per-status background colors */
 .status-approved {
-  background-color: #FFE28A;
+  background-color: #16A34A;
   color: #fff;
 }
 .status-closed {
-  background-color: #7BD4B4;
+  background-color: #6B7280;
   color: #fff;
 }
 .status-need-to-approve {
-  background-color: #F5A8A8;
+  background-color: #f3ce85;
   color: #fff;
 }
 .status-requested {

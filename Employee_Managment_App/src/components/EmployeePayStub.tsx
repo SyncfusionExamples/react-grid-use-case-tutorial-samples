@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Filter, Page, Inject, Freeze, Aggregate } from '@syncfusion/ej2-react-grids';
 import { AggregateColumnDirective, AggregateColumnsDirective, AggregateDirective, AggregatesDirective, AggregateColumnModel } from '@syncfusion/ej2-react-grids';
 import { DataManager, Query, UrlAdaptor } from '@syncfusion/ej2-data';
@@ -31,6 +31,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
     { field: 'NovPayStub', headerText: 'Nov' },
     { field: 'DecPayStub', headerText: 'Dec' },
   ];
+  const [selectedValue, setSelectedValue] = useState<string>(`${months[currentMonth].headerText} ${currentYear}`);
 
   const itemTemplate = () => {
     return (
@@ -156,7 +157,9 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
   };
 
   const paystubChange = (args: ChangeEventArgs): void => {
+    debugger;
     let showCols: string[] = [(args.itemData as { field: string; headerText: string }).headerText];
+    setSelectedValue(`${showCols} ${currentYear}`);
     let hideCols: string[] = [];
     months.forEach((x) => {
       if (x.headerText !== (args.itemData as { field: string; headerText: string }).headerText) {
@@ -171,10 +174,10 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
     <div className="paystubpage">
       <div className="paystub-header">
         <div className="paystubinfo">
-          Paystub for the selected month in {currentYear}
+          Paystub - {selectedValue}
         </div>
         <div className="paystubdd-container">
-          Choose Month: &nbsp;&nbsp;
+          <span style={{fontSize:14}}>Choose Month:</span>&nbsp;&nbsp;
           <DropDownListComponent
             id="paystubdd"
             dataSource={months}

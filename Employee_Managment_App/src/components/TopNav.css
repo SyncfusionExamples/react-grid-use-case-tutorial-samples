@@ -653,7 +653,7 @@
 }
 
 .e-ddl.e-popup .e-list-item:hover {
-  background: #f0fdf4 !important;
+  background:rgb(222, 226, 230) !important;
   color: inherit !important;
 }
 
@@ -673,12 +673,13 @@
   width: 100% !important;
   text-decoration: none !important;
   color: inherit !important;
-  padding: 0 !important;
+  padding: 2px !important;
 }
 
 .employee-suggestion-link:hover {
   text-decoration: none !important;
   color: inherit !important;
+  background-color: rgb(26, 179, 148) !important;
 }
 
 /* Employee Suggestion Item Template */
