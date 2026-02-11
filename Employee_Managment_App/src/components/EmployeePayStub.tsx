@@ -81,42 +81,42 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
           <tbody>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].RegularHoursWorked.toFixed(2)}{' '}
+                ${props[props.column.field].RegularHoursWorked.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].OverTimeHoursWorked.toFixed(2)}{' '}
+                ${props[props.column.field].OverTimeHoursWorked.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].Bonus.toFixed(2)}{' '}
+                ${props[props.column.field].Bonus.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell separateline">
-                $ {props[props.column.field].Commission.toFixed(2)}{' '}
+                ${props[props.column.field].Commission.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].FederalIncomeTax.toFixed(2)}{' '}
+                ${props[props.column.field].FederalIncomeTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].StateIncomeTax.toFixed(2)}{' '}
+                ${props[props.column.field].StateIncomeTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].SocialSecurityTax.toFixed(2)}{' '}
+                ${props[props.column.field].SocialSecurityTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].MedicareTax.toFixed(2)}{' '}
+                ${props[props.column.field].MedicareTax.toFixed(2)}{' '}
               </td>
             </tr>
           </tbody>
@@ -242,7 +242,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteGrossAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -266,7 +266,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteDeductionAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -290,7 +290,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteNetPayAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );

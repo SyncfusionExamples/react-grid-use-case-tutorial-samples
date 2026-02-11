@@ -41,7 +41,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
   const currentYear: number = currentDate.getFullYear() - 1;
   const headerTextRef = useRef<HTMLDivElement>(null);
   const initialYear: number = currentDate.getFullYear() - 1;
-  
+
   const months: { field: string; headerText: string }[] = [
     { field: 'JanPayStub', headerText: 'Jan' },
     { field: 'FebPayStub', headerText: 'Feb' },
@@ -169,28 +169,28 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
           </colgroup>
           <tbody>
             <tr>
-              <td className="cardcell">$ {RegularHoursWorked} </td>
+              <td className="cardcell">${RegularHoursWorked} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {OverTimeHoursWorked} </td>
+              <td className="cardcell">${OverTimeHoursWorked} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {Bonus} </td>
+              <td className="cardcell">${Bonus} </td>
             </tr>
             <tr>
-              <td className="cardcell separateline">$ {Commission} </td>
+              <td className="cardcell separateline">${Commission} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {FederalIncomeTax} </td>
+              <td className="cardcell">${FederalIncomeTax} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {StateIncomeTax} </td>
+              <td className="cardcell">${StateIncomeTax} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {SocialSecurityTax} </td>
+              <td className="cardcell">${SocialSecurityTax} </td>
             </tr>
             <tr>
-              <td className="cardcell">$ {MedicareTax} </td>
+              <td className="cardcell">${MedicareTax} </td>
             </tr>
           </tbody>
         </table>
@@ -221,7 +221,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
         }
       }
       if (elem) {
-        elem.innerText = '$ ' + value.toFixed(2);
+        elem.innerText = '$' + value.toFixed(2);
       }
     }
 
@@ -422,7 +422,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteGrossInYear}
                 footerTemplate={(props: any) => {
-                  return <span style={{ fontWeight: 500 }}>$ {props.Custom}</span>;
+                  return <span style={{ fontWeight: 500 }}>${props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -433,7 +433,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteGrossAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -455,7 +455,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteDeductionInYear}
                 footerTemplate={(props: any) => {
-                  return <span style={{ fontWeight: 500 }}>$ {props.Custom}</span>;
+                  return <span style={{ fontWeight: 500 }}>${props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -466,7 +466,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteDeductionAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -488,7 +488,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                 type="Custom"
                 customAggregate={calculteNetPayInYear}
                 footerTemplate={(props: any) => {
-                  return <span>$ {props.Custom}</span>;
+                  return <span>${props.Custom}</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -499,7 +499,7 @@ const EmployeePayRoll = (props: { employeeData: EmployeeDetails }) => {
                   type="Custom"
                   customAggregate={calculteNetPayAggregate}
                   footerTemplate={(props: any) => {
-                    return <span>$ {props.Custom}</span>;
+                    return <span>${props.Custom}</span>;
                   }}
                 />
               );

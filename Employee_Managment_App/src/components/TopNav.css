@@ -28,7 +28,7 @@
   --hr-search-width: 250px;
   --hr-search-width-focused: 100%;
 
-  --control-height: 35px;
+  --control-height: 30px;
   --radius-pill: 9999px;
 
   --accent: #10b981;                   /* focus ring + border accent */
@@ -57,6 +57,8 @@
   height: var(--topnav-height);
   background: var(--topnav-bg);
   border-bottom: 2px solid var(--topnav-border);
+  height: 48px;
+  min-height: 50px;
 }
 
 /* Optional green accent line/shadow */
@@ -92,6 +94,8 @@
 .company-name {
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 /* Center cluster: search */

@@ -138,7 +138,7 @@
   display: inline-block;
   border-radius: 999px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: .2px;
 }
@@ -176,25 +176,64 @@
 }
 
 /* --- Header badges (summary) use same palette --- */
-.badge-casual { 
+.badge-casual {
   background-color: #1ab394;
   color: #fff;
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 10px;
 }
 
 .badge-sick {
-  background-color: #23c6c8; 
-  color: #fff; 
-  height: 18px;
+  background-color: #23c6c8;
+  color: #fff;
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 10px;
 }
 
 .badge-others {
- background-color: #999;
+  background-color: #999;
   color: #fff;
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 10px;
 }
 
 .badge-request {
-    background-color: #f3ce85;
-    color: #fff;
+  background-color: #f3ce85;
+  color: #fff;
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 10px;
 }
 
 /* Optional: subtle hover for interactive feel in grid cells */
@@ -286,4 +325,15 @@
     -webkit-transform: none !important;
     transform: none !important;
   }
+}
+
+.e-icons.e-file-new:before {
+  content: "" !important;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://hr.syncfusion.com/fonts/icons/excel.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
 }

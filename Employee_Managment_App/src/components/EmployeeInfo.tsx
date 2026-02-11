@@ -338,7 +338,7 @@ const canSeePrivateTabs =
                         <div className="Profile-data-availability e-badge"> Available - {employeeData.Branch}</div>
                     </div>
                 </div>
-                <div className="overview-content">
+                <div className="overview-content" style={{height: "40px"}}>
                     <TabComponent heightAdjustMode="Auto" swipeMode="None" overflowMode='Scrollable' cssClass='content-overview'>
                         <TabItemsDirective >
                             <TabItemDirective header={headerText[0]} content={content0} />
@@ -369,7 +369,7 @@ const canSeePrivateTabs =
         );
     };
     return (
-        <div className="employeeinfopage">
+        <div className="employeeinfopage" style={{backgroundColor: "rgb(255, 255, 255)"}}>
             <div className="employeeinfo-content">
                 <TabComponent heightAdjustMode="Auto" cssClass='employee-header'>
                     <TabItemsDirective>

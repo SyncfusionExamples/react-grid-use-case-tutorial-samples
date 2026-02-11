@@ -25,7 +25,7 @@ import {
   RangeEventArgs
 } from '@syncfusion/ej2-react-calendars';
 import { EmployeeDetails, EmployeeLeaveDetails } from '../interface.ts';
-import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import { ClickEventArgs, ItemModel } from '@syncfusion/ej2-navigations';
 
 const gridData: DataManager = new DataManager({
   url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesLeaveData',
@@ -111,7 +111,17 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
 
   const [query, setQuery] = useState(() => new Query().where(predicate));
   const leaveGridIns = useRef<GridComponent>(null);
-  const toolbar: string[] = ['Search', 'ColumnChooser', 'ExcelExport'];
+  const toolbar: (string | ItemModel)[] = [
+    'Search',
+    {
+      text: '',
+      tooltipText: 'Export to Excel',
+      prefixIcon: 'e-icons e-file-new',
+      id: 'excelExport',
+      align: 'Right'
+    } as ItemModel,
+    'ColumnChooser'
+  ];
 
   const emptyRecordTemplate = useCallback(() => {
     return <div> No Results Found </div>;
@@ -266,11 +276,11 @@ const statusTemplate = (args: any) => {
     <div className='employee-leave-detail'>
       <div className="employeeLeave-header">
         <div className="leaveinfo">
-            <b>Leave:</b>{' '}
+            <b style={{fontWeight: "500"}}>Leave:</b>{' '}
             <span className="e-badge badge-casual">{leaveCount.casual} d</span> Casual |{' '}
             <span className="e-badge badge-sick">{leaveCount.sick} d</span> Sick |{' '}
             <span className="e-badge badge-others">{leaveCount.others} d</span> Others |{' '}
-            <span className="e-badge badge-request">{leaveCount.request} d</span> Request
+            <span className="e-badge badge-request">{leaveCount.request} d</span> Requests
         </div>
         <div className="daterange">
           <Presets dateRangeChange={dateRangeChange} />

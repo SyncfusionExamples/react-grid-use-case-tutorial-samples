@@ -21,7 +21,7 @@
   left: 0;
   bottom: 0;
   width: var(--sidebar-current-width);
-  background-color: #242a35;
+  background-color: #2d323e;
   color: #fff;
   overflow: auto;
   z-index: 1010; /* sits over header on mobile when open */
@@ -57,9 +57,9 @@
   padding: calc(var(--header-h) + 16px) 0 0;
   min-height: 100vh;
   box-sizing: border-box;
-  background: #f3f3f4;
+  background: rgb(255, 255, 255);
   transition: margin-left 220ms ease;
-  padding-top: 58px;
+  padding-top: 50px;
 }
 
 /* Optional: collapse style tweaks */
@@ -98,13 +98,19 @@
 }
 .nav .nav-item .nav-link {
   padding: 10px 16px;
-  color: #cfd6e4;
+  color: #c0c2c5;
   text-decoration: none;
+  border-left: 4px solid transparent;
 }
 .nav .nav-item .nav-link.active,
 .nav .nav-item .nav-link:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
+}
+
+.nav .nav-item .nav-link.active {
+  border-left: 4px solid #19aa8d;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #employees_grid .e-pager .e-currentitem, #employees_grid .e-pager .e-currentitem:hover {
@@ -129,16 +135,16 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 8px;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #e5e7eb;
+  border: none;
+  color: rgba(255, 255, 255, .8) !important;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .app-sidebar .sidebar-brand .title {
-  color: #e5e7eb;
-  font-weight: 600;
+  color: rgba(255, 255, 255, .8) !important;
+  font-weight: 400;
   font-size: 16px;
 }
 
@@ -159,7 +165,6 @@
   gap: 12px;
   padding: 10px 12px;
   color: #cbd5e1;
-  border-radius: 8px;
   text-decoration: none;
 }
 
@@ -192,4 +197,8 @@
 /* Keep brand title minimal when collapsed (we render 'HR' text already) */
 .app-layout.sidebar-is-collapsed .app-sidebar .sidebar-brand {
   justify-content: center;
+}
+
+.nav-text {
+  margin-top: 3px;
 }

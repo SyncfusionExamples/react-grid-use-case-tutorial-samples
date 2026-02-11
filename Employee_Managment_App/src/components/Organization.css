@@ -94,9 +94,10 @@
 .org-filters__label {
   display: inline-flex;
   align-items: center;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--org-text);
   font-size: 13px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .org-filters__dot {
@@ -116,6 +117,7 @@
   padding-bottom: 2px;
   scrollbar-width: thin;
   scrollbar-color: var(--org-green-300) transparent;
+  font-family: 'Roboto', sans-serif;
 }
 .org-filters__pills::-webkit-scrollbar {
   height: 6px;
@@ -139,6 +141,7 @@
   font-size: 13px;
   font-weight: 400;
   height: 23px;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 .org-pill:hover {
