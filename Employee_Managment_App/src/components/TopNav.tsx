@@ -154,8 +154,8 @@ const handleEmployeeSelect = (args: any) => {
             </svg>
           </div>
           <div className="employee-info-group">
-            <div className="employee-name-link">{data.Name}</div>
-            <div className="employee-id-email">{data.EmployeeCode} • {data.Mail}</div>
+            <div className="employee-name-link" style={{fontSize: "12px", fontWeight:"500"}}>{data.Name} <span style={{fontSize: "10px", fontWeight: "400"}}>{data.EmployeeCode} ({data.Mail})</span></div>
+            <div className="employee-id-email">{data.Designation}</div>
           </div>
         </div>
       </a>

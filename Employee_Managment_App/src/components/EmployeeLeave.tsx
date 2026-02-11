@@ -17,7 +17,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import './EmployeeLeave.css';
 import { ChangeEventArgs, SwitchComponent } from '@syncfusion/ej2-react-buttons';
-import { DataManager, Query, UrlAdaptor, Predicate } from '@syncfusion/ej2-data';
+import { DataManager, Query, UrlAdaptor, Predicate, WebApiAdaptor } from '@syncfusion/ej2-data';
 import {
   DateRangePickerComponent,
   PresetsDirective,
@@ -25,11 +25,11 @@ import {
   RangeEventArgs
 } from '@syncfusion/ej2-react-calendars';
 import { EmployeeDetails, EmployeeLeaveDetails } from '../interface.ts';
-import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import { ClickEventArgs, ItemModel } from '@syncfusion/ej2-navigations';
 
 const gridData: DataManager = new DataManager({
   url: 'https://ej2services.syncfusion.com/aspnet/development/api/EmployeesLeaveData',
-  adaptor: new UrlAdaptor()
+  adaptor: new UrlAdaptor(),
 });
 
 const yearStart: Date = new Date(new Date(new Date().getFullYear(), 0, 1).toDateString());
@@ -111,7 +111,17 @@ const EmployeeLeave = (props: { employeeData: EmployeeDetails; userInfo: Employe
 
   const [query, setQuery] = useState(() => new Query().where(predicate));
   const leaveGridIns = useRef<GridComponent>(null);
-  const toolbar: string[] = ['ColumnChooser', 'Search', 'ExcelExport'];
+  const toolbar: (string | ItemModel)[] = [
+    'Search',
+    {
+      text: '',
+      tooltipText: 'Export to Excel',
+      prefixIcon: 'e-icons e-file-new',
+      id: 'excelExport',
+      align: 'Right'
+    } as ItemModel,
+    'ColumnChooser'
+  ];
 
   const emptyRecordTemplate = useCallback(() => {
     return <div> No Results Found </div>;
@@ -266,11 +276,11 @@ const statusTemplate = (args: any) => {
     <div className='employee-leave-detail'>
       <div className="employeeLeave-header">
         <div className="leaveinfo">
-            <b>Leave:</b>{' '}
+            <b style={{fontWeight: "500"}}>Leave:</b>{' '}
             <span className="e-badge badge-casual">{leaveCount.casual} d</span> Casual |{' '}
             <span className="e-badge badge-sick">{leaveCount.sick} d</span> Sick |{' '}
             <span className="e-badge badge-others">{leaveCount.others} d</span> Others |{' '}
-            <span className="e-badge badge-request">{leaveCount.request} d</span> Request
+            <span className="e-badge badge-request">{leaveCount.request} d</span> Requests
         </div>
         <div className="daterange">
           <Presets dateRangeChange={dateRangeChange} />
@@ -302,10 +312,10 @@ const statusTemplate = (args: any) => {
           <ColumnDirective field="AttendanceID" headerText="Leave ID" isPrimaryKey={true} clipMode="EllipsisWithTooltip" width="140" />
           <ColumnDirective field="AbsenceType" headerText="Leave Type" width="120" clipMode="EllipsisWithTooltip" template={leaveTypeTemplate} />
           <ColumnDirective field="ShiftName" headerText="Shift Name" clipMode="EllipsisWithTooltip" width="120" />
-          <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
-          <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Right" width="120" />
-          <ColumnDirective field="Days" headerText="Day(s)" textAlign="Right" width="120" />
-          <ColumnDirective field="Status" headerText="Status" template={statusTemplate} width="150" />
+          <ColumnDirective field="From" type="date" format="MMM d yyyy" textAlign="Left" width="120" />
+          <ColumnDirective field="To" type="date" format="MMM d yyyy" textAlign="Left" width="120" />
+          <ColumnDirective field="Days" headerText="Day(s)" textAlign="Left" width="120" />
+          <ColumnDirective field="Status" headerText="Status" textAlign="Left" template={statusTemplate} width="150" />
           {props.employeeData &&
             props.userInfo &&
             props.employeeData.TeamLead === props.userInfo.Name && (
@@ -313,6 +323,13 @@ const statusTemplate = (args: any) => {
             )}
           <ColumnDirective field="CreatedBy" headerText="Created By" width="150" />
         </ColumnsDirective>
+        {/* <ColumnsDirective>
+                        <ColumnDirective field='OrderID' headerText='Order ID' width='120' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='CustomerID' headerText='Customer ID' width='160'></ColumnDirective>
+                        <ColumnDirective field='EmployeeID' headerText='Employee ID' width='120' textAlign='Right' />
+                        <ColumnDirective field='Freight' headerText='Freight' width='150' format='C2' textAlign='Right' />
+                        <ColumnDirective field='ShipCountry' headerText='Ship Country' width='150'></ColumnDirective>
+                    </ColumnsDirective> */}
         <Inject services={[Page, Filter, Sort, Toolbar, ExcelExport, ColumnChooser, Edit]} />
       </GridComponent>
     </div>

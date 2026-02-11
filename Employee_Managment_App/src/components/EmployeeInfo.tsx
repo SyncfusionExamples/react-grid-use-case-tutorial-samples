@@ -113,14 +113,14 @@ const EmployeeInfo = (props: { employeeData?: EmployeeDetails; userInfo?: Employ
         experienceMonths = months % 12;
     }
     let headerText: Object[] = [
-        { text: 'Official' },
-        { text: 'Personal' },
-        { text: 'Leave report' },
-        { text: 'Pay Stub' },
-        { text: 'Pay Roll' },
-        { text: 'Contact' },
-        { text: 'Education' },
-        { text: 'About Me' },
+        { text: 'OFFICIAL' },
+        { text: 'PERSONAL' },
+        { text: 'LEAVE REPORT' },
+        { text: 'PAY STUB' },
+        { text: 'PAY ROLL' },
+        { text: 'CONTACT' },
+        { text: 'EDUCATION' },
+        { text: 'ABOUT ME' },
     ];
     const content0 = () => {
         return (
@@ -338,8 +338,8 @@ const canSeePrivateTabs =
                         <div className="Profile-data-availability e-badge"> Available - {employeeData.Branch}</div>
                     </div>
                 </div>
-                <div className="overview-content">
-                    <TabComponent heightAdjustMode="Auto" swipeMode="None" overflowMode='Scrollable'>
+                <div className="overview-content" style={{height: "40px"}}>
+                    <TabComponent heightAdjustMode="Auto" swipeMode="None" overflowMode='Scrollable' cssClass='content-overview'>
                         <TabItemsDirective >
                             <TabItemDirective header={headerText[0]} content={content0} />
                             {employeeData &&
@@ -369,12 +369,12 @@ const canSeePrivateTabs =
         );
     };
     return (
-        <div className="employeeinfopage">
+        <div className="employeeinfopage" style={{backgroundColor: "rgb(255, 255, 255)"}}>
             <div className="employeeinfo-content">
-                <TabComponent heightAdjustMode="Auto">
+                <TabComponent heightAdjustMode="Auto" cssClass='employee-header'>
                     <TabItemsDirective>
                         <TabItemDirective
-                            header={{ text: 'Overview' }}
+                            header={{ text: 'OVERVIEW' }}
                             content={overview}
                         />
                     </TabItemsDirective>

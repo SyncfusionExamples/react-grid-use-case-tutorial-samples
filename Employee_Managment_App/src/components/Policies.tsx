@@ -148,11 +148,6 @@ const Policies: React.FC = () => {
         </section>
 
         <section className="recent-policies" aria-labelledby="recently-updated-policies-title">
-          <div className="section-header">
-            <h3 id="recently-updated-policies-title" className="section-title">
-              {activeCategory === 'All' ? 'Recently Updated Policies' : `${activeCategory} Policies`}
-            </h3>
-          </div>
           <GridComponent
             dataSource={filteredData}
             allowPaging

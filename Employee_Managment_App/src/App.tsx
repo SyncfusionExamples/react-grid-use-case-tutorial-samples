@@ -162,16 +162,20 @@ function App() {
           showBackdrop={!isDesktop}
           closeOnDocumentClick={!isDesktop}
           open={() => {
+             if(document.querySelector('.employeeinfo-content .e-tab'))
+            (document.querySelector('.employeeinfo-content .e-tab') as any).ej2_instances[0].refreshActiveTab();
             if (!isDesktop) setMobileSidebarOpen(true);
           }}
           close={() => {
+            if(document.querySelector('.employeeinfo-content .e-tab'))
+            (document.querySelector('.employeeinfo-content .e-tab')as any).ej2_instances[0].refreshActiveTab();
             if (!isDesktop) setMobileSidebarOpen(false);
           }}
         >
           <aside className="app-sidebar" role="navigation" aria-label="Main">
             {/* Sidebar header with toggle inside sidebar */}
             <div className="sidebar-brand">
-              <div className="title">{collapsed ? 'HR' : 'HR Portal'}</div>
+              <div className="title">{collapsed ? 'HR' : 'HR PORTAL'}</div>
               <button
                 type="button"
                 className="sidebar-toggle e-icons e-menu"
@@ -191,7 +195,7 @@ function App() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/organization" title={collapsed ? 'Organization' : undefined} aria-label="Organization">
-                  <span className="nav-icon e-icons e-xml-mapping" aria-hidden="true">
+                  <span className="nav-icon sficon-organization menu-icon" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">Organization</span>}
                 </NavLink>
@@ -205,7 +209,7 @@ function App() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/achievements" title={collapsed ? 'Achievements' : undefined} aria-label="Achievements">
-                  <span className="nav-icon e-icons e-activities" aria-hidden="true">
+                  <span className="nav-icon sficon-badge menu-icon" aria-hidden="true">
                   </span>
                   {!collapsed && <span className="nav-text">Achievements</span>}
                 </NavLink>

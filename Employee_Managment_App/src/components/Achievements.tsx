@@ -54,7 +54,8 @@ const years = [
   { text: '2022', value: 2022 },
   { text: '2023', value: 2023 },
   { text: '2024', value: 2024 },
-  { text: '2025', value: 2025 }
+  { text: '2025', value: 2025 },
+  { text: '2026', value: 2026 }
 ];
 
 function mapDesignationToRole(designation?: string): 'Developer' | 'QA' | 'Designer' | 'Manager' {
@@ -97,13 +98,15 @@ function monthIndex(m: string) {
   return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m);
 }
 
+
 function buildScores(emp: EmployeeDetails, month: string, year: number): ScoreTriple {
-  const seedKey = `${emp.EmployeeCode || emp.Name}-${year}-${month}`;
-  const rand = seededPRNG(seedKey);
+  const baseSeed = `${emp.EmployeeCode || emp.Name}-${year}-${month}`;
+  const randTask = seededPRNG(baseSeed + '-task-score');
+  const randAttend = seededPRNG(baseSeed + '-attendance-unique');
+  const randOverall = seededPRNG(baseSeed + '-overall-calc');
 
   const role = mapDesignationToRole(emp.Designation);
   const roleTaskWeight = role === 'Manager' ? 0.9 : role === 'QA' ? 1.1 : role === 'Designer' ? 1.0 : 1.05;
-  const roleAttendWeight = role === 'Manager' ? 0.95 : 1.0;
 
   let tenureYears = 1;
   try {
@@ -118,12 +121,18 @@ function buildScores(emp: EmployeeDetails, month: string, year: number): ScoreTr
   }
   const tenureBonus = 1 + tenureYears * 0.02;
 
-  const task = Math.round((12 + rand() * 18) * roleTaskWeight * tenureBonus);
-  const attendance = Math.round((8 + rand() * 14) * roleAttendWeight);
-  const overall = Math.round(task * 12 + attendance * 8 + rand() * 20);
+  // Task scores: 200-600 range
+  const task = Math.round((150 + randTask() * 400) * roleTaskWeight * tenureBonus);
+  
+  // Attendance: Use PRNG for proper unique distribution (25-95 range)
+  const attendance = Math.round(25 + randAttend() * 70);
+  
+  // Overall: combination of task, attendance (weighted heavily), and bonus
+  const overall = Math.round(task + (attendance * 4) + randOverall() * 200);
 
   return { task, attendance, overall };
 }
+
 
 function initials(name?: string) {
   if (!name) return 'NA';
@@ -135,7 +144,7 @@ function initials(name?: string) {
 const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = true }) => {
   const [role, setRole] = useState<string>('All');
   const [month, setMonth] = useState<string>('All');
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const [year, setYear] = useState<number>(2026);
 
   const [employees, setEmployees] = useState<EmployeeDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -203,7 +212,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="toolbar-sub">
             {onlyTeamIfUser && userInfo?.Team
               ? `You can view only your team employees in leaderboard. (Team: ${userInfo.Team})`
-              : 'Leaderboard generated from employee records.'}
+              : 'You can view only your team employees in leaderboard.'}
           </div>
         </div>
 
@@ -222,6 +231,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               aria-label="Filter by role"
               floatLabelType="Never"
               popupHeight="220px"
+              allowFiltering={true}
             />
           </label>
 
@@ -239,6 +249,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
               aria-label="Filter by month"
               floatLabelType="Never"
               popupHeight="260px"
+              allowFiltering={true}
             />
           </label>
 
@@ -272,8 +283,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
           <div className="lb-sections">
             <section className="lb-section">
               <header className="lb-header bg-r-overall">
-                <div className="lb-header-icon icon-overall e-icons e-people" aria-hidden>
-                </div>
+                <span id="categoryImageName" className="sficon-leaderboard-overall icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Overall</div>
                   <div className="lb-sub">LEADERBOARD</div>
@@ -296,8 +306,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-task">
-                <div className="lb-header-icon icon-task e-icons e-check-tick" aria-hidden>
-                </div>
+               <span id="categoryImageName" className="sficon-tasks icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Task</div>
                   <div className="lb-sub">LEADERBOARD</div>
@@ -320,8 +329,7 @@ const Achievements: React.FC<AchievementsProps> = ({ userInfo, onlyTeamIfUser = 
 
             <section className="lb-section">
               <header className="lb-header bg-r-attendance">
-                <div className="lb-header-icon icon-att e-icons e-day" aria-hidden>
-                </div>
+                <span id="categoryImageName" className="sficon-user-time-wf icon"></span>
                 <div className="lb-header-text">
                   <div className="lb-title">Attendance</div>
                   <div className="lb-sub">LEADERBOARD</div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Filter, Page, Inject, Freeze, Aggregate } from '@syncfusion/ej2-react-grids';
 import { AggregateColumnDirective, AggregateColumnsDirective, AggregateDirective, AggregatesDirective, AggregateColumnModel } from '@syncfusion/ej2-react-grids';
 import { DataManager, Query, UrlAdaptor } from '@syncfusion/ej2-data';
@@ -31,6 +31,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
     { field: 'NovPayStub', headerText: 'Nov' },
     { field: 'DecPayStub', headerText: 'Dec' },
   ];
+  const [selectedValue, setSelectedValue] = useState<string>(`${months[currentMonth].headerText} ${currentYear}`);
 
   const itemTemplate = () => {
     return (
@@ -80,42 +81,42 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
           <tbody>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].RegularHoursWorked.toFixed(2)}{' '}
+                ${props[props.column.field].RegularHoursWorked.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].OverTimeHoursWorked.toFixed(2)}{' '}
+                ${props[props.column.field].OverTimeHoursWorked.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].Bonus.toFixed(2)}{' '}
+                ${props[props.column.field].Bonus.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell separateline">
-                $ {props[props.column.field].Commission.toFixed(2)}{' '}
+                ${props[props.column.field].Commission.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].FederalIncomeTax.toFixed(2)}{' '}
+                ${props[props.column.field].FederalIncomeTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].StateIncomeTax.toFixed(2)}{' '}
+                ${props[props.column.field].StateIncomeTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].SocialSecurityTax.toFixed(2)}{' '}
+                ${props[props.column.field].SocialSecurityTax.toFixed(2)}{' '}
               </td>
             </tr>
             <tr>
               <td className="cardcell">
-                $ {props[props.column.field].MedicareTax.toFixed(2)}{' '}
+                ${props[props.column.field].MedicareTax.toFixed(2)}{' '}
               </td>
             </tr>
           </tbody>
@@ -156,7 +157,9 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
   };
 
   const paystubChange = (args: ChangeEventArgs): void => {
+    debugger;
     let showCols: string[] = [(args.itemData as { field: string; headerText: string }).headerText];
+    setSelectedValue(`${showCols} ${currentYear}`);
     let hideCols: string[] = [];
     months.forEach((x) => {
       if (x.headerText !== (args.itemData as { field: string; headerText: string }).headerText) {
@@ -171,16 +174,17 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
     <div className="paystubpage">
       <div className="paystub-header">
         <div className="paystubinfo">
-          Paystub for the selected month in {currentYear}
+          Paystub - {selectedValue}
         </div>
         <div className="paystubdd-container">
+          <span style={{fontSize:14}}>Choose Month:</span>&nbsp;&nbsp;
           <DropDownListComponent
             id="paystubdd"
             dataSource={months}
             value={months[currentMonth].headerText}
             fields={{ text: 'headerText', value: 'headerText' }}
             change={paystubChange}
-            width={250}
+            width={90}
           />
         </div>
       </div>
@@ -238,7 +242,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteGrossAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -262,7 +266,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteDeductionAggregate}
                     footerTemplate={(props: any) => {
-                      return <span>$ {props.Custom}</span>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
@@ -275,7 +279,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                 field="Item"
                 type="Custom"
                 footerTemplate={() => {
-                  return <strong>Net Pay</strong>;
+                  return <span>Net Pay</span>;
                 }}
               />
               {months.map((x, index) => {
@@ -286,7 +290,7 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
                     type="Custom"
                     customAggregate={calculteNetPayAggregate}
                     footerTemplate={(props: any) => {
-                      return <strong>$ {props.Custom}</strong>;
+                      return <span>${props.Custom}</span>;
                     }}
                   />
                 );
