@@ -57,7 +57,7 @@
   padding: calc(var(--header-h) + 16px) 0 0;
   min-height: 100vh;
   box-sizing: border-box;
-  background: rgb(255, 255, 255);
+  background: #f3f3f4;
   transition: margin-left 220ms ease;
   padding-top: 50px;
 }
