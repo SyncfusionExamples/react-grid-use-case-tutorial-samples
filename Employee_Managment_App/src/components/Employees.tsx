@@ -84,7 +84,7 @@ const Employees = (props?: EmployeesProps) => {
       grid.filterByColumn('TeamLead', 'equal', props.userInfo.Name);
     } else if (sel === 'directReporters' && props?.userInfo?.Team) {
       // Show colleagues in the same Team
-      grid.filterByColumn('Team', 'equal', props.userInfo.Team);
+      grid.filterByColumn('TeamLead', 'equal', props.userInfo.Name);
     } else {
       // 'active' or no selection => no filter (loads all)
       // clearFiltering already done above

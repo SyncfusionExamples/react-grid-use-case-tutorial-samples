@@ -62,6 +62,7 @@ const Organization = () => {
             <ButtonComponent
               cssClass={`e-outline org-pill ${selected === 'directReporters' ? 'org-pill--active e-primary' : ''}`}
               onClick={() => handleSelect('directReporters')}
+              title='Including employees in India and the US'
               aria-pressed={selected === 'directReporters'}
             >
               Direct Reporters

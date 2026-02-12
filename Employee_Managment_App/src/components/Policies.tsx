@@ -152,6 +152,7 @@ const Policies: React.FC = () => {
             dataSource={filteredData}
             allowPaging={false}
             allowSorting
+            className='policy-Grid'
             enableAdaptiveUI={true}
             allowResizing
             toolbar={['Search']}
