@@ -77,11 +77,15 @@ export const AnnouncementDetailDialog: React.FC<AnnouncementDetailDialogProps> =
 
   // Details to show inside the card (Title and Reference ID removed)
   const detailsRows: { key: string; label: string; value?: React.ReactNode }[] = [
-    { key: 'subtitle', label: 'Subtitle', value: item?.subtitle || '-' },
+    {
+      key: 'subtitle',
+      label: item?.type === 'message' ? 'Category' : 'Department',
+      value: item?.subtitle || '-',
+    },
     {
       key: 'type',
       label: 'Type',
-      value: <span className={`type-badge ${item?.type || 'announcement'}`}>{label}</span>,
+      value: <span className={`${item?.type || 'announcement'}`}>{label}</span>,
     },
     { key: 'date', label: 'Date', value: item?.date || '-' },
     {

@@ -130,26 +130,21 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
           <div className="annc-panel-header">
             <div className="annc-panel-title">Notification</div>
             <ButtonComponent
-              className="annc-panel-close"
+              className="annc-panel-close e-flat e-btn"
               cssClass="annc-panel-close"
               type="button"
+              iconCss='e-icons e-close'
               aria-label="Close"
               onClick={onClose}
               title="Close"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
             </ButtonComponent>
           </div>
 
           <div className="annc-panel-tabs" role="tablist" aria-label="Notification categories">
-            <button role="tab" aria-selected={tab === 'notifications'} className={tab === 'notifications' ? 'active e-icons e-multiple-comment' : 'e-icons e-multiple-comment'} onClick={() => setActiveTab('notifications')} title="Notifications">
+            <button role="tab" aria-selected={tab === 'notifications'} className={tab === 'notifications' ? 'active side-icon e-icons e-multiple-comment' : 'e-icons e-multiple-comment'} onClick={() => setActiveTab('notifications')} title="Notifications">
             </button>
-            <button role="tab" aria-selected={tab === 'announcements'} className={tab === 'announcements' ? 'active e-icons e-audio' : 'e-icons e-audio'} onClick={() => setActiveTab('announcements')} title="Announcements">
+            <button role="tab" aria-selected={tab === 'announcements'} className={tab === 'announcements' ? 'active side-icon e-icons e-audio' : 'e-icons e-audio'} onClick={() => setActiveTab('announcements')} title="Announcements">
             </button>
           </div>
 
@@ -157,10 +152,11 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
             {tab === 'notifications' ? (
               <span>Notifications for the last 15 days</span>
             ) : (
-              <span>Announcements</span>
+              <span>Notifications for the last 15 days</span>
             )}
             <ButtonComponent
               cssClass="annc-panel-cta"
+              className='e-btn e-flat'
               type="button"
               disabled={!items.some((it) => !it.read)}
               onClick={handleMarkAllRead}
@@ -189,7 +185,7 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
                       <div className={`annc-item-title ${!it.read ? 'unread' : ''}`}>{it.title}</div>
                       {(it.subtitle || it.date) && (
                         <div className="annc-item-meta">
-                          {it.subtitle && <span className="meta">{it.subtitle}</span>}
+                          {it.subtitle && <span className="meta-unread meta">{it.subtitle}</span>}
                           {it.date && <span className="meta dot">{it.date}</span>}
                         </div>
                       )}

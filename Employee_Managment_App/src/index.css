@@ -1863,6 +1863,9 @@ h2 {
 .e-icons.e-multiple-comment:before {
   content: "\e8bc";
 }
+.top-msgbtn{
+  border: none !important;
+}
 
 .e-icons.e-format-painter:before {
   content: "\e8bd";
@@ -1902,6 +1905,12 @@ h2 {
 
 .e-icons.e-increase-indent-rtl:before {
   content: "\e8c6";
+}
+.e-unfreeze .CardTable{
+  margin-left: 45px !important;
+}
+.e-freezeleftborder.e-leftfreeze .CardTable{
+  margin-left: 35px !important;
 }
 
 .e-icons.e-decrease-indent-rtl:before {
@@ -24013,6 +24022,9 @@ label[for*=_wholeWord_e-de-rtl] {
 .e-de-toolbar.e-toolbar {
   border-radius: 0;
 }
+.side-icon{
+  font-size: 21px !important;
+}
 
 .e-de-ctnr-toolbar .e-toolbar-item.e-de-toolbar-btn-first {
   margin-left: 0;
@@ -45227,7 +45239,7 @@ body.e-colorpicker-overflow {
 }
 
 .e-toolbar .e-toolbar-item .e-tbar-btn.e-tbtn-txt .e-icons.e-btn-icon.e-icon-right {
-  padding: 6px;
+  padding: 4px;
 }
 
 .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons.e-btn-icon {
@@ -58005,6 +58017,7 @@ ejs-sidebar {
 .e-popup.e-popup-open.e-dialog {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
   display: inline-flex;
   max-height: 600px !important;
 }
@@ -70738,7 +70751,7 @@ a.employee-popover:hover {
 
 .tab-content {
   padding: 20px 10px 20px 35px;
-  background-color: rgb(255, 255, 255);
+  background-color: #f3f3f4;
 }
 
 /* Tooltip */
@@ -70820,7 +70833,9 @@ a.employee-popover:hover {
     font-family: var(--font-family);
   }
 }
-
+.e-grid .e-toolbar .e-toolbar-items .e-toolbar-right .e-cc-toolbar .e-tbar-btn .e-columnchooser-btn {
+  margin-top: 0px;
+}
 /* Employee Info */
 
 .employeeinfo-header {

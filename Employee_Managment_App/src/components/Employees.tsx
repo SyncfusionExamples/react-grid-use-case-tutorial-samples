@@ -5,7 +5,7 @@ import {
   Page, Inject, ContextMenu, CommandColumn, Freeze, LazyLoadGroup, RecordClickEventArgs, RowInfo,
   ExcelExport, Column, Search // <-- add Search
 } from '@syncfusion/ej2-react-grids';
-import { DataManager, UrlAdaptor, DataUtil, Query } from '@syncfusion/ej2-data';
+import { DataManager, UrlAdaptor, DataUtil, Query, ReturnOption } from '@syncfusion/ej2-data';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { TooltipComponent, TooltipEventArgs } from '@syncfusion/ej2-react-popups';
@@ -36,6 +36,7 @@ const data = new DataManager({
   adaptor: new CappedUrlAdaptor(),
 });
 
+
 type EmployeesProps = {
   employeeData?: EmployeeDetails;
   userInfo?: EmployeeDetails;
@@ -45,12 +46,11 @@ type EmployeesProps = {
 const Employees = (props?: EmployeesProps) => {
   const navigate = useNavigate();
 
-  const employeeGridIns = useRef<GridComponent>(null);
   const tooltipObj = useRef<TooltipComponent>(null);
   const gridRef = React.useRef<GridComponent | null>(null);
    // Use Syncfusion Grid API to auto-fit column widths and keep height auto-sized
   const onGridDataBound = React.useCallback(() => {
-    const grid: any = employeeGridIns.current;
+    const grid: any = gridRef.current;
     if (!grid) return;
     // Ensure grid height is set to auto so it adapts to content (Syncfusion supports 'auto')
     if (grid.element) {
@@ -60,10 +60,10 @@ const Employees = (props?: EmployeesProps) => {
 
   // Apply/clear remote filters on pill changes or routed context
   useEffect(() => {
-    const grid = employeeGridIns.current;
+    const grid = gridRef.current;
     if (!grid) return;
-    const gridEl = gridRef.current?.element;
-  if (!gridEl) return;
+    const gridEl = grid?.element;
+    if (!gridEl) return;
 
     // Clear existing filters and search when the pill changes
     grid.clearFiltering();
@@ -79,19 +79,17 @@ const Employees = (props?: EmployeesProps) => {
     // Apply filters based on the selected pill on Organization page
     const sel = props?.selected;
 
-    if (sel === 'myTeam' && props?.userInfo?.Team) {
+    if (sel === 'myTeam' && props?.userInfo?.Name) {
+      // Show people whose TeamLead is the current user (Michael Anderson)
+      grid.filterByColumn('TeamLead', 'equal', props.userInfo.Name);
+    } else if (sel === 'directReporters' && props?.userInfo?.Team) {
+      // Show colleagues in the same Team
       grid.filterByColumn('Team', 'equal', props.userInfo.Team);
-    } else if (sel === 'directReporters' && props?.userInfo?.TeamLead) {
-      // Show my direct reporting person (supervisor)
-      grid.filterByColumn('Name', 'equal', props.userInfo.TeamLead);
-
-      // If instead you meant "people who report to me", use:
-      // grid.filterByColumn('TeamLead', 'equal', props.userInfo.Name);
     } else {
       // 'active' or no selection => no filter (loads all)
       // clearFiltering already done above
     }
-  }, [props?.selected, props?.userInfo?.Team, props?.userInfo?.TeamLead, props?.employeeData?.Name]);
+  }, [props?.selected, props?.userInfo?.Team, props?.userInfo?.TeamLead, props?.userInfo?.Name, props?.employeeData?.Name]);
 
   const toolbar: string[] =
     props?.employeeData?.Name === props?.userInfo?.Name
@@ -112,13 +110,13 @@ const Employees = (props?: EmployeesProps) => {
 
   const toolbarClick = (args: ClickEventArgs): void => {
     if (args.item.id === 'employees_grid_excelexport') {
-      (employeeGridIns.current?.getColumnByField('Image') as Column).visible = false;
-      employeeGridIns.current?.excelExport();
+      (gridRef.current?.getColumnByField('Image') as Column).visible = false;
+      gridRef.current?.excelExport();
     }
   };
 
   const excelExportComplete = (): void => {
-    (employeeGridIns.current?.getColumnByField('Image') as Column).visible = true;
+    (gridRef.current?.getColumnByField('Image') as Column).visible = true;
   };
 
   const imageTemplate = () => {
@@ -198,7 +196,7 @@ const Employees = (props?: EmployeesProps) => {
           ref={gridRef}
           dataSource={data}
           allowPaging={true}
-          pageSettings={{ pageCount: 8, pageSize: 12 }}
+          pageSettings={{ pageCount: 8, pageSize: 10 }}
           allowExcelExport={true}
           //width={'100%'}
           height={'100%'}

@@ -78,6 +78,7 @@ const TopNav: React.FC<TopNavProps> = ({
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelTab, setPanelTab] = useState<'notifications' | 'announcements'>('announcements');
   const autoCompleteRef = useRef<AutoCompleteComponent>(null);
+  const mobileAutoRef = useRef<AutoCompleteComponent | null>(null);
 
   const submitSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -102,12 +103,35 @@ const handleEmployeeSelect = (args: any) => {
       state: { employeeID: employeeData, userInfo: loggedInUser },
     });
 
-    // Clear UI state
-    if (autoCompleteRef.current) {
-      autoCompleteRef.current.value = '';
-    }
-    setQuery('');
-    setMobileSearchOpen(false);
+    // Clear UI state: clear both desktop and mobile autocomplete inputs
+    // Use a timeout to let the select event finish before clearing the input
+    setTimeout(() => {
+      if (autoCompleteRef.current) {
+        try {
+          (autoCompleteRef.current as any).value = '';
+        } catch (e) {}
+        try {
+          const el = (autoCompleteRef.current as any).element || (autoCompleteRef.current as any).inputElement;
+          if (el && typeof el.blur === 'function') el.blur();
+        } catch (e) {}
+      }
+      if (mobileAutoRef.current) {
+        try {
+          (mobileAutoRef.current as any).value = '';
+        } catch (e) {}
+        try {
+          const mel = (mobileAutoRef.current as any).element || (mobileAutoRef.current as any).inputElement;
+          if (mel && typeof mel.blur === 'function') mel.blur();
+        } catch (e) {}
+      }
+      // Fallback: blur any focused input
+      try {
+        const active = document.activeElement as HTMLElement | null;
+        if (active && active.tagName === 'INPUT') active.blur();
+      } catch (e) {}
+      setQuery('');
+      setMobileSearchOpen(false);
+    }, 0);
   }
 };
 
@@ -282,7 +306,7 @@ const handleEmployeeSelect = (args: any) => {
               </svg>
             </ButtonComponent>
 
-            <button className="icon-btn e-icons e-multiple-comment" type="button" onClick={(e) => {
+            <button className="icon-btn top-msgbtn e-icons e-multiple-comment" type="button" onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 setPanelTab('notifications');
@@ -293,7 +317,7 @@ const handleEmployeeSelect = (args: any) => {
             </button>
 
             <button
-              className="icon-btn e-icons e-audio"
+              className="icon-btn top-msgbtn e-icons e-audio"
               type="button"
               onClick={(e) => {
                 e.preventDefault();
@@ -340,6 +364,7 @@ const handleEmployeeSelect = (args: any) => {
                 </svg>
               </span>
               <AutoCompleteComponent
+                ref={mobileAutoRef}
                 dataSource={employeeDataSource}
                 fields={{ value: 'Name' }}
                 placeholder="Search by name, ID, or email"
