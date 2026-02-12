@@ -45227,7 +45227,7 @@ body.e-colorpicker-overflow {
 }
 
 .e-toolbar .e-toolbar-item .e-tbar-btn.e-tbtn-txt .e-icons.e-btn-icon.e-icon-right {
-  padding: 6px;
+  padding: 4px;
 }
 
 .e-toolbar .e-toolbar-item .e-tbar-btn .e-icons.e-btn-icon {
@@ -70738,7 +70738,7 @@ a.employee-popover:hover {
 
 .tab-content {
   padding: 20px 10px 20px 35px;
-  background-color: rgb(255, 255, 255);
+  background-color: #f3f3f4;
 }
 
 /* Tooltip */
@@ -71218,4 +71218,8 @@ td.cardcell.separateline {
 .e-tab.content-overview .e-tab-header .e-toolbar-item .e-text-wrap {
   height: 40px;
   min-height: 40px;
+}
+
+.e-grid .e-toolbar .e-toolbar-items .e-toolbar-right .e-cc-toolbar .e-tbar-btn .e-columnchooser-btn {
+  margin-top: 0px;
 }

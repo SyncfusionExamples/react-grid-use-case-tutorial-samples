@@ -157,7 +157,6 @@ const EmployeePayStub = (props: { employeeData: EmployeeDetails }) => {
   };
 
   const paystubChange = (args: ChangeEventArgs): void => {
-    debugger;
     let showCols: string[] = [(args.itemData as { field: string; headerText: string }).headerText];
     setSelectedValue(`${showCols} ${currentYear}`);
     let hideCols: string[] = [];

@@ -107,7 +107,7 @@ const Policies: React.FC = () => {
     <div className="policiespage policiespage--green">
       <div className="policies-content policies-grid-wrapper">
         <header className="policies-header">
-          <h2 className="policies-title">Employee Policy Hub</h2>
+          <div className="policies-title">Employee Policy Hub</div>
         </header>
 
         <section className="policies-intro" aria-label="Policies information">
@@ -125,7 +125,7 @@ const Policies: React.FC = () => {
 
         <section className="policy-filters" aria-labelledby="policy-filters-title">
           <div className="section-header">
-            <h3 id="policy-filters-title" className="section-title">Policy Categories</h3>
+            <div id="policy-filters-title" className="section-title">Policy Categories</div>
           </div>
 
           <div className="filter-chip-row" role="tablist" aria-label="Filter by category">
