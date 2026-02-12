@@ -45119,9 +45119,12 @@ body.e-colorpicker-overflow {
 .e-toolbar .e-toolbar-items.e-multirow-pos .e-toolbar-right {
   display: inline;
 }
-
+#leave_grid, #paystub_grid, #payroll_grid, .policy-Grid{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
 .e-toolbar .e-toolbar-items.e-tbar-pos {
   display: block;
+  background: rgb(255, 255, 255);
 }
 
 .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left,
@@ -70904,6 +70907,7 @@ a.employee-popover:hover {
 
 .employees-content #content {
   /* height: calc(100vh - 150px); */
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .employeeLeave-header {
