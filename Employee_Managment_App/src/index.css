@@ -1702,6 +1702,9 @@ h2 {
 
 .e-icons.e-audio:before {
   content: "\e894";
+  width: 24px;
+  height: 24px;
+  font-size: 21px;
 }
 
 .e-icons.e-video:before {
@@ -1862,6 +1865,9 @@ h2 {
 
 .e-icons.e-multiple-comment:before {
   content: "\e8bc";
+  width: 24px;
+  height: 24px;
+  font-size: 21px;
 }
 .top-msgbtn{
   border: none !important;
@@ -43381,7 +43387,7 @@ body.e-colorpicker-overflow {
   border-style: solid;
   border-width: 1px;
   display: inline-block;
-  font-size: 14px;
+  font-size: 13px;
   padding: 7px 8px 7px 8px;
   white-space: normal;
   width: 100%;
@@ -43435,7 +43441,7 @@ body.e-colorpicker-overflow {
 
 .e-pager .e-numericitem {
   border-right-style: solid;
-  border-right-width: 1px;
+  border-right-width: 0px;
   display: inline-block;
   line-height: 1;
   margin-right: 0;
@@ -43494,7 +43500,7 @@ body.e-colorpicker-overflow {
 .e-pager .e-pagercontainer .e-nextpagedisabled,
 .e-pager .e-pagercontainer .e-lastpagedisabled {
   border-right-style: solid;
-  border-right-width: 1px;
+  border-right-width: 0px;
   display: inline-block;
   margin-right: 0;
   margin-top: 0;
@@ -43533,7 +43539,7 @@ body.e-colorpicker-overflow {
 .e-pager .e-pagercontainer {
   border-radius: 4px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0px;
   display: inline-block;
   margin: 0 0 -4px 0.3px;
   overflow: hidden;
@@ -43958,7 +43964,7 @@ body.e-colorpicker-overflow {
 .e-pager {
   border-color: var(--color-sf-border-light);
   background: var(--color-sf-content-bg-color);
-  color: var(--color-sf-content-text-color-alt1);
+  color: rgba(33, 37, 41, .5);
   opacity: 1;
 }
 
@@ -58557,10 +58563,15 @@ td[aria-label=" is template cell column header Total"] .CardTable {
   border-left: 8px solid var(--color-sf-tooltip-border);
   border-top: 8px solid transparent;
 }
-.panel-item-icon{
+.panel-item-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #ffffff;
+  background: #607d8b;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
 
 .e-tooltip-wrap .e-arrow-tip-inner {
@@ -66255,6 +66266,7 @@ li.e-separator.e-menu-item.e-excel-separator {
 }
 
 .e-grid .e-content {
+  height: 100% !important;
   -webkit-overflow-scrolling: touch;
   /* stylelint-disable-line property-no-vendor-prefix */
   overflow-x: auto;
@@ -70906,7 +70918,7 @@ a.employee-popover:hover {
 }
 
 .employees-content #content {
-  /* height: calc(100vh - 150px); */
+  height: calc(100vh - 150px);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
@@ -71237,4 +71249,21 @@ td.cardcell.separateline {
 .e-tab.content-overview .e-tab-header .e-toolbar-item .e-text-wrap {
   height: 40px;
   min-height: 40px;
+}
+
+.e-pager .e-pagercontainer .e-first, 
+.e-pager .e-pagercontainer .e-last {
+  color: #757575 !important;
+}
+
+.e-grid .e-focused:not(.e-menu-item):not(.e-editedbatchcell),
+#leave_grid_toolbarItems.e-toolbar .e-toolbar-item .e-tbar-btn:focus,
+#employees_grid_toolbarItems.e-toolbar .e-toolbar-item .e-tbar-btn:focus {
+  box-shadow: none !important;
+}
+
+.custom-syncfusion-drp.drp-left-icon.e-date-range-wrapper.e-valid-input {
+    margin: 0;
+    padding: 0px 22px 0px 10px;
+    border-radius: 0px;
 }

@@ -27,6 +27,8 @@ export type AnnouncementPanelProps = {
   onChangeTab?: (tab: 'notifications' | 'announcements') => void;
   onMarkAllRead?: (tab: 'notifications' | 'announcements') => void;
   onMarkRead?: (itemId: string | number, isNotification: boolean) => void;
+  notificationCount?: number;
+  announcementCount?: number;
 };
 
 export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
@@ -39,6 +41,8 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
   onChangeTab,
   onMarkAllRead,
   onMarkRead,
+  notificationCount = 0,
+  announcementCount = 0,
 }) => {
   const [tab, setTab] = React.useState<'notifications' | 'announcements'>(defaultTab);
   const panelRef = React.useRef<HTMLDivElement | null>(null);
@@ -143,8 +147,10 @@ export const AnnouncementPanel: React.FC<AnnouncementPanelProps> = ({
 
           <div className="annc-panel-tabs" role="tablist" aria-label="Notification categories">
             <button role="tab" aria-selected={tab === 'notifications'} className={tab === 'notifications' ? 'active side-icon e-icons e-multiple-comment' : 'e-icons e-multiple-comment'} onClick={() => setActiveTab('notifications')} title="Notifications">
+              {notificationCount > 0 && <span className="tab-badge">{notificationCount}</span>}
             </button>
             <button role="tab" aria-selected={tab === 'announcements'} className={tab === 'announcements' ? 'active side-icon e-icons e-audio' : 'e-icons e-audio'} onClick={() => setActiveTab('announcements')} title="Announcements">
+              {announcementCount > 0 && <span className="tab-badge">{announcementCount}</span>}
             </button>
           </div>
 
