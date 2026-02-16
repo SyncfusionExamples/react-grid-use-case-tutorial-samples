@@ -176,8 +176,8 @@
 }
 
 .filter-chip.is-active {
-  background: #1ab394;
-  border-color: #1ab394;
+  background: #f8ac59;
+  border-color: #f8ac59;
   color: #fff;
   box-shadow: 0 6px 14px rgba(16, 24, 40, .16);
 }
