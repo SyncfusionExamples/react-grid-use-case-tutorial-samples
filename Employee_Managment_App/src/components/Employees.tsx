@@ -196,7 +196,7 @@ const Employees = (props?: EmployeesProps) => {
           ref={gridRef}
           dataSource={data}
           allowPaging={true}
-          pageSettings={{ pageCount: 8, pageSize: 10 }}
+          pageSettings={{ pageCount: 8, pageSize: 12 }}
           allowExcelExport={true}
           //width={'100%'}
           height={'100%'}

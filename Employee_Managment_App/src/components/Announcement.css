@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: var(--annc-theme);
+  background: #1ab394;
   color: #fff;
 }
 .annc-panel-title {
@@ -82,6 +82,7 @@
   border-bottom: 1px solid var(--annc-border);
 }
 .annc-panel-tabs button {
+  color: rgba(0, 0, 0, 0.54);
   background: transparent;
   border: none;
   padding: 12px 0; /* taller clickable area */
@@ -93,14 +94,14 @@
   align-items: center;
   justify-content: center; /* center icon */
 }
-.annc-panel-tabs button.active { color: var(--annc-theme); }
+
 .annc-panel-tabs button.active::after {
   content: '';
   position: absolute;
   left: 0; /* underline spans the full half */
   right: 0;
   bottom: -1px;
-  height: 2px;
+  height: 3px;
   background: var(--annc-theme);
 }
 
@@ -160,24 +161,25 @@
   position: relative;
 }
 .annc-panel-item.is-unread {
-  border-bottom: 0.5px solid rgba(235, 232, 232, 0.87);
+  border-bottom: 1px solid #eee;
   padding: 6px;
   background: transparent;
-  border-color: transparent;
   /* left indicator bar for unread items */
-  border-left: 6px solid #f8ac59;
+  border-left: 4px solid #f8ac59;
   padding-left: 10px; /* give content some space from the indicator */
 }
 .annc-panel-item.is-read {
   padding: 6px;
-  border-bottom: 0.5px solid rgba(235, 232, 232, 0.87);
+  padding-left: 10px;
+  border-bottom: 1px solid #eee;
+  border-left: 6px solid transparent;
 }
 .annc-panel-item:hover {
     background: var(--color-sf-secondary-bg-color-hover);
     color: var(--color-sf-content-text-color);
 }
 .annc-panel-item.is-unread:hover {
-  background: #f1eded;
+  background: rgba(158, 158, 158, 0.2);
 }
 .unread-indicator {
   width: 8px;
@@ -242,4 +244,29 @@
 }
 @media (max-width: 480px) {
   :root { --annc-panel-width: 100%; }
+}
+
+/* Add to your Announcement.css file */
+
+.annc-panel-tabs button {
+  position: relative;
+}
+
+.tab-badge {
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+  top: .3rem;
+  right: 5.9rem;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background: #f8ac59;
+  color: #fff;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 2rem;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
 }

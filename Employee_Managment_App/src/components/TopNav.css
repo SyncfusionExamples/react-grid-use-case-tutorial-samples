@@ -242,7 +242,7 @@
   border-radius: 10px;
   border: 1px solid var(--topnav-border);
   background: #fff;
-  color: var(--icon);
+  color: rgba(0, 0, 0, 0.54);
   cursor: pointer;
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 80ms ease, background 160ms ease;
 }
@@ -258,7 +258,7 @@
 .icon-btn:focus-visible,
 .topnav-avatar:focus-visible,
 .btn-create:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: none;
   outline-offset: 2px;
 }
 
@@ -329,11 +329,11 @@
   font-family: 'Roboto', sans-serif;
   top: -4px;
   right: -4px;
-  min-width: 18px;
-  height: 18px;
+  min-width: 16px;
+  height: 16px;
   padding: 0 4px;
-  border-radius: 10px;
-  background: var(--bs-success);
+  border-radius: .25em;
+  background: #f8ac59;
   color: #fff;
   font-size: 11px;
   display: inline-flex;

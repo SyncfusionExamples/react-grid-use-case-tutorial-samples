@@ -1,3 +1,7 @@
 #employees_grid .e-content {
   overflow-y: hidden !important;
 }
+
+#employees_grid .e-rowcell {
+  height: 53px;
+}

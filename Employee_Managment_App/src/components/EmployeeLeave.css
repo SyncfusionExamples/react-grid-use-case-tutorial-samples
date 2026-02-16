@@ -41,8 +41,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 36px;
-  width: 36px;             /* clickable area */
+  height: 32px;
+  width: 32px;             /* clickable area */
   border: 0;
   background: transparent;
   color: #333;
@@ -55,7 +55,6 @@
 }
 
 /* Place icons slightly inset from edges so they don't touch the border */
-.drp-icon-left   { left: 8px; }
 .drp-caret-right { right: 6px; }
 
 .calendar-svg, .caret-svg {
@@ -80,6 +79,7 @@
   display: inline-block;
   vertical-align: middle;
   color: inherit;
+  margin-top: 2px;
 }
 
 /* Apply icon vertical adjustment only on mobile screens */
@@ -329,11 +329,11 @@
 
 .e-icons.e-file-new:before {
   content: "" !important;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-image: url(https://hr.syncfusion.com/fonts/icons/excel.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    vertical-align: middle;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/public/excel.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
 }

@@ -395,6 +395,8 @@ const handleEmployeeSelect = (args: any) => {
         onChangeTab={(t) => setPanelTab(t)}
         onMarkAllRead={onMarkAllRead}
         onMarkRead={onMarkRead}
+        notificationCount={notifications.chat || 0}
+        announcementCount={notifications.announcements || 0}
       />
     </>
   );

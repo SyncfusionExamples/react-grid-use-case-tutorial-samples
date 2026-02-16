@@ -55,6 +55,22 @@ const Presets = (props: { dateRangeChange: (args: RangeEventArgs) => void }) => 
     new Date(new Date(new Date().setMonth(new Date().getMonth() + 1)).setDate(0)).toDateString()
   );
   const dateRangePickerRef = React.useRef<DateRangePickerComponent>(null);
+  let isPopupClosed: boolean;
+  const togglePicker = (e: React.MouseEvent) => {
+    if (dateRangePickerRef.current) {
+      const picker = dateRangePickerRef.current as any;
+      if (picker.isPopupOpen && picker.isPopupOpen() || isPopupClosed) {
+        picker.hide();
+        isPopupClosed = false;
+      } else {
+        picker.show();
+      }
+    }
+  };
+
+  const onClose = () => {
+    isPopupClosed = true;
+  };
 
   return (
     <div className="drp-input-wrapper">
@@ -62,8 +78,8 @@ const Presets = (props: { dateRangeChange: (args: RangeEventArgs) => void }) => 
       <button
         type="button"
         className="drp-icon-left"
-        aria-hidden
-        onClick={() => dateRangePickerRef.current && (dateRangePickerRef.current as any).show()}
+        aria-label="Toggle date picker"
+        onClick={togglePicker}
       >
         {/* Syncfusion icon (e-icons) for calendar */}
         <span className="e-input-group-icon e-range-icon e-icons" aria-hidden="true"></span>
@@ -78,6 +94,7 @@ const Presets = (props: { dateRangeChange: (args: RangeEventArgs) => void }) => 
         width={240}
         cssClass="custom-syncfusion-drp drp-left-icon"
         showClearButton={false}
+        close={onClose}
       >
         <PresetsDirective>
           <PresetDirective label="This Month" start={monthStart} end={monthEnd}></PresetDirective>
@@ -94,7 +111,7 @@ const Presets = (props: { dateRangeChange: (args: RangeEventArgs) => void }) => 
         type="button"
         className="drp-caret-right"
         aria-hidden
-        onClick={() => dateRangePickerRef.current && (dateRangePickerRef.current as any).show()}
+        onClick={togglePicker}
       >
         <span className="e-icons e-chevron-down caret-i" aria-hidden="true"></span>
       </button>
@@ -225,7 +242,7 @@ const leaveTypeTemplate = (args: any) => {
   };
 
   const toolbarClick = (args: ClickEventArgs): void => {
-    if (args.item.id === 'leave_grid_excelexport') {
+    if (args.item.id === 'excelExport') {
       leaveGridIns.current?.excelExport();
     }
   };
